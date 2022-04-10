@@ -349,7 +349,6 @@
                             <constraint firstItem="1pA-MU-hJi" firstAttribute="top" secondItem="Es3-aD-GX4" secondAttribute="bottom" constant="10" id="oKs-oE-oZy"/>
                             <constraint firstItem="1pA-MU-hJi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tr9-uS-HKT" secondAttribute="trailing" constant="8" symbolic="YES" id="oNm-rk-l2K"/>
                             <constraint firstItem="1PN-Tn-dOu" firstAttribute="leading" secondItem="EBo-ON-V98" secondAttribute="leading" constant="20" id="qfj-dD-Tyn"/>
-                            <constraint firstItem="EBo-ON-V98" firstAttribute="trailing" secondItem="Es3-aD-GX4" secondAttribute="trailing" id="ru3-xu-q7d"/>
                             <constraint firstItem="EBo-ON-V98" firstAttribute="trailing" secondItem="xHE-PH-oGY" secondAttribute="trailing" id="sqk-zi-xKj"/>
                         </constraints>
                     </view>
@@ -361,7 +360,6 @@
         <!--Navigation Controller-->
         <scene sceneID="MQA-eO-kDS">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VI1-bj-cgG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="bEj-8Y-jp3" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9Pg-LQ-vwG">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -371,6 +369,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="vnh-sh-2cO"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VI1-bj-cgG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-177" y="51"/>
         </scene>
