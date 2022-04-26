@@ -15,6 +15,15 @@
 		ECA6F45228026B0E00CA7C2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA6F45028026B0E00CA7C2D /* LaunchScreen.storyboard */; };
 		ECA6F45B28026B8E00CA7C2D /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6F45A28026B8E00CA7C2D /* ModalViewController.swift */; };
 		ECA6F45D28026BAE00CA7C2D /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6F45C28026BAE00CA7C2D /* FoodData.swift */; };
+		ECBFB95F28031A1800EB2FCF /* UnitSelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBFB95E28031A1800EB2FCF /* UnitSelectButton.swift */; };
+		ECE2F0A22806935C00975A38 /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0A12806935C00975A38 /* CheckBoxButton.swift */; };
+		ECE2F0A8280B03EE00975A38 /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0A7280B03EE00975A38 /* DeleteButton.swift */; };
+		ECE2F0AA280B052B00975A38 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0A9280B052B00975A38 /* AddButton.swift */; };
+		ECE2F0AC280B063D00975A38 /* NavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0AB280B063D00975A38 /* NavigationItem.swift */; };
+		ECE2F0BE280C3B9600975A38 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = ECE2F0BD280C3B9600975A38 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		ECE2F0C0280C3B9600975A38 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = ECE2F0BF280C3B9600975A38 /* FirebaseCrashlytics */; };
+		ECE2F0C2280C3B9600975A38 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = ECE2F0C1280C3B9600975A38 /* FirebaseDatabase */; };
+		ECEB7103280314BD00B157FB /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEB7102280314BD00B157FB /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +37,12 @@
 		ECA6F45328026B0E00CA7C2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ECA6F45A28026B8E00CA7C2D /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
 		ECA6F45C28026BAE00CA7C2D /* FoodData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
+		ECBFB95E28031A1800EB2FCF /* UnitSelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitSelectButton.swift; sourceTree = "<group>"; };
+		ECE2F0A12806935C00975A38 /* CheckBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
+		ECE2F0A7280B03EE00975A38 /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
+		ECE2F0A9280B052B00975A38 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
+		ECE2F0AB280B063D00975A38 /* NavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationItem.swift; sourceTree = "<group>"; };
+		ECEB7102280314BD00B157FB /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +50,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECE2F0C2280C3B9600975A38 /* FirebaseDatabase in Frameworks */,
+				ECE2F0BE280C3B9600975A38 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				ECE2F0C0280C3B9600975A38 /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,11 +78,17 @@
 		ECA6F44428026B0C00CA7C2D /* RefManager1-2 */ = {
 			isa = PBXGroup;
 			children = (
-				ECA6F45C28026BAE00CA7C2D /* FoodData.swift */,
 				ECA6F44528026B0C00CA7C2D /* AppDelegate.swift */,
 				ECA6F44728026B0C00CA7C2D /* SceneDelegate.swift */,
+				ECA6F45C28026BAE00CA7C2D /* FoodData.swift */,
 				ECA6F44928026B0C00CA7C2D /* ViewController.swift */,
+				ECEB7102280314BD00B157FB /* TableViewCell.swift */,
 				ECA6F45A28026B8E00CA7C2D /* ModalViewController.swift */,
+				ECBFB95E28031A1800EB2FCF /* UnitSelectButton.swift */,
+				ECE2F0A12806935C00975A38 /* CheckBoxButton.swift */,
+				ECE2F0A7280B03EE00975A38 /* DeleteButton.swift */,
+				ECE2F0A9280B052B00975A38 /* AddButton.swift */,
+				ECE2F0AB280B063D00975A38 /* NavigationItem.swift */,
 				ECA6F44B28026B0C00CA7C2D /* Main.storyboard */,
 				ECA6F44E28026B0E00CA7C2D /* Assets.xcassets */,
 				ECA6F45028026B0E00CA7C2D /* LaunchScreen.storyboard */,
@@ -83,12 +107,18 @@
 				ECA6F43E28026B0C00CA7C2D /* Sources */,
 				ECA6F43F28026B0C00CA7C2D /* Frameworks */,
 				ECA6F44028026B0C00CA7C2D /* Resources */,
+				ECE2F0CC2817888000975A38 /* Run SwiftLint */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "RefManager1-2";
+			packageProductDependencies = (
+				ECE2F0BD280C3B9600975A38 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				ECE2F0BF280C3B9600975A38 /* FirebaseCrashlytics */,
+				ECE2F0C1280C3B9600975A38 /* FirebaseDatabase */,
+			);
 			productName = "RefManager1-2";
 			productReference = ECA6F44228026B0C00CA7C2D /* RefManager1-2.app */;
 			productType = "com.apple.product-type.application";
@@ -117,6 +147,9 @@
 				Base,
 			);
 			mainGroup = ECA6F43928026B0C00CA7C2D;
+			packageReferences = (
+				ECE2F0BC280C3B9600975A38 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = ECA6F44328026B0C00CA7C2D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -139,16 +172,43 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		ECE2F0CC2817888000975A38 /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		ECA6F43E28026B0C00CA7C2D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECE2F0A8280B03EE00975A38 /* DeleteButton.swift in Sources */,
 				ECA6F45B28026B8E00CA7C2D /* ModalViewController.swift in Sources */,
 				ECA6F44A28026B0C00CA7C2D /* ViewController.swift in Sources */,
+				ECE2F0AA280B052B00975A38 /* AddButton.swift in Sources */,
+				ECE2F0A22806935C00975A38 /* CheckBoxButton.swift in Sources */,
+				ECE2F0AC280B063D00975A38 /* NavigationItem.swift in Sources */,
 				ECA6F44628026B0C00CA7C2D /* AppDelegate.swift in Sources */,
+				ECEB7103280314BD00B157FB /* TableViewCell.swift in Sources */,
 				ECA6F45D28026BAE00CA7C2D /* FoodData.swift in Sources */,
 				ECA6F44828026B0C00CA7C2D /* SceneDelegate.swift in Sources */,
+				ECBFB95F28031A1800EB2FCF /* UnitSelectButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +428,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ECE2F0BC280C3B9600975A38 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ECE2F0BD280C3B9600975A38 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ECE2F0BC280C3B9600975A38 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		ECE2F0BF280C3B9600975A38 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ECE2F0BC280C3B9600975A38 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		ECE2F0C1280C3B9600975A38 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ECE2F0BC280C3B9600975A38 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ECA6F43A28026B0C00CA7C2D /* Project object */;
 }

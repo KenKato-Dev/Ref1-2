@@ -12,26 +12,26 @@ struct Food {
     var refOrFreezer:RefOrFreezer
     var kind:FoodKind
     var name:String
-    var quantity:Int
-    var unit:String
+    var quantity:Double
+    var unit:UnitSelectButton.UnitMenu
     var IDkey:String
-    enum RefOrFreezer {
-        case refrigator
-        case freezer
+    var date:Date
+    enum RefOrFreezer:String {
+        case refrigerator = "冷蔵"
+        case freezer = "冷凍"
     }
-    enum FoodKind {
-        case meat
-        case fish
-        case vegetableAndFruit
-        case milkAndEgg
-        case dish
-        case drink
-        case seasoning
-        case sweet
-        case other
+    enum FoodKind:String {
+        case meat = "meat"
+        case fish = "fish"
+        case vegetableAndFruit = "vegetableAndFruit"
+        case milkAndEgg = "milkAndEgg"
+        case dish = "dish"
+        case drink = "drink"
+        case seasoning = "seasoning"
+        case sweet = "sweet"
+        case other = "other"
     }
 }
-
 class FoodData {
     static let shared:FoodData = FoodData()
     private var foodsArray:[Food] = []
