@@ -7,14 +7,15 @@
 
 import UIKit
 
-class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
-    
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
     private let foods = FoodData.shared
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var viewTitle: UINavigationItem!
     @IBOutlet weak var deleteButton: DeleteButton!
     private var isChange = false
-    
+    var checkedIDDictionary: [String: Bool] = [:]
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -23,6 +24,15 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         deleteButton.addAction(.init(handler: { _ in
             self.isChange.toggle()
             self.deleteButton.imageChange(bool: self.isChange)
+            // 再度タップしてisChangeがfalseに切り替わった際の挙動
+            if self.isChange == false {
+                // filterで値のみを取り出し、
+                let filteredIDDictionary = self.checkedIDDictionary.filter {$0.value}.map {$0.key}
+                for key in filteredIDDictionary {
+                    self.foods.removeFoods(key: key)
+                    self.checkedIDDictionary = [:]
+                }
+            }
             self.tableView.reloadData()
             print("tapされました")
         }), for: .touchUpInside)
@@ -31,7 +41,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
-    //Intでリストの数を返す
+    // Intでリストの数を返す
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         foods.getfoodArray().count
     }
@@ -45,9 +55,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         cell?.foodNameTextLabel.text = foods.getfoodArray()[indexPath.row].name
         cell?.quantityTextLabel.text = String(foods.getfoodArray()[indexPath.row].quantity)
         cell?.unitTextLabel.text = foods.getfoodArray()[indexPath.row].unit.rawValue
+        // 削除ボタンと連動
         cell?.showCheckBox = self.isChange
+        // UUIDをDictionaryに追加
+        cell?.didTapCheckBox = { isChecked in
+            self.checkedIDDictionary[self.foods.getfoodArray()[indexPath.row].IDkey] = isChecked
+        }
+        cell?.checkBoxButton.updateAppearance(isChecked: checkedIDDictionary[self.foods.getfoodArray()[indexPath.row].IDkey] ?? false)
         return cell!
-        
     }
 }
-

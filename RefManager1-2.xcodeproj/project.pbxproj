@@ -84,10 +84,7 @@
 				ECA6F44928026B0C00CA7C2D /* ViewController.swift */,
 				ECEB7102280314BD00B157FB /* TableViewCell.swift */,
 				ECA6F45A28026B8E00CA7C2D /* ModalViewController.swift */,
-				ECBFB95E28031A1800EB2FCF /* UnitSelectButton.swift */,
-				ECE2F0A12806935C00975A38 /* CheckBoxButton.swift */,
-				ECE2F0A7280B03EE00975A38 /* DeleteButton.swift */,
-				ECE2F0A9280B052B00975A38 /* AddButton.swift */,
+				ECE2F0CD281965AD00975A38 /* Button */,
 				ECE2F0AB280B063D00975A38 /* NavigationItem.swift */,
 				ECA6F44B28026B0C00CA7C2D /* Main.storyboard */,
 				ECA6F44E28026B0E00CA7C2D /* Assets.xcassets */,
@@ -95,6 +92,17 @@
 				ECA6F45328026B0E00CA7C2D /* Info.plist */,
 			);
 			path = "RefManager1-2";
+			sourceTree = "<group>";
+		};
+		ECE2F0CD281965AD00975A38 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				ECBFB95E28031A1800EB2FCF /* UnitSelectButton.swift */,
+				ECE2F0A12806935C00975A38 /* CheckBoxButton.swift */,
+				ECE2F0A7280B03EE00975A38 /* DeleteButton.swift */,
+				ECE2F0A9280B052B00975A38 /* AddButton.swift */,
+			);
+			path = Button;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,7 +197,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif test -d /opt/homebrew/bin; then\n    PATH=/opt/homebrew/bin/:$PATH\nfi\n\nif which swiftlint >/dev/null; then\n    swiftlint\n    swiftlint --fix\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

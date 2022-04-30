@@ -9,32 +9,32 @@ import Foundation
 import UIKit
 
 struct Food {
-    var refOrFreezer:RefOrFreezer
-    var kind:FoodKind
-    var name:String
-    var quantity:Double
-    var unit:UnitSelectButton.UnitMenu
-    var IDkey:String
-    var date:Date
-    enum RefOrFreezer:String {
+    var refOrFreezer: RefOrFreezer
+    var kind: FoodKind
+    var name: String
+    var quantity: Double
+    var unit: UnitSelectButton.UnitMenu
+    var IDkey: String
+    var date: Date
+    enum RefOrFreezer: String {
         case refrigerator = "冷蔵"
         case freezer = "冷凍"
     }
-    enum FoodKind:String {
-        case meat = "meat"
-        case fish = "fish"
-        case vegetableAndFruit = "vegetableAndFruit"
-        case milkAndEgg = "milkAndEgg"
-        case dish = "dish"
-        case drink = "drink"
-        case seasoning = "seasoning"
-        case sweet = "sweet"
-        case other = "other"
+    enum FoodKind: String {
+        case meat
+        case fish
+        case vegetableAndFruit
+        case milkAndEgg
+        case dish
+        case drink
+        case seasoning
+        case sweet
+        case other
     }
 }
 class FoodData {
-    static let shared:FoodData = FoodData()
-    private var foodsArray:[Food] = []
+    static let shared: FoodData = FoodData()
+    private var foodsArray: [Food] = []
 
     func add(_ food: Food) {
         foodsArray.append(food)
@@ -42,5 +42,9 @@ class FoodData {
     func getfoodArray() -> [Food] {
         foodsArray
     }
-    
+    func removeFoods(key: String) {
+        foodsArray.removeAll { food in
+            food.IDkey == key
+        }
+    }
 }

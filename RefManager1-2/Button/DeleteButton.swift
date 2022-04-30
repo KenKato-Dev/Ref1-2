@@ -44,10 +44,10 @@ class DeleteButton: UIButton {
         // テキストサイズ
         titleLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
         self.imageView?.image?.withTintColor(.red)
-        //シンボルカラー
+        // シンボルカラー
     }
-    func imageChange(bool:Bool) -> Void {
-        if bool == false{
+    func imageChange(bool: Bool) {
+        if bool == false {
             setImage(UIImage(systemName: "trash"), for: .normal)
             setTitle("", for: .normal)
         } else {

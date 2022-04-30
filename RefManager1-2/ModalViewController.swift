@@ -9,7 +9,7 @@ import UIKit
 
 class ModalViewController: UIViewController, UITextFieldDelegate {
     private var baseArray = Food(refOrFreezer: .refrigerator, kind: .other, name: String(), quantity: Double(), unit: UnitSelectButton.UnitMenu.initial, IDkey: UUID().uuidString, date: Date())
-    
+
     @IBOutlet weak var foodNameTextField: UITextField!
     @IBOutlet weak var methodSelectText: UILabel!
     @IBOutlet weak var refrigeratorButton: UIButton!
@@ -33,13 +33,13 @@ class ModalViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         foodNameTextField.delegate = self
         quantityTextField.delegate = self
-        let foodTextAttribute: [NSAttributedString.Key : Any] = [
-            .font : UIFont.systemFont(ofSize: 18.0),
-            .foregroundColor : UIColor.gray
+        let foodTextAttribute: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 18.0),
+            .foregroundColor: UIColor.gray
         ]
-        let quantityTextAttribute: [NSAttributedString.Key : Any] = [
-            .font : UIFont.systemFont(ofSize: 12.0),
-            .foregroundColor : UIColor.gray
+        let quantityTextAttribute: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 12.0),
+            .foregroundColor: UIColor.gray
         ]
         foodNameTextField.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: foodTextAttribute)
         quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: quantityTextAttribute)
@@ -99,7 +99,7 @@ class ModalViewController: UIViewController, UITextFieldDelegate {
 //        foodNameTextField.text = foodNameTextField.text
 //            self.view.endEditing(true)
 //        }
-    @objc func hideKeyboard(){
+    @objc func hideKeyboard() {
         self.view.endEditing(true)
         print("hide作動")
     }
@@ -111,12 +111,12 @@ class ModalViewController: UIViewController, UITextFieldDelegate {
         baseArray.quantity = Double(quantityTextField.text!) ?? 0.0
         baseArray.unit = unitSelectButton.selectedUnit
         FoodData.shared.add(baseArray)
-        print(FoodData.shared.getfoodArray())
-        dismiss(animated: true,  completion: nil)
+        print(FoodData.shared.getfoodArray().last?.IDkey)
+        dismiss(animated: true, completion: nil)
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
            textField.resignFirstResponder()
            return true
        }
-    
+
 }
