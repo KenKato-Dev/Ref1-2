@@ -8,12 +8,11 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
     private let foods = FoodData.shared
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var viewTitle: UINavigationItem!
     @IBOutlet weak var deleteButton: DeleteButton!
-    private var isChange = false
+    private var isChange = true
     var checkedIDDictionary: [String: Bool] = [:]
     //
     override func viewDidLoad() {
@@ -24,9 +23,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         deleteButton.addAction(.init(handler: { _ in
             self.isChange.toggle()
             self.deleteButton.imageChange(bool: self.isChange)
-            // 再度タップしてisChangeがfalseに切り替わった際の挙動
-            if self.isChange == false {
-                // filterで値のみを取り出し、
+            // 再度タップしてisChangeがfalseに切り替わった際の挙動、Bool値がTrueに設定
+            if self.isChange {
+                // filterで値のみを取り出し、defoはTrueを取り出す
                 let filteredIDDictionary = self.checkedIDDictionary.filter {$0.value}.map {$0.key}
                 for key in filteredIDDictionary {
                     self.foods.removeFoods(key: key)

@@ -19,19 +19,20 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var unitTextLabel: UILabel!
     var showCheckBox: Bool = false {
         didSet {
-            checkBoxButton.isHidden = !showCheckBox
+            // Boolの関係性を理解し
+            checkBoxButton.isHidden = showCheckBox
         }
     }
     var didTapCheckBox: ((Bool) -> Void)?
-    private var isTap = false
+    // 下記のisTapはやはりCheckboxにあるべきという感覚を身につける
     // awakeFromNib
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         checkBoxButton.addAction(.init(handler: { _ in
-            self.isTap.toggle()
-            self.checkBoxButton.updateAppearance(isChecked: self.isTap)
-            self.didTapCheckBox?(self.isTap)
+            CheckBoxButton.isTap.toggle()
+            self.checkBoxButton.updateAppearance(isChecked: CheckBoxButton.isTap)
+            self.didTapCheckBox?(CheckBoxButton.isTap)
         }), for: .touchUpInside)
     }
     override func setSelected(_ selected: Bool, animated: Bool) {

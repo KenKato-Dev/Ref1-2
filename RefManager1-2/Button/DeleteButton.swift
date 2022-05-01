@@ -46,8 +46,9 @@ class DeleteButton: UIButton {
         self.imageView?.image?.withTintColor(.red)
         // シンボルカラー
     }
+    // bool=trueの際に作動
     func imageChange(bool: Bool) {
-        if bool == false {
+        if bool {
             setImage(UIImage(systemName: "trash"), for: .normal)
             setTitle("", for: .normal)
         } else {
