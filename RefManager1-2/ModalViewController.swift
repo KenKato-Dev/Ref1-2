@@ -8,7 +8,7 @@
 import UIKit
 
 class ModalViewController: UIViewController, UITextFieldDelegate {
-    private var baseArray = Food(refOrFreezer: .refrigerator, kind: .other, name: String(), quantity: Double(), unit: UnitSelectButton.UnitMenu.initial, IDkey: UUID().uuidString, date: Date())
+    private var baseArray = Food(location: .refrigerator, kind: .other, name: String(), quantity: Double(), unit: UnitSelectButton.UnitMenu.initial, IDkey: UUID().uuidString, date: Date())
 
     @IBOutlet weak var foodNameTextField: UITextField!
     @IBOutlet weak var methodSelectText: UILabel!
@@ -46,11 +46,11 @@ class ModalViewController: UIViewController, UITextFieldDelegate {
         quantityTextField.keyboardType = .numberPad
 //        textFieldShouldReturn(foodNameTextField)
         refrigeratorButton.addAction(.init(handler: { _ in
-            self.baseArray.refOrFreezer = .refrigerator
+            self.baseArray.location = .refrigerator
             print("Refボタン")
         }), for: .touchUpInside)
         freezerButton.addAction(.init(handler: { _ in
-            self.baseArray.refOrFreezer = .freezer
+            self.baseArray.location = .freezer
         }), for: .touchUpInside)
         meatButton.addAction(.init(handler: { _ in
             self.baseArray.kind = .meat
@@ -111,7 +111,7 @@ class ModalViewController: UIViewController, UITextFieldDelegate {
         baseArray.quantity = Double(quantityTextField.text!) ?? 0.0
         baseArray.unit = unitSelectButton.selectedUnit
         FoodData.shared.add(baseArray)
-        print(FoodData.shared.getfoodArray().last?.IDkey)
+//        print(FoodData.shared.getfoodArray().last?.IDkey)
         dismiss(animated: true, completion: nil)
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

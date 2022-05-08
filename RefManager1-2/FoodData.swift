@@ -9,18 +9,19 @@ import Foundation
 import UIKit
 
 struct Food {
-    var refOrFreezer: RefOrFreezer
+    var location: Location
     var kind: FoodKind
     var name: String
     var quantity: Double
     var unit: UnitSelectButton.UnitMenu
     var IDkey: String
     var date: Date
-    enum RefOrFreezer: String {
+    enum Location: String {
         case refrigerator = "冷蔵"
         case freezer = "冷凍"
     }
-    enum FoodKind: String {
+    // CaseIterableでallCasesが使用可能になる
+    enum FoodKind: String, CaseIterable {
         case meat
         case fish
         case vegetableAndFruit
@@ -33,12 +34,16 @@ struct Food {
     }
 }
 class FoodData {
+    struct Fiter {
+        var location: Food.Location
+        var kind: [Food.FoodKind]
+    }
     static let shared: FoodData = FoodData()
     private var foodsArray: [Food] = []
-
     func add(_ food: Food) {
         foodsArray.append(food)
     }
+
     func getfoodArray() -> [Food] {
         foodsArray
     }
@@ -47,4 +52,8 @@ class FoodData {
             food.IDkey == key
         }
     }
-}
+    func filterationOfFood(with filter: Fiter) -> [Food] {
+        // containsはBoolであり含まれていたらtrueを返す
+        foodsArray.filter {filter.kind.contains($0.kind) && $0.location == filter.location}
+        }
+    }

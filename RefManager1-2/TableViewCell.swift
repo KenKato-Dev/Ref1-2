@@ -30,7 +30,10 @@ class TableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         checkBoxButton.addAction(.init(handler: { _ in
+            // toggleが動作せず、改善策がわかるまでコメントアウト
+//            var isTapInCheckBoxButton: Bool = CheckBoxButton.sharedCheckBoxButton.returnIsTap()
             CheckBoxButton.isTap.toggle()
+            print(CheckBoxButton.isTap)
             self.checkBoxButton.updateAppearance(isChecked: CheckBoxButton.isTap)
             self.didTapCheckBox?(CheckBoxButton.isTap)
         }), for: .touchUpInside)

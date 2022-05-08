@@ -8,7 +8,11 @@
 import UIKit
 
 class CheckBoxButton: UIButton {
+    static let sharedCheckBoxButton: CheckBoxButton = CheckBoxButton()
     static var isTap = false
+//    func returnIsTap() -> Bool {
+//        isTap
+//    }
     // ボタンの内容
     override init(frame: CGRect) {
         super.init(frame: frame)
