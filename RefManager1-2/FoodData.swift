@@ -53,7 +53,16 @@ class FoodData {
         }
     }
     func filterationOfFood(with filter: Fiter) -> [Food] {
-        // containsはBoolであり含まれていたらtrueを返す
+        // containsはBoolであり、配列kindの中に含まれていたらtrueを返す
+        // これだと必ずlocationの選択が必要となるためLocationを選択してない状態では動作しない？
         foodsArray.filter {filter.kind.contains($0.kind) && $0.location == filter.location}
+        }
+    func foodSelect2(with filter: Fiter) {
+//        var selectedFoods = selectedFoods
+//        FoodData.foodKindDictionary[foodKind]!.toggle()
+        // Dictionaryで取り出し
+//        let selectedKinds = FoodData.foodKindDictionary.filter {$0.value == true}
+//        for selectedKind in selectedKinds.keys {
+//            selectedFoods.append(contentsOf: foodsArray.filter {$0.kind == selectedKind})
         }
     }

@@ -8,9 +8,12 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    private var filteredFoods: [Food] = []
+    private var foodLocation: [Food] = []
+    private var foodfilteredbyKind: [Food] = []
+    private var foodLocationAndKind: [Food] = []
     private var foodFiter: FoodData.Fiter = .init(location: .refrigerator, kind: Food.FoodKind.allCases)
     private let foods = FoodData.shared
+    private let foodUseCase = FoodUseCase.shared
     @IBOutlet weak var filterRefrigeratorButton: UIButton!
     @IBOutlet weak var filteredFreezerButton: UIButton!
     @IBOutlet weak var filterForMeetButton: UIButton!
@@ -26,20 +29,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var viewTitle: UINavigationItem!
     @IBOutlet weak var deleteButton: DeleteButton!
     private var isChange = true
+    // 食材種類を判断するDictionary
+    var foodKindDictionary: [Food.FoodKind: Bool] = [
+        .meat: false, .fish: false, .vegetableAndFruit: false,
+        .milkAndEgg: false, .dish: false, .drink: false,
+            .seasoning: false, .sweet: false, .other: false
+        ]
+    // 食材種類を判断するDictionary
+//        var foodKindDictionary: [Food.FoodKind: Bool] = [
+//            .meat: false, .fish: false, .vegetableAndFruit: false, .milkAndEgg: false, .dish: false, .drink: false, .seasoning: false, .sweet: false, .other: false
+//        ]
     // 表示切り替え
-    private var filterForRefrigerator = false
-    private var filterForFreezer = false
     private var filterForMeet = false
-    private var filterForFish = false
-    private var filterForVegAndFluits = false
-    private var filterForMilkAndEgg = false
-    private var filterForDish = false
-    private var filterForDrink = false
-    private var filterForSeasoning = false
-    private var filterForSweet = false
-    private var filterForOther = false
+//    private var filterForFish = false
+//    private var filterForVegAndFluits = false
+//    private var filterForMilkAndEgg = false
+//    private var filterForDish = false
+//    private var filterForDrink = false
+//    private var filterForSeasoning = false
+//    private var filterForSweet = false
+//    private var filterForOther = false
     var checkedIDDictionary: [String: Bool] = [:]
-    //
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -65,28 +76,44 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // フィルターボタン
         // 冷蔵庫ボタンのアクション
         self.filterRefrigeratorButton.addAction(.init(handler: { _ in
-            self.filterForFreezer = false
-            self.filterForRefrigerator.toggle()
-            self.filteredFoods = []
+//            FoodUseCase().filterFoodLocation(
+//                boolForLocation: self.foodUseCase.filterForRefrigerator,
+//                boolForAnotherLocation: self.foodUseCase.filterForFreezer,
+//                location: .refrigerator,
+//                foodLocation: self.foodLocation,
+//                foodFilter: self.foodFiter)
+
+            self.foodUseCase.filterForFreezer = false
+            self.foodUseCase.filterForRefrigerator.toggle()
+            self.foodLocation = []
             self.foodFiter.location = .refrigerator
             self.addFilteredFood()
-            print(self.filteredFoods)
+            print(self.foodLocation)
             self.tableView.reloadData()
         }), for: .touchUpInside)
         // 冷凍庫ボタンのアクション
         self.filteredFreezerButton.addAction(.init(handler: { _ in
-            self.filterForRefrigerator = false
-            self.filterForFreezer.toggle()
-            self.filteredFoods = []
+//            FoodUseCase().filterFoodLocation(
+//                boolForLocation: self.filterForFreezer,
+//                boolForAnotherLocation: self.filterForRefrigerator,
+//                location: .freezer,
+//                foodLocation: self.foodLocation,
+//                foodFilter: self.foodFiter)
+
+            self.foodUseCase.filterForRefrigerator = false
+            self.foodUseCase.filterForFreezer.toggle()
+            self.foodLocation = []
             self.foodFiter.location = .freezer
             self.addFilteredFood()
-            print(self.filteredFoods)
+//            print(self.foodLocation)
             self.tableView.reloadData()
         }), for: .touchUpInside)
-        // うまく作動せず、冷蔵庫か冷凍庫のボタンでフィルターしたときのみ動作
+        // うまく作動せず
         self.filterForMeetButton.addAction(.init(handler: { _ in
-                self.filteredFoods = self.filteredFoods.filter {$0.kind == .meat}
-            self.tableView.reloadData()
+
+//            foodSelect2(selectedFoods: self.foodfilteredbyKind, foodKind: .meat)
+            self.addFilteredByKinds(foodKind: .meat)
+            print(self.foodfilteredbyKind)
         }), for: .touchUpInside)
 //        self.filterForFishButton.addAction(.init(handler: { _ in
 //            <#code#>
@@ -120,23 +147,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     // Intでリストの数を返す
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (filterForRefrigerator || filterForFreezer) && filteredFoods.count != 0 {
-           return  filteredFoods.count
+        if (self.foodUseCase.filterForFreezer || self.foodUseCase.filterForRefrigerator) && foodLocation.count != 0 {
+           return  foodLocation.count
         } else {
             return foods.getfoodArray().count
         }
+//        if foodFiter.kind ==  {
+//        }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyMMdd", options: 0, locale: Locale(identifier: "ja_JP"))
         cell?.dateTextLabel.text = dateFormatter.string(from: Date())
-        if (filterForRefrigerator || filterForFreezer) && filteredFoods.count != 0 {
-            cell?.foodImage.image = UIImage(named: "\(filteredFoods[indexPath.row].kind.rawValue)")
-            cell?.preserveMethodTextLable.text = filteredFoods[indexPath.row].location.rawValue
-            cell?.foodNameTextLabel.text = filteredFoods[indexPath.row].name
-            cell?.quantityTextLabel.text = String(filteredFoods[indexPath.row].quantity)
-            cell?.unitTextLabel.text = filteredFoods[indexPath.row].unit.rawValue
+        if (self.foodUseCase.filterForFreezer || self.foodUseCase.filterForRefrigerator) && foodLocation.count != 0 {
+            cell?.foodImage.image = UIImage(named: "\(foodLocation[indexPath.row].kind.rawValue)")
+            cell?.preserveMethodTextLable.text = foodLocation[indexPath.row].location.rawValue
+            cell?.foodNameTextLabel.text = foodLocation[indexPath.row].name
+            cell?.quantityTextLabel.text = String(foodLocation[indexPath.row].quantity)
+            cell?.unitTextLabel.text = foodLocation[indexPath.row].unit.rawValue
         } else {
             cell?.foodImage.image = UIImage(named: "\(foods.getfoodArray()[indexPath.row].kind.rawValue)")
             cell?.preserveMethodTextLable.text = foods.getfoodArray()[indexPath.row].location.rawValue
@@ -144,6 +173,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell?.quantityTextLabel.text = String(foods.getfoodArray()[indexPath.row].quantity)
             cell?.unitTextLabel.text = foods.getfoodArray()[indexPath.row].unit.rawValue
         }
+
         // 削除ボタンと連動
         cell?.showCheckBox = self.isChange
         // UUIDをDictionaryに追加
@@ -154,6 +184,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell!
     }
     func addFilteredFood() {
-        self.filteredFoods.append(contentsOf: self.foods.filterationOfFood(with: self.foodFiter))
+        self.foodLocation.append(contentsOf: self.foods.filterationOfFood(with: self.foodFiter))
+    }
+    // 食材ボタンを押すとリストにそれを表示する
+    func foodSelect(boolOfKind: Bool, foodKind: Food.FoodKind) {
+        if boolOfKind && (self.foodUseCase.filterForRefrigerator || self.foodUseCase.filterForFreezer) {
+            self.foodLocationAndKind = []
+            self.foodLocationAndKind = self.foodLocation.filter {$0.kind == foodKind}
+        } else if !boolOfKind && (self.foodUseCase.filterForRefrigerator || self.foodUseCase.filterForFreezer) {
+            self.foodLocation
+        }
+    }
+    // ボタンが押されたらfoodKindDic内のkey値を切り替える
+    func addFilteredByKinds(foodKind: Food.FoodKind) {
+        foodKindDictionary[foodKind]!.toggle()
+        let selectedKinds = foodKindDictionary.filter {$0.value == true}
+        let kinds = selectedKinds.map {$0.key}
+        self.foodFiter.kind = kinds
+        self.foodfilteredbyKind.append(contentsOf: self.foods.filterationOfFood(with: self.foodFiter))
     }
 }

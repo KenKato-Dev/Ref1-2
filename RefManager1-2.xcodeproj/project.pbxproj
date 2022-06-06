@@ -23,6 +23,7 @@
 		ECE2F0BE280C3B9600975A38 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = ECE2F0BD280C3B9600975A38 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		ECE2F0C0280C3B9600975A38 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = ECE2F0BF280C3B9600975A38 /* FirebaseCrashlytics */; };
 		ECE2F0C2280C3B9600975A38 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = ECE2F0C1280C3B9600975A38 /* FirebaseDatabase */; };
+		ECE2F0E028349FBC00975A38 /* FoodUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */; };
 		ECEB7103280314BD00B157FB /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEB7102280314BD00B157FB /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		ECE2F0A7280B03EE00975A38 /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
 		ECE2F0A9280B052B00975A38 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		ECE2F0AB280B063D00975A38 /* NavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationItem.swift; sourceTree = "<group>"; };
+		ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodUseCase.swift; sourceTree = "<group>"; };
 		ECEB7102280314BD00B157FB /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +83,7 @@
 				ECA6F44528026B0C00CA7C2D /* AppDelegate.swift */,
 				ECA6F44728026B0C00CA7C2D /* SceneDelegate.swift */,
 				ECA6F45C28026BAE00CA7C2D /* FoodData.swift */,
+				ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */,
 				ECA6F44928026B0C00CA7C2D /* ViewController.swift */,
 				ECEB7102280314BD00B157FB /* TableViewCell.swift */,
 				ECA6F45A28026B8E00CA7C2D /* ModalViewController.swift */,
@@ -207,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECE2F0A8280B03EE00975A38 /* DeleteButton.swift in Sources */,
+				ECE2F0E028349FBC00975A38 /* FoodUseCase.swift in Sources */,
 				ECA6F45B28026B8E00CA7C2D /* ModalViewController.swift in Sources */,
 				ECA6F44A28026B0C00CA7C2D /* ViewController.swift in Sources */,
 				ECE2F0AA280B052B00975A38 /* AddButton.swift in Sources */,
