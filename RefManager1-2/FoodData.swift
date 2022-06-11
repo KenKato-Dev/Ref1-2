@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct Food {
+struct Food: Equatable {
     var location: Location
     var kind: FoodKind
     var name: String
@@ -16,7 +16,7 @@ struct Food {
     var unit: UnitSelectButton.UnitMenu
     var IDkey: String
     var date: Date
-    enum Location: String {
+    enum Location: String, CaseIterable {
         case refrigerator = "冷蔵"
         case freezer = "冷凍"
     }
@@ -57,12 +57,5 @@ class FoodData {
         // これだと必ずlocationの選択が必要となるためLocationを選択してない状態では動作しない？
         foodsArray.filter {filter.kind.contains($0.kind) && $0.location == filter.location}
         }
-    func foodSelect2(with filter: Fiter) {
-//        var selectedFoods = selectedFoods
-//        FoodData.foodKindDictionary[foodKind]!.toggle()
-        // Dictionaryで取り出し
-//        let selectedKinds = FoodData.foodKindDictionary.filter {$0.value == true}
-//        for selectedKind in selectedKinds.keys {
-//            selectedFoods.append(contentsOf: foodsArray.filter {$0.kind == selectedKind})
-        }
+
     }

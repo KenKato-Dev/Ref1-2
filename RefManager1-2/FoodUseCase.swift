@@ -9,26 +9,19 @@ import Foundation
 import UIKit
 class FoodUseCase {
     static let shared: FoodUseCase = FoodUseCase()
-//    private var foodLocation: [Food] = []
     var filterForRefrigerator = false
     var filterForFreezer = false
-
-    func filterFoodLocation(boolForLocation: Bool, boolForAnotherLocation: Bool, location: Food.Location, foodLocation: [Food], foodFilter: FoodData.Fiter) {
-        var boolForLocation = boolForLocation
-        var boolForAnotherLocation = boolForAnotherLocation
-        var foodLocation = foodLocation
-        var location = location
-        boolForAnotherLocation = false
-        boolForLocation.toggle()
-            foodLocation = []
-            location = .refrigerator
-            addFilteredFood(foodLocation: foodLocation, foodFilter: foodFilter)
-//            print(self.foodLocation)
-//            self.tableView.reloadData()
-
-    }
-    func addFilteredFood(foodLocation: [Food], foodFilter: FoodData.Fiter) {
-        var foodLocation = foodLocation
-        foodLocation.append(contentsOf: FoodData().filterationOfFood(with: foodFilter))
-    }
+    // 下記を利用
+    var selectedKinds: [Food.FoodKind] = []
+    var foodFilter = FoodData.Fiter.init(location: .refrigerator, kind: Food.FoodKind.allCases)
+    var foodKindDictionary: [Food.FoodKind: Bool] = [
+        .meat: false, .fish: false, .vegetableAndFruit: false,
+        .milkAndEgg: false, .dish: false, .drink: false,
+            .seasoning: false, .sweet: false, .other: false
+        ]
+    // func動作せず、引数に外部の配列を入れても機能しない？
+//    func addFilteredFood(foodLocation: [Food]) {
+//        var foodLocation = foodLocation
+//        foodLocation.append(contentsOf: FoodData.shared.filterationOfFood(with: FoodUseCase.shared.foodFilter))
+//    }
 }
