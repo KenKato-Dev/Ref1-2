@@ -30,12 +30,13 @@ class TableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         checkBoxButton.addAction(.init(handler: { _ in
-            // toggleが動作せず、改善策がわかるまでコメントアウト
-//            var isTapInCheckBoxButton: Bool = CheckBoxButton.sharedCheckBoxButton.returnIsTap()
-            CheckBoxButton.isTap.toggle()
-            print(CheckBoxButton.isTap)
-            self.checkBoxButton.updateAppearance(isChecked: CheckBoxButton.isTap)
-            self.didTapCheckBox?(CheckBoxButton.isTap)
+            // toggleが動作せず、改善策がわかるまでコメントアウト、TableViewCell内のCheckBoxButtonにアクセスできず
+//            var isTapInCheckBoxButton: Bool = CheckBoxButton.shared.returnIsTap()
+//            CheckBoxButton.isTap.toggle()
+            self.checkBoxButton.isTap.toggle()
+            print(self.checkBoxButton.isTap)
+            self.checkBoxButton.updateAppearance(isChecked: self.checkBoxButton.isTap)
+            self.didTapCheckBox?(self.checkBoxButton.isTap)
         }), for: .touchUpInside)
     }
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -8,8 +8,9 @@
 import UIKit
 
 class CheckBoxButton: UIButton {
-    static let sharedCheckBoxButton: CheckBoxButton = CheckBoxButton()
-    static var isTap = false
+    static let shared: CheckBoxButton = CheckBoxButton()
+//    static var isTap = false
+    var isTap = false
 //    func returnIsTap() -> Bool {
 //        isTap
 //    }

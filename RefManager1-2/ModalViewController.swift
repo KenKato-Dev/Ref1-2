@@ -8,13 +8,15 @@
 import UIKit
 
 class ModalViewController: UIViewController, UITextFieldDelegate {
-    private var baseArray = Food(location: .refrigerator, kind: .other, name: String(), quantity: Double(), unit: UnitSelectButton.UnitMenu.initial, IDkey: UUID().uuidString, date: Date())
+    private var baseArray = Food(location: .refrigerator, kind: .other, name: String(), quantity: String(), unit: UnitSelectButton.UnitMenu.initial, IDkey: UUID().uuidString, date: Date())
 
     @IBOutlet weak var foodNameTextField: UITextField!
     @IBOutlet weak var methodSelectText: UILabel!
     @IBOutlet weak var refrigeratorButton: UIButton!
     @IBOutlet weak var freezerButton: UIButton!
     @IBOutlet weak var kindSelectText: UILabel!
+    @IBOutlet weak var foodKindsStacks: UIStackView!
+    @IBOutlet weak var topConstraintOfButtonsStack: NSLayoutConstraint!
     @IBOutlet weak var meatButton: UIButton!
     @IBOutlet weak var fishButton: UIButton!
     @IBOutlet weak var vegetableAndFruitButton: UIButton!
@@ -26,8 +28,10 @@ class ModalViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var othersButton: UIButton!
     @IBOutlet weak var quantityTextField: UITextField!
     @IBOutlet weak var unitSelectButton: UnitSelectButton!
+    @IBOutlet weak var buttonsStack: UIStackView!
     @IBOutlet weak var preserveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,12 +49,21 @@ class ModalViewController: UIViewController, UITextFieldDelegate {
         quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: quantityTextAttribute)
         quantityTextField.keyboardType = .numberPad
 //        textFieldShouldReturn(foodNameTextField)
+        // 冷蔵ボタン
         refrigeratorButton.addAction(.init(handler: { _ in
-            self.baseArray.location = .refrigerator
-            print("Refボタン")
+            if ViewController.isEditMode == false {
+                self.baseArray.location = .refrigerator
+            } else {
+                print("editの冷蔵ボタン")
+            }
         }), for: .touchUpInside)
+        // 冷凍ボタン
         freezerButton.addAction(.init(handler: { _ in
-            self.baseArray.location = .freezer
+            if ViewController.isEditMode == false {
+                self.baseArray.location = .freezer
+            } else {
+                print("editの冷凍ボタン")
+            }
         }), for: .touchUpInside)
         meatButton.addAction(.init(handler: { _ in
             self.baseArray.kind = .meat
@@ -106,13 +119,19 @@ class ModalViewController: UIViewController, UITextFieldDelegate {
     @IBAction func cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+
     @IBAction func preserve(_ sender: Any) {
-        baseArray.name = foodNameTextField.text!
-        baseArray.quantity = Double(quantityTextField.text!) ?? 0.0
-        baseArray.unit = unitSelectButton.selectedUnit
-        FoodData.shared.add(baseArray)
-//        print(FoodData.shared.getfoodArray().last?.IDkey)
-        dismiss(animated: true, completion: nil)
+        if ViewController.isEditMode == false {
+            baseArray.name = foodNameTextField.text!
+            baseArray.quantity = String(Double(quantityTextField.text!) ?? 0.0) ?? "0.0"
+            baseArray.unit = unitSelectButton.selectedUnit
+//            FoodData.shared.add(baseArray)
+            FoodData.shared.addtoDataBase(baseArray)
+            dismiss(animated: true, completion: nil)
+            print("オリジナルのFuncが動作")
+        } else {
+            print(ViewController.isEditMode)
+        }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
            textField.resignFirstResponder()
