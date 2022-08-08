@@ -11,12 +11,12 @@ class ModalViewController: UIViewController, UITextFieldDelegate {
     private var baseArray = Food(location: .refrigerator, kind: .other, name: String(), quantity: String(), unit: UnitSelectButton.UnitMenu.initial, IDkey: UUID().uuidString, date: Date())
 
     @IBOutlet weak var foodNameTextField: UITextField!
+    @IBOutlet weak var nameTextHeightconstraint: NSLayoutConstraint!
     @IBOutlet weak var methodSelectText: UILabel!
     @IBOutlet weak var refrigeratorButton: UIButton!
     @IBOutlet weak var freezerButton: UIButton!
     @IBOutlet weak var kindSelectText: UILabel!
     @IBOutlet weak var foodKindsStacks: UIStackView!
-    @IBOutlet weak var topConstraintOfButtonsStack: NSLayoutConstraint!
     @IBOutlet weak var meatButton: UIButton!
     @IBOutlet weak var fishButton: UIButton!
     @IBOutlet weak var vegetableAndFruitButton: UIButton!
@@ -27,7 +27,9 @@ class ModalViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var sweetButton: UIButton!
     @IBOutlet weak var othersButton: UIButton!
     @IBOutlet weak var quantityTextField: UITextField!
+    @IBOutlet weak var quantityTextHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var unitSelectButton: UnitSelectButton!
+    @IBOutlet weak var parentStacKView: UIStackView!
     @IBOutlet weak var buttonsStack: UIStackView!
     @IBOutlet weak var preserveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
@@ -38,11 +40,11 @@ class ModalViewController: UIViewController, UITextFieldDelegate {
         foodNameTextField.delegate = self
         quantityTextField.delegate = self
         let foodTextAttribute: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 18.0),
+            .font: UIFont.systemFont(ofSize: 15.0),
             .foregroundColor: UIColor.gray
         ]
         let quantityTextAttribute: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 12.0),
+            .font: UIFont.systemFont(ofSize: 15.0),
             .foregroundColor: UIColor.gray
         ]
         foodNameTextField.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: foodTextAttribute)

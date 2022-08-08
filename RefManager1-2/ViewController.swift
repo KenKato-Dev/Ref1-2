@@ -69,7 +69,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //                    self.foods.delete(filteredIDictionary)
                 self.foods.delete(filteredIDictionary) { result in
                     switch result {
-                    case.success():
+                    case.success:
                         // ここから
                         self.checkedIDDictionary = [:]
                         self.foods.fetchFoods { result in
@@ -280,25 +280,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         inputView?.unitSelectButton.alpha = 1.0
 //        "\(self.foodArray[indexPath.row].unit)"
         // 下記で消せるがボタンがViewの一番上まで来てしまうためConstraintを上書きする必要あり
-        inputView?.foodKindsStacks.removeFromSuperview()
-//        print("コンスト:\(inputView?.bottomConstraint.constant)")
-        /// 第一引数itemのview1は設定する要素を指定
-        /// 第二引数attr1はview1で指定した要素の制約を設定する場所を指定
-        /// 第三引数relationは制約を設定する２つの要素の関係性を指定
-        /// 第四引数view2は基準となる要素を指定
-        /// 第五引数attr2は基準となる要素の制約の場所を指定
-        /// 第六引数multiplierは制約の割合の数値を指定
-        /// 第七引数cは制約で追加する数値を指定
-//        let inputViewConstraint = NSLayoutConstraint(item: inputView?.buttonsStack, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1.0, constant: 100)
-//        inputView?.buttonsStack.addConstraint(inputViewConstraint)
-//        inputView?.buttonsStack.updateConstraints()
-        inputView?.topConstraintOfButtonsStack.constant = 50
-//        for constraint in inputView?.buttonsStack.constraints ?? [] {
-//            if constraint.identifier == "stackViewBottom"{
-//                constraint.constant = 100
-//                print("constraint:\(constraint.constant)")
-//            }
-//        }
+        inputView?.foodKindsStacks.isHidden = true
+        inputView?.parentStacKView.spacing = 50
+        inputView?.nameTextHeightconstraint.constant = 20
+        inputView?.quantityTextHeightConstraint.constant = 20
+
+//        inputView?.nameTextHeightconstraint.multiplier = 0.1
         inputView?.foodNameTextField.delegate = self
         inputView?.quantityTextField.delegate = self
         ViewController.isEditMode = true
