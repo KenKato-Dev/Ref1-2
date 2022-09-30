@@ -100,6 +100,23 @@ struct FoodForTest: Decodable {
         case other
     }
 }
+struct Recepie: Codable {
+    let foodImageUrl: String
+    let mediumImageUrl: String
+    let nickname: String
+    let pickup: Int
+    let rank: String
+    let recipeCost: String
+    let recipeDescription: String
+    let recipeId: Int
+    let recipeIndication: String
+    let recipeMaterial: [String]
+    let recipePublishday: String
+    let recipeTitle: String
+    let recipeUrl: String
+    let shop: Int
+    let smallImageUrl: String
+}
 class FoodData {
     struct Fiter: Codable {
         var location: Food.Location
@@ -134,19 +151,6 @@ class FoodData {
         }
     }
 
-//    func getfoodArray() -> [Food] {
-//        foodsArray
-//    }
-//    func removeFoods(key: String) {
-//        foodsArray.removeAll { food in
-//            food.IDkey == key
-//        }
-//    }
-//    func filterationOfFood(with filter: Fiter) -> [Food] {
-        // containsはBoolであり、配列kindの中に含まれていたらtrueを返す
-        // これだと必ずlocationの選択が必要となるためLocationを選択してない状態では動作しない？
-//        foodsArray.filter {filter.kind.contains($0.kind) && $0.location == filter.location}
-//    }
     // FireStoreから[food]として読み込み、Resultを使うことで綺麗に記述、Escapingがなければエラー
     func fetchFoods(_ completion:@escaping (Result<[Food], Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
@@ -178,27 +182,7 @@ class FoodData {
             }
         }
     }
-    // 要改善
-//    func delete(_ idKeys: [String]) {
-//                    if !idKeys.isEmpty {
-//                        DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
-//                            let query = self.db.collection("foods").whereField("IDkey", in: idKeys)
-//                            query.getDocuments { snapshot, error in
-//                                if let error = error {
-//                                    print(error)
-//                                    return
-//                                }
-//                                for document in snapshot!.documents {
-//                                    document.reference.delete()
-//                                    // ここにfetchを入れてみようとしたがうまくいかず
-//                                }
-//                            }
-//                        }
-//                } else {
-//                    print("isKeysが空です")
-//                }
-//
-//    }
+
     func delete(_ idKeys: [String], _ completion:@escaping (Result<Void, Error>) -> Void) {
         guard !idKeys.isEmpty else {
             return
@@ -250,35 +234,6 @@ class FoodData {
         return array
     }
 
-//    func returnQueryDocument() -> [QueryDocumentSnapshot]? {
-//        let loadedFromFireStore = db.collection("foods")
-//        var initialQuerySnapshot: [QueryDocumentSnapshot] = .init()
-//        loadedFromFireStore.getDocuments { (querySnapshot, error) in
-//            if let err = error {
-//                print("FireStoreへの読み込みに失敗しました: \(err)")
-//            } else {
-//                print("FireStoreへの読み込みに成功しました")
-//                initialQuerySnapshot = querySnapshot!.documents
-//
-//            }
-//        }
-//        if initialQuerySnapshot != .init() {
-//            return initialQuerySnapshot
-//        } else {
-//            print("ReturnQueryDocumentにてエラーが発生しました")
-//            return nil
-//        }
-//    }
-//    func get(completion: @escaping([QueryDocumentSnapshot]) -> Void) {
-//        db.collection("foods").getDocuments { querySnapshot, error in
-//            if let err = error {
-//                print("エラー発生:\(err)")
-//            } else {
-//                let documents = querySnapshot!.documents
-//                completion(documents)
-//            }
-//        }
-//    }
     func returnFood(queryDocumentSnapshot: [QueryDocumentSnapshot])async throws -> [Food]? {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(.iso8601Full)
@@ -310,74 +265,32 @@ class FoodData {
             }
         }
 }
-    // 下記のFuncでは何も返さないと判断されるためTableviewに入れるとエラーが発生
-//    func fetchListCount(_ completion:@escaping (Int) -> ()) {
-//        db.collection("foods").getDocuments {querySnapshot, error in
-//            if let err = error {
-//                print("ドキュメント取得に失敗: \(err)")
-//                return 0
-//            } else {
-//                do {
-//                    let dictionaryDocuments = try querySnapshot?.documents.map({ snapshot in
-//                        snapshot.data()
-//                    })
-//                    completion(dictionaryDocuments?.count ?? 0)
-//                } catch {
-//                    print(error)
-//                }
-//            }
-//        }
-//    }
-    //
-//    func fetchCountForTest(_ completion:@escaping (Result<Int, Error>) -> Void) {
-//        db.collection("foods").getDocuments { querySnapShot, error in
-//            if let err = error {
-//                completion(.failure(err))
-//                print("FireStoreへの読み込みに失敗しました: \(err)")
-//            } else {
-//                print("FireStoreへの読み込みに成功しました")
-//                // ここから非同期処理？
-//                let decoder = JSONDecoder()
-//                decoder.dateDecodingStrategy = .formatted(.iso8601Full)
-//                // 下記でDictionaryに変換
-//                var dictinaryDocuments = querySnapShot?.documents.map({ snapshot in
-//                    snapshot.data()
-//                })
-//                do {
-//                    // 下記でDictionaryをdata→JsonString→[Food]に変換
-//                    let data = try JSONSerialization.data(withJSONObject: dictinaryDocuments, options: .prettyPrinted)
-//                    //                    let jsonSting = try String(data: data, encoding: .utf8)!
-//                    //                    let datafromJson = jsonSting.data(using: .utf8)
-//                    let decodedFoods = try decoder.decode([Food].self, from: data)
-//                    completion(.success(decodedFoods.count))
-//                } catch {
-//                    completion(.failure(error))
-//                }
-//            }
-//        }
-//    }
-//        func fetchListCount() -> Int? {
-//            var count = 0
-//            db.collection("foods").getDocuments {
-//                (querySnapshot, err) in
-//                if let err = err {
-//                    print("ドキュメント取得に失敗: \(err)")
-//                } else {
-//                    var countOfDocuments = 0
-//                    for document in querySnapshot!.documents {
-//                        countOfDocuments += 1
-////                        print("\(document.documentID) => \(document.data())")
-//                    }
-////                    print("Count = \(countOfDocuments)")
-//                    count = countOfDocuments
-//                }
-//            }
-//            if count != nil {
-//                // まず下記の処理が開始されその後上記のif let elseに入るため記述が無意味
-//                // 確実に取り出す方法が必要
-//                return count
-//            } else {
-//                return nil
-//            }
-//        }
+    // APIからランキングを取得
+    //この部分をMyplaygroundのランキング取得に変換、ここからURLとタイトルを取り出す
+    func fetchRankingFromAPI(_ completion:@escaping(Result<[Recepie], Error>) -> Void) {
+        guard let url = URL(string: "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?format=json&applicationId=1014272479943576132") else { return }
+
+            let task = URLSession.shared.dataTask(with: url) { data, _, error in
+                if let error = error {
+                    print("URL取得に失敗:\(error)")
+                    completion(.failure(error))
+                } else {
+                    let decoder = JSONDecoder()
+                    do {
+                        let recepieData = try JSONSerialization.jsonObject(with: data!) as? [String: Any]
+                        let dictionary = recepieData?["result"] as?([[String: Any]])
+                        let data = try JSONSerialization.data(withJSONObject: dictionary!, options: .prettyPrinted)
+                        let decodedResult = try decoder.decode([Recepie].self, from: data)
+                        completion(.success(decodedResult))
+                    } catch {
+                        print("デコードに失敗:\(error)")
+                    }
+                }
+            }
+            task.resume()
+    }
+    // APIからカテゴリを取得
+    func fetchCategoryFromAPI(_ completion:@escaping(Result<[Recepie], Error>) -> Void) {
+
+    }
 }

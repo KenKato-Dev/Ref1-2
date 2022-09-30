@@ -265,91 +265,102 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // ここで選択しているセルにアクセス
         tableView.deselectRow(at: indexPath, animated: false)
         let cell = self.tableView.cellForRow(at: indexPath) as? TableViewCell
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell
-        let inputView = storyboard?.instantiateViewController(withIdentifier: "modal") as? ModalViewController
-//        let imputView = ModalViewController()
-        if let modalImput = inputView?.sheetPresentationController {
-            modalImput.detents = [.medium()]
-        } else {
-            print("エラーです")
-        }
-        present(inputView!, animated: true)
-        inputView?.kindSelectText.isHidden = true
-        inputView?.unitSelectButton.setTitle(inputView?.unitSelectButton.unitButtonTranslator(unit: self.foodArray[indexPath.row].unit), for: .normal)
-        inputView?.unitSelectButton.isEnabled = false
-        inputView?.unitSelectButton.alpha = 1.0
-//        "\(self.foodArray[indexPath.row].unit)"
-        // 下記で消せるがボタンがViewの一番上まで来てしまうためConstraintを上書きする必要あり
-        inputView?.foodKindsStacks.isHidden = true
-        inputView?.parentStacKView.spacing = 50
-        inputView?.nameTextHeightconstraint.constant = 20
-        inputView?.quantityTextHeightConstraint.constant = 20
+        // アラート表示
+        let alert = UIAlertController(title: "選択してください", message: "", preferredStyle: .actionSheet)
+        alert.addAction(.init(title: "数量・保存方法を変更する", style: .default, handler: { _ -> Void in
+            print("アラート")
+            let inputView = self.storyboard?.instantiateViewController(withIdentifier: "modal") as? ModalViewController
+            if let modalImput = inputView?.sheetPresentationController {
+                modalImput.detents = [.medium()]
+            } else {
+                print("エラーです")
+            }
+            self.present(inputView!, animated: true)
+            inputView?.kindSelectText.isHidden = true
+            inputView?.unitSelectButton.setTitle(inputView?.unitSelectButton.unitButtonTranslator(unit: self.foodArray[indexPath.row].unit), for: .normal)
+            inputView?.unitSelectButton.isEnabled = false
+            inputView?.unitSelectButton.alpha = 1.0
+            //        "\(self.foodArray[indexPath.row].unit)"
+            // 下記で消せるがボタンがViewの一番上まで来てしまうためConstraintを上書きする必要あり
+            inputView?.foodKindsStacks.isHidden = true
+            inputView?.parentStacKView.spacing = 50
+            inputView?.nameTextHeightconstraint.constant = 20
+            inputView?.quantityTextHeightConstraint.constant = 20
 
-//        inputView?.nameTextHeightconstraint.multiplier = 0.1
-        inputView?.foodNameTextField.delegate = self
-        inputView?.quantityTextField.delegate = self
-        ViewController.isEditMode = true
+            //        inputView?.nameTextHeightconstraint.multiplier = 0.1
+            inputView?.foodNameTextField.delegate = self
+            inputView?.quantityTextField.delegate = self
+            ViewController.isEditMode = true
 
-        if ViewController.isEditMode == true {
-            inputView?.preserveButton.addAction(.init(handler: { [self]_ in
-                cell?.foodNameTextLabel.text = inputView?.foodNameTextField.text
-                cell?.quantityTextLabel.text = inputView?.quantityTextField.text
-                print("inputのアクションが操作")
-                self.db.collection("foods").document("IDkey: \(self.foodArray[indexPath.row].IDkey)").setData([
-                    "name": "\((inputView?.foodNameTextField.text)!)",
-                    "quantity": "\((inputView?.quantityTextField.text)!)",
-                    "date": "\(Date())",
-                    "IDkey": "\(self.foodArray[indexPath.row].IDkey)",
-                    "kind": "\(self.foodArray[indexPath.row].kind)",
-                    "unit": "\(self.foodArray[indexPath.row].unit)"
-                ], merge: true) { err in
-                    if let err = err {
-                        print("FireStoreへの書き込みに失敗しました: \(err)")
-                        ViewController.isEditMode = false
-                    } else {
-                        print("FireStoreへの書き込みに成功しました")
-                        ViewController.isEditMode = false
-                    }
-                }
-                self.dismiss(animated: true, completion: nil)
-                ViewController.isEditMode = false
-                // ここで読み込む
-                foods.fetchFoods { result in
-                    DispatchQueue.main.asyncAfter(deadline: .now()) {
-                        switch result {
-                        case .success(let foods):
-                            self.foodArray = foods
-                            // ここに入れることで起動時に表示
-                            self.tableView.reloadData()
-                        case .failure(let error):
-                            print(error)
+            if ViewController.isEditMode == true {
+                inputView?.preserveButton.addAction(.init(handler: { [self]_ in
+                    cell?.foodNameTextLabel.text = inputView?.foodNameTextField.text
+                    cell?.quantityTextLabel.text = inputView?.quantityTextField.text
+                    print("inputのアクションが操作")
+                    self.db.collection("foods").document("IDkey: \(self.foodArray[indexPath.row].IDkey)").setData([
+                        "name": "\((inputView?.foodNameTextField.text)!)",
+                        "quantity": "\((inputView?.quantityTextField.text)!)",
+                        "date": "\(Date())",
+                        "IDkey": "\(self.foodArray[indexPath.row].IDkey)",
+                        "kind": "\(self.foodArray[indexPath.row].kind)",
+                        "unit": "\(self.foodArray[indexPath.row].unit)"
+                    ], merge: true) { err in
+                        if let err = err {
+                            print("FireStoreへの書き込みに失敗しました: \(err)")
+                            ViewController.isEditMode = false
+                        } else {
+                            print("FireStoreへの書き込みに成功しました")
+                            ViewController.isEditMode = false
                         }
                     }
-                }
-            }), for: .touchUpInside)
-            inputView?.refrigeratorButton.addAction(.init(handler: { _ in
-                self.db.collection("foods").document("IDkey: \(self.foodArray[indexPath.row].IDkey)").setData([
-                    "location": "\(Food.Location.refrigerator.rawValue)"
-                ])
-                print("\(Food.Location.refrigerator.rawValue)")
-            }), for: .touchUpInside)
-            inputView?.freezerButton.addAction(.init(handler: { _ in
-                self.db.collection("foods").document("IDkey: \(self.foodArray[indexPath.row].IDkey)").setData([
-                    "location": "\(Food.Location.freezer.rawValue)"
-                ])
-                print("\(Food.Location.freezer.rawValue)")
-            }), for: .touchUpInside)
-//            inputView?.unitSelectButton.addAction(.init(handler: { _ in
-//                self.db.collection("foods").document("IDkey: \(self.foodArray[indexPath.row].IDkey)").setData([
-//                    "location": "\(self.foodArray[indexPath.row].unit)"
-//                ])
-//            }), for: .allTouchEvents)
+                    self.dismiss(animated: true, completion: nil)
+                    ViewController.isEditMode = false
+                    // ここで読み込む
+                    foods.fetchFoods { result in
+                        DispatchQueue.main.asyncAfter(deadline: .now()) {
+                            switch result {
+                            case .success(let foods):
+                                self.foodArray = foods
+                                // ここに入れることで起動時に表示
+                                self.tableView.reloadData()
+                            case .failure(let error):
+                                print(error)
+                            }
+                        }
+                    }
+                }), for: .touchUpInside)
+                inputView?.refrigeratorButton.addAction(.init(handler: { _ in
+                    self.db.collection("foods").document("IDkey: \(self.foodArray[indexPath.row].IDkey)").setData([
+                        "location": "\(Food.Location.refrigerator.rawValue)"
+                    ])
+                    print("\(Food.Location.refrigerator.rawValue)")
+                }), for: .touchUpInside)
+                inputView?.freezerButton.addAction(.init(handler: { _ in
+                    self.db.collection("foods").document("IDkey: \(self.foodArray[indexPath.row].IDkey)").setData([
+                        "location": "\(Food.Location.freezer.rawValue)"
+                    ])
+                    print("\(Food.Location.freezer.rawValue)")
+                }), for: .touchUpInside)
+
+            }
+        }))
+        // アラートアクションシート二項目目
+        alert.addAction(.init(title: "レシピを調べる", style: .default, handler: { _ ->Void in
+            self.performSegue(withIdentifier: "toRecepieTableView", sender: cell?.foodNameTextLabel.text)
+        }))
+        self.present(alert, animated: true) {
+            print("エラー発生")
+        }
+        alert.addAction(.init(title: "キャンセル", style: .cancel, handler: { _ in
+
+        }))
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if  segue.identifier == "toRecepieTableView"{
+            let recepieView = segue.destination as? RecepieViewController
+            recepieView?.navigationItem.title = String("\(sender!)")
         }
     }
-//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell
-//        print("didDeselectRowAt")
-//    }
     // 冷蔵庫/冷凍庫用
     func switchLocation(targetLocation: Food.Location) {
         if foodUseCase.selectedKinds.isEmpty {
