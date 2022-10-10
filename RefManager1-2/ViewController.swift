@@ -355,10 +355,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         }))
     }
+    // 下記にて遷移先のプロパティに代入
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if  segue.identifier == "toRecepieTableView"{
             let recepieView = segue.destination as? RecepieViewController
             recepieView?.navigationItem.title = String("\(sender!)")
+            recepieView?.searchKeyword = String("\(sender!)")
         }
     }
     // 冷蔵庫/冷凍庫用

@@ -266,7 +266,7 @@ class FoodData {
         }
 }
     // APIからランキングを取得
-    //この部分をMyplaygroundのランキング取得に変換、ここからURLとタイトルを取り出す
+    // この部分をMyplaygroundのランキング取得に変換、ここからURLとタイトルを取り出す
     func fetchRankingFromAPI(_ completion:@escaping(Result<[Recepie], Error>) -> Void) {
         guard let url = URL(string: "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?format=json&applicationId=1014272479943576132") else { return }
 

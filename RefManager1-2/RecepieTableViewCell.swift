@@ -8,10 +8,8 @@
 import UIKit
 
 class RecepieTableViewCell: UITableViewCell {
-    @IBOutlet weak var recepieImageView: UIImageView!
-    @IBOutlet weak var recepieTitleLabel: UILabel!
-    @IBOutlet weak var cookingTimeLabel: UILabel!
-    @IBOutlet weak var numberOfFaboriteLabel: UILabel!
+    @IBOutlet weak var circlefill: UILabel!
+    @IBOutlet weak var categoryName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,16 +19,6 @@ class RecepieTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }
-    func getImage(url: String) -> UIImage {
-        let url = URL(string: url)
-        do {
-            let data = try Data(contentsOf: url!)
-            return UIImage(data: data)!
-        } catch {
-            print(error)
-        }
-        return UIImage()
     }
 
 }
