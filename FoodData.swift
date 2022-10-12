@@ -120,7 +120,7 @@ struct Recepie: Codable {
 class FoodData {
     struct Fiter: Codable {
         var location: Food.Location
-        var kind: [Food.FoodKind]
+        var kindArray: [Food.FoodKind]
     }
     static var shared: FoodData = FoodData()
 //    static let queue = DispatchQueue(label: "queue")

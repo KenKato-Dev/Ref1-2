@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 import FirebaseCore
 import FirebaseFirestore
 import FirebaseFirestoreSwift
@@ -89,7 +88,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         print(error)
                     }
                 }
-
                 // 下記reloadがないと表示が反映されず2
                 self.tableView.reloadData()
             }
@@ -100,14 +98,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // フィルターボタン
         // 冷蔵庫ボタンのアクション
         self.filterRefrigeratorButton.addAction(.init(handler: { _ in
-            self.foodUseCase.filterForRefrigerator.toggle()
-            self.foodUseCase.filterForFreezer = false
+            self.foodUseCase.isFilteringRefrigerator.toggle()
+            self.foodUseCase.isFilteringFreezer = false
             self.switchLocation(targetLocation: .refrigerator)
         }), for: .touchUpInside)
         // 冷凍庫ボタンのアクション
         self.filteredFreezerButton.addAction(.init(handler: { _ in
-            self.foodUseCase.filterForFreezer.toggle()
-            self.foodUseCase.filterForRefrigerator = false
+            self.foodUseCase.isFilteringFreezer.toggle()
+            self.foodUseCase.isFilteringRefrigerator = false
             self.switchLocation(targetLocation: .freezer)
         }), for: .touchUpInside)
         // 食材ボタン
@@ -219,7 +217,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     // Intでリストの数を返す
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (!foodUseCase.filterForFreezer && !foodUseCase.filterForRefrigerator) && (self.foodUseCase.selectedKinds.isEmpty) {
+        if (!foodUseCase.isFilteringFreezer && !foodUseCase.isFilteringRefrigerator) && (self.foodUseCase.selectedKinds.isEmpty) {
             // Cellの数が返ってこず、Optional(0)となっている
             // fetchCountForTestでも値は返ってくるがまず初めに初期値設定したIntが入りそれを元にTableが構築される
             return self.foodArray.count
@@ -230,7 +228,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // cellの中身を記述
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell
-        if (!self.foodUseCase.filterForFreezer && !self.foodUseCase.filterForRefrigerator) && (self.foodUseCase.selectedKinds.isEmpty) {
+        if (!self.foodUseCase.isFilteringFreezer && !self.foodUseCase.isFilteringRefrigerator) && (self.foodUseCase.selectedKinds.isEmpty) {
             cell?.foodImage.image = UIImage(named: "\(self.foodArray[indexPath.row].kind.rawValue)")
             cell?.preserveMethodTextLable.text = locationTranslator(location: self.foodArray[indexPath.row].location)
             cell?.foodNameTextLabel.text = self.foodArray[indexPath.row].name
@@ -371,19 +369,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         foodUseCase.foodFilter.location = targetLocation
         foodUseCase.selectedKinds = []
         self.filteredFoodArray = filteredFoodArray.filter {$0.location == self.foodUseCase.foodFilter.location}
-        if !foodUseCase.selectedKinds.isEmpty {
-            self.filteredFoodArray = filteredFoodArray.filter {foodUseCase.foodFilter.kind.contains($0.kind) && $0.location == self.foodUseCase.foodFilter.location}
-        }
+//        if !foodUseCase.selectedKinds.isEmpty {
+//            self.filteredFoodArray = filteredFoodArray.filter {foodUseCase.foodFilter.kind.contains($0.kind) && $0.location == self.foodUseCase.foodFilter.location}
+//        }
         self.tableView.reloadData()
     }
     func filtrationOfFoodArray(kinds: [Food.FoodKind]) {
-        self.foodUseCase.foodFilter.kind = kinds
+        self.foodUseCase.foodFilter.kindArray = kinds
         self.foodUseCase.selectedKinds = kinds
-        self.filteredFoodArray = self.foodArray.filter {foodUseCase.foodFilter.kind.contains($0.kind)}
-        if self.foodUseCase.filterForFreezer || self.foodUseCase.filterForRefrigerator {
-            self.filteredFoodArray = filteredFoodArray.filter {foodUseCase.foodFilter.kind.contains($0.kind) && $0.location == self.foodUseCase.foodFilter.location}
-            print(filteredFoodArray)
-        }
+        self.filteredFoodArray = self.foodArray.filter {foodUseCase.foodFilter.kindArray.contains($0.kind)}
+        // ない方が良い？
+//        if self.foodUseCase.filterForFreezer || self.foodUseCase.filterForRefrigerator {
+//            self.filteredFoodArray = filteredFoodArray.filter {foodUseCase.foodFilter.kind.contains($0.kind) && $0.location == self.foodUseCase.foodFilter.location}
+//            print(filteredFoodArray)
+//        }
         if filteredFoodArray.isEmpty {
             self.filteredFoodArray = self.foodArray
         }
