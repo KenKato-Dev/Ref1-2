@@ -53,7 +53,7 @@ class ModalViewController: UIViewController, UITextFieldDelegate {
 //        textFieldShouldReturn(foodNameTextField)
         // 冷蔵ボタン
         refrigeratorButton.addAction(.init(handler: { _ in
-            if ViewController.isEditMode == false {
+            if FoodListViewController.isEditMode == false {
                 self.baseArray.location = .refrigerator
             } else {
                 print("editの冷蔵ボタン")
@@ -61,7 +61,7 @@ class ModalViewController: UIViewController, UITextFieldDelegate {
         }), for: .touchUpInside)
         // 冷凍ボタン
         freezerButton.addAction(.init(handler: { _ in
-            if ViewController.isEditMode == false {
+            if FoodListViewController.isEditMode == false {
                 self.baseArray.location = .freezer
             } else {
                 print("editの冷凍ボタン")
@@ -123,7 +123,7 @@ class ModalViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func preserve(_ sender: Any) {
-        if ViewController.isEditMode == false {
+        if FoodListViewController.isEditMode == false {
             baseArray.name = foodNameTextField.text!
             baseArray.quantity = String(Double(quantityTextField.text!) ?? 0.0) ?? "0.0"
             baseArray.unit = unitSelectButton.selectedUnit
@@ -132,7 +132,7 @@ class ModalViewController: UIViewController, UITextFieldDelegate {
             dismiss(animated: true, completion: nil)
             print("オリジナルのFuncが動作")
         } else {
-            print(ViewController.isEditMode)
+            print(FoodListViewController.isEditMode)
         }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

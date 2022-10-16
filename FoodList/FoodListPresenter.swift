@@ -7,8 +7,11 @@
 
 import Foundation
 protocol FoodListPresenterOutput: AnyObject {
-    func didLoadView()
-}
+    func update()
+    func didRefreshSwipe()
+    func didSwitchDeleteButton(isDelete: Bool)
+    }
+
 final class FoodListPresenter {
     private let foodData: FoodData
     weak private var foodListPresenterOutput: FoodListPresenterOutput?
@@ -16,6 +19,8 @@ final class FoodListPresenter {
     private var array: [Food]=[]
     private var filteredArray: [Food]=[]
     private var isDelete = false
+    private var checkedID: [String: Bool] = [:]
+    private let sharedFoodUseCase = FoodUseCase.shared
 
     init(foodData: FoodData) {
         self.foodData = foodData
@@ -23,8 +28,57 @@ final class FoodListPresenter {
     func setOutput(foodListPresenterOutput: FoodListPresenterOutput) {
         self.foodListPresenterOutput = foodListPresenterOutput
     }
+    func didLoadView() {
+        self.loadArray()
+        self.foodListPresenterOutput?.update()
+    }
+    func willViewAppear() {
+        self.foodListPresenterOutput?.didRefreshSwipe()
+        self.foodListPresenterOutput?.update()
+    }
+    func loadArray() {
+        foodData.fetchFoods { result in
+            switch result {
+            case .success(let foods):
+                self.array = foods
+                self.foodListPresenterOutput?.update()
+            case .failure(let error):
+                print(error)
+                // Alart表示
+            }
+        }
+    }
     func didTapDeleteButton() {
-
+        isDelete.toggle()
+        foodListPresenterOutput?.didSwitchDeleteButton(isDelete: isDelete)
+        if isDelete {
+            // filterで値のみを取り出し、defoはTrueを取り出すため
+            let filteredIDictionary = self.checkedID.filter {$0.value}.map {$0.key}
+//                    self.foods.delete(filteredIDictionary)
+            self.foodData.delete(filteredIDictionary) { result in
+                switch result {
+                case.success:
+                    // ここから
+                    self.checkedID = [:]
+                    self.foodData.fetchFoods { result in
+                        switch result {
+                        case .success(let foods):
+                            self.array = foods
+                            // このReloadにより削除がtableに反映
+                            self.foodListPresenterOutput?.update()
+                        case .failure(let error):
+                            print("fetchfoodsに失敗:\(error)")
+                        }
+                        // 下記reloadがないと表示が反映されず1
+                        self.foodListPresenterOutput?.update()
+                    }
+                case.failure(let error):
+                    print("deleteに失敗:\(error)")
+                }
+            }
+            self.foodListPresenterOutput?.update()
+        }
+        self.foodListPresenterOutput?.update()
     }
     func didTapCheckBoxButton() {
 
@@ -49,7 +103,7 @@ final class FoodListPresenter {
         self.foodUseCase.foodFilter.location = location
         self.foodUseCase.selectedKinds = []
         self.filteredArray = filteredArray.filter {$0.location == self.foodUseCase.foodFilter.location}
-        foodListPresenterOutput?.didLoadView()
+        foodListPresenterOutput?.update()
     }
     // 食材ボタン
     func didTapFoodKindButtons(kind: Food.FoodKind) {
@@ -63,18 +117,65 @@ final class FoodListPresenter {
                 if filteredArray.isEmpty {
             self.filteredArray = self.array
         }
-        foodListPresenterOutput?.didLoadView()
+        foodListPresenterOutput?.update()
+    }
+    // 冷蔵冷凍を文字で返す
+    func locationTranslator(location: Food.Location) -> String {
+        var trasnlatedlocation = String()
+        if location == .refrigerator {
+            trasnlatedlocation = "冷蔵"
+        } else if location == .freezer {
+            trasnlatedlocation = "冷凍"
+        }
+        return trasnlatedlocation
     }
     // TableView用Func
     func foodInRow(forRow row: Int) -> Food? {
         guard row < array.count else {return nil}
         return array[row]
     }
+    func filteredFoodInRow(forRow row: Int) -> Food? {
+        guard row < filteredArray.count else {return nil}
+        return filteredArray[row]
+    }
+    func numberOfRows() -> Int{
+        if (!sharedFoodUseCase.isFilteringFreezer && !sharedFoodUseCase.isFilteringRefrigerator) && (self.sharedFoodUseCase.selectedKinds.isEmpty) {
+            return self.array.count
+        } else {
+            return filteredArray.count
+        }
+    }
+    func configure(){
+        
+    }
     func isTapDeleteButton() {
         self.isDelete.toggle()
-        //self.deleteButton.imageChange(bool: self.isChange)
+        // self.deleteButton.imageChange(bool: self.isChange)
         if isDelete {
-            
-        }
+            // checkboxButtonと連動
+            let filteredID = self.checkedID.filter {$0.value}.map {$0.key}
+            self.foodData.delete(filteredID) { result in
+                switch result {
+                case.success:
+                    self.checkedID = [:]
+                    self.foodData.fetchFoods { result in
+                        switch result {
+                        case.success(let foods):
+                            self.array = foods
+                            self.foodListPresenterOutput?.update()
+                        case.failure(let error):
+                            print(error)
+                            // ここにアラートを表示(fetchfoodsを失敗)
+                            self.foodListPresenterOutput?.update()
+                        }
+                    }
+                case.failure(let error):
+                    print(error)
+                        // アラート表示(deleteを失敗)
+                } // deleteのswitch
+            } // delete
+        } // if isDelete
+    } // isTapDeleteButton
+    func isTapCheckboxButton() {
     }
 }

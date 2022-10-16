@@ -43,4 +43,30 @@ class TableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
+    func foodConfigure(food:Food){
+            foodImage.image = UIImage(named: "\(food.kind.rawValue)") //foodArray[indexPath.row]
+            preserveMethodTextLable.text = self.locationTranslator(location: food.location)
+            foodNameTextLabel.text = food.name
+            quantityTextLabel.text = String(food.quantity)
+            unitTextLabel.text = UnitSelectButton().unitButtonTranslator(unit: food.unit)
+            dateTextLabel.text = food.date.formatted(date: .abbreviated, time: .omitted)
+        
+    }
+    func filteredConfigure(filteredFood:Food){
+        foodImage.image = UIImage(named: "\(filteredFood.kind.rawValue)")
+        preserveMethodTextLable.text = self.locationTranslator(location: filteredFood.location)
+        foodNameTextLabel.text = filteredFood.name
+        quantityTextLabel.text = String(filteredFood.quantity)
+        unitTextLabel.text = UnitSelectButton().unitButtonTranslator(unit: filteredFood.unit)
+        dateTextLabel.text = filteredFood.date.formatted(date: .abbreviated, time: .omitted)
+    }
+    func locationTranslator(location: Food.Location) -> String {
+        var trasnlatedlocation = String()
+        if location == .refrigerator {
+            trasnlatedlocation = "冷蔵"
+        } else if location == .freezer {
+            trasnlatedlocation = "冷凍"
+        }
+        return trasnlatedlocation
+    }
 }
