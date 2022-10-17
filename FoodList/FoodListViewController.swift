@@ -52,7 +52,7 @@ class FoodListViewController: UIViewController {
         self.foodListPresenter.didLoadView()
         // 削除ボタン
         deleteButton.addAction(.init(handler: { _ in
-            self.foodListPresenter.isTapDeleteButton()
+            self.foodListPresenter.didTapDeleteButton()
         }), for: .touchUpInside)
         // 冷蔵庫ボタンのアクション
         self.filterRefrigeratorButton.addAction(.init(handler: { _ in
@@ -90,13 +90,17 @@ class FoodListViewController: UIViewController {
         self.filterForOthersButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(kind: .other)
         }), for: .touchUpInside)
-        self.tableView.reloadData()
+
     }// viewdidload
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.foodListPresenter.willViewAppear()
     } // ViewWillAppear
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.foodListPresenter.didLoadView()
+    }
     // 下記にて遷移先のプロパティに代入
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if  segue.identifier == "toRecepieTableView"{
@@ -110,37 +114,29 @@ class FoodListViewController: UIViewController {
 extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
     // Intでリストの数を返す
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (!sharedFoodUseCase.isFilteringFreezer &&
-            !sharedFoodUseCase.isFilteringRefrigerator) &&
-            (self.sharedFoodUseCase.selectedKinds.isEmpty) {
-            return self.foodArray.count
-        } else {
-            return filteredFoodArray.count
-        }
+        self.foodListPresenter.numberOfRows()
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell
         if (!self.sharedFoodUseCase.isFilteringFreezer &&
             !self.sharedFoodUseCase.isFilteringRefrigerator) &&
-            (self.sharedFoodUseCase.selectedKinds.isEmpty){
-            if let food = foodListPresenter.foodInRow(forRow: indexPath.row){
+            (self.sharedFoodUseCase.selectedKinds.isEmpty) {
+            if let food = foodListPresenter.foodInRow(forRow: indexPath.row) {
                 cell?.foodConfigure(food: food)
             }
-        }else{
-            if let filteredFood = foodListPresenter.filteredFoodInRow(forRow: indexPath.row){
+        } else {
+            if let filteredFood = foodListPresenter.filteredFoodInRow(forRow: indexPath.row) {
                 cell?.filteredConfigure(filteredFood: filteredFood)
             }
         }
         // 削除ボタンと連動
-        cell?.showCheckBox = self.isChange
+        cell?.showCheckBox = self.foodListPresenter.isDelete
         // UUIDをDictionaryに追加
-        cell?.didTapCheckBox = { isChecked in
-            self.checkedIDDictionary[self.foodArray[indexPath.row].IDkey] = isChecked
-            print(self.checkedIDDictionary)
-        }
-        cell?.checkBoxButton.updateAppearance(isChecked: checkedIDDictionary[self.foodArray[indexPath.row].IDkey] ?? false)
+        cell?.didTapCheckBox = self.foodListPresenter.isTapCheckboxButton(row: indexPath.row)
+        // 下記エラー発生のため一時的にコメントアウト（2022/10/17）
+        cell?.checkBoxButton.updateAppearance(isChecked: self.foodListPresenter.checkedID[self.foodListPresenter.array[indexPath.row].IDkey] ?? false)
         // 下記でcheckBoxの削除後に再利用されるCell内のBool値をfalseにする
-        if !isChange {
+        if self.foodListPresenter.isDelete {
             cell?.checkBoxButton.isTap = false
         }
         return cell!
@@ -254,7 +250,7 @@ extension FoodListViewController: FoodListPresenterOutput {
             self.tableView.refreshControl?.endRefreshing()
         }), for: .valueChanged)
     }
-    func didSwitchDeleteButton(isDelete: Bool) {
+    func isAppearingTrashBox(isDelete: Bool) {
         self.deleteButton.imageChange(bool: isDelete)
     }
 }

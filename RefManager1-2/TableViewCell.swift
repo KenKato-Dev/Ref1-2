@@ -34,7 +34,6 @@ class TableViewCell: UITableViewCell {
 //            var isTapInCheckBoxButton: Bool = CheckBoxButton.shared.returnIsTap()
 //            CheckBoxButton.isTap.toggle()
             self.checkBoxButton.isTap.toggle()
-            print(self.checkBoxButton.isTap)
             self.checkBoxButton.updateAppearance(isChecked: self.checkBoxButton.isTap)
             self.didTapCheckBox?(self.checkBoxButton.isTap)
         }), for: .touchUpInside)
@@ -43,16 +42,16 @@ class TableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
-    func foodConfigure(food:Food){
-            foodImage.image = UIImage(named: "\(food.kind.rawValue)") //foodArray[indexPath.row]
+    func foodConfigure(food: Food) {
+            foodImage.image = UIImage(named: "\(food.kind.rawValue)") // foodArray[indexPath.row]
             preserveMethodTextLable.text = self.locationTranslator(location: food.location)
             foodNameTextLabel.text = food.name
             quantityTextLabel.text = String(food.quantity)
             unitTextLabel.text = UnitSelectButton().unitButtonTranslator(unit: food.unit)
             dateTextLabel.text = food.date.formatted(date: .abbreviated, time: .omitted)
-        
+
     }
-    func filteredConfigure(filteredFood:Food){
+    func filteredConfigure(filteredFood: Food) {
         foodImage.image = UIImage(named: "\(filteredFood.kind.rawValue)")
         preserveMethodTextLable.text = self.locationTranslator(location: filteredFood.location)
         foodNameTextLabel.text = filteredFood.name

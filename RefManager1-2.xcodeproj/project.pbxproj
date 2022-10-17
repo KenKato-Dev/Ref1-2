@@ -21,7 +21,6 @@
 		EC77EA2528F2A813009B3EBA /* UnitSelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC77EA2128F2A813009B3EBA /* UnitSelectButton.swift */; };
 		EC77EA2628F2A813009B3EBA /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC77EA2228F2A813009B3EBA /* AddButton.swift */; };
 		EC9C1C0D28F45E2D0024570D /* FoodListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C1C0C28F45E2D0024570D /* FoodListPresenter.swift */; };
-		EC9C1C0F28F45F040024570D /* FoodListViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C1C0E28F45F040024570D /* FoodListViewController2.swift */; };
 		ECA6F44628026B0C00CA7C2D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6F44528026B0C00CA7C2D /* AppDelegate.swift */; };
 		ECA6F44828026B0C00CA7C2D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6F44728026B0C00CA7C2D /* SceneDelegate.swift */; };
 		ECA6F44A28026B0C00CA7C2D /* FoodListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6F44928026B0C00CA7C2D /* FoodListViewController.swift */; };
@@ -45,7 +44,6 @@
 		EC77EA2128F2A813009B3EBA /* UnitSelectButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitSelectButton.swift; sourceTree = "<group>"; };
 		EC77EA2228F2A813009B3EBA /* AddButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		EC9C1C0C28F45E2D0024570D /* FoodListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListPresenter.swift; sourceTree = "<group>"; };
-		EC9C1C0E28F45F040024570D /* FoodListViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListViewController2.swift; sourceTree = "<group>"; };
 		ECA6F44228026B0C00CA7C2D /* RefManager1-2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RefManager1-2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECA6F44528026B0C00CA7C2D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECA6F44728026B0C00CA7C2D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,7 +93,6 @@
 			isa = PBXGroup;
 			children = (
 				ECA6F44928026B0C00CA7C2D /* FoodListViewController.swift */,
-				EC9C1C0E28F45F040024570D /* FoodListViewController2.swift */,
 				EC9C1C0C28F45E2D0024570D /* FoodListPresenter.swift */,
 			);
 			path = FoodList;
@@ -273,7 +270,6 @@
 				ECA6F45D28026BAE00CA7C2D /* FoodData.swift in Sources */,
 				EC77EA2328F2A813009B3EBA /* CheckBoxButton.swift in Sources */,
 				ECA6F44828026B0C00CA7C2D /* SceneDelegate.swift in Sources */,
-				EC9C1C0F28F45F040024570D /* FoodListViewController2.swift in Sources */,
 				EC9C1C0D28F45E2D0024570D /* FoodListPresenter.swift in Sources */,
 				EC77EA2528F2A813009B3EBA /* UnitSelectButton.swift in Sources */,
 			);
