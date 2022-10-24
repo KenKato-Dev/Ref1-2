@@ -34,10 +34,10 @@ class RecepieModel {
                     // 全体からKeyで内部をDictionaryにて取り出し
                     let result = recepieData?["result"] as? [String: Any]
                     // dataからmediumに変換
-                    let medium = result?["medium"] as? [[String: Any]]
-                    let mediumData = try JSONSerialization.data(withJSONObject: medium!, options: .prettyPrinted)
-                    let decodedmedium = try decoder.decode([MediumAndSmall].self, from: mediumData)
-                    array.append(contentsOf: decodedmedium)
+//                    let medium = result?["medium"] as? [[String: Any]]
+//                    let mediumData = try JSONSerialization.data(withJSONObject: medium!, options: .prettyPrinted)
+//                    let decodedmedium = try decoder.decode([MediumAndSmall].self, from: mediumData)
+//                    array.append(contentsOf: decodedmedium)
                     // dataからsmallに変換
                     let small = result?["small"] as? [[String: Any]]
                     let smallData = try JSONSerialization.data(withJSONObject: small!, options: .prettyPrinted)

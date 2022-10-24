@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ModalViewController: UIViewController, UITextFieldDelegate {
-    private var baseArray = Food(location: .refrigerator, kind: .other, name: String(), quantity: String(), unit: UnitSelectButton.UnitMenu.initial, IDkey: UUID().uuidString, date: Date())
-
+class FoodAppendViewController: UIViewController {
+//    private var baseArray = Food(location: .refrigerator, kind: .other, name: String(), quantity: String(), unit: UnitSelectButton.UnitMenu.initial, IDkey: UUID().uuidString, date: Date())
+    private let foodAppendPresenter=FoodAppendPresenter(foodData: FoodData())
     @IBOutlet weak var foodNameTextField: UITextField!
     @IBOutlet weak var nameTextHeightconstraint: NSLayoutConstraint!
     @IBOutlet weak var methodSelectText: UILabel!
@@ -37,62 +37,61 @@ class ModalViewController: UIViewController, UITextFieldDelegate {
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        foodNameTextField.delegate = self
-        quantityTextField.delegate = self
-        let foodTextAttribute: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 15.0),
-            .foregroundColor: UIColor.gray
-        ]
-        let quantityTextAttribute: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 15.0),
-            .foregroundColor: UIColor.gray
-        ]
-        foodNameTextField.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: foodTextAttribute)
-        quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: quantityTextAttribute)
-        quantityTextField.keyboardType = .numberPad
+//        foodNameTextField.delegate = self
+//        quantityTextField.delegate = self
+        // func setPlaceholder
+//        self.foodAppendPresenter.settingTextField()
+        self.settingTextfield()
+//        let foodTextAttribute: [NSAttributedString.Key: Any] = [
+//            .font: UIFont.systemFont(ofSize: 15.0),
+//            .foregroundColor: UIColor.gray
+//        ]
+//        let quantityTextAttribute: [NSAttributedString.Key: Any] = [
+//            .font: UIFont.systemFont(ofSize: 15.0),
+//            .foregroundColor: UIColor.gray
+//        ]
+//        foodNameTextField.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: foodTextAttribute)
+//        quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: quantityTextAttribute)
+//        quantityTextField.keyboardType = .numberPad
+//        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+
+        self.foodAppendPresenter.setOutput(foodAppendPresenterOutput: self)
+
 //        textFieldShouldReturn(foodNameTextField)
         // 冷蔵ボタン
         refrigeratorButton.addAction(.init(handler: { _ in
-            if FoodListViewController.isEditMode == false {
-                self.baseArray.location = .refrigerator
-            } else {
-                print("editの冷蔵ボタン")
-            }
+            self.foodAppendPresenter.didTaplocationButton(location: .refrigerator)
         }), for: .touchUpInside)
         // 冷凍ボタン
         freezerButton.addAction(.init(handler: { _ in
-            if FoodListViewController.isEditMode == false {
-                self.baseArray.location = .freezer
-            } else {
-                print("editの冷凍ボタン")
-            }
+            self.foodAppendPresenter.didTaplocationButton(location: .freezer)
         }), for: .touchUpInside)
         meatButton.addAction(.init(handler: { _ in
-            self.baseArray.kind = .meat
+            self.foodAppendPresenter.didTapKindButton(kind: .meat)
         }), for: .touchUpInside)
         fishButton.addAction(.init(handler: { _ in
-            self.baseArray.kind = .fish
+            self.foodAppendPresenter.didTapKindButton(kind: .fish)
         }), for: .touchUpInside)
         vegetableAndFruitButton.addAction(.init(handler: { _ in
-            self.baseArray.kind = .vegetableAndFruit
+            self.foodAppendPresenter.didTapKindButton(kind: .vegetableAndFruit)
         }), for: .touchUpInside)
         milkAndEggButton.addAction(.init(handler: { _ in
-            self.baseArray.kind = .milkAndEgg
+            self.foodAppendPresenter.didTapKindButton(kind: .milkAndEgg)
         }), for: .touchUpInside)
         dishButton.addAction(.init(handler: { _ in
-            self.baseArray.kind = .dish
+            self.foodAppendPresenter.didTapKindButton(kind: .dish)
         }), for: .touchUpInside)
         drinkButton.addAction(.init(handler: { _ in
-            self.baseArray.kind = .drink
+            self.foodAppendPresenter.didTapKindButton(kind: .drink)
         }), for: .touchUpInside)
         seasoningButton.addAction(.init(handler: { _ in
-            self.baseArray.kind = .seasoning
+            self.foodAppendPresenter.didTapKindButton(kind: .seasoning)
         }), for: .touchUpInside)
         sweetButton.addAction(.init(handler: { _ in
-            self.baseArray.kind = .sweet
+            self.foodAppendPresenter.didTapKindButton(kind: .sweet)
         }), for: .touchUpInside)
         othersButton.addAction(.init(handler: { _ in
-            self.baseArray.kind = .other
+            self.foodAppendPresenter.didTapKindButton(kind: .other)
         }), for: .touchUpInside)
 //         Do any additional setup after loading the view.
         unitSelectButton.unitSelection()
@@ -119,25 +118,36 @@ class ModalViewController: UIViewController, UITextFieldDelegate {
         print("hide作動")
     }
     @IBAction func cancel(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        self.foodAppendPresenter.didTapCancelButton()
     }
 
     @IBAction func preserve(_ sender: Any) {
-        if FoodListViewController.isEditMode == false {
-            baseArray.name = foodNameTextField.text!
-            baseArray.quantity = String(Double(quantityTextField.text!) ?? 0.0) ?? "0.0"
-            baseArray.unit = unitSelectButton.selectedUnit
-//            FoodData.shared.add(baseArray)
-            FoodData.shared.addtoDataBase(baseArray)
-            dismiss(animated: true, completion: nil)
-            print("オリジナルのFuncが動作")
-        } else {
-            print(FoodListViewController.isEditMode)
-        }
+        self.foodAppendPresenter.didTapPreserveButton(foodName: foodNameTextField.text, quantity: quantityTextField.text, unit: unitSelectButton.selectedUnit)
     }
+
+}
+extension FoodAppendViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
            textField.resignFirstResponder()
            return true
        }
-
+}
+extension FoodAppendViewController: FoodAppendPresenterOutput {
+    func settingTextfield() {
+        let foodTextAttribute: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 15.0),
+            .foregroundColor: UIColor.gray
+        ]
+        let quantityTextAttribute: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 15.0),
+            .foregroundColor: UIColor.gray
+        ]
+        foodNameTextField.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: foodTextAttribute)
+        quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: quantityTextAttribute)
+        quantityTextField.keyboardType = .numberPad
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+    }
+    func dismiss() {
+        dismiss(animated: true, completion: nil)
+    }
 }

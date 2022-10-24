@@ -288,10 +288,10 @@
             </objects>
             <point key="canvasLocation" x="566.66666666666674" y="50.892857142857139"/>
         </scene>
-        <!--Recepie View Controller-->
+        <!--Recepie Category List View Controller-->
         <scene sceneID="f0h-xF-0t1">
             <objects>
-                <viewController id="rRR-Uk-hkv" customClass="RecepieViewController" customModule="RefManager1_2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="rRR-Uk-hkv" customClass="RecepieCategoryListViewController" customModule="RefManager1_2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bjv-MJ-eYz">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -367,10 +367,10 @@
             </objects>
             <point key="canvasLocation" x="1435" y="-591"/>
         </scene>
-        <!--Modal View Controller-->
+        <!--Food Append View Controller-->
         <scene sceneID="efr-8c-Fhi">
             <objects>
-                <viewController storyboardIdentifier="modal" id="2KF-vN-BTj" customClass="ModalViewController" customModule="RefManager1_2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="modal" id="2KF-vN-BTj" customClass="FoodAppendViewController" customModule="RefManager1_2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qh5-El-XsC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

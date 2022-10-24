@@ -6,10 +6,15 @@
 //
 
 import Foundation
+import Firebase
 protocol FoodListPresenterOutput: AnyObject {
     func update()
     func didRefreshSwipe()
     func isAppearingTrashBox(isDelete: Bool)
+    func present(inputView: FoodAppendViewController?)
+    func presentRecepie(alert: UIAlertController)
+    func dismiss()
+    func performSegue(foodNameTextLabel: String?)
     }
 
 final class FoodListPresenter {
@@ -22,6 +27,8 @@ final class FoodListPresenter {
     private (set) var checkedID: [String: Bool] = [:]
     private let sharedFoodUseCase = FoodUseCase.shared
     private var didTapCheckBox: ((Bool) -> Void)?
+    static private(set) var isTapRow = false
+    private let db = Firestore.firestore()
 
     init(foodData: FoodData) {
         self.foodData = foodData
@@ -80,9 +87,6 @@ final class FoodListPresenter {
         }
         self.foodListPresenterOutput?.update()
     }
-    func didTapCheckBoxButton() {
-
-    }
     // 冷蔵ボタン
     func didTapRefrigiratorButton() {
         foodUseCase.isFilteringRefrigerator.toggle()
@@ -129,6 +133,13 @@ final class FoodListPresenter {
         }
         return trasnlatedlocation
     }
+    func isTapCheckboxButton(row: Int) -> ((Bool) -> Void)? {
+        //        // UUIDをDictionaryに追加
+        didTapCheckBox = { isChecked in
+            self.checkedID[self.array[row].IDkey] = isChecked
+        }
+        return didTapCheckBox
+    }
     // TableView用Func
     func foodInRow(forRow row: Int) -> Food? {
         guard row < array.count else {return nil}
@@ -147,16 +158,95 @@ final class FoodListPresenter {
             return filteredArray.count
         }
     }
-    func isTapCheckboxButton(row: Int) -> ((Bool) -> Void)? {
-//        // UUIDをDictionaryに追加
-        didTapCheckBox = { isChecked in
-            self.checkedID[self.array[row].IDkey] = isChecked
-        }
-        return didTapCheckBox
-//        cell?.checkBoxButton.updateAppearance(isChecked: checkedIDDictionary[self.foodArray[indexPath.row].IDkey] ?? false)
-//        // 下記でcheckBoxの削除後に再利用されるCell内のBool値をfalseにする
-//        if !isChange {
-//            cell?.checkBoxButton.isTap = false
-//        }
+    func didSelectRow(storyboard: FoodAppendViewController?, row: Int, foodNameTextLabel: String?, quantityTextLabel: String?) {
+        var foodNameTextLabel = foodNameTextLabel
+        var quantityTextLabel = quantityTextLabel
+        let alert = UIAlertController(title: "選択してください", message: "", preferredStyle: .actionSheet)
+        alert.addAction(.init(title: "数量・保存方法を変更する", style: .default, handler: { _ -> Void in
+            let inputView = storyboard
+            if let modalImput = inputView?.sheetPresentationController {
+                modalImput.detents = [.medium()]
+            } else {
+                print("エラーです")
+            }
+            self.foodListPresenterOutput?.present(inputView: inputView)
+            inputView?.kindSelectText.isHidden = true
+            // 数値を変更しようとした際にクラッシュThread 1: EXC_BAD_ACCESS (code=2, address=0x1d82cd1d0)
+            inputView?.unitSelectButton.setTitle(inputView?.unitSelectButton.unitButtonTranslator(unit: self.array[row].unit), for: .normal)
+            inputView?.unitSelectButton.isEnabled = false
+            inputView?.unitSelectButton.alpha = 1.0
+            //        "\(self.foodArray[indexPath.row].unit)"
+            // 下記で消せるがボタンがViewの一番上まで来てしまうためConstraintを上書きする必要あり
+            inputView?.foodKindsStacks.isHidden = true
+            inputView?.parentStacKView.spacing = 50
+            inputView?.nameTextHeightconstraint.constant = 20
+            inputView?.quantityTextHeightConstraint.constant = 20
+
+            //        inputView?.nameTextHeightconstraint.multiplier = 0.1
+
+            FoodListPresenter.isTapRow = true
+
+            if FoodListPresenter.isTapRow == true {
+                inputView?.preserveButton.addAction(.init(handler: { [self]_ in
+                    foodNameTextLabel = inputView?.foodNameTextField.text
+                    quantityTextLabel = inputView?.quantityTextField.text
+                    print("inputのアクションが操作")
+                    self.db.collection("foods").document("IDkey: \(self.array[row].IDkey)").setData([
+                        "name": "\((inputView?.foodNameTextField.text)!)",
+                        "quantity": "\((inputView?.quantityTextField.text)!)",
+                        "date": "\(Date())",
+                        "IDkey": "\(self.array[row].IDkey)",
+                        "kind": "\(self.array[row].kind)",
+                        "unit": "\(self.array[row].unit)"
+                    ], merge: true) { err in
+                        if let err = err {
+                            print("FireStoreへの書き込みに失敗しました: \(err)")
+                            FoodListPresenter.isTapRow = false
+                        } else {
+                            print("FireStoreへの書き込みに成功しました")
+                            FoodListPresenter.isTapRow = false
+                        }
+                    }
+
+                    self.foodListPresenterOutput?.dismiss()
+                    FoodListPresenter.isTapRow = false
+                    // ここで読み込む
+                    foodData.fetchFoods { result in
+                        DispatchQueue.main.asyncAfter(deadline: .now()) {
+                            switch result {
+                            case .success(let foods):
+                                self.array = foods
+                                // ここに入れることで起動時に表示
+                                self.foodListPresenterOutput?.update()
+                            case .failure(let error):
+                                print(error)
+                            }
+                        }
+                    }
+                }), for: .touchUpInside)
+                inputView?.refrigeratorButton.addAction(.init(handler: { _ in
+                    self.db.collection("foods").document("IDkey: \(self.array[row].IDkey)").setData([
+                        "location": "\(Food.Location.refrigerator.rawValue)"
+                    ])
+                    print("\(Food.Location.refrigerator.rawValue)")
+                }), for: .touchUpInside)
+                inputView?.freezerButton.addAction(.init(handler: { _ in
+                    self.db.collection("foods").document("IDkey: \(self.array[row].IDkey)").setData([
+                        "location": "\(Food.Location.freezer.rawValue)"
+                    ])
+                    print("\(Food.Location.freezer.rawValue)")
+                }), for: .touchUpInside)
+
+            }
+        }))
+        // アラートアクションシート二項目目
+        alert.addAction(.init(title: "レシピを調べる", style: .default, handler: { _ ->Void in
+            self.foodListPresenterOutput?.performSegue(foodNameTextLabel: foodNameTextLabel)
+        }))
+        self.foodListPresenterOutput?.presentRecepie(alert: alert)
+        alert.addAction(.init(title: "キャンセル", style: .cancel, handler: { _ in
+
+        }))
+
     }
 }
