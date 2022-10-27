@@ -24,15 +24,12 @@ class TableViewCell: UITableViewCell {
         }
     }
     var didTapCheckBox: ((Bool) -> Void)?
-    // 下記のisTapはやはりCheckboxにあるべきという感覚を身につける
     // awakeFromNib
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         checkBoxButton.addAction(.init(handler: { _ in
             // toggleが動作せず、改善策がわかるまでコメントアウト、TableViewCell内のCheckBoxButtonにアクセスできず
-//            var isTapInCheckBoxButton: Bool = CheckBoxButton.shared.returnIsTap()
-//            CheckBoxButton.isTap.toggle()
             self.checkBoxButton.isTap.toggle()
             self.checkBoxButton.updateAppearance(isChecked: self.checkBoxButton.isTap)
             self.didTapCheckBox?(self.checkBoxButton.isTap)
@@ -40,7 +37,6 @@ class TableViewCell: UITableViewCell {
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
     }
     func foodConfigure(food: Food) {
             foodImage.image = UIImage(named: "\(food.kind.rawValue)") // foodArray[indexPath.row]
@@ -51,14 +47,7 @@ class TableViewCell: UITableViewCell {
             dateTextLabel.text = food.date.formatted(date: .abbreviated, time: .omitted)
 
     }
-    func filteredConfigure(filteredFood: Food) {
-        foodImage.image = UIImage(named: "\(filteredFood.kind.rawValue)")
-        preserveMethodTextLable.text = self.locationTranslator(location: filteredFood.location)
-        foodNameTextLabel.text = filteredFood.name
-        quantityTextLabel.text = String(filteredFood.quantity)
-        unitTextLabel.text = UnitSelectButton().unitButtonTranslator(unit: filteredFood.unit)
-        dateTextLabel.text = filteredFood.date.formatted(date: .abbreviated, time: .omitted)
-    }
+
     func locationTranslator(location: Food.Location) -> String {
         var trasnlatedlocation = String()
         if location == .refrigerator {

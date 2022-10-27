@@ -15,6 +15,7 @@ protocol FoodListPresenterOutput: AnyObject {
     func presentRecepie(alert: UIAlertController)
     func dismiss()
     func performSegue(foodNameTextLabel: String?)
+    func setTitle(location: Food.Location) 
     }
 
 final class FoodListPresenter {
@@ -45,7 +46,7 @@ final class FoodListPresenter {
         self.foodListPresenterOutput?.update()
     }
     func loadArray() {
-        foodData.fetchFoods { result in
+        foodData.fetch { result in
             switch result {
             case .success(let foods):
                 self.array = foods
@@ -67,7 +68,7 @@ final class FoodListPresenter {
                 case.success:
                     // ここから
                     self.checkedID = [:]
-                    self.foodData.fetchFoods { result in
+                    self.foodData.fetch { result in
                         switch result {
                         case .success(let foods):
                             self.array = foods
@@ -124,15 +125,15 @@ final class FoodListPresenter {
         foodListPresenterOutput?.update()
     }
     // 冷蔵冷凍を文字で返す
-    func locationTranslator(location: Food.Location) -> String {
-        var trasnlatedlocation = String()
-        if location == .refrigerator {
-            trasnlatedlocation = "冷蔵"
-        } else if location == .freezer {
-            trasnlatedlocation = "冷凍"
-        }
-        return trasnlatedlocation
-    }
+//    func locationTranslator(location: Food.Location) -> String {
+//        var trasnlatedlocation = String()
+//        if location == .refrigerator {
+//            trasnlatedlocation = "冷蔵"
+//        } else if location == .freezer {
+//            trasnlatedlocation = "冷凍"
+//        }
+//        return trasnlatedlocation
+//    }
     func isTapCheckboxButton(row: Int) -> ((Bool) -> Void)? {
         //        // UUIDをDictionaryに追加
         didTapCheckBox = { isChecked in
@@ -141,6 +142,15 @@ final class FoodListPresenter {
         return didTapCheckBox
     }
     // TableView用Func
+    func configure(row: Int) -> Food? {
+        if (!self.sharedFoodUseCase.isFilteringFreezer &&
+            !self.sharedFoodUseCase.isFilteringRefrigerator) &&
+            (self.sharedFoodUseCase.selectedKinds.isEmpty) {
+            return self.foodInRow(forRow: row)
+        } else {
+            return self.filteredFoodInRow(forRow: row)
+        }
+    }
     func foodInRow(forRow row: Int) -> Food? {
         guard row < array.count else {return nil}
         return array[row]
@@ -175,17 +185,12 @@ final class FoodListPresenter {
             inputView?.unitSelectButton.setTitle(inputView?.unitSelectButton.unitButtonTranslator(unit: self.array[row].unit), for: .normal)
             inputView?.unitSelectButton.isEnabled = false
             inputView?.unitSelectButton.alpha = 1.0
-            //        "\(self.foodArray[indexPath.row].unit)"
             // 下記で消せるがボタンがViewの一番上まで来てしまうためConstraintを上書きする必要あり
             inputView?.foodKindsStacks.isHidden = true
             inputView?.parentStacKView.spacing = 50
             inputView?.nameTextHeightconstraint.constant = 20
             inputView?.quantityTextHeightConstraint.constant = 20
-
-            //        inputView?.nameTextHeightconstraint.multiplier = 0.1
-
             FoodListPresenter.isTapRow = true
-
             if FoodListPresenter.isTapRow == true {
                 inputView?.preserveButton.addAction(.init(handler: { [self]_ in
                     foodNameTextLabel = inputView?.foodNameTextField.text
@@ -211,7 +216,7 @@ final class FoodListPresenter {
                     self.foodListPresenterOutput?.dismiss()
                     FoodListPresenter.isTapRow = false
                     // ここで読み込む
-                    foodData.fetchFoods { result in
+                    foodData.fetch { result in
                         DispatchQueue.main.asyncAfter(deadline: .now()) {
                             switch result {
                             case .success(let foods):

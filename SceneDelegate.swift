@@ -48,26 +48,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
-
-//        let foods = FoodData.shared.getfoodArray()
-//        for food in foods {
-//            // ドキュメントごとに保管
-//            db.collection("foods").document("IDkey: \(food.IDkey)").setData([
-//                "IDkey": "\(food.IDkey)",
-//                "location": "\(food.location)",
-//                "kind": "\(food.kind)",
-//                "name": "\(food.name)",
-//                "quantity": "\(food.quantity)",
-//                "unit": "\(food.unit)",
-//                "date": "\(food.date)"
-//            ], merge: false) { err in
-//                if let err = err {
-//                    print("FireStoreへの書き込みに失敗しました: \(err)")
-//                } else {
-//                    print("FireStoreへの書き込みに成功しました")
-//                }
-//            }
-//        }
     }
 
 }

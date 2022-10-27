@@ -48,27 +48,14 @@ class DeleteButton: UIButton {
     }
     // bool=trueの際に作動
     func imageChange(bool: Bool) {
-//        if bool {
-//            setImage(UIImage(systemName: "trash"), for: .normal)
-//            setTitle("", for: .normal)
-//            print(bool)
-//        } else {
-//            setImage(.remove, for: .normal)
-//            setTitle("削除", for: .normal)
-//            setTitleColor(.red, for: .normal)
-//            print(bool)
-//        }
         if bool {
             setImage(UIImage(systemName: "trash"), for: .normal)
             setTitle("", for: .normal)
-//            print(bool)
+
         } else {
             setImage(.remove, for: .normal)
             setTitle("削除", for: .normal)
             setTitleColor(.red, for: .normal)
-
-//            print(bool)
-
         }
     }
     /*

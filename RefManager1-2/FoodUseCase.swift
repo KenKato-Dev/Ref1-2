@@ -19,9 +19,5 @@ class FoodUseCase {
         .milkAndEgg: false, .dish: false, .drink: false,
             .seasoning: false, .sweet: false, .other: false
         ]
-    // func動作せず、引数に外部の配列を入れても機能しない？
-//    func addFilteredFood(foodLocation: [Food]) {
-//        var foodLocation = foodLocation
-//        foodLocation.append(contentsOf: FoodData.shared.filterationOfFood(with: FoodUseCase.shared.foodFilter))
-//    }
+
 }

@@ -34,7 +34,6 @@
 		ECCAA677290045D800CE141B /* RecepieCategoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCAA676290045D800CE141B /* RecepieCategoryListPresenter.swift */; };
 		ECDF47A928B4F7B7004BC6A9 /* RecepieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47A828B4F7B7004BC6A9 /* RecepieTableViewCell.swift */; };
 		ECDF47AB28B4F7DC004BC6A9 /* RecepieCategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47AA28B4F7DB004BC6A9 /* RecepieCategoryListViewController.swift */; };
-		ECE2F0AC280B063D00975A38 /* NavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0AB280B063D00975A38 /* NavigationItem.swift */; };
 		ECE2F0E028349FBC00975A38 /* FoodUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */; };
 		ECEB7103280314BD00B157FB /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEB7102280314BD00B157FB /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -61,7 +60,6 @@
 		ECCAA676290045D800CE141B /* RecepieCategoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieCategoryListPresenter.swift; sourceTree = "<group>"; };
 		ECDF47A828B4F7B7004BC6A9 /* RecepieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieTableViewCell.swift; sourceTree = "<group>"; };
 		ECDF47AA28B4F7DB004BC6A9 /* RecepieCategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieCategoryListViewController.swift; sourceTree = "<group>"; };
-		ECE2F0AB280B063D00975A38 /* NavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationItem.swift; sourceTree = "<group>"; };
 		ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodUseCase.swift; sourceTree = "<group>"; };
 		ECEB7102280314BD00B157FB /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,7 +139,6 @@
 				ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */,
 				ECEB7102280314BD00B157FB /* TableViewCell.swift */,
 				ECDF47A828B4F7B7004BC6A9 /* RecepieTableViewCell.swift */,
-				ECE2F0AB280B063D00975A38 /* NavigationItem.swift */,
 				EC77EA1F28F2A813009B3EBA /* CheckBoxButton.swift */,
 				EC77EA2028F2A813009B3EBA /* DeleteButton.swift */,
 				EC77EA2128F2A813009B3EBA /* UnitSelectButton.swift */,
@@ -269,7 +266,6 @@
 				EC77EA2628F2A813009B3EBA /* AddButton.swift in Sources */,
 				ECA6F45B28026B8E00CA7C2D /* FoodAppendViewController.swift in Sources */,
 				ECA6F44A28026B0C00CA7C2D /* FoodListViewController.swift in Sources */,
-				ECE2F0AC280B063D00975A38 /* NavigationItem.swift in Sources */,
 				ECA6F44628026B0C00CA7C2D /* AppDelegate.swift in Sources */,
 				ECEB7103280314BD00B157FB /* TableViewCell.swift in Sources */,
 				ECDF47AB28B4F7DC004BC6A9 /* RecepieCategoryListViewController.swift in Sources */,

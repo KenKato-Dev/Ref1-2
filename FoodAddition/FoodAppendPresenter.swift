@@ -47,7 +47,7 @@ final class FoodAppendPresenter {
 //             = String(Double(quantityTextField.text!) ?? 0.0) ?? "0.0"
             self.baseArray.unit = unit
 //            FoodData.shared.add(baseArray)
-            self.foodData.addtoDataBase(self.baseArray)
+            self.foodData.post(self.baseArray)
             self.foodAppendPresenterOutput?.dismiss()
             print("オリジナルのFuncが動作")
         } else {

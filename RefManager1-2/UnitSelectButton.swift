@@ -11,12 +11,6 @@ import UIKit
 
 class UnitSelectButton: UIButton {
     enum UnitMenu: String, Codable {
-//    case initial = "単位を選択してください"
-//    case gram = "g"
-//    case piece = "個"
-//    case bottle = "本"
-//    case bag = "袋"
-//    case people = "人分"
         case initial
         case gram
         case piece

@@ -10,7 +10,6 @@ import UIKit
 class RecepieCategoryListViewController: UIViewController {
     @IBOutlet weak var recepieTable: UITableView!
     private let recepieCategoryListPresenter=RecepieCategoryListPresenter(recepieModel: RecepieModel())
-//     var searchKeyword: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -18,18 +17,6 @@ class RecepieCategoryListViewController: UIViewController {
         self.recepieTable.dataSource = self
         self.recepieCategoryListPresenter.setOutput(recepieCategoryListPresenterOutput: self)
         self.recepieCategoryListPresenter.reloadArray(searchKeyword: self.navigationItem.title)
-//        RecepieModel().fetchCategory(keyword: searchKeyword) { result in
-//            switch result {
-//            case .success(let categories):
-//                self.array = categories
-//                DispatchQueue.main.async {
-//                    self.recepieTable.reloadData()
-//                }
-//            case.failure(let error):
-//                print(error)
-//                self.dismiss(animated: true, completion: nil)
-//            }
-//        }
 
     }
     /*

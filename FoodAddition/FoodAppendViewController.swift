@@ -8,7 +8,7 @@
 import UIKit
 
 class FoodAppendViewController: UIViewController {
-//    private var baseArray = Food(location: .refrigerator, kind: .other, name: String(), quantity: String(), unit: UnitSelectButton.UnitMenu.initial, IDkey: UUID().uuidString, date: Date())
+
     private let foodAppendPresenter=FoodAppendPresenter(foodData: FoodData())
     @IBOutlet weak var foodNameTextField: UITextField!
     @IBOutlet weak var nameTextHeightconstraint: NSLayoutConstraint!
@@ -37,27 +37,8 @@ class FoodAppendViewController: UIViewController {
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-//        foodNameTextField.delegate = self
-//        quantityTextField.delegate = self
-        // func setPlaceholder
-//        self.foodAppendPresenter.settingTextField()
         self.settingTextfield()
-//        let foodTextAttribute: [NSAttributedString.Key: Any] = [
-//            .font: UIFont.systemFont(ofSize: 15.0),
-//            .foregroundColor: UIColor.gray
-//        ]
-//        let quantityTextAttribute: [NSAttributedString.Key: Any] = [
-//            .font: UIFont.systemFont(ofSize: 15.0),
-//            .foregroundColor: UIColor.gray
-//        ]
-//        foodNameTextField.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: foodTextAttribute)
-//        quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: quantityTextAttribute)
-//        quantityTextField.keyboardType = .numberPad
-//        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
-
         self.foodAppendPresenter.setOutput(foodAppendPresenterOutput: self)
-
-//        textFieldShouldReturn(foodNameTextField)
         // 冷蔵ボタン
         refrigeratorButton.addAction(.init(handler: { _ in
             self.foodAppendPresenter.didTaplocationButton(location: .refrigerator)
@@ -93,26 +74,10 @@ class FoodAppendViewController: UIViewController {
         othersButton.addAction(.init(handler: { _ in
             self.foodAppendPresenter.didTapKindButton(kind: .other)
         }), for: .touchUpInside)
-//         Do any additional setup after loading the view.
         unitSelectButton.unitSelection()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
     }
-    // viewDidLoad
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//            quantityTextField.text = quantityTextField.text
-//        foodNameTextField.text = foodNameTextField.text
-//            self.view.endEditing(true)
-//        }
     @objc func hideKeyboard() {
         self.view.endEditing(true)
         print("hide作動")

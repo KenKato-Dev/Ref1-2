@@ -14,10 +14,6 @@ final class FoodListViewController: UIViewController {
 
     private let sharedFoodUseCase = FoodUseCase.shared
     private let foodListPresenter = FoodListPresenter(foodData: FoodData())
-//    private var foodLocation: [Food] = []
-//    private var foodfilteredbyKind: [Food] = []
-//    private var foodLocationAndKind: [Food] = []
-//    private var filteredFoodArray: [Food] = []
     @IBOutlet weak var filterRefrigeratorButton: UIButton!
     @IBOutlet weak var filteredFreezerButton: UIButton!
     @IBOutlet weak var filterForMeetButton: UIButton!
@@ -32,37 +28,23 @@ final class FoodListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var viewTitle: UINavigationItem!
     @IBOutlet weak var deleteButton: DeleteButton!
-//    private var isChange = true
-//    var checkedIDDictionary: [String: Bool] = [:]
-    // 配列を保持
-//    private var foodArray: [Food] = []
-    // 外部から参照だけできる
-//    static private(set) var isEditMode: Bool = false
-    let db = Firestore.firestore()
 
-    // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
-//        self.filteredFoodArray = self.foodArray
         self.foodListPresenter.setOutput(foodListPresenterOutput: self)
-
         self.foodListPresenter.didLoadView()
-        // 削除ボタン
         deleteButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapDeleteButton()
         }), for: .touchUpInside)
-        // 冷蔵庫ボタンのアクション
         self.filterRefrigeratorButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapRefrigiratorButton()
         }), for: .touchUpInside)
-        // 冷凍庫ボタンのアクション
         self.filteredFreezerButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFreezerButton()
         }), for: .touchUpInside)
-        // 食材ボタン
         self.filterForMeetButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(kind: .meat)
         }), for: .touchUpInside)
@@ -91,43 +73,32 @@ final class FoodListViewController: UIViewController {
             self.foodListPresenter.didTapFoodKindButtons(kind: .other)
         }), for: .touchUpInside)
 
-    }// viewdidload
-
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.foodListPresenter.willViewAppear()
-    } // ViewWillAppear
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.foodListPresenter.didLoadView()
     }
-    // 下記にて遷移先のプロパティに代入
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if  segue.identifier == "toRecepieTableView"{
             let recepieView = segue.destination as? RecepieCategoryListViewController
             recepieView?.navigationItem.title = String("\(sender!)")
-//            recepieView?.searchKeyword = String("\(sender!)")
         }
     }
 
 }
 extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
-    // Intでリストの数を返す
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.foodListPresenter.numberOfRows()
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell
-        if (!self.sharedFoodUseCase.isFilteringFreezer &&
-            !self.sharedFoodUseCase.isFilteringRefrigerator) &&
-            (self.sharedFoodUseCase.selectedKinds.isEmpty) {
-            if let food = foodListPresenter.foodInRow(forRow: indexPath.row) {
-                cell?.foodConfigure(food: food)
-            }
-        } else {
-            if let filteredFood = foodListPresenter.filteredFoodInRow(forRow: indexPath.row) {
-                cell?.filteredConfigure(filteredFood: filteredFood)
-            }
+        if let configuredFood = self.foodListPresenter.configure(row: indexPath.row) {
+            cell?.foodConfigure(food: configuredFood)
         }
         // 削除ボタンと連動
         cell?.showCheckBox = self.foodListPresenter.isDelete
@@ -184,5 +155,14 @@ extension FoodListViewController: FoodListPresenterOutput {
     }
     func performSegue(foodNameTextLabel: String?) {
         self.performSegue(withIdentifier: "toRecepieTableView", sender: foodNameTextLabel)
+    }
+    func setTitle(location: Food.Location) { //この処理でなく条件式も含めタイトルを入れるようにする
+        var trasnlatedlocation = "冷蔵/冷凍"
+        if location == .refrigerator {
+            trasnlatedlocation = "冷蔵"
+        } else if location == .freezer {
+            trasnlatedlocation = "冷凍"
+        }
+        
     }
 }

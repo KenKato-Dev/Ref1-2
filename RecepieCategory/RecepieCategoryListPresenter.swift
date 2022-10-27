@@ -13,7 +13,7 @@ protocol RecepieCategoryListPresenterOutput: AnyObject {
     func setTitle()
 }
 final class RecepieCategoryListPresenter {
-    private (set) var array: [MediumAndSmall]=[]
+    private (set) var array: [Small]=[]
     weak private var recepieCategoryListPresenterOutput: RecepieCategoryListPresenterOutput?
     private let recepieModel: RecepieModel
     init(recepieModel: RecepieModel) {
@@ -34,13 +34,11 @@ final class RecepieCategoryListPresenter {
                 print(error)
                 self.recepieCategoryListPresenterOutput?.dismiss()
             }
-//            self.recepieCategoryListPresenterOutput?.reloadData()
         }
-//        self.recepieCategoryListPresenterOutput?.reloadData()
         self.recepieCategoryListPresenterOutput?.setTitle()
     }
     }
-    func categoryListInRow(forRow row: Int) -> MediumAndSmall? {
+    func categoryListInRow(forRow row: Int) -> Small? {
         guard row < array.count else {return nil}
         return array[row]
     }
