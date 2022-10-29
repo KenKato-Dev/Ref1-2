@@ -15,7 +15,8 @@ protocol FoodListPresenterOutput: AnyObject {
     func presentRecepie(alert: UIAlertController)
     func dismiss()
     func performSegue(foodNameTextLabel: String?)
-    func setTitle(location: Food.Location) 
+    func setTitle(location: Food.Location)
+    func disableButtons(isDelete: Bool)
     }
 
 final class FoodListPresenter {
@@ -59,6 +60,13 @@ final class FoodListPresenter {
     }
     func didTapDeleteButton() {
         isDelete.toggle()
+        // 削除事に配列を元に戻す
+        sharedFoodUseCase.isFilteringFreezer = false
+        sharedFoodUseCase.isFilteringRefrigerator = false
+        sharedFoodUseCase.selectedKinds = []
+        // ボタンの無効化
+        foodListPresenterOutput?.disableButtons(isDelete: isDelete)
+        //
         foodListPresenterOutput?.isAppearingTrashBox(isDelete: isDelete)
         if isDelete {
             // filterで値のみを取り出し、defoはTrueを取り出すため

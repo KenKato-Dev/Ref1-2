@@ -268,6 +268,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButtton" destination="CDt-br-9dE" id="enJ-HT-djg"/>
                         <outlet property="deleteButton" destination="8e0-Ob-ULs" id="Wy0-aH-WzM"/>
                         <outlet property="filterForDishButton" destination="OGg-bs-jr3" id="881-uK-Zwv"/>
                         <outlet property="filterForDrinkButton" destination="Hzr-gf-a9Z" id="MQ9-XW-Lk1"/>
@@ -280,6 +281,8 @@
                         <outlet property="filterForVegAndFruitsButton" destination="niJ-RN-24C" id="vR3-gl-cJA"/>
                         <outlet property="filterRefrigeratorButton" destination="uCq-u3-tN4" id="h7c-pq-nnT"/>
                         <outlet property="filteredFreezerButton" destination="YHM-94-Qkr" id="6I1-Tj-chX"/>
+                        <outlet property="kindButtonsStack" destination="hcp-aU-k7B" id="wZ7-FU-8YU"/>
+                        <outlet property="locationButtonsStack" destination="CN4-Pj-DGz" id="96a-RO-xdl"/>
                         <outlet property="tableView" destination="4fB-Nk-tQM" id="1a2-D3-sFa"/>
                         <outlet property="viewTitle" destination="ebQ-Yw-zQR" id="aOL-4D-cPZ"/>
                         <segue destination="rRR-Uk-hkv" kind="show" identifier="toRecepieTableView" id="jAc-dp-xnC"/>

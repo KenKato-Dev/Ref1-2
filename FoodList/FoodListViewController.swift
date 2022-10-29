@@ -14,6 +14,10 @@ final class FoodListViewController: UIViewController {
 
     private let sharedFoodUseCase = FoodUseCase.shared
     private let foodListPresenter = FoodListPresenter(foodData: FoodData())
+
+    @IBOutlet weak var addButtton: AddButton!
+    @IBOutlet weak var locationButtonsStack: UIStackView!
+    @IBOutlet weak var kindButtonsStack: UIStackView!
     @IBOutlet weak var filterRefrigeratorButton: UIButton!
     @IBOutlet weak var filteredFreezerButton: UIButton!
     @IBOutlet weak var filterForMeetButton: UIButton!
@@ -156,13 +160,18 @@ extension FoodListViewController: FoodListPresenterOutput {
     func performSegue(foodNameTextLabel: String?) {
         self.performSegue(withIdentifier: "toRecepieTableView", sender: foodNameTextLabel)
     }
-    func setTitle(location: Food.Location) { //この処理でなく条件式も含めタイトルを入れるようにする
+    func setTitle(location: Food.Location) { // この処理でなく条件式も含めタイトルを入れるようにする
         var trasnlatedlocation = "冷蔵/冷凍"
         if location == .refrigerator {
             trasnlatedlocation = "冷蔵"
         } else if location == .freezer {
             trasnlatedlocation = "冷凍"
         }
-        
+
+    }
+    func disableButtons(isDelete: Bool) {
+        self.addButtton.isEnabled = isDelete
+        self.locationButtonsStack.isHidden = !isDelete
+        self.kindButtonsStack.isHidden = !isDelete
     }
 }
