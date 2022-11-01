@@ -98,29 +98,38 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.foodListPresenter.numberOfRows()
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell
-        if let configuredFood = self.foodListPresenter.configure(row: indexPath.row) {
-            cell?.foodConfigure(food: configuredFood)
+        guard
+            // foodListPresenter.configureがconfigureっぽくないので，処理に適した名前に改名．
+            let configuredFood = self.foodListPresenter.configure(row: indexPath.row),
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell
+        else { return .init() }
+
+        cell.foodConfigure(food: configuredFood)
+        // cellState: [IndexPath: TableVewCell.State]
+        // let cellState = presenter.cellState(indexPath)
+        // cell.configure(stete: cellState)
+        let isCheckd = foodListPresenter.checkedID[configuredFood.IDkey] ?? false
+        let shouldShowCheckBoxs = foodListPresenter.isDelete
+
+        if shouldShowCheckBoxs {
+            cell.configure(state: .shownCheckBox(isChecked: isCheckd))
+        } else {
+            cell.configure(state: .normal)
         }
-        // 削除ボタンと連動
-        cell?.showCheckBox = self.foodListPresenter.isDelete
+
         // UUIDをDictionaryに追加
-        cell?.didTapCheckBox = self.foodListPresenter.isTapCheckboxButton(row: indexPath.row)
-        // 下記エラー発生のため一時的にコメントアウト（2022/10/17）
-        cell?.checkBoxButton.updateAppearance(isChecked: self.foodListPresenter.checkedID[self.foodListPresenter.array[indexPath.row].IDkey] ?? false)
-        // 下記でcheckBoxの削除後に再利用されるCell内のBool値をfalseにする
-        if self.foodListPresenter.isDelete {
-            cell?.checkBoxButton.isTap = false
-        }
-        return cell!
+        cell.didTapCheckBox = self.foodListPresenter.isTapCheckboxButton(row: indexPath.row)
+        return cell
     }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let inputView = self.storyboard?.instantiateViewController(withIdentifier: "modal") as? FoodAppendViewController
 
         // ここで選択しているセルにアクセス
         tableView.deselectRow(at: indexPath, animated: false)
-//        let cell = self.tableView.cellForRow(at: indexPath) as? TableViewCell
+    //        let cell = self.tableView.cellForRow(at: indexPath) as? TableViewCell
         self.foodListPresenter.didSelectRow(storyboard: inputView, row: indexPath.row)
     }
 }
