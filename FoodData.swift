@@ -65,6 +65,15 @@ struct Food: Equatable, Codable {
         case seasoning
         case sweet
         case other
+//        case meat = "1.meet"
+//        case fish = "2.fish"
+//        case vegetableAndFruit = "3.vegetableAndFruit"
+//        case milkAndEgg = "4.milkAndEgg"
+//        case dish = "5.dish"
+//        case drink = "6.drink"
+//        case seasoning = "7.seasoning"
+//        case sweet = "8.sweet"
+//        case other = "9.other"
     }
 }
 
@@ -78,7 +87,7 @@ final class FoodData {
     private let db = Firestore.firestore()
 
     func post(_ food: Food) {
-        // ドキュメントごとに保管
+        // ドキュメントごとに保管、ドキュメントを他のものにするとDictionary方式に上書きされる
         db.collection("foods").document("IDkey: \(food.IDkey)").setData([
             "location": "\(food.location)",
             "kind": "\(food.kind)",
@@ -111,7 +120,8 @@ final class FoodData {
                     })
                     do {
                         let data = try JSONSerialization.data(withJSONObject: dictinaryDocuments, options: .prettyPrinted)
-                        let decodedFoods = try decoder.decode([Food].self, from: data)
+                        var decodedFoods = try decoder.decode([Food].self, from: data)
+                        decodedFoods = decodedFoods.sorted(by: {$0.kind.rawValue > $1.kind.rawValue})
                         completion(.success(decodedFoods))
                     } catch {
                         completion(.failure(error))

@@ -21,6 +21,7 @@
 		EC77EA2528F2A813009B3EBA /* UnitSelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC77EA2128F2A813009B3EBA /* UnitSelectButton.swift */; };
 		EC77EA2628F2A813009B3EBA /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC77EA2228F2A813009B3EBA /* AddButton.swift */; };
 		EC9C1C0D28F45E2D0024570D /* FoodListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C1C0C28F45E2D0024570D /* FoodListPresenter.swift */; };
+		ECA41AE1290E5A5D0030BF16 /* TapFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA41AE0290E5A5D0030BF16 /* TapFeedback.swift */; };
 		ECA60EB128FEE28B00B7C7F6 /* FoodAppendPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA60EB028FEE28B00B7C7F6 /* FoodAppendPresenter.swift */; };
 		ECA6F44628026B0C00CA7C2D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6F44528026B0C00CA7C2D /* AppDelegate.swift */; };
 		ECA6F44828026B0C00CA7C2D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6F44728026B0C00CA7C2D /* SceneDelegate.swift */; };
@@ -45,6 +46,7 @@
 		EC77EA2128F2A813009B3EBA /* UnitSelectButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitSelectButton.swift; sourceTree = "<group>"; };
 		EC77EA2228F2A813009B3EBA /* AddButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		EC9C1C0C28F45E2D0024570D /* FoodListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListPresenter.swift; sourceTree = "<group>"; };
+		ECA41AE0290E5A5D0030BF16 /* TapFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapFeedback.swift; sourceTree = "<group>"; };
 		ECA60EB028FEE28B00B7C7F6 /* FoodAppendPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAppendPresenter.swift; sourceTree = "<group>"; };
 		ECA6F44228026B0C00CA7C2D /* RefManager1-2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RefManager1-2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECA6F44528026B0C00CA7C2D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				EC77EA2028F2A813009B3EBA /* DeleteButton.swift */,
 				EC77EA2128F2A813009B3EBA /* UnitSelectButton.swift */,
 				EC77EA2228F2A813009B3EBA /* AddButton.swift */,
+				ECA41AE0290E5A5D0030BF16 /* TapFeedback.swift */,
 				ECA6F44B28026B0C00CA7C2D /* Main.storyboard */,
 				ECA6F44E28026B0E00CA7C2D /* Assets.xcassets */,
 				ECA6F45028026B0E00CA7C2D /* LaunchScreen.storyboard */,
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECA41AE1290E5A5D0030BF16 /* TapFeedback.swift in Sources */,
 				ECA60EB128FEE28B00B7C7F6 /* FoodAppendPresenter.swift in Sources */,
 				ECC2590E28E7369600F790F5 /* RecepieCategory.swift in Sources */,
 				ECDF47A928B4F7B7004BC6A9 /* RecepieTableViewCell.swift in Sources */,

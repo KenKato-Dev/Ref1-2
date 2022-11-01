@@ -56,7 +56,7 @@ extension RecepieCategoryListViewController: RecepieCategoryListPresenterOutput 
     }
     func setTitle() {
         if let title = self.navigationItem.title {
-            self.navigationItem.title = ("\(title)のレシピ")
+            self.navigationItem.title = ("\(title)のレシピ集")
         }
     }
 }

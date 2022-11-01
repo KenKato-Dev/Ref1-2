@@ -8,7 +8,7 @@
 import UIKit
 
 class CheckBoxButton: UIButton {
-    static let shared: CheckBoxButton = CheckBoxButton()
+//    static let shared: CheckBoxButton = CheckBoxButton()
     var isTap = false
 
     // ボタンの内容

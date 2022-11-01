@@ -29,6 +29,7 @@ class RecepieModel {
 //                    var mediumArray:[MediumAndSmall]=[]
                     var array: [Small]=[]
                     // 全体をDictionaryに変換
+                    // オフラインの際ここでエラー発生、エラーハンドリングが必要
                     let recepieData = try JSONSerialization.jsonObject(with: data!)as? [String: Any]
                     // 全体からKeyで内部をDictionaryにて取り出し
                     let result = recepieData?["result"] as? [String: Any]

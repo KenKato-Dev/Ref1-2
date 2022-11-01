@@ -32,7 +32,7 @@ final class FoodListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var viewTitle: UINavigationItem!
     @IBOutlet weak var deleteButton: DeleteButton!
-
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -76,7 +76,6 @@ final class FoodListViewController: UIViewController {
         self.filterForOthersButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(kind: .other)
         }), for: .touchUpInside)
-
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -121,8 +120,8 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
 
         // ここで選択しているセルにアクセス
         tableView.deselectRow(at: indexPath, animated: false)
-        let cell = self.tableView.cellForRow(at: indexPath) as? TableViewCell
-        self.foodListPresenter.didSelectRow(storyboard: inputView, row: indexPath.row, foodNameTextLabel: cell?.foodNameTextLabel.text, quantityTextLabel: cell?.quantityTextLabel.text)
+//        let cell = self.tableView.cellForRow(at: indexPath) as? TableViewCell
+        self.foodListPresenter.didSelectRow(storyboard: inputView, row: indexPath.row)
     }
 }
 extension FoodListViewController: UITextFieldDelegate {
@@ -149,7 +148,7 @@ extension FoodListViewController: FoodListPresenterOutput {
             print("presentのアンラップに失敗")
         }
     }
-    func presentRecepie(alert: UIAlertController) {
+    func presentAlert(alert: UIAlertController) {
         self.present(alert, animated: true) {
             print("エラー発生")
         }
@@ -160,18 +159,33 @@ extension FoodListViewController: FoodListPresenterOutput {
     func performSegue(foodNameTextLabel: String?) {
         self.performSegue(withIdentifier: "toRecepieTableView", sender: foodNameTextLabel)
     }
-    func setTitle(location: Food.Location) { // この処理でなく条件式も含めタイトルを入れるようにする
-        var trasnlatedlocation = "冷蔵/冷凍"
-        if location == .refrigerator {
-            trasnlatedlocation = "冷蔵"
-        } else if location == .freezer {
-            trasnlatedlocation = "冷凍"
-        }
+    func setTitle(refigerator: Bool, freezer: Bool, selectedKinds: [Food.FoodKind], location: Food.Location) {
+        // この処理でなく条件式も含めタイトルを入れるようにする
+        if (!refigerator &&
+            !freezer) &&
+            (selectedKinds.isEmpty) {
+            self.viewTitle.title = "冷蔵品と冷凍品"
 
+        } else {
+            if location == .refrigerator {
+                self.viewTitle.title  = "冷蔵品"
+            } else if location == .freezer {
+                self.viewTitle.title  = "冷凍品"
+            }
+        }
     }
-    func disableButtons(isDelete: Bool) {
+    func isHidingButtons(isDelete: Bool) {
         self.addButtton.isEnabled = isDelete
         self.locationButtonsStack.isHidden = !isDelete
         self.kindButtonsStack.isHidden = !isDelete
+        if !isDelete {
+            self.locationButtonsStack.backgroundColor = .clear
+            self.kindButtonsStack.backgroundColor = .clear
+            self.tableViewBottomConstraint.constant = 165
+        } else {
+            self.locationButtonsStack.backgroundColor = .clear
+            self.kindButtonsStack.backgroundColor = .lightGray
+            self.tableViewBottomConstraint.constant = 0
+        }
     }
 }

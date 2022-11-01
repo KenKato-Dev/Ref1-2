@@ -12,11 +12,11 @@ protocol FoodListPresenterOutput: AnyObject {
     func didRefreshSwipe()
     func isAppearingTrashBox(isDelete: Bool)
     func present(inputView: FoodAppendViewController?)
-    func presentRecepie(alert: UIAlertController)
+    func presentAlert(alert: UIAlertController)
     func dismiss()
     func performSegue(foodNameTextLabel: String?)
-    func setTitle(location: Food.Location)
-    func disableButtons(isDelete: Bool)
+    func setTitle(refigerator: Bool, freezer: Bool, selectedKinds: [Food.FoodKind], location: Food.Location)
+    func isHidingButtons(isDelete: Bool)
     }
 
 final class FoodListPresenter {
@@ -65,39 +65,49 @@ final class FoodListPresenter {
         sharedFoodUseCase.isFilteringRefrigerator = false
         sharedFoodUseCase.selectedKinds = []
         // ボタンの無効化
-        foodListPresenterOutput?.disableButtons(isDelete: isDelete)
+        foodListPresenterOutput?.isHidingButtons(isDelete: isDelete)
         //
         foodListPresenterOutput?.isAppearingTrashBox(isDelete: isDelete)
-        if isDelete {
-            // filterで値のみを取り出し、defoはTrueを取り出すため
-            let filteredIDictionary = self.checkedID.filter {$0.value}.map {$0.key}
-            self.foodData.delete(filteredIDictionary) { result in
-                switch result {
-                case.success:
-                    // ここから
-                    self.checkedID = [:]
-                    self.foodData.fetch { result in
-                        switch result {
-                        case .success(let foods):
-                            self.array = foods
-                            // このReloadにより削除がtableに反映
+        if isDelete && checkedID.values.contains(true) {
+            // 削除するかどうかアラート
+            let alert = UIAlertController(title: "削除しますか?", message: "", preferredStyle: .actionSheet)
+            alert.addAction(.init(title: "はい", style: .default, handler: { _ in
+//                 filterで値のみを取り出し、defoはTrueを取り出すため
+                let filteredIDictionary = self.checkedID.filter {$0.value}.map {$0.key}
+                self.foodData.delete(filteredIDictionary) { result in
+                    switch result {
+                    case.success:
+                        // ここから
+                        self.checkedID = [:]
+                        self.foodData.fetch { result in
+                            switch result {
+                            case .success(let foods):
+                                self.array = foods
+                                // このReloadにより削除がtableに反映
+                                self.foodListPresenterOutput?.update()
+                            case .failure(let error):
+                                print("fetchfoodsに失敗:\(error)")
+                            }
+                            // 下記reloadがないと表示が反映されず1
                             self.foodListPresenterOutput?.update()
-                        case .failure(let error):
-                            print("fetchfoodsに失敗:\(error)")
                         }
-                        // 下記reloadがないと表示が反映されず1
-                        self.foodListPresenterOutput?.update()
+                    case.failure(let error):
+                        print("deleteに失敗:\(error)")
                     }
-                case.failure(let error):
-                    print("deleteに失敗:\(error)")
                 }
-            }
-            self.foodListPresenterOutput?.update()
+                self.foodListPresenterOutput?.update()
+            }))
+            alert.addAction(.init(title: "いいえ", style: .destructive, handler: { _ in
+                self.checkedID = [:]
+                print("削除をキャンセル")
+            }))
+            self.foodListPresenterOutput?.presentAlert(alert: alert)
         }
         self.foodListPresenterOutput?.update()
     }
     // 冷蔵ボタン
     func didTapRefrigiratorButton() {
+
         foodUseCase.isFilteringRefrigerator.toggle()
         foodUseCase.isFilteringFreezer = false
         didSwitchLocation(location: .refrigerator)
@@ -116,6 +126,11 @@ final class FoodListPresenter {
         self.foodUseCase.foodFilter.location = location
         self.foodUseCase.selectedKinds = []
         self.filteredArray = filteredArray.filter {$0.location == self.foodUseCase.foodFilter.location}
+        self.foodListPresenterOutput?.setTitle(
+            refigerator: self.sharedFoodUseCase.isFilteringRefrigerator,
+            freezer: self.sharedFoodUseCase.isFilteringFreezer,
+            selectedKinds: self.sharedFoodUseCase.selectedKinds,
+            location: self.foodUseCase.foodFilter.location)
         foodListPresenterOutput?.update()
     }
     // 食材ボタン
@@ -132,19 +147,9 @@ final class FoodListPresenter {
         }
         foodListPresenterOutput?.update()
     }
-    // 冷蔵冷凍を文字で返す
-//    func locationTranslator(location: Food.Location) -> String {
-//        var trasnlatedlocation = String()
-//        if location == .refrigerator {
-//            trasnlatedlocation = "冷蔵"
-//        } else if location == .freezer {
-//            trasnlatedlocation = "冷凍"
-//        }
-//        return trasnlatedlocation
-//    }
     func isTapCheckboxButton(row: Int) -> ((Bool) -> Void)? {
         //        // UUIDをDictionaryに追加
-        didTapCheckBox = { isChecked in
+        self.didTapCheckBox = { isChecked in
             self.checkedID[self.array[row].IDkey] = isChecked
         }
         return didTapCheckBox
@@ -154,6 +159,7 @@ final class FoodListPresenter {
         if (!self.sharedFoodUseCase.isFilteringFreezer &&
             !self.sharedFoodUseCase.isFilteringRefrigerator) &&
             (self.sharedFoodUseCase.selectedKinds.isEmpty) {
+
             return self.foodInRow(forRow: row)
         } else {
             return self.filteredFoodInRow(forRow: row)
@@ -176,9 +182,7 @@ final class FoodListPresenter {
             return filteredArray.count
         }
     }
-    func didSelectRow(storyboard: FoodAppendViewController?, row: Int, foodNameTextLabel: String?, quantityTextLabel: String?) {
-        var foodNameTextLabel = foodNameTextLabel
-        var quantityTextLabel = quantityTextLabel
+    func didSelectRow(storyboard: FoodAppendViewController?, row: Int) {
         let alert = UIAlertController(title: "選択してください", message: "", preferredStyle: .actionSheet)
         alert.addAction(.init(title: "数量・保存方法を変更する", style: .default, handler: { _ -> Void in
             let inputView = storyboard
@@ -188,6 +192,10 @@ final class FoodListPresenter {
                 print("エラーです")
             }
             self.foodListPresenterOutput?.present(inputView: inputView)
+            // ここでPlaceholderを
+            inputView?.foodNameTextField.placeholder = self.array[row].name
+            inputView?.quantityTextField.placeholder = self.array[row].quantity
+            //
             inputView?.kindSelectText.isHidden = true
             // 数値を変更しようとした際にクラッシュThread 1: EXC_BAD_ACCESS (code=2, address=0x1d82cd1d0)
             inputView?.unitSelectButton.setTitle(inputView?.unitSelectButton.unitButtonTranslator(unit: self.array[row].unit), for: .normal)
@@ -200,9 +208,14 @@ final class FoodListPresenter {
             inputView?.quantityTextHeightConstraint.constant = 20
             FoodListPresenter.isTapRow = true
             if FoodListPresenter.isTapRow == true {
+                // placeholderでなくそのまま入力
+                if(inputView?.foodNameTextField.state)!.isEmpty {
+                    inputView?.foodNameTextField.text = self.array[row].name
+                }
+                if(inputView?.quantityTextField.state)!.isEmpty {
+                    inputView?.quantityTextField.text = self.array[row].quantity
+                }
                 inputView?.preserveButton.addAction(.init(handler: { [self]_ in
-                    foodNameTextLabel = inputView?.foodNameTextField.text
-                    quantityTextLabel = inputView?.quantityTextField.text
                     print("inputのアクションが操作")
                     self.db.collection("foods").document("IDkey: \(self.array[row].IDkey)").setData([
                         "name": "\((inputView?.foodNameTextField.text)!)",
@@ -254,10 +267,10 @@ final class FoodListPresenter {
         }))
         // アラートアクションシート二項目目
         alert.addAction(.init(title: "レシピを調べる", style: .default, handler: { _ ->Void in
-            self.foodListPresenterOutput?.performSegue(foodNameTextLabel: foodNameTextLabel)
+            self.foodListPresenterOutput?.performSegue(foodNameTextLabel: self.array[row].name) // foodNameTextLabel
         }))
-        self.foodListPresenterOutput?.presentRecepie(alert: alert)
-        alert.addAction(.init(title: "キャンセル", style: .cancel, handler: { _ in
+        self.foodListPresenterOutput?.presentAlert(alert: alert)
+        alert.addAction(.init(title: "キャンセル", style: .destructive, handler: { _ in
 
         }))
 
