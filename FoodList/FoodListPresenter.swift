@@ -30,10 +30,13 @@ final class FoodListPresenter {
     private let sharedFoodUseCase = FoodUseCase.shared
     private var didTapCheckBox: ((Bool) -> Void)?
     static private(set) var isTapRow = false
+    //static foodUseCaseを消す
+//    private let foodUseCase:FoodUseCase
     private let db = Firestore.firestore()
 
-    init(foodData: FoodData) {
+    init(foodData: FoodData, foodUseCase:FoodUseCase) {
         self.foodData = foodData
+        self.foodUseCase = foodUseCase
     }
     func setOutput(foodListPresenterOutput: FoodListPresenterOutput) {
         self.foodListPresenterOutput = foodListPresenterOutput
@@ -131,10 +134,25 @@ final class FoodListPresenter {
             freezer: self.sharedFoodUseCase.isFilteringFreezer,
             selectedKinds: self.sharedFoodUseCase.selectedKinds,
             location: self.foodUseCase.foodFilter.location)
+//        self.refreshFoodKindDictionary()
+
         foodListPresenterOutput?.update()
+    }
+    // 食材を選択した状態で冷蔵冷凍ボタンを押してどちらもFalseとなった
+   private func refreshFoodKindDictionary() {
+        if (!self.sharedFoodUseCase.isFilteringRefrigerator &&
+            !self.sharedFoodUseCase.isFilteringFreezer) &&
+            (self.sharedFoodUseCase.selectedKinds.isEmpty) {
+            self.foodUseCase.foodKindDictionary = [
+                .meat: false, .fish: false, .vegetableAndFruit: false,
+                .milkAndEgg: false, .dish: false, .drink: false,
+                    .seasoning: false, .sweet: false, .other: false
+                ]
+        }
     }
     // 食材ボタン
     func didTapFoodKindButtons(kind: Food.FoodKind) {
+        self.refreshFoodKindDictionary()
         self.foodUseCase.foodKindDictionary[kind]!.toggle()
         let selectedKinds = self.foodUseCase.foodKindDictionary.filter {$0.value == true}
         let kinds = selectedKinds.map {$0.key}
@@ -165,11 +183,11 @@ final class FoodListPresenter {
             return self.filteredFoodInRow(forRow: row)
         }
     }
-    func foodInRow(forRow row: Int) -> Food? {
+    private func foodInRow(forRow row: Int) -> Food? {
         guard row < array.count else {return nil}
         return array[row]
     }
-    func filteredFoodInRow(forRow row: Int) -> Food? {
+    private func filteredFoodInRow(forRow row: Int) -> Food? {
         guard row < filteredArray.count else {return nil}
         return filteredArray[row]
     }
@@ -195,7 +213,6 @@ final class FoodListPresenter {
             // ここでPlaceholderを
             inputView?.foodNameTextField.placeholder = self.array[row].name
             inputView?.quantityTextField.placeholder = self.array[row].quantity
-            //
             inputView?.kindSelectText.isHidden = true
             // 数値を変更しようとした際にクラッシュThread 1: EXC_BAD_ACCESS (code=2, address=0x1d82cd1d0)
             inputView?.unitSelectButton.setTitle(inputView?.unitSelectButton.unitButtonTranslator(unit: self.array[row].unit), for: .normal)

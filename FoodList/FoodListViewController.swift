@@ -12,7 +12,6 @@ import FirebaseFirestoreSwift
 
 final class FoodListViewController: UIViewController {
 
-    private let sharedFoodUseCase = FoodUseCase.shared
     private let foodListPresenter = FoodListPresenter(foodData: FoodData())
 
     @IBOutlet weak var addButtton: AddButton!
@@ -76,6 +75,7 @@ final class FoodListViewController: UIViewController {
         self.filterForOthersButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(kind: .other)
         }), for: .touchUpInside)
+//        self.foodListPresenter.refreshFoodKindDictionary()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

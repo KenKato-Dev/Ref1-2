@@ -46,7 +46,7 @@ class CheckBoxButton: UIButton {
         titleLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
         //        imageView?.image?.withTintColor(.red)
     }
-    //Bool引数isCheckによってボタン外観をsetImageを切り替えさせる
+    // Bool引数isCheckによってボタン外観をsetImageを切り替えさせる
     func updateAppearance(isChecked: Bool) {
         if isChecked {
             self.setImage(UIImage(systemName: "checkmark.square")!, for: .normal)

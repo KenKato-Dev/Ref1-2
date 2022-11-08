@@ -10,8 +10,8 @@ import UIKit
 // サブクラスを入れていないからかと緊急的にcheckBoxButtonを入れたがうまくいかず
 // ターゲットからモジュールを先導を選択しエラー解決、Inherit module from targetカスタムクラス作成時に使用する
 class TableViewCell: UITableViewCell {
-    //下記enumを追加、normal. trueとfalseの3肢を用意
-    //checkboxの出現、checkboxのsetImage切り替えをこれでまとめる
+    // 下記enumを追加、normal. trueとfalseの3肢を用意
+    // checkboxの出現、checkboxのsetImage切り替えをこれでまとめる
     enum State {
         case normal
         case shownCheckBox(isChecked: Bool)
@@ -23,7 +23,7 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var dateTextLabel: UILabel!
     @IBOutlet weak var quantityTextLabel: UILabel!
     @IBOutlet weak var unitTextLabel: UILabel!
-    //インスタンスを追加
+    // インスタンスを追加
     private var state: State = .normal
 //    var showCheckBox: Bool = false {
 //        didSet {
@@ -42,10 +42,11 @@ class TableViewCell: UITableViewCell {
             //            self.checkBoxButton.updateAppearance(isChecked: self.checkBoxButton.isTap)
             //            self.didTapCheckBox?(self.checkBoxButton.isTap)
             if case .shownCheckBox(let isChecked) = self.state {
-                let nextIsCheckd = !isChecked
-                self.checkBoxButton.updateAppearance(isChecked: nextIsCheckd)
-                self.didTapCheckBox?(nextIsCheckd)
-                self.configure(state: .shownCheckBox(isChecked: nextIsCheckd))
+                let nextIsChecked = !isChecked
+                // 下記記載はconfigureと重複するため不要
+//                self.checkBoxButton.updateAppearance(isChecked: nextIsChecked)
+                self.didTapCheckBox?(nextIsChecked)
+                self.configure(state: .shownCheckBox(isChecked: nextIsChecked))
             }
         }), for: .touchUpInside)
     }
@@ -56,7 +57,6 @@ class TableViewCell: UITableViewCell {
         super.prepareForReuse()
         configure(state: .normal)
     }
-
     func foodConfigure(food: Food) {
         foodImage.image = UIImage(named: "\(food.kind.rawValue)") // foodArray[indexPath.row]
         preserveMethodTextLable.text = self.locationTranslator(location: food.location)
@@ -64,10 +64,9 @@ class TableViewCell: UITableViewCell {
         quantityTextLabel.text = String(food.quantity)
         unitTextLabel.text = UnitSelectButton().unitButtonTranslator(unit: food.unit)
         dateTextLabel.text = food.date.formatted(date: .abbreviated, time: .omitted)
-
     }
+
     func configure(state: State) {
-        //この
         self.state = state
         switch state {
         case .normal:
