@@ -17,24 +17,25 @@ protocol FoodListPresenterOutput: AnyObject {
     func performSegue(foodNameTextLabel: String?)
     func setTitle(refigerator: Bool, freezer: Bool, selectedKinds: [Food.FoodKind], location: Food.Location)
     func isHidingButtons(isDelete: Bool)
-    }
+    func buttonAnimation(isFilteringRef: Bool, isFilteringFreezer: Bool)
+}
 
 final class FoodListPresenter {
     private let foodData: FoodData
     weak private var foodListPresenterOutput: FoodListPresenterOutput?
-    private let foodUseCase = FoodUseCase.shared
+    //    private let foodUseCase = FoodUseCase.shared
     private (set) var array: [Food]=[]
     private var filteredArray: [Food]=[]
     private (set) var isDelete = true
     private (set) var checkedID: [String: Bool] = [:]
-    private let sharedFoodUseCase = FoodUseCase.shared
+    //    private let sharedFoodUseCase = FoodUseCase.shared
     private var didTapCheckBox: ((Bool) -> Void)?
     static private(set) var isTapRow = false
-    //static foodUseCaseを消す
-//    private let foodUseCase:FoodUseCase
+    // static foodUseCaseを消す
+    private let foodUseCase: FoodUseCase
     private let db = Firestore.firestore()
 
-    init(foodData: FoodData, foodUseCase:FoodUseCase) {
+    init(foodData: FoodData, foodUseCase: FoodUseCase) {
         self.foodData = foodData
         self.foodUseCase = foodUseCase
     }
@@ -64,9 +65,9 @@ final class FoodListPresenter {
     func didTapDeleteButton() {
         isDelete.toggle()
         // 削除事に配列を元に戻す
-        sharedFoodUseCase.isFilteringFreezer = false
-        sharedFoodUseCase.isFilteringRefrigerator = false
-        sharedFoodUseCase.selectedKinds = []
+        self.foodUseCase.isFilteringFreezer = false
+        self.foodUseCase.isFilteringRefrigerator = false
+        self.foodUseCase.selectedKinds = []
         // ボタンの無効化
         foodListPresenterOutput?.isHidingButtons(isDelete: isDelete)
         //
@@ -75,7 +76,7 @@ final class FoodListPresenter {
             // 削除するかどうかアラート
             let alert = UIAlertController(title: "削除しますか?", message: "", preferredStyle: .actionSheet)
             alert.addAction(.init(title: "はい", style: .default, handler: { _ in
-//                 filterで値のみを取り出し、defoはTrueを取り出すため
+                //                 filterで値のみを取り出し、defoはTrueを取り出すため
                 let filteredIDictionary = self.checkedID.filter {$0.value}.map {$0.key}
                 self.foodData.delete(filteredIDictionary) { result in
                     switch result {
@@ -109,16 +110,18 @@ final class FoodListPresenter {
         self.foodListPresenterOutput?.update()
     }
     // 冷蔵ボタン
-    func didTapRefrigiratorButton() {
-
+    func didTapRefrigiratorButton(_ button: UIButton) {
         foodUseCase.isFilteringRefrigerator.toggle()
         foodUseCase.isFilteringFreezer = false
+        // ボタンの色を変更
+        self.foodListPresenterOutput?.buttonAnimation(isFilteringRef: foodUseCase.isFilteringRefrigerator, isFilteringFreezer: foodUseCase.isFilteringFreezer)
         didSwitchLocation(location: .refrigerator)
     }
     // 冷凍ボタン
-    func didTapFreezerButton() {
+    func didTapFreezerButton(_ button: UIButton) {
         self.foodUseCase.isFilteringFreezer.toggle()
         self.foodUseCase.isFilteringRefrigerator = false
+        self.foodListPresenterOutput?.buttonAnimation(isFilteringRef: foodUseCase.isFilteringRefrigerator, isFilteringFreezer: foodUseCase.isFilteringFreezer)
         self.didSwitchLocation(location: .freezer)
     }
     // 冷蔵冷凍ボタンを押した際実行する
@@ -128,42 +131,84 @@ final class FoodListPresenter {
         }
         self.foodUseCase.foodFilter.location = location
         self.foodUseCase.selectedKinds = []
-        self.filteredArray = filteredArray.filter {$0.location == self.foodUseCase.foodFilter.location}
-        self.foodListPresenterOutput?.setTitle(
-            refigerator: self.sharedFoodUseCase.isFilteringRefrigerator,
-            freezer: self.sharedFoodUseCase.isFilteringFreezer,
-            selectedKinds: self.sharedFoodUseCase.selectedKinds,
-            location: self.foodUseCase.foodFilter.location)
-//        self.refreshFoodKindDictionary()
-
-        foodListPresenterOutput?.update()
-    }
-    // 食材を選択した状態で冷蔵冷凍ボタンを押してどちらもFalseとなった
-   private func refreshFoodKindDictionary() {
-        if (!self.sharedFoodUseCase.isFilteringRefrigerator &&
-            !self.sharedFoodUseCase.isFilteringFreezer) &&
-            (self.sharedFoodUseCase.selectedKinds.isEmpty) {
-            self.foodUseCase.foodKindDictionary = [
-                .meat: false, .fish: false, .vegetableAndFruit: false,
-                .milkAndEgg: false, .dish: false, .drink: false,
-                    .seasoning: false, .sweet: false, .other: false
-                ]
+        //        self.filteredArray = filteredArray.filter {$0.location == self.foodUseCase.foodFilter.location}
+        self.filteredArray = self.array.filter {$0.location == self.foodUseCase.foodFilter.location}.filter {foodUseCase.foodFilter.kindArray.contains($0.kind)}
+        if self.filteredArray.isEmpty {
+            self.filteredArray = self.array.filter {$0.location == self.foodUseCase.foodFilter.location}
         }
+        //        self.configure(location: location)
+        // タイトル編集
+        self.foodListPresenterOutput?.setTitle(
+            refigerator: self.foodUseCase.isFilteringRefrigerator,
+            freezer: self.foodUseCase.isFilteringFreezer,
+            selectedKinds: self.foodUseCase.selectedKinds,
+            location: self.foodUseCase.foodFilter.location)
+        self.refreshFoodKindDictionary()
+        foodListPresenterOutput?.update()
     }
     // 食材ボタン
     func didTapFoodKindButtons(kind: Food.FoodKind) {
-        self.refreshFoodKindDictionary()
+        //        self.refreshFoodKindDictionary()
         self.foodUseCase.foodKindDictionary[kind]!.toggle()
-        let selectedKinds = self.foodUseCase.foodKindDictionary.filter {$0.value == true}
-        let kinds = selectedKinds.map {$0.key}
+        let selectedDictionary = self.foodUseCase.foodKindDictionary.filter {$0.value == true}
+        let selectedFoodKinds = selectedDictionary.map {$0.key}
         // 食材ボタンを押した際に実行する　didSelectKinds(kinds: [Food.FoodKind])
-        self.foodUseCase.foodFilter.kindArray = kinds
-        self.foodUseCase.selectedKinds = kinds
-        self.filteredArray = self.array.filter {foodUseCase.foodFilter.kindArray.contains($0.kind)}
-                if filteredArray.isEmpty {
-            self.filteredArray = self.array
+        self.foodUseCase.foodFilter.kindArray = selectedFoodKinds
+        // ここで入る
+        self.foodUseCase.selectedKinds = selectedFoodKinds
+        // selectedKindsが既に入っている場合はfilteredArrayから処理するように実施
+        // self.array.filter
+        self.filteredArray = self.array.filter {$0.location == self.foodUseCase.foodFilter.location}.filter {foodUseCase.foodFilter.kindArray.contains($0.kind)}
+        if self.filteredArray.isEmpty {
+            self.filteredArray = self.array.filter {foodUseCase.foodFilter.kindArray.contains($0.kind)}
         }
+        //        self.filteredArray = self.filteredArray.filter {foodUseCase.foodFilter.kindArray.contains($0.kind)}
+        // 配列がからの状態でもリセットしてはならない
+        //        if filteredArray.isEmpty {
+        //            self.filteredArray = self.array
+        //            // 以下追記
+        //        }
+
+        //        else if (self.foodUseCase.isFilteringRefrigerator ||
+        //                  self.foodUseCase.isFilteringFreezer) &&
+        //                    (!self.foodUseCase.selectedKinds.isEmpty) {
+        //            self.filteredArray = self.filteredArray.filter {foodUseCase.foodFilter.kindArray.contains($0.kind)}
+        //        }
+        //        self.configure(location: self.foodUseCase.foodFilter.location)
+        if self.foodUseCase.selectedKinds.isEmpty {
+
+        }
+
         foodListPresenterOutput?.update()
+    }
+    // 食材を選択した状態で冷蔵冷凍ボタンを押した際に
+    private func refreshFoodKindDictionary() {
+        if (!self.foodUseCase.isFilteringRefrigerator &&
+            !self.foodUseCase.isFilteringFreezer) &&
+            (self.foodUseCase.selectedKinds.isEmpty) {
+            self.foodUseCase.foodKindDictionary = [
+                .meat: false, .fish: false, .vegetableAndFruit: false,
+                .milkAndEgg: false, .dish: false, .drink: false,
+                .seasoning: false, .sweet: false, .other: false
+            ]
+        }
+    }
+    // 上記食材ボタン,冷凍冷蔵ボタンによる配列への操作を下記に集約させる
+    private func configure(location: Food.Location) {
+        let selectedDictionary = self.foodUseCase.foodKindDictionary.filter {$0.value == true}
+        let selectedFoodKinds = selectedDictionary.map {$0.key}
+        self.foodUseCase.selectedKinds = selectedFoodKinds
+        self.foodUseCase.foodFilter.location = location
+        self.foodUseCase.foodFilter.kindArray = selectedFoodKinds
+        if (!self.foodUseCase.isFilteringRefrigerator &&
+            !self.foodUseCase.isFilteringFreezer) &&
+            (self.foodUseCase.selectedKinds.isEmpty) {
+            self.filteredArray = self.array
+        } else if self.foodUseCase.selectedKinds.isEmpty {
+            self.filteredArray = self.array.filter {$0.location == self.foodUseCase.foodFilter.location}
+        } else {
+            self.filteredArray = filteredArray.filter {$0.location == self.foodUseCase.foodFilter.location}
+        }
     }
     func isTapCheckboxButton(row: Int) -> ((Bool) -> Void)? {
         //        // UUIDをDictionaryに追加
@@ -172,12 +217,13 @@ final class FoodListPresenter {
         }
         return didTapCheckBox
     }
-    // TableView用Func
-    func configure(row: Int) -> Food? {
-        if (!self.sharedFoodUseCase.isFilteringFreezer &&
-            !self.sharedFoodUseCase.isFilteringRefrigerator) &&
-            (self.sharedFoodUseCase.selectedKinds.isEmpty) {
-
+    // TableView用Func、ここで配列に入れるものを決めている
+    // ここの修正により配列管理を改善、Filtered FoodInRowの改善
+    func isManagingArray(row: Int) -> Food? {
+        if (!self.foodUseCase.isFilteringFreezer &&
+            !self.foodUseCase.isFilteringRefrigerator) &&
+            (self.foodUseCase.selectedKinds.isEmpty) {
+            //            self.refreshFoodKindDictionary()
             return self.foodInRow(forRow: row)
         } else {
             return self.filteredFoodInRow(forRow: row)
@@ -192,9 +238,9 @@ final class FoodListPresenter {
         return filteredArray[row]
     }
     func numberOfRows() -> Int {
-        if (!sharedFoodUseCase.isFilteringFreezer &&
-            !sharedFoodUseCase.isFilteringRefrigerator) &&
-            (self.sharedFoodUseCase.selectedKinds.isEmpty) {
+        if (!self.foodUseCase.isFilteringFreezer &&
+            !self.foodUseCase.isFilteringRefrigerator) &&
+            (self.foodUseCase.selectedKinds.isEmpty) {
             return self.array.count
         } else {
             return filteredArray.count
@@ -291,5 +337,14 @@ final class FoodListPresenter {
 
         }))
 
+    }
+    func kindButtonAnimation(kind: Food.FoodKind, _ button: UIButton) {
+        if self.foodUseCase.foodKindDictionary[kind]! {
+            button.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            button.backgroundColor = .lightGray
+        } else {
+            button.transform = CGAffineTransform(scaleX: 1, y: 1)
+            button.backgroundColor = .clear
+        }
     }
 }

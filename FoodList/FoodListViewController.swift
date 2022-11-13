@@ -12,7 +12,7 @@ import FirebaseFirestoreSwift
 
 final class FoodListViewController: UIViewController {
 
-    private let foodListPresenter = FoodListPresenter(foodData: FoodData())
+    private let foodListPresenter = FoodListPresenter(foodData: FoodData(), foodUseCase: FoodUseCase())
 
     @IBOutlet weak var addButtton: AddButton!
     @IBOutlet weak var locationButtonsStack: UIStackView!
@@ -43,39 +43,47 @@ final class FoodListViewController: UIViewController {
             self.foodListPresenter.didTapDeleteButton()
         }), for: .touchUpInside)
         self.filterRefrigeratorButton.addAction(.init(handler: { _ in
-            self.foodListPresenter.didTapRefrigiratorButton()
+            self.foodListPresenter.didTapRefrigiratorButton(self.filterRefrigeratorButton)
         }), for: .touchUpInside)
         self.filteredFreezerButton.addAction(.init(handler: { _ in
-            self.foodListPresenter.didTapFreezerButton()
+            self.foodListPresenter.didTapFreezerButton(self.filteredFreezerButton)
         }), for: .touchUpInside)
         self.filterForMeetButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(kind: .meat)
+            self.foodListPresenter.kindButtonAnimation(kind: .meat, self.filterForMeetButton)
         }), for: .touchUpInside)
         self.filterForFishButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(kind: .fish)
+            self.foodListPresenter.kindButtonAnimation(kind: .fish, self.filterForFishButton)
         }), for: .touchUpInside)
         self.filterForVegAndFruitsButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(kind: .vegetableAndFruit)
+            self.foodListPresenter.kindButtonAnimation(kind: .vegetableAndFruit, self.filterForVegAndFruitsButton)
         }), for: .touchUpInside)
         self.filterForMilkAndEggButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(kind: .milkAndEgg)
+            self.foodListPresenter.kindButtonAnimation(kind: .milkAndEgg, self.filterForMilkAndEggButton)
         }), for: .touchUpInside)
         self.filterForDishButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(kind: .dish)
+            self.foodListPresenter.kindButtonAnimation(kind: .dish, self.filterForDishButton)
         }), for: .touchUpInside)
         self.filterForDrinkButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(kind: .drink)
+            self.foodListPresenter.kindButtonAnimation(kind: .drink, self.filterForDrinkButton)
         }), for: .touchUpInside)
         self.filterForSeasoningButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(kind: .seasoning)
+            self.foodListPresenter.kindButtonAnimation(kind: .seasoning, self.filterForSeasoningButton)
         }), for: .touchUpInside)
         self.filterForSweetButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(kind: .sweet)
+            self.foodListPresenter.kindButtonAnimation(kind: .sweet, self.filterForSweetButton)
         }), for: .touchUpInside)
         self.filterForOthersButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(kind: .other)
+            self.foodListPresenter.kindButtonAnimation(kind: .other, self.filterForOthersButton)
         }), for: .touchUpInside)
-//        self.foodListPresenter.refreshFoodKindDictionary()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -92,30 +100,16 @@ final class FoodListViewController: UIViewController {
             recepieView?.navigationItem.title = String("\(sender!)")
         }
     }
-
-}
+    }
 extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.foodListPresenter.numberOfRows()
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let configuredFood = self.foodListPresenter.configure(row: indexPath.row),
+        guard let configuredFood = self.foodListPresenter.isManagingArray(row: indexPath.row),
               let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell
         else {return .init()}
-
-//        if let configuredFood = self.foodListPresenter.configure(row: indexPath.row) {
             cell.foodConfigure(food: configuredFood)
-//        }
-//        // 削除ボタンと連動
-//        cell.showCheckBox = self.foodListPresenter.isDelete
-        // UUIDをDictionaryに追加
-//        cell.didTapCheckBox = self.foodListPresenter.isTapCheckboxButton(row: indexPath.row)
-//        // 下記エラー発生のため一時的にコメントアウト（2022/10/17）
-//        cell.checkBoxButton.updateAppearance(isChecked: self.foodListPresenter.checkedID[self.foodListPresenter.array[indexPath.row].IDkey] ?? false)
-//        // 下記でcheckBoxの削除後に再利用されるCell内のBool値をfalseにする
-//        if self.foodListPresenter.isDelete {
-//            cell.checkBoxButton.isTap = false
-//        }
         let isChecked = self.foodListPresenter.checkedID[configuredFood.IDkey] ?? false
         let shouldShowCheckBox = !self.foodListPresenter.isDelete
         if shouldShowCheckBox {
@@ -128,10 +122,8 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let inputView = self.storyboard?.instantiateViewController(withIdentifier: "modal") as? FoodAppendViewController
-
         // ここで選択しているセルにアクセス
         tableView.deselectRow(at: indexPath, animated: false)
-//        let cell = self.tableView.cellForRow(at: indexPath) as? TableViewCell
         self.foodListPresenter.didSelectRow(storyboard: inputView, row: indexPath.row)
     }
 }
@@ -173,8 +165,7 @@ extension FoodListViewController: FoodListPresenterOutput {
     func setTitle(refigerator: Bool, freezer: Bool, selectedKinds: [Food.FoodKind], location: Food.Location) {
         // この処理でなく条件式も含めタイトルを入れるようにする
         if (!refigerator &&
-            !freezer) &&
-            (selectedKinds.isEmpty) {
+            !freezer)&&(selectedKinds.isEmpty) {
             self.viewTitle.title = "冷蔵品と冷凍品"
 
         } else {
@@ -195,8 +186,20 @@ extension FoodListViewController: FoodListPresenterOutput {
             self.tableViewBottomConstraint.constant = 165
         } else {
             self.locationButtonsStack.backgroundColor = .clear
-            self.kindButtonsStack.backgroundColor = .lightGray
+            self.kindButtonsStack.backgroundColor = .white
             self.tableViewBottomConstraint.constant = 0
+        }
+    }
+    func buttonAnimation(isFilteringRef: Bool, isFilteringFreezer: Bool) {
+        if isFilteringRef {
+            self.filterRefrigeratorButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        } else {
+            self.filterRefrigeratorButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+        if isFilteringFreezer {
+            self.filteredFreezerButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        } else {
+            self.filteredFreezerButton.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
     }
 }

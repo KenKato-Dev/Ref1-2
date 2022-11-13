@@ -7,11 +7,15 @@
 
 import Foundation
 import UIKit
-class FoodUseCase {
-    static let shared: FoodUseCase = FoodUseCase()
+final class FoodUseCase {
+//    enum ManagingArray {
+//        case empty(location:Food.Location)
+//        case didSelectKind(location:Food.Location)
+//    }
+//    static let shared: FoodUseCase = FoodUseCase()
+    //    var managingArray:ManagingArray = .empty(location: .refrigerator)
     var isFilteringRefrigerator = false
     var isFilteringFreezer = false
-    // 下記を利用
     var selectedKinds: [Food.FoodKind] = []
     var foodFilter = FoodData.Fiter.init(location: .refrigerator, kindArray: Food.FoodKind.allCases)
     var foodKindDictionary: [Food.FoodKind: Bool] = [
@@ -19,5 +23,12 @@ class FoodUseCase {
         .milkAndEgg: false, .dish: false, .drink: false,
             .seasoning: false, .sweet: false, .other: false
         ]
-
+    func didTapRefrigeratorButton(){
+        self.isFilteringRefrigerator.toggle()
+        self.isFilteringFreezer = false
+    }
+    func didTapFreezerButton(){
+        self.isFilteringFreezer.toggle()
+        self.isFilteringRefrigerator = false
+    }
 }

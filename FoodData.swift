@@ -10,6 +10,16 @@ import UIKit
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+extension DateFormatter {
+    static let iso8601Full: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss +SSSS"
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        return formatter
+    }()
+}
 // extension StringTo: Decodable {
 //    init(from decoder: Decoder) throws {
 //        let container = try decoder.singleValueContainer()
@@ -25,17 +35,6 @@ import FirebaseFirestoreSwift
 //        self.value = value
 //    }
 // }
-
-extension DateFormatter {
-    static let iso8601Full: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss +SSSS"
-        formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        return formatter
-    }()
-}
 
 // struct StringTo<T: LosslessStringConvertible> {
 //    let value: T
@@ -82,10 +81,8 @@ final class FoodData {
         var location: Food.Location
         var kindArray: [Food.FoodKind]
     }
-//    static var shared: FoodData = FoodData()
 
     private let db = Firestore.firestore()
-
     func post(_ food: Food) {
         // ドキュメントごとに保管、ドキュメントを他のものにするとDictionary方式に上書きされる
         db.collection("foods").document("IDkey: \(food.IDkey)").setData([

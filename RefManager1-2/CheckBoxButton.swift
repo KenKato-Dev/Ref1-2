@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CheckBoxButton: UIButton {
+class CheckBoxButton: TapFeedbackView {
     //    var isTap = false
 
     // ボタンの内容
