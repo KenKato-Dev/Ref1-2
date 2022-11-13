@@ -6,13 +6,28 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
+//        FoodData.shared.delete(idKeys: ["1C7F7790-54BA-4498-8861-2EF7F037D13D", "3E28A2AE-9282-4A64-A513-7B5037F8ACE6", "633D8AEF-B7B3-448D-A9CB-158FE30936CA"])
+//        FoodData.shared.fetchFoods { result in
+//            switch result {
+//            case .success(let foods):
+//                print(foods)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//        FoodData.shared.fetchListCount { count in
+//            print("リストの数：\(count)")
+//        }
+
         // Override point for customization after application launch.
         return true
     }
@@ -31,6 +46,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
 }
-

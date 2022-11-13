@@ -8,6 +8,9 @@
 import UIKit
 
 class CheckBoxButton: UIButton {
+//    static let shared: CheckBoxButton = CheckBoxButton()
+    var isTap = false
+
     // ボタンの内容
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,21 +47,12 @@ class CheckBoxButton: UIButton {
         titleLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
 //        imageView?.image?.withTintColor(.red)
     }
-//    func toggle() {
-//        isCheck.toggle()
-////        if isCheck == false {
-////            self.setImage(UIImage(systemName: "square")!, for: .normal)
-////
-////        } else {
-////            self.setImage(UIImage(systemName: "checkmark.square")!, for: .normal)
-////    }
-//    }
     func updateAppearance(isChecked: Bool) {
         // トグルの中でisCheckを入れ替えるようにしてImageを連携させる
-        if !isChecked {
-            self.setImage(UIImage(systemName: "square")!, for: .normal)
-        } else {
+        if isChecked {
             self.setImage(UIImage(systemName: "checkmark.square")!, for: .normal)
+        } else {
+            self.setImage(UIImage(systemName: "square")!, for: .normal)
     }
 }
 }

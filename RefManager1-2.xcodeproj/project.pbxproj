@@ -7,41 +7,62 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC1242ED286F158B00C60089 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC1242EC286F158B00C60089 /* GoogleService-Info.plist */; };
+		EC1242F0286F1CD300C60089 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = EC1242EF286F1CD300C60089 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		EC1242F2286F1CD300C60089 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EC1242F1286F1CD300C60089 /* FirebaseAuth */; };
+		EC1242F4286F1CD300C60089 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = EC1242F3286F1CD300C60089 /* FirebaseCrashlytics */; };
+		EC1242F6286F1CD300C60089 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EC1242F5286F1CD300C60089 /* FirebaseDatabaseSwift */; };
+		EC1242F8286F1CD300C60089 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EC1242F7286F1CD300C60089 /* FirebaseFirestore */; };
+		EC1242FA286F1CD300C60089 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = EC1242F9286F1CD300C60089 /* FirebaseFirestoreCombine-Community */; };
+		EC1242FC286F1CD300C60089 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EC1242FB286F1CD300C60089 /* FirebaseFirestoreSwift */; };
+		EC1242FE286F1CD300C60089 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = EC1242FD286F1CD300C60089 /* FirebaseMessaging */; };
+		EC77EA2328F2A813009B3EBA /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC77EA1F28F2A813009B3EBA /* CheckBoxButton.swift */; };
+		EC77EA2428F2A813009B3EBA /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC77EA2028F2A813009B3EBA /* DeleteButton.swift */; };
+		EC77EA2528F2A813009B3EBA /* UnitSelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC77EA2128F2A813009B3EBA /* UnitSelectButton.swift */; };
+		EC77EA2628F2A813009B3EBA /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC77EA2228F2A813009B3EBA /* AddButton.swift */; };
+		EC9C1C0D28F45E2D0024570D /* FoodListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C1C0C28F45E2D0024570D /* FoodListPresenter.swift */; };
+		ECA41AE1290E5A5D0030BF16 /* TapFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA41AE0290E5A5D0030BF16 /* TapFeedback.swift */; };
+		ECA60EB128FEE28B00B7C7F6 /* FoodAppendPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA60EB028FEE28B00B7C7F6 /* FoodAppendPresenter.swift */; };
 		ECA6F44628026B0C00CA7C2D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6F44528026B0C00CA7C2D /* AppDelegate.swift */; };
 		ECA6F44828026B0C00CA7C2D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6F44728026B0C00CA7C2D /* SceneDelegate.swift */; };
-		ECA6F44A28026B0C00CA7C2D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6F44928026B0C00CA7C2D /* ViewController.swift */; };
+		ECA6F44A28026B0C00CA7C2D /* FoodListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6F44928026B0C00CA7C2D /* FoodListViewController.swift */; };
 		ECA6F44D28026B0C00CA7C2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA6F44B28026B0C00CA7C2D /* Main.storyboard */; };
 		ECA6F44F28026B0E00CA7C2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA6F44E28026B0E00CA7C2D /* Assets.xcassets */; };
 		ECA6F45228026B0E00CA7C2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA6F45028026B0E00CA7C2D /* LaunchScreen.storyboard */; };
-		ECA6F45B28026B8E00CA7C2D /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6F45A28026B8E00CA7C2D /* ModalViewController.swift */; };
+		ECA6F45B28026B8E00CA7C2D /* FoodAppendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6F45A28026B8E00CA7C2D /* FoodAppendViewController.swift */; };
 		ECA6F45D28026BAE00CA7C2D /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6F45C28026BAE00CA7C2D /* FoodData.swift */; };
-		ECBFB95F28031A1800EB2FCF /* UnitSelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBFB95E28031A1800EB2FCF /* UnitSelectButton.swift */; };
-		ECE2F0A22806935C00975A38 /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0A12806935C00975A38 /* CheckBoxButton.swift */; };
-		ECE2F0A8280B03EE00975A38 /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0A7280B03EE00975A38 /* DeleteButton.swift */; };
-		ECE2F0AA280B052B00975A38 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0A9280B052B00975A38 /* AddButton.swift */; };
-		ECE2F0AC280B063D00975A38 /* NavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0AB280B063D00975A38 /* NavigationItem.swift */; };
-		ECE2F0BE280C3B9600975A38 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = ECE2F0BD280C3B9600975A38 /* FirebaseAnalyticsWithoutAdIdSupport */; };
-		ECE2F0C0280C3B9600975A38 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = ECE2F0BF280C3B9600975A38 /* FirebaseCrashlytics */; };
-		ECE2F0C2280C3B9600975A38 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = ECE2F0C1280C3B9600975A38 /* FirebaseDatabase */; };
+		ECC2590E28E7369600F790F5 /* RecepieCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2590D28E7369600F790F5 /* RecepieCategory.swift */; };
+		ECCAA677290045D800CE141B /* RecepieCategoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCAA676290045D800CE141B /* RecepieCategoryListPresenter.swift */; };
+		ECDF47A928B4F7B7004BC6A9 /* RecepieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47A828B4F7B7004BC6A9 /* RecepieTableViewCell.swift */; };
+		ECDF47AB28B4F7DC004BC6A9 /* RecepieCategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47AA28B4F7DB004BC6A9 /* RecepieCategoryListViewController.swift */; };
+		ECE2F0E028349FBC00975A38 /* FoodUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */; };
 		ECEB7103280314BD00B157FB /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEB7102280314BD00B157FB /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EC1242EC286F158B00C60089 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EC77EA1F28F2A813009B3EBA /* CheckBoxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
+		EC77EA2028F2A813009B3EBA /* DeleteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
+		EC77EA2128F2A813009B3EBA /* UnitSelectButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitSelectButton.swift; sourceTree = "<group>"; };
+		EC77EA2228F2A813009B3EBA /* AddButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
+		EC9C1C0C28F45E2D0024570D /* FoodListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListPresenter.swift; sourceTree = "<group>"; };
+		ECA41AE0290E5A5D0030BF16 /* TapFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapFeedback.swift; sourceTree = "<group>"; };
+		ECA60EB028FEE28B00B7C7F6 /* FoodAppendPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAppendPresenter.swift; sourceTree = "<group>"; };
 		ECA6F44228026B0C00CA7C2D /* RefManager1-2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RefManager1-2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECA6F44528026B0C00CA7C2D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECA6F44728026B0C00CA7C2D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		ECA6F44928026B0C00CA7C2D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		ECA6F44928026B0C00CA7C2D /* FoodListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListViewController.swift; sourceTree = "<group>"; };
 		ECA6F44C28026B0C00CA7C2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ECA6F44E28026B0E00CA7C2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECA6F45128026B0E00CA7C2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ECA6F45328026B0E00CA7C2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ECA6F45A28026B8E00CA7C2D /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
+		ECA6F45A28026B8E00CA7C2D /* FoodAppendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAppendViewController.swift; sourceTree = "<group>"; };
 		ECA6F45C28026BAE00CA7C2D /* FoodData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
-		ECBFB95E28031A1800EB2FCF /* UnitSelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitSelectButton.swift; sourceTree = "<group>"; };
-		ECE2F0A12806935C00975A38 /* CheckBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
-		ECE2F0A7280B03EE00975A38 /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
-		ECE2F0A9280B052B00975A38 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
-		ECE2F0AB280B063D00975A38 /* NavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationItem.swift; sourceTree = "<group>"; };
+		ECC2590D28E7369600F790F5 /* RecepieCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieCategory.swift; sourceTree = "<group>"; };
+		ECCAA676290045D800CE141B /* RecepieCategoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieCategoryListPresenter.swift; sourceTree = "<group>"; };
+		ECDF47A828B4F7B7004BC6A9 /* RecepieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieTableViewCell.swift; sourceTree = "<group>"; };
+		ECDF47AA28B4F7DB004BC6A9 /* RecepieCategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieCategoryListViewController.swift; sourceTree = "<group>"; };
+		ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodUseCase.swift; sourceTree = "<group>"; };
 		ECEB7102280314BD00B157FB /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -50,18 +71,57 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECE2F0C2280C3B9600975A38 /* FirebaseDatabase in Frameworks */,
-				ECE2F0BE280C3B9600975A38 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
-				ECE2F0C0280C3B9600975A38 /* FirebaseCrashlytics in Frameworks */,
+				EC1242FE286F1CD300C60089 /* FirebaseMessaging in Frameworks */,
+				EC1242F6286F1CD300C60089 /* FirebaseDatabaseSwift in Frameworks */,
+				EC1242F4286F1CD300C60089 /* FirebaseCrashlytics in Frameworks */,
+				EC1242F0286F1CD300C60089 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				EC1242FC286F1CD300C60089 /* FirebaseFirestoreSwift in Frameworks */,
+				EC1242FA286F1CD300C60089 /* FirebaseFirestoreCombine-Community in Frameworks */,
+				EC1242F8286F1CD300C60089 /* FirebaseFirestore in Frameworks */,
+				EC1242F2286F1CD300C60089 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC9C1C0928F3E8260024570D /* RecepieCategory */ = {
+			isa = PBXGroup;
+			children = (
+				ECDF47AA28B4F7DB004BC6A9 /* RecepieCategoryListViewController.swift */,
+				ECCAA676290045D800CE141B /* RecepieCategoryListPresenter.swift */,
+			);
+			path = RecepieCategory;
+			sourceTree = "<group>";
+		};
+		EC9C1C0A28F3E8650024570D /* FoodList */ = {
+			isa = PBXGroup;
+			children = (
+				ECA6F44928026B0C00CA7C2D /* FoodListViewController.swift */,
+				EC9C1C0C28F45E2D0024570D /* FoodListPresenter.swift */,
+			);
+			path = FoodList;
+			sourceTree = "<group>";
+		};
+		EC9C1C0B28F3E8A60024570D /* FoodAddition */ = {
+			isa = PBXGroup;
+			children = (
+				ECA6F45A28026B8E00CA7C2D /* FoodAppendViewController.swift */,
+				ECA60EB028FEE28B00B7C7F6 /* FoodAppendPresenter.swift */,
+			);
+			path = FoodAddition;
+			sourceTree = "<group>";
+		};
 		ECA6F43928026B0C00CA7C2D = {
 			isa = PBXGroup;
 			children = (
+				ECA6F44528026B0C00CA7C2D /* AppDelegate.swift */,
+				ECA6F44728026B0C00CA7C2D /* SceneDelegate.swift */,
+				ECA6F45C28026BAE00CA7C2D /* FoodData.swift */,
+				ECC2590D28E7369600F790F5 /* RecepieCategory.swift */,
+				EC9C1C0A28F3E8650024570D /* FoodList */,
+				EC9C1C0B28F3E8A60024570D /* FoodAddition */,
+				EC9C1C0928F3E8260024570D /* RecepieCategory */,
 				ECA6F44428026B0C00CA7C2D /* RefManager1-2 */,
 				ECA6F44328026B0C00CA7C2D /* Products */,
 			);
@@ -78,20 +138,18 @@
 		ECA6F44428026B0C00CA7C2D /* RefManager1-2 */ = {
 			isa = PBXGroup;
 			children = (
-				ECA6F44528026B0C00CA7C2D /* AppDelegate.swift */,
-				ECA6F44728026B0C00CA7C2D /* SceneDelegate.swift */,
-				ECA6F45C28026BAE00CA7C2D /* FoodData.swift */,
-				ECA6F44928026B0C00CA7C2D /* ViewController.swift */,
+				ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */,
 				ECEB7102280314BD00B157FB /* TableViewCell.swift */,
-				ECA6F45A28026B8E00CA7C2D /* ModalViewController.swift */,
-				ECBFB95E28031A1800EB2FCF /* UnitSelectButton.swift */,
-				ECE2F0A12806935C00975A38 /* CheckBoxButton.swift */,
-				ECE2F0A7280B03EE00975A38 /* DeleteButton.swift */,
-				ECE2F0A9280B052B00975A38 /* AddButton.swift */,
-				ECE2F0AB280B063D00975A38 /* NavigationItem.swift */,
+				ECDF47A828B4F7B7004BC6A9 /* RecepieTableViewCell.swift */,
+				EC77EA1F28F2A813009B3EBA /* CheckBoxButton.swift */,
+				EC77EA2028F2A813009B3EBA /* DeleteButton.swift */,
+				EC77EA2128F2A813009B3EBA /* UnitSelectButton.swift */,
+				EC77EA2228F2A813009B3EBA /* AddButton.swift */,
+				ECA41AE0290E5A5D0030BF16 /* TapFeedback.swift */,
 				ECA6F44B28026B0C00CA7C2D /* Main.storyboard */,
 				ECA6F44E28026B0E00CA7C2D /* Assets.xcassets */,
 				ECA6F45028026B0E00CA7C2D /* LaunchScreen.storyboard */,
+				EC1242EC286F158B00C60089 /* GoogleService-Info.plist */,
 				ECA6F45328026B0E00CA7C2D /* Info.plist */,
 			);
 			path = "RefManager1-2";
@@ -115,9 +173,14 @@
 			);
 			name = "RefManager1-2";
 			packageProductDependencies = (
-				ECE2F0BD280C3B9600975A38 /* FirebaseAnalyticsWithoutAdIdSupport */,
-				ECE2F0BF280C3B9600975A38 /* FirebaseCrashlytics */,
-				ECE2F0C1280C3B9600975A38 /* FirebaseDatabase */,
+				EC1242EF286F1CD300C60089 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				EC1242F1286F1CD300C60089 /* FirebaseAuth */,
+				EC1242F3286F1CD300C60089 /* FirebaseCrashlytics */,
+				EC1242F5286F1CD300C60089 /* FirebaseDatabaseSwift */,
+				EC1242F7286F1CD300C60089 /* FirebaseFirestore */,
+				EC1242F9286F1CD300C60089 /* FirebaseFirestoreCombine-Community */,
+				EC1242FB286F1CD300C60089 /* FirebaseFirestoreSwift */,
+				EC1242FD286F1CD300C60089 /* FirebaseMessaging */,
 			);
 			productName = "RefManager1-2";
 			productReference = ECA6F44228026B0C00CA7C2D /* RefManager1-2.app */;
@@ -148,7 +211,7 @@
 			);
 			mainGroup = ECA6F43928026B0C00CA7C2D;
 			packageReferences = (
-				ECE2F0BC280C3B9600975A38 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				EC1242EE286F1CD300C60089 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = ECA6F44328026B0C00CA7C2D /* Products */;
 			projectDirPath = "";
@@ -165,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECA6F45228026B0E00CA7C2D /* LaunchScreen.storyboard in Resources */,
+				EC1242ED286F158B00C60089 /* GoogleService-Info.plist in Resources */,
 				ECA6F44F28026B0E00CA7C2D /* Assets.xcassets in Resources */,
 				ECA6F44D28026B0C00CA7C2D /* Main.storyboard in Resources */,
 			);
@@ -189,7 +253,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif test -d /opt/homebrew/bin; then\n    PATH=/opt/homebrew/bin/:$PATH\nfi\nif which swiftlint >/dev/null; then\n    swiftlint\n    swiftlint --fix\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -198,17 +262,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECE2F0A8280B03EE00975A38 /* DeleteButton.swift in Sources */,
-				ECA6F45B28026B8E00CA7C2D /* ModalViewController.swift in Sources */,
-				ECA6F44A28026B0C00CA7C2D /* ViewController.swift in Sources */,
-				ECE2F0AA280B052B00975A38 /* AddButton.swift in Sources */,
-				ECE2F0A22806935C00975A38 /* CheckBoxButton.swift in Sources */,
-				ECE2F0AC280B063D00975A38 /* NavigationItem.swift in Sources */,
+				ECA41AE1290E5A5D0030BF16 /* TapFeedback.swift in Sources */,
+				ECA60EB128FEE28B00B7C7F6 /* FoodAppendPresenter.swift in Sources */,
+				ECC2590E28E7369600F790F5 /* RecepieCategory.swift in Sources */,
+				ECDF47A928B4F7B7004BC6A9 /* RecepieTableViewCell.swift in Sources */,
+				ECE2F0E028349FBC00975A38 /* FoodUseCase.swift in Sources */,
+				EC77EA2628F2A813009B3EBA /* AddButton.swift in Sources */,
+				ECA6F45B28026B8E00CA7C2D /* FoodAppendViewController.swift in Sources */,
+				ECA6F44A28026B0C00CA7C2D /* FoodListViewController.swift in Sources */,
 				ECA6F44628026B0C00CA7C2D /* AppDelegate.swift in Sources */,
 				ECEB7103280314BD00B157FB /* TableViewCell.swift in Sources */,
+				ECDF47AB28B4F7DC004BC6A9 /* RecepieCategoryListViewController.swift in Sources */,
+				EC77EA2428F2A813009B3EBA /* DeleteButton.swift in Sources */,
+				ECCAA677290045D800CE141B /* RecepieCategoryListPresenter.swift in Sources */,
 				ECA6F45D28026BAE00CA7C2D /* FoodData.swift in Sources */,
+				EC77EA2328F2A813009B3EBA /* CheckBoxButton.swift in Sources */,
 				ECA6F44828026B0C00CA7C2D /* SceneDelegate.swift in Sources */,
-				ECBFB95F28031A1800EB2FCF /* UnitSelectButton.swift in Sources */,
+				EC9C1C0D28F45E2D0024570D /* FoodListPresenter.swift in Sources */,
+				EC77EA2528F2A813009B3EBA /* UnitSelectButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,31 +501,56 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		ECE2F0BC280C3B9600975A38 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		EC1242EE286F1CD300C60089 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		ECE2F0BD280C3B9600975A38 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+		EC1242EF286F1CD300C60089 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ECE2F0BC280C3B9600975A38 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = EC1242EE286F1CD300C60089 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsWithoutAdIdSupport;
 		};
-		ECE2F0BF280C3B9600975A38 /* FirebaseCrashlytics */ = {
+		EC1242F1286F1CD300C60089 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ECE2F0BC280C3B9600975A38 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = EC1242EE286F1CD300C60089 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		EC1242F3286F1CD300C60089 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC1242EE286F1CD300C60089 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
 		};
-		ECE2F0C1280C3B9600975A38 /* FirebaseDatabase */ = {
+		EC1242F5286F1CD300C60089 /* FirebaseDatabaseSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ECE2F0BC280C3B9600975A38 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseDatabase;
+			package = EC1242EE286F1CD300C60089 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
+		};
+		EC1242F7286F1CD300C60089 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC1242EE286F1CD300C60089 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		EC1242F9286F1CD300C60089 /* FirebaseFirestoreCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC1242EE286F1CD300C60089 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreCombine-Community";
+		};
+		EC1242FB286F1CD300C60089 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC1242EE286F1CD300C60089 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		EC1242FD286F1CD300C60089 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC1242EE286F1CD300C60089 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
