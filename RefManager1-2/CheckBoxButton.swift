@@ -15,14 +15,17 @@ class CheckBoxButton: TapFeedbackView {
         super.init(frame: frame)
         customDesign()
     }
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         customDesign()
     }
+
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         customDesign()
     }
+
     private func customDesign() {
         // イメージ挿入
         setImage(UIImage(systemName: "square")!, for: .normal)
@@ -46,12 +49,13 @@ class CheckBoxButton: TapFeedbackView {
         titleLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
         //        imageView?.image?.withTintColor(.red)
     }
+
     // Bool引数isCheckによってボタン外観をsetImageを切り替えさせる
     func updateAppearance(isChecked: Bool) {
         if isChecked {
-            self.setImage(UIImage(systemName: "checkmark.square")!, for: .normal)
+            setImage(UIImage(systemName: "checkmark.square")!, for: .normal)
         } else {
-            self.setImage(UIImage(systemName: "square")!, for: .normal)
+            setImage(UIImage(systemName: "square")!, for: .normal)
         }
     }
 }

@@ -17,18 +17,19 @@ final class FoodUseCase {
     var isFilteringRefrigerator = false
     var isFilteringFreezer = false
     var selectedKinds: [Food.FoodKind] = []
-    var foodFilter = FoodData.Fiter.init(location: .refrigerator, kindArray: Food.FoodKind.allCases)
+    var foodFilter = FoodData.Fiter(location: .refrigerator, kindArray: Food.FoodKind.allCases)
     var foodKindDictionary: [Food.FoodKind: Bool] = [
         .meat: false, .fish: false, .vegetableAndFruit: false,
         .milkAndEgg: false, .dish: false, .drink: false,
-            .seasoning: false, .sweet: false, .other: false
-        ]
-    func didTapRefrigeratorButton(){
-        self.isFilteringRefrigerator.toggle()
-        self.isFilteringFreezer = false
+        .seasoning: false, .sweet: false, .other: false,
+    ]
+    func didTapRefrigeratorButton() {
+        isFilteringRefrigerator.toggle()
+        isFilteringFreezer = false
     }
-    func didTapFreezerButton(){
-        self.isFilteringFreezer.toggle()
-        self.isFilteringRefrigerator = false
+
+    func didTapFreezerButton() {
+        isFilteringFreezer.toggle()
+        isFilteringRefrigerator = false
     }
 }

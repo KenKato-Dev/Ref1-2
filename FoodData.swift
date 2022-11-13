@@ -5,10 +5,10 @@
 //  Created by 加藤研太郎 on 2022/04/05.
 //
 
-import Foundation
-import UIKit
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import Foundation
+import UIKit
 
 extension DateFormatter {
     static let iso8601Full: DateFormatter = {
@@ -20,6 +20,7 @@ extension DateFormatter {
         return formatter
     }()
 }
+
 // extension StringTo: Decodable {
 //    init(from decoder: Decoder) throws {
 //        let container = try decoder.singleValueContainer()
@@ -92,7 +93,7 @@ final class FoodData {
             "quantity": "\(food.quantity)",
             "unit": "\(food.unit)",
             "IDkey": "\(food.IDkey)",
-            "date": "\(food.date)"
+            "date": "\(food.date)",
         ], merge: false) { err in
             if let err = err {
                 print("FireStoreへの書き込みに失敗しました: \(err)")
@@ -102,7 +103,7 @@ final class FoodData {
         }
     }
 
-    func fetch(_ completion:@escaping (Result<[Food], Error>) -> Void) {
+    func fetch(_ completion: @escaping (Result<[Food], Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now()) { // +0.3を削除し動作確認
             self.db.collection("foods").getDocuments { querySnapShot, error in
                 if let err = error {
@@ -112,13 +113,13 @@ final class FoodData {
                     print("FireStoreへの読み込みに成功しました")
                     let decoder = JSONDecoder()
                     decoder.dateDecodingStrategy = .formatted(.iso8601Full)
-                    var dictinaryDocuments = querySnapShot?.documents.map({ snapshot in
+                    var dictinaryDocuments = querySnapShot?.documents.map { snapshot in
                         snapshot.data()
-                    })
+                    }
                     do {
                         let data = try JSONSerialization.data(withJSONObject: dictinaryDocuments, options: .prettyPrinted)
                         var decodedFoods = try decoder.decode([Food].self, from: data)
-                        decodedFoods = decodedFoods.sorted(by: {$0.kind.rawValue > $1.kind.rawValue})
+                        decodedFoods = decodedFoods.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
                         completion(.success(decodedFoods))
                     } catch {
                         completion(.failure(error))
@@ -128,30 +129,30 @@ final class FoodData {
         }
     }
 
-    func delete(_ idKeys: [String], _ completion:@escaping (Result<Void, Error>) -> Void) {
+    func delete(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
         guard !idKeys.isEmpty else {
             return
         }
-                let query = self.db.collection("foods").whereField("IDkey", in: idKeys)
-                query.getDocuments { snapshot, error in
+        let query = db.collection("foods").whereField("IDkey", in: idKeys)
+        query.getDocuments { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            var count = 0
+            for document in snapshot!.documents { // ここにsuccessを入れるとfor分毎に呼ばれる
+                document.reference.delete { error in
+                    count += 1
                     if let error = error {
                         completion(.failure(error))
                         return
                     }
-                    var count = 0
-                    for document in snapshot!.documents { // ここにsuccessを入れるとfor分毎に呼ばれる
-                        document.reference.delete { error in
-                            count += 1
-                            if let error = error {
-                                completion(.failure(error))
-                                return
-                            }
-                            if count == snapshot?.count {
-                                completion(.success(()))
-                            }
-                        }
+                    if count == snapshot?.count {
+                        completion(.success(()))
                     }
-                    completion(.success(()))
                 }
+            }
+            completion(.success(()))
+        }
     }
 }

@@ -16,7 +16,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "267"
             endingLineNumber = "267"
-            landmarkName = "didSelectRow(storyboard:row:)"
+            landmarkName = "numberOfRows()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -96,7 +96,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "205"
             endingLineNumber = "205"
-            landmarkName = "configure(location:)"
+            landmarkName = "refreshFoodKindDictionary()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -144,7 +144,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "227"
             endingLineNumber = "227"
-            landmarkName = "isManagingArray(row:)"
+            landmarkName = "isTapCheckboxButton(row:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

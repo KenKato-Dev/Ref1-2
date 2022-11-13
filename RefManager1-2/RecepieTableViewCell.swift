@@ -8,8 +8,8 @@
 import UIKit
 
 class RecepieTableViewCell: UITableViewCell {
-    @IBOutlet weak var circlefill: UILabel!
-    @IBOutlet weak var categoryName: UILabel!
+    @IBOutlet var circlefill: UILabel!
+    @IBOutlet var categoryName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

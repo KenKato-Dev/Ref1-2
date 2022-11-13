@@ -16,13 +16,14 @@ class TableViewCell: UITableViewCell {
         case normal
         case shownCheckBox(isChecked: Bool)
     }
-    @IBOutlet weak var checkBoxButton: CheckBoxButton!
-    @IBOutlet weak var preserveMethodTextLable: UILabel!
-    @IBOutlet weak var foodImage: UIImageView!
-    @IBOutlet weak var foodNameTextLabel: UILabel!
-    @IBOutlet weak var dateTextLabel: UILabel!
-    @IBOutlet weak var quantityTextLabel: UILabel!
-    @IBOutlet weak var unitTextLabel: UILabel!
+
+    @IBOutlet var checkBoxButton: CheckBoxButton!
+    @IBOutlet var preserveMethodTextLable: UILabel!
+    @IBOutlet var foodImage: UIImageView!
+    @IBOutlet var foodNameTextLabel: UILabel!
+    @IBOutlet var dateTextLabel: UILabel!
+    @IBOutlet var quantityTextLabel: UILabel!
+    @IBOutlet var unitTextLabel: UILabel!
     // インスタンスを追加
     private var state: State = .normal
 //    var showCheckBox: Bool = false {
@@ -41,7 +42,7 @@ class TableViewCell: UITableViewCell {
             //            self.checkBoxButton.isTap.toggle()
             //            self.checkBoxButton.updateAppearance(isChecked: self.checkBoxButton.isTap)
             //            self.didTapCheckBox?(self.checkBoxButton.isTap)
-            if case .shownCheckBox(let isChecked) = self.state {
+            if case let .shownCheckBox(isChecked) = self.state {
                 let nextIsChecked = !isChecked
                 // 下記記載はconfigureと重複するため不要
 //                self.checkBoxButton.updateAppearance(isChecked: nextIsChecked)
@@ -50,6 +51,7 @@ class TableViewCell: UITableViewCell {
             }
         }), for: .touchUpInside)
     }
+
 //    override func setSelected(_ selected: Bool, animated: Bool) {
 //        super.setSelected(selected, animated: animated)
 //    }
@@ -57,9 +59,10 @@ class TableViewCell: UITableViewCell {
         super.prepareForReuse()
         configure(state: .normal)
     }
+
     func foodConfigure(food: Food) {
         foodImage.image = UIImage(named: "\(food.kind.rawValue)") // foodArray[indexPath.row]
-        preserveMethodTextLable.text = self.locationTranslator(location: food.location)
+        preserveMethodTextLable.text = locationTranslator(location: food.location)
         foodNameTextLabel.text = food.name
         quantityTextLabel.text = String(food.quantity)
         unitTextLabel.text = UnitSelectButton().unitButtonTranslator(unit: food.unit)
@@ -71,7 +74,7 @@ class TableViewCell: UITableViewCell {
         switch state {
         case .normal:
             checkBoxButton.isHidden = true
-        case .shownCheckBox(let isChecked):
+        case let .shownCheckBox(isChecked):
             checkBoxButton.isHidden = false
             checkBoxButton.updateAppearance(isChecked: isChecked)
         }
