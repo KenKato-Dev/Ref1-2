@@ -8,7 +8,7 @@
 import Foundation
 import Firebase
 
-class SignUp {
+class SignUpPresenter {
     func didTapSignUPButton() {
         let email: String = ""
         let password: String = ""

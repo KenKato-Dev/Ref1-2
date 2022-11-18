@@ -102,11 +102,11 @@ extension FoodAppendViewController: FoodAppendPresenterOutput {
     func settingTextfield() {
         let foodTextAttribute: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 15.0),
-            .foregroundColor: UIColor.gray,
+            .foregroundColor: UIColor.gray
         ]
         let quantityTextAttribute: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 15.0),
-            .foregroundColor: UIColor.gray,
+            .foregroundColor: UIColor.gray
         ]
         foodNameTextField.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: foodTextAttribute)
         quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: quantityTextAttribute)

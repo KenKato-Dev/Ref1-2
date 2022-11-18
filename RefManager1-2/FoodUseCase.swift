@@ -21,7 +21,7 @@ final class FoodUseCase {
     var foodKindDictionary: [Food.FoodKind: Bool] = [
         .meat: false, .fish: false, .vegetableAndFruit: false,
         .milkAndEgg: false, .dish: false, .drink: false,
-        .seasoning: false, .sweet: false, .other: false,
+        .seasoning: false, .sweet: false, .other: false
     ]
     func didTapRefrigeratorButton() {
         isFilteringRefrigerator.toggle()

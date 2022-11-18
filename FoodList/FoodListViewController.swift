@@ -176,8 +176,7 @@ extension FoodListViewController: FoodListPresenterOutput {
     func setTitle(refigerator: Bool, freezer: Bool, selectedKinds: [Food.FoodKind], location: Food.Location) {
         // この処理でなく条件式も含めタイトルを入れるようにする
         if !refigerator,
-           !freezer, selectedKinds.isEmpty
-        {
+           !freezer, selectedKinds.isEmpty {
             viewTitle.title = "冷蔵品と冷凍品"
 
         } else {
@@ -204,7 +203,7 @@ extension FoodListViewController: FoodListPresenterOutput {
         }
     }
 
-    func buttonAnimation(isFilteringRef: Bool, isFilteringFreezer: Bool) {
+    func animateButton(isFilteringRef: Bool, isFilteringFreezer: Bool) {
         if isFilteringRef {
             filterRefrigeratorButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         } else {
@@ -215,5 +214,25 @@ extension FoodListViewController: FoodListPresenterOutput {
         } else {
             filteredFreezerButton.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
+    }
+    func resetButtonColor() {
+        self.filterForMeetButton.backgroundColor = .clear
+        self.filterForMeetButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+        self.filterForFishButton.backgroundColor = .clear
+        self.filterForFishButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+        self.filterForVegAndFruitsButton.backgroundColor = .clear
+        self.filterForVegAndFruitsButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+        self.filterForMilkAndEggButton.backgroundColor = .clear
+        self.filterForMilkAndEggButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+        self.filterForDishButton.backgroundColor = .clear
+        self.filterForDishButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+        self.filterForDrinkButton.backgroundColor = .clear
+        self.filterForDrinkButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+        self.filterForSeasoningButton.backgroundColor = .clear
+        self.filterForSeasoningButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+        self.filterForSweetButton.backgroundColor = .clear
+        self.filterForSweetButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+        self.filterForOthersButton.backgroundColor = .clear
+        self.filterForOthersButton.transform = CGAffineTransform(scaleX: 1, y: 1)
     }
 }

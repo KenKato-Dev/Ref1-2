@@ -93,7 +93,7 @@ final class FoodData {
             "quantity": "\(food.quantity)",
             "unit": "\(food.unit)",
             "IDkey": "\(food.IDkey)",
-            "date": "\(food.date)",
+            "date": "\(food.date)"
         ], merge: false) { err in
             if let err = err {
                 print("FireStoreへの書き込みに失敗しました: \(err)")
