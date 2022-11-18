@@ -10,45 +10,52 @@ protocol FoodAppendPresenterOutput: AnyObject {
     func settingTextfield()
     func dismiss()
 }
+
 final class FoodAppendPresenter {
     private let foodData: FoodData
-    weak private var foodAppendPresenterOutput: FoodAppendPresenterOutput?
+    private weak var foodAppendPresenterOutput: FoodAppendPresenterOutput?
     private var baseArray = Food(location: .refrigerator, kind: .other, name: String(), quantity: String(), unit: UnitSelectButton.UnitMenu.initial, IDkey: UUID().uuidString, date: Date())
     init(foodData: FoodData) {
         self.foodData = foodData
     }
+
     func setOutput(foodAppendPresenterOutput: FoodAppendPresenterOutput?) {
         self.foodAppendPresenterOutput = foodAppendPresenterOutput
     }
+
     func settingTextField() {
         foodAppendPresenterOutput?.settingTextfield()
     }
+
     func didTaplocationButton(location: Food.Location) {
         if FoodListPresenter.isTapRow == false {
-            self.baseArray.location = location
+            baseArray.location = location
         } else {
             print("editの冷蔵ボタン")
         }
     }
+
     func didTapKindButton(kind: Food.FoodKind) {
-        self.baseArray.kind = kind
+        baseArray.kind = kind
     }
+
     func didTapCancelButton() {
-        self.foodAppendPresenterOutput?.dismiss()
+        foodAppendPresenterOutput?.dismiss()
     }
+
     func didTapPreserveButton(foodName: String?, quantity: String?, unit: UnitSelectButton.UnitMenu) {
         if FoodListPresenter.isTapRow == false {
             if let foodName = foodName {
-                self.baseArray.name = foodName
+                baseArray.name = foodName
             }
             if let quantity = quantity {
-                self.baseArray.quantity = quantity
+                baseArray.quantity = quantity
             }
 //             = String(Double(quantityTextField.text!) ?? 0.0) ?? "0.0"
-            self.baseArray.unit = unit
+            baseArray.unit = unit
 //            FoodData.shared.add(baseArray)
-            self.foodData.post(self.baseArray)
-            self.foodAppendPresenterOutput?.dismiss()
+            foodData.post(baseArray)
+            foodAppendPresenterOutput?.dismiss()
             print("オリジナルのFuncが動作")
         } else {
             print(FoodListPresenter.isTapRow)

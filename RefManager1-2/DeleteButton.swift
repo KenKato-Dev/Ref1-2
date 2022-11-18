@@ -11,16 +11,62 @@ class DeleteButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         customDesign()
-      }
-      required init?(coder aDecoder: NSCoder) {
+    }
+
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-          // 下記がない場合Viewが初めて表示された際にStoryboard上で決めた初期値になる
+        // 下記がない場合Viewが初めて表示された際にStoryboard上で決めた初期値になる
         customDesign()
-      }
-      override func prepareForInterfaceBuilder() {
+    }
+
+    // ボタンのアニメーション
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        touchStartAnimation()
+    }
+
+    // タップキャンセル時の処理
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        touchEndAnimation()
+    }
+
+    // タップ終了時の処理
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        touchEndAnimation()
+    }
+
+    // ビューを凹んだように見せるアニメーション
+    private func touchStartAnimation() {
+        UIButton.animate(withDuration: 0.2,
+                         delay: 0.0,
+                         options: UIView.AnimationOptions.curveEaseIn,
+                         animations: {
+                             // 少しだけビューを小さく縮めて、奥に行ったような「凹み」を演出する
+                             self.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+                         },
+                         completion: nil)
+    }
+
+    // 凹みを元に戻すアニメーション
+    private func touchEndAnimation() {
+        UIButton.animate(withDuration: 0.1,
+                         delay: 0.0,
+                         options: UIView.AnimationOptions.curveEaseIn,
+                         animations: {
+                             // 元の倍率に戻す
+                             self.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                         },
+                         completion: nil)
+    }
+
+    //
+    override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         customDesign()
-      }
+    }
+
     private func customDesign() {
         setImage(UIImage(systemName: "trash")?.withTintColor(.red), for: .normal)
         // テキスト挿入
@@ -43,9 +89,10 @@ class DeleteButton: UIButton {
 //        setTitleColor(UIColor(displayP3Red: 79/255, green: 172/255, blue: 254/255,alpha: 1.0), for: .normal)
         // テキストサイズ
         titleLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
-        self.imageView?.image?.withTintColor(.red)
+        imageView?.image?.withTintColor(.red)
         // シンボルカラー
     }
+
     // bool=trueの際に作動
     func imageChange(bool: Bool) {
         if bool {
@@ -59,11 +106,10 @@ class DeleteButton: UIButton {
         }
     }
     /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
+     // Only override draw() if you perform custom drawing.
+     // An empty implementation adversely affects performance during animation.
+     override func draw(_ rect: CGRect) {
+         // Drawing code
+     }
+     */
 }

@@ -22,33 +22,34 @@ class UnitSelectButton: UIButton {
     var selectedUnit = UnitMenu.initial
 
     func unitSelection() {
-         var unitActions = [UIMenuElement]()
-            // グラム
-            unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.gram), image: nil, state: self.selectedUnit == UnitMenu.gram ? .on: .off, handler: { (_) in
-                self.selectedUnit = .gram
-                self.unitSelection()
-            }))
-            // 個数
-            unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.piece), image: nil, state: self.selectedUnit == UnitMenu.piece ? .on:.off, handler: { (_) in
-                self.selectedUnit = .piece
-                self.unitSelection()
-            }))
-            unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.bottle), image: nil, state: self.selectedUnit == UnitMenu.bottle ? .on:.off, handler: { (_) in
-                self.selectedUnit = .bottle
-                self.unitSelection()
-            }))
-            unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.bag), image: nil, state: self.selectedUnit == UnitMenu.bag ? .on:.off, handler: { (_) in
-                self.selectedUnit = .bag
-                self.unitSelection()
-            }))
-            unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.people), image: nil, state: self.selectedUnit == UnitMenu.people ? .on:.off, handler: { (_) in
-                self.selectedUnit = .people
-                self.unitSelection()
-            }))
-            self.menu = UIMenu(title: "", options: .displayInline, children: unitActions)
-            self.showsMenuAsPrimaryAction = true
-            self.setTitle(unitButtonTranslator(unit: self.selectedUnit), for: .normal)
+        var unitActions = [UIMenuElement]()
+        // グラム
+        unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.gram), image: nil, state: selectedUnit == UnitMenu.gram ? .on : .off, handler: { _ in
+            self.selectedUnit = .gram
+            self.unitSelection()
+        }))
+        // 個数
+        unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.piece), image: nil, state: selectedUnit == UnitMenu.piece ? .on : .off, handler: { _ in
+            self.selectedUnit = .piece
+            self.unitSelection()
+        }))
+        unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.bottle), image: nil, state: selectedUnit == UnitMenu.bottle ? .on : .off, handler: { _ in
+            self.selectedUnit = .bottle
+            self.unitSelection()
+        }))
+        unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.bag), image: nil, state: selectedUnit == UnitMenu.bag ? .on : .off, handler: { _ in
+            self.selectedUnit = .bag
+            self.unitSelection()
+        }))
+        unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.people), image: nil, state: selectedUnit == UnitMenu.people ? .on : .off, handler: { _ in
+            self.selectedUnit = .people
+            self.unitSelection()
+        }))
+        menu = UIMenu(title: "", options: .displayInline, children: unitActions)
+        showsMenuAsPrimaryAction = true
+        setTitle(unitButtonTranslator(unit: selectedUnit), for: .normal)
     }
+
     func unitButtonTranslator(unit: UnitSelectButton.UnitMenu) -> String {
         var trasnlatedUnit = String()
         if unit == .gram {
@@ -67,10 +68,10 @@ class UnitSelectButton: UIButton {
         return trasnlatedUnit
     }
     /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+     // Only override draw() if you perform custom drawing.
+     // An empty implementation adversely affects performance during animation.
+     override func draw(_ rect: CGRect) {
+         // Drawing code
+     }
+     */
 }

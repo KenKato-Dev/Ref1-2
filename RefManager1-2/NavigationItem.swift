@@ -7,6 +7,4 @@
 
 import UIKit
 
-class NavigationItem: UINavigationItem {
-
-}
+class NavigationItem: UINavigationItem {}

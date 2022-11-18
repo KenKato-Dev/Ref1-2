@@ -8,37 +8,36 @@
 import UIKit
 
 class FoodAppendViewController: UIViewController {
-
-    private let foodAppendPresenter=FoodAppendPresenter(foodData: FoodData())
-    @IBOutlet weak var foodNameTextField: UITextField!
-    @IBOutlet weak var nameTextHeightconstraint: NSLayoutConstraint!
-    @IBOutlet weak var methodSelectText: UILabel!
-    @IBOutlet weak var refrigeratorButton: UIButton!
-    @IBOutlet weak var freezerButton: UIButton!
-    @IBOutlet weak var kindSelectText: UILabel!
-    @IBOutlet weak var foodKindsStacks: UIStackView!
-    @IBOutlet weak var meatButton: UIButton!
-    @IBOutlet weak var fishButton: UIButton!
-    @IBOutlet weak var vegetableAndFruitButton: UIButton!
-    @IBOutlet weak var milkAndEggButton: UIButton!
-    @IBOutlet weak var dishButton: UIButton!
-    @IBOutlet weak var drinkButton: UIButton!
-    @IBOutlet weak var seasoningButton: UIButton!
-    @IBOutlet weak var sweetButton: UIButton!
-    @IBOutlet weak var othersButton: UIButton!
-    @IBOutlet weak var quantityTextField: UITextField!
-    @IBOutlet weak var quantityTextHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var unitSelectButton: UnitSelectButton!
-    @IBOutlet weak var parentStacKView: UIStackView!
-    @IBOutlet weak var buttonsStack: UIStackView!
-    @IBOutlet weak var preserveButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
+    private let foodAppendPresenter = FoodAppendPresenter(foodData: FoodData())
+    @IBOutlet var foodNameTextField: UITextField!
+    @IBOutlet var nameTextHeightconstraint: NSLayoutConstraint!
+    @IBOutlet var methodSelectText: UILabel!
+    @IBOutlet var refrigeratorButton: UIButton!
+    @IBOutlet var freezerButton: UIButton!
+    @IBOutlet var kindSelectText: UILabel!
+    @IBOutlet var foodKindsStacks: UIStackView!
+    @IBOutlet var meatButton: UIButton!
+    @IBOutlet var fishButton: UIButton!
+    @IBOutlet var vegetableAndFruitButton: UIButton!
+    @IBOutlet var milkAndEggButton: UIButton!
+    @IBOutlet var dishButton: UIButton!
+    @IBOutlet var drinkButton: UIButton!
+    @IBOutlet var seasoningButton: UIButton!
+    @IBOutlet var sweetButton: UIButton!
+    @IBOutlet var othersButton: UIButton!
+    @IBOutlet var quantityTextField: UITextField!
+    @IBOutlet var quantityTextHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var unitSelectButton: UnitSelectButton!
+    @IBOutlet var parentStacKView: UIStackView!
+    @IBOutlet var buttonsStack: UIStackView!
+    @IBOutlet var preserveButton: UIButton!
+    @IBOutlet var cancelButton: UIButton!
 
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.settingTextfield()
-        self.foodAppendPresenter.setOutput(foodAppendPresenterOutput: self)
+        settingTextfield()
+        foodAppendPresenter.setOutput(foodAppendPresenterOutput: self)
         // 冷蔵ボタン
         refrigeratorButton.addAction(.init(handler: { _ in
             self.foodAppendPresenter.didTaplocationButton(location: .refrigerator)
@@ -79,39 +78,42 @@ class FoodAppendViewController: UIViewController {
     }
 
     @objc func hideKeyboard() {
-        self.view.endEditing(true)
+        view.endEditing(true)
         print("hide作動")
     }
-    @IBAction func cancel(_ sender: Any) {
-        self.foodAppendPresenter.didTapCancelButton()
+
+    @IBAction func cancel(_: Any) {
+        foodAppendPresenter.didTapCancelButton()
     }
 
-    @IBAction func preserve(_ sender: Any) {
-        self.foodAppendPresenter.didTapPreserveButton(foodName: foodNameTextField.text, quantity: quantityTextField.text, unit: unitSelectButton.selectedUnit)
+    @IBAction func preserve(_: Any) {
+        foodAppendPresenter.didTapPreserveButton(foodName: foodNameTextField.text, quantity: quantityTextField.text, unit: unitSelectButton.selectedUnit)
     }
-
 }
+
 extension FoodAppendViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-           textField.resignFirstResponder()
-           return true
-       }
+        textField.resignFirstResponder()
+        return true
+    }
 }
+
 extension FoodAppendViewController: FoodAppendPresenterOutput {
     func settingTextfield() {
         let foodTextAttribute: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 15.0),
-            .foregroundColor: UIColor.gray
+            .foregroundColor: UIColor.gray,
         ]
         let quantityTextAttribute: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 15.0),
-            .foregroundColor: UIColor.gray
+            .foregroundColor: UIColor.gray,
         ]
         foodNameTextField.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: foodTextAttribute)
         quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: quantityTextAttribute)
         quantityTextField.keyboardType = .numberPad
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
     }
+
     func dismiss() {
         dismiss(animated: true, completion: nil)
     }
