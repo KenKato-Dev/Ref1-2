@@ -54,6 +54,7 @@ class CheckBoxButton: TapFeedbackView {
     func updateAppearance(isChecked: Bool) {
         if isChecked {
             setImage(UIImage(systemName: "checkmark.square")!, for: .normal)
+//            print("押されました")
         } else {
             setImage(UIImage(systemName: "square")!, for: .normal)
         }

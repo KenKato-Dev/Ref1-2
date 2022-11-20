@@ -16,6 +16,8 @@ final class FoodListViewController: UIViewController {
     @IBOutlet var addButtton: AddButton!
     @IBOutlet var locationButtonsStack: UIStackView!
     @IBOutlet var kindButtonsStack: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var kindButtonsBackgroundView: UIView!
     @IBOutlet var filterRefrigeratorButton: UIButton!
     @IBOutlet var filteredFreezerButton: UIButton!
     @IBOutlet var filterForMeetButton: UIButton!
@@ -92,7 +94,7 @@ final class FoodListViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        foodListPresenter.didLoadView()
+        foodListPresenter.didViewAppear()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -112,6 +114,7 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
         guard let configuredFood = foodListPresenter.isManagingArray(row: indexPath.row),
               let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell
         else { return .init() }
+//        print("row:\(indexPath.row)")
         cell.foodConfigure(food: configuredFood)
         let isChecked = foodListPresenter.checkedID[configuredFood.IDkey] ?? false
         let shouldShowCheckBox = !foodListPresenter.isDelete
@@ -130,6 +133,11 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: false)
         foodListPresenter.didSelectRow(storyboard: inputView, row: indexPath.row)
     }
+        // スクロールし、indexPathのセルが表示される直前に呼ばれる
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+
+        self.foodListPresenter.didScrollToLast(row: indexPath.row)
+    }
 }
 
 extension FoodListViewController: UITextFieldDelegate {}
@@ -139,13 +147,13 @@ extension FoodListViewController: FoodListPresenterOutput {
         tableView.reloadData()
     }
 
-    func didRefreshSwipe() {
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addAction(.init(handler: { _ in
-            self.foodListPresenter.loadArray()
-            self.tableView.refreshControl?.endRefreshing()
-        }), for: .valueChanged)
-    }
+//    func didRefreshSwipe() {
+//        tableView.refreshControl = UIRefreshControl()
+//        tableView.refreshControl?.addAction(.init(handler: { _ in
+//            self.foodListPresenter.loadArray()
+//            self.tableView.refreshControl?.endRefreshing()
+//        }), for: .valueChanged)
+//    }
 
     func isAppearingTrashBox(isDelete: Bool) {
         deleteButton.imageChange(bool: isDelete)
@@ -192,6 +200,17 @@ extension FoodListViewController: FoodListPresenterOutput {
         addButtton.isEnabled = isDelete
         locationButtonsStack.isHidden = !isDelete
         kindButtonsStack.isHidden = !isDelete
+        kindButtonsBackgroundView.isHidden = !isDelete
+        scrollView.isHidden = !isDelete
+        self.filterForMeetButton.isHidden = !isDelete
+        self.filterForFishButton.isHidden = !isDelete
+        self.filterForVegAndFruitsButton.isHidden = !isDelete
+        self.filterForMilkAndEggButton.isHidden = !isDelete
+        self.filterForDishButton.isHidden = !isDelete
+        self.filterForDrinkButton.isHidden = !isDelete
+        self.filterForSeasoningButton.isHidden = !isDelete
+        self.filterForSweetButton.isHidden = !isDelete
+        self.filterForOthersButton.isHidden = !isDelete
         if !isDelete {
             locationButtonsStack.backgroundColor = .clear
             kindButtonsStack.backgroundColor = .clear

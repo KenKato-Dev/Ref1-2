@@ -292,8 +292,10 @@
                         <outlet property="filterForVegAndFruitsButton" destination="niJ-RN-24C" id="vR3-gl-cJA"/>
                         <outlet property="filterRefrigeratorButton" destination="uCq-u3-tN4" id="h7c-pq-nnT"/>
                         <outlet property="filteredFreezerButton" destination="YHM-94-Qkr" id="6I1-Tj-chX"/>
+                        <outlet property="kindButtonsBackgroundView" destination="tyq-DV-7WE" id="4NQ-ji-b8D"/>
                         <outlet property="kindButtonsStack" destination="hcp-aU-k7B" id="wZ7-FU-8YU"/>
                         <outlet property="locationButtonsStack" destination="CN4-Pj-DGz" id="96a-RO-xdl"/>
+                        <outlet property="scrollView" destination="7kW-7V-hcx" id="05F-YW-Vx9"/>
                         <outlet property="tableView" destination="4fB-Nk-tQM" id="1a2-D3-sFa"/>
                         <outlet property="tableViewBottomConstraint" destination="VMe-I7-9j5" id="hnP-oI-X2K"/>
                         <outlet property="viewTitle" destination="ebQ-Yw-zQR" id="aOL-4D-cPZ"/>

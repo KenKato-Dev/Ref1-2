@@ -9,6 +9,7 @@ import Foundation
 protocol FoodAppendPresenterOutput: AnyObject {
     func settingTextfield()
     func dismiss()
+    func didTapPreserveButtonWithoutEssential()
 }
 
 final class FoodAppendPresenter {
@@ -51,14 +52,29 @@ final class FoodAppendPresenter {
             if let quantity = quantity {
                 baseArray.quantity = quantity
             }
-//             = String(Double(quantityTextField.text!) ?? 0.0) ?? "0.0"
             baseArray.unit = unit
-//            FoodData.shared.add(baseArray)
             foodData.post(baseArray)
             foodAppendPresenterOutput?.dismiss()
             print("オリジナルのFuncが動作")
         } else {
             print(FoodListPresenter.isTapRow)
         }
+    }
+    func didEditingTextFields(foodName: String?, quantity: String?, unit: UnitSelectButton.UnitMenu) {
+        if FoodListPresenter.isTapRow == false {
+            if let foodName = foodName {
+                baseArray.name = foodName
+            }
+            if let quantity = quantity {
+                baseArray.quantity = quantity
+            }
+            baseArray.unit = unit
+            print("オリジナルのFuncが動作")
+        } else {
+            print(FoodListPresenter.isTapRow)
+        }
+    }
+    func disablingPreserveButton() {
+        self.foodAppendPresenterOutput?.didTapPreserveButtonWithoutEssential()
     }
 }

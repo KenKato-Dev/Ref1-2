@@ -65,15 +65,6 @@ struct Food: Equatable, Codable {
         case seasoning
         case sweet
         case other
-//        case meat = "1.meet"
-//        case fish = "2.fish"
-//        case vegetableAndFruit = "3.vegetableAndFruit"
-//        case milkAndEgg = "4.milkAndEgg"
-//        case dish = "5.dish"
-//        case drink = "6.drink"
-//        case seasoning = "7.seasoning"
-//        case sweet = "8.sweet"
-//        case other = "9.other"
     }
 }
 
@@ -82,8 +73,14 @@ final class FoodData {
         var location: Food.Location
         var kindArray: [Food.FoodKind]
     }
-
     private let db = Firestore.firestore()
+    private var query = Firestore.firestore().collection("foods").limit(to: 8)
+    private (set) var queryDocumentSnaphots: [QueryDocumentSnapshot] = []
+    private (set) var countOfDocuments = 0
+//    init(countOfDocuments:Int) {
+//        self.countOfDocuments = countOfDocuments
+//    }
+//    private let first = Firestore.firestore().collection("foods").limit(to: 5)
     func post(_ food: Food) {
         // ドキュメントごとに保管、ドキュメントを他のものにするとDictionary方式に上書きされる
         db.collection("foods").document("IDkey: \(food.IDkey)").setData([
@@ -105,18 +102,26 @@ final class FoodData {
 
     func fetch(_ completion: @escaping (Result<[Food], Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now()) { // +0.3を削除し動作確認
-            self.db.collection("foods").getDocuments { querySnapShot, error in
+            // self.db.collection("foods")
+            self.query = self.db.collection("foods").limit(to: 10)
+            self.countOfDocuments = 0
+            self.query.getDocuments { querySnapShot, error in
                 if let err = error {
                     completion(.failure(err))
                     print("FireStoreへの読み込みに失敗しました: \(err)")
                 } else {
                     print("FireStoreへの読み込みに成功しました")
+                    guard let querySnapShot = querySnapShot else { return }
                     let decoder = JSONDecoder()
                     decoder.dateDecodingStrategy = .formatted(.iso8601Full)
-                    var dictinaryDocuments = querySnapShot?.documents.map { snapshot in
+                    self.queryDocumentSnaphots.append(contentsOf: querySnapShot.documents)
+                    self.countOfDocuments = querySnapShot.documents.count
+                    print(self.countOfDocuments)
+                    let dictinaryDocuments = querySnapShot.documents.map { snapshot in
                         snapshot.data()
                     }
                     do {
+    //                    guard let dictinaryDocuments = dictinaryDocuments else {return}
                         let data = try JSONSerialization.data(withJSONObject: dictinaryDocuments, options: .prettyPrinted)
                         var decodedFoods = try decoder.decode([Food].self, from: data)
                         decodedFoods = decodedFoods.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
@@ -128,6 +133,72 @@ final class FoodData {
             }
         }
     }
+    func paginate() {
+        guard let nextDocument = queryDocumentSnaphots.last else { return}
+        query = query.start(afterDocument: nextDocument).limit(to: 10)
+
+    }
+    func paginatingfetch(_ completion: @escaping (Result<[Food], Error>) -> Void) {
+        query.getDocuments { querySnapShot, error in
+            if let err = error {
+                completion(.failure(err))
+                print("FireStoreへの読み込みに失敗しました: \(err)")
+            } else {
+                print("FireStoreへの読み込みに成功しました")
+                guard let querySnapShot = querySnapShot else { return }
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .formatted(.iso8601Full)
+                self.queryDocumentSnaphots.append(contentsOf: querySnapShot.documents)
+                self.countOfDocuments = querySnapShot.documents.count
+                print(self.countOfDocuments)
+                let dictinaryDocuments = querySnapShot.documents.map { snapshot in
+                    snapshot.data()
+                }
+                do {
+//                    guard let dictinaryDocuments = dictinaryDocuments else {return}
+                    let data = try JSONSerialization.data(withJSONObject: dictinaryDocuments, options: .prettyPrinted)
+                    var decodedFoods = try decoder.decode([Food].self, from: data)
+                    decodedFoods = decodedFoods.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
+                    completion(.success(decodedFoods))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+//    func filteredFetch(_ location:String, _ completion: @escaping (Result<[Food], Error>) -> Void) {
+//        DispatchQueue.main.asyncAfter(deadline: .now()) {
+//            // self.db.collection("foods")
+//            self.query = self.db.collection("foods").limit(to: 10).order(by: <#T##String#>)
+//            self.countOfDocuments = 0
+//            self.query.getDocuments { querySnapShot, error in
+//                if let err = error {
+//                    completion(.failure(err))
+//                    print("FireStoreへの読み込みに失敗しました: \(err)")
+//                } else {
+//                    print("FireStoreへの読み込みに成功しました")
+//                    guard let querySnapShot = querySnapShot else { return }
+//                    let decoder = JSONDecoder()
+//                    decoder.dateDecodingStrategy = .formatted(.iso8601Full)
+//                    self.queryDocumentSnaphots.append(contentsOf: querySnapShot.documents)
+//                    self.countOfDocuments = querySnapShot.documents.count
+//                    print(self.countOfDocuments)
+//                    let dictinaryDocuments = querySnapShot.documents.map { snapshot in
+//                        snapshot.data()
+//                    }
+//                    do {
+//    //                    guard let dictinaryDocuments = dictinaryDocuments else {return}
+//                        let data = try JSONSerialization.data(withJSONObject: dictinaryDocuments, options: .prettyPrinted)
+//                        var decodedFoods = try decoder.decode([Food].self, from: data)
+//                        decodedFoods = decodedFoods.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
+//                        completion(.success(decodedFoods))
+//                    } catch {
+//                        completion(.failure(error))
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     func delete(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
         guard !idKeys.isEmpty else {
