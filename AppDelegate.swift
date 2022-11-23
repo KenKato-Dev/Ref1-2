@@ -14,16 +14,22 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-       FoodData().filteredFetch("freezer") { result in
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
-                switch result {
-                case let .success(foods):
-                    print("とれたデータ：\(foods)")
-                case let .failure(error):
-                    print(error)
-                }
-            }
-        }
+//        FoodData().isConfiguringQuery(
+//            true,
+//            false,
+//            FoodData.Filter(location: .refrigerator, kindArray: [.meat, .fish])
+//        )
+//        FoodData().fetch { result in
+//            DispatchQueue.main.asyncAfter(deadline: .now()) {
+//                switch result {
+//                case let .success(foods):
+//                    print("完了：\(foods)")
+//                    //                self.array.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
+//                case let .failure(error):
+//                    print(error)
+//                }
+//            }
+//        }
 
         // Override point for customization after application launch.
         return true

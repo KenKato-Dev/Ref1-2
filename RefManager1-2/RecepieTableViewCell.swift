@@ -8,17 +8,32 @@
 import UIKit
 
 class RecepieTableViewCell: UITableViewCell {
-    @IBOutlet var circlefill: UILabel!
+
+    @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet var categoryName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        circlefill.text = "●"
+        self.isSettingIconImage()
+        self.isSettingCategoryName()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
+    }
+    func isSettingIconImage() {
+        let image = UIImage(systemName: "fork.knife.circle")?.withTintColor(.systemOrange)
+        let imageSize = CGSize(width: 90, height: 90)
+        let render = UIGraphicsImageRenderer(size: imageSize)
+        let scaleImage = render.image { _ in
+            image?.draw(in: CGRect(origin: .zero, size: imageSize))
+        }
+        self.iconImage.image = scaleImage
+        self.iconImage.contentMode = .scaleAspectFit
+    }
+    func isSettingCategoryName() {
+        self.categoryName.adjustsFontSizeToFitWidth = true
+        self.categoryName.textColor = .darkGray
     }
 }

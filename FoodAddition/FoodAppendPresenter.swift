@@ -75,6 +75,8 @@ final class FoodAppendPresenter {
         }
     }
     func disablingPreserveButton() {
+        if FoodListPresenter.isTapRow == false {
         self.foodAppendPresenterOutput?.didTapPreserveButtonWithoutEssential()
+        }
     }
 }

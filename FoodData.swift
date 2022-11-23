@@ -69,18 +69,14 @@ struct Food: Equatable, Codable {
 }
 
 final class FoodData {
-    struct Fiter: Codable {
+    struct Filter: Codable {
         var location: Food.Location
         var kindArray: [Food.FoodKind]
     }
     private let db = Firestore.firestore()
-    private var query = Firestore.firestore().collection("foods").limit(to: 8)
+    private (set) var query = Firestore.firestore().collection("foods").limit(to: 10)
     private (set) var queryDocumentSnaphots: [QueryDocumentSnapshot] = []
     private (set) var countOfDocuments = 0
-//    init(countOfDocuments:Int) {
-//        self.countOfDocuments = countOfDocuments
-//    }
-//    private let first = Firestore.firestore().collection("foods").limit(to: 5)
     func post(_ food: Food) {
         // ドキュメントごとに保管、ドキュメントを他のものにするとDictionary方式に上書きされる
         db.collection("foods").document("IDkey: \(food.IDkey)").setData([
@@ -103,7 +99,7 @@ final class FoodData {
     func fetch(_ completion: @escaping (Result<[Food], Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now()) { // +0.3を削除し動作確認
             // self.db.collection("foods")
-            self.query = self.db.collection("foods").limit(to: 10)
+//            self.query = self.db.collection("foods").limit(to: 10)
             self.countOfDocuments = 0
             self.query.getDocuments { querySnapShot, error in
                 if let err = error {
@@ -131,6 +127,24 @@ final class FoodData {
                     }
                 }
             }
+        }
+    }
+    func isConfiguringQuery(_ filterRef: Bool, _ filterFreezer: Bool, _ filter: Filter) {
+        let kindArray = filter.kindArray.map {$0.rawValue}
+        let location = filter.location.rawValue
+
+        if (filterRef || filterFreezer) && !kindArray.isEmpty {
+            // 1.冷蔵/冷凍がtrueでかつfoodも選択
+            self.query = self.db.collection("foods").whereField("location", isEqualTo: location).whereField("kind", in: kindArray).limit(to: 10)
+        } else if (filterRef || filterFreezer) && kindArray.isEmpty {
+            // 2.冷蔵/冷凍のみtrue
+            self.query = self.db.collection("foods").whereField("location", isEqualTo: location).limit(to: 10)
+        } else if (!filterRef && !filterFreezer) && !kindArray.isEmpty {
+            // 3.foodのみ選択
+            self.query = self.db.collection("foods").whereField("kind", in: kindArray).limit(to: 10)
+        } else {
+            // 4.何も選択されていない状態
+            self.query = self.db.collection("foods").limit(to: 10)
         }
     }
     func paginate() {
@@ -138,66 +152,69 @@ final class FoodData {
         query = query.start(afterDocument: nextDocument).limit(to: 10)
 
     }
-    func paginatingfetch(_ completion: @escaping (Result<[Food], Error>) -> Void) {
-        query.getDocuments { querySnapShot, error in
-            if let err = error {
-                completion(.failure(err))
-                print("FireStoreへの読み込みに失敗しました: \(err)")
-            } else {
-                print("FireStoreへの読み込みに成功しました")
-                guard let querySnapShot = querySnapShot else { return }
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .formatted(.iso8601Full)
-                self.queryDocumentSnaphots.append(contentsOf: querySnapShot.documents)
-                self.countOfDocuments = querySnapShot.documents.count
-                print(self.countOfDocuments)
-                let dictinaryDocuments = querySnapShot.documents.map { snapshot in
-                    snapshot.data()
-                }
-                do {
-//                    guard let dictinaryDocuments = dictinaryDocuments else {return}
-                    let data = try JSONSerialization.data(withJSONObject: dictinaryDocuments, options: .prettyPrinted)
-                    var decodedFoods = try decoder.decode([Food].self, from: data)
-                    decodedFoods = decodedFoods.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
-                    completion(.success(decodedFoods))
-                } catch {
-                    completion(.failure(error))
-                }
-            }
-        }
-    }
-    func filteredFetch(_ location: String,_ kind:String,_ completion: @escaping (Result<[Food], Error>) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
-            self.query = self.db.collection("foods").whereField("location", isEqualTo: location)
-            self.countOfDocuments = 0
-            self.query.getDocuments { querySnapShot, error in
-                if let err = error {
-                    completion(.failure(err))
-                    print("FireStoreへの読み込みに失敗しました: \(err)")
-                } else {
-                    print("FireStoreへの読み込みに成功しました")
-                    guard let querySnapShot = querySnapShot else { return }
-                    let decoder = JSONDecoder()
-                    decoder.dateDecodingStrategy = .formatted(.iso8601Full)
-                    self.queryDocumentSnaphots.append(contentsOf: querySnapShot.documents)
-                    self.countOfDocuments = querySnapShot.documents.count
-                    print(self.countOfDocuments)
-                    let dictinaryDocuments = querySnapShot.documents.map { snapshot in
-                        snapshot.data()
-                    }
-                    do {
-    //                    guard let dictinaryDocuments = dictinaryDocuments else {return}
-                        let data = try JSONSerialization.data(withJSONObject: dictinaryDocuments, options: .prettyPrinted)
-                        var decodedFoods = try decoder.decode([Food].self, from: data)
-                        decodedFoods = decodedFoods.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
-                        completion(.success(decodedFoods))
-                    } catch {
-                        completion(.failure(error))
-                    }
-                }
-            }
-        }
-    }
+//    func paginatingfetch(_ completion: @escaping (Result<[Food], Error>) -> Void) {
+//        query.getDocuments { querySnapShot, error in
+//            if let err = error {
+//                completion(.failure(err))
+//                print("FireStoreへの読み込みに失敗しました: \(err)")
+//            } else {
+//                print("FireStoreへの読み込みに成功しました")
+//                guard let querySnapShot = querySnapShot else { return }
+//                let decoder = JSONDecoder()
+//                decoder.dateDecodingStrategy = .formatted(.iso8601Full)
+//                self.queryDocumentSnaphots.append(contentsOf: querySnapShot.documents)
+//                self.countOfDocuments = querySnapShot.documents.count
+//                print(self.countOfDocuments)
+//                let dictinaryDocuments = querySnapShot.documents.map { snapshot in
+//                    snapshot.data()
+//                }
+//                do {
+////                    guard let dictinaryDocuments = dictinaryDocuments else {return}
+//                    let data = try JSONSerialization.data(withJSONObject: dictinaryDocuments, options: .prettyPrinted)
+//                    var decodedFoods = try decoder.decode([Food].self, from: data)
+//                    decodedFoods = decodedFoods.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
+//                    completion(.success(decodedFoods))
+//                } catch {
+//                    completion(.failure(error))
+//                }
+//            }
+//        }
+//    }
+//    func filteredFetch(_ location: String, _ kinds: [String], _ completion: @escaping (Result<[Food], Error>) -> Void) {
+//        DispatchQueue.main.asyncAfter(deadline: .now()) {
+//
+////            self.query = self.db.collection("foods").whereField("location", isEqualTo: location)
+////            self.query = self.db.collection("foods").whereField("kind", in: kinds)
+//            self.query = self.db.collection("foods").whereField("location", isEqualTo: "freezer").whereField("kind", in: ["meat", "fish"])
+//            self.countOfDocuments = 0
+//            self.query.getDocuments { querySnapShot, error in
+//                if let err = error {
+//                    completion(.failure(err))
+//                    print("FireStoreへの読み込みに失敗しました: \(err)")
+//                } else {
+//                    print("FireStoreへの読み込みに成功しました")
+//                    guard let querySnapShot = querySnapShot else { return }
+//                    let decoder = JSONDecoder()
+//                    decoder.dateDecodingStrategy = .formatted(.iso8601Full)
+//                    self.queryDocumentSnaphots.append(contentsOf: querySnapShot.documents)
+//                    self.countOfDocuments = querySnapShot.documents.count
+//                    print(self.countOfDocuments)
+//                    let dictinaryDocuments = querySnapShot.documents.map { snapshot in
+//                        snapshot.data()
+//                    }
+//                    do {
+//    //                    guard let dictinaryDocuments = dictinaryDocuments else {return}
+//                        let data = try JSONSerialization.data(withJSONObject: dictinaryDocuments, options: .prettyPrinted)
+//                        var decodedFoods = try decoder.decode([Food].self, from: data)
+//                        decodedFoods = decodedFoods.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
+//                        completion(.success(decodedFoods))
+//                    } catch {
+//                        completion(.failure(error))
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     func delete(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
         guard !idKeys.isEmpty else {

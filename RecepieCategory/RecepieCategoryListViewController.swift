@@ -8,6 +8,7 @@
 import UIKit
 
 class RecepieCategoryListViewController: UIViewController {
+
     @IBOutlet var recepieTable: UITableView!
     private let recepieCategoryListPresenter = RecepieCategoryListPresenter(recepieModel: RecepieModel())
     override func viewDidLoad() {
@@ -36,7 +37,6 @@ extension RecepieCategoryListViewController: UITableViewDelegate, UITableViewDat
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recepieCell", for: indexPath) as? RecepieTableViewCell
-        cell?.circlefill.text = "●"
         cell?.categoryName.text = recepieCategoryListPresenter.cellForRowAt(indexPath: indexPath)
         return cell!
     }

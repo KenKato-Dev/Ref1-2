@@ -35,7 +35,8 @@ class RecepieModel {
                     let result = recepieData?["result"] as? [String: Any]
                     // dataからsmallに変換
                     let small = result?["small"] as? [[String: Any]]
-                    let smallData = try JSONSerialization.data(withJSONObject: small!, options: .prettyPrinted)
+                    guard let small = small else {return}
+                    let smallData = try JSONSerialization.data(withJSONObject: small, options: .prettyPrinted)
                     let decodedSmall = try decoder.decode([Small].self, from: smallData)
                     array.append(contentsOf: decodedSmall)
                     // 食材名を含むものを配列から取り出す、今回は鶏肉

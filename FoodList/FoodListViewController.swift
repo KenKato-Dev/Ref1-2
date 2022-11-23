@@ -33,13 +33,14 @@ final class FoodListViewController: UIViewController {
     @IBOutlet var viewTitle: UINavigationItem!
     @IBOutlet var deleteButton: DeleteButton!
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
+//    private var nameTextField:UITextField = 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
         foodListPresenter.setOutput(foodListPresenterOutput: self)
-        foodListPresenter.didLoadView()
+        foodListPresenter.isLoadingList()
         deleteButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapDeleteButton()
         }), for: .touchUpInside)
@@ -89,12 +90,12 @@ final class FoodListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        foodListPresenter.willViewAppear()
+        foodListPresenter.isLoadingList()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        foodListPresenter.didViewAppear()
+        foodListPresenter.isLoadingList()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -140,28 +141,17 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension FoodListViewController: UITextFieldDelegate {}
+// extension FoodListViewController: UITextFieldDelegate {}
 
 extension FoodListViewController: FoodListPresenterOutput {
-    func update() {
+    func reloadData() {
         tableView.reloadData()
-    }
-
-//    func didRefreshSwipe() {
-//        tableView.refreshControl = UIRefreshControl()
-//        tableView.refreshControl?.addAction(.init(handler: { _ in
-//            self.foodListPresenter.loadArray()
-//            self.tableView.refreshControl?.endRefreshing()
-//        }), for: .valueChanged)
-//    }
-
-    func isAppearingTrashBox(isDelete: Bool) {
-        deleteButton.imageChange(bool: isDelete)
     }
 
     func present(inputView: FoodAppendViewController?) {
         if let inputView = inputView {
             present(inputView, animated: true)
+
         } else {
             print("presentのアンラップに失敗")
         }
@@ -196,7 +186,8 @@ extension FoodListViewController: FoodListPresenterOutput {
         }
     }
 
-    func isHidingButtons(isDelete: Bool) {
+    func didTapDeleteButton(isDelete: Bool) {
+        deleteButton.imageChange(bool: isDelete)
         addButtton.isEnabled = isDelete
         locationButtonsStack.isHidden = !isDelete
         kindButtonsStack.isHidden = !isDelete
@@ -221,7 +212,6 @@ extension FoodListViewController: FoodListPresenterOutput {
             tableViewBottomConstraint.constant = 0
         }
     }
-
     func animateButton(isFilteringRef: Bool, isFilteringFreezer: Bool) {
         if isFilteringRef {
             filterRefrigeratorButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)

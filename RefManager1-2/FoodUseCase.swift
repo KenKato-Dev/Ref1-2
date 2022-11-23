@@ -17,7 +17,7 @@ final class FoodUseCase {
     private (set) var isFilteringRefrigerator = false
     private (set) var isFilteringFreezer = false
     private (set) var selectedKinds: [Food.FoodKind] = []
-    var foodFilter = FoodData.Fiter(location: .refrigerator, kindArray: Food.FoodKind.allCases)
+    var foodFilter = FoodData.Filter(location: .refrigerator, kindArray: Food.FoodKind.allCases)
     private (set) var foodKindDictionary: [Food.FoodKind: Bool] = [
         .meat: false, .fish: false, .vegetableAndFruit: false,
         .milkAndEgg: false, .dish: false, .drink: false,
