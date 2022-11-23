@@ -144,7 +144,7 @@ final class FoodData {
             self.query = self.db.collection("foods").whereField("kind", in: kindArray).limit(to: 10)
         } else {
             // 4.何も選択されていない状態
-            self.query = self.db.collection("foods").limit(to: 10)
+            self.query = Firestore.firestore().collection("foods").limit(to: 10)
         }
     }
     func paginate() {

@@ -8,6 +8,7 @@
 import Firebase
 import Foundation
 import UIKit
+import Dispatch
 protocol FoodListPresenterOutput: AnyObject {
     func reloadData()
     func present(inputView: FoodAppendViewController?)
@@ -42,7 +43,7 @@ final class FoodListPresenter {
     }
     func isLoadingList() {
         isFetchingArray()
-        foodListPresenterOutput?.reloadData()
+//        foodListPresenterOutput?.reloadData()
     }
     private func isFetchingArray() {
         self.foodData.isConfiguringQuery(
@@ -70,8 +71,7 @@ final class FoodListPresenter {
                     switch result {
                     case let .success(foods):
                         self.array.append(contentsOf: foods)
-                        //                            self.array.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
-                        // ここに入れることで起動時に表示
+                        self.array = self.array.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
                         self.foodListPresenterOutput?.reloadData()
                     case let .failure(error):
                         print(error)
@@ -103,9 +103,9 @@ final class FoodListPresenter {
                             switch result {
                             case let .success(foods):
                                 self.array = foods
-//                                self.array.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
+                                self.array = self.array.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
                                 // このReloadにより削除がtableに反映
-                                self.foodListPresenterOutput?.reloadData()
+//                                self.foodListPresenterOutput?.reloadData()
                             case let .failure(error):
                                 print("fetchfoodsに失敗:\(error)")
                             }
@@ -330,6 +330,9 @@ final class FoodListPresenter {
 
     private func didTapPreserveOnInputView(foodName: String?, foodQuantity: String?, foodinArray: Food) {
         print("inputのアクションが操作")
+        let dispatchGroup = DispatchGroup()
+        let dispatchQueue = DispatchQueue(label: "queue")
+//        dispatchGroup.enter()
         self.db.collection("foods").document("IDkey: \(foodinArray.IDkey)").setData([
             "name": "\(foodName!)",
             "quantity": "\(foodQuantity!)",
@@ -340,28 +343,38 @@ final class FoodListPresenter {
         ], merge: true) { err in
             if let err = err {
                 print("FireStoreへの書き込みに失敗しました: \(err)")
-                FoodListPresenter.isTapRow = false
+//                FoodListPresenter.isTapRow = false
             } else {
                 print("FireStoreへの書き込みに成功しました")
-                FoodListPresenter.isTapRow = false
+//                FoodListPresenter.isTapRow = false
             }
         }
-        self.foodListPresenterOutput?.dismiss()
-        FoodListPresenter.isTapRow = false
-        // ここで読み込む
-        foodData.fetch { result in
+        self.foodData.isConfiguringQuery(
+            foodUseCase.isFilteringRefrigerator,
+            foodUseCase.isFilteringFreezer,
+            foodUseCase.foodFilter)
+        self.foodData.fetch { result in
             DispatchQueue.main.asyncAfter(deadline: .now()) {
                 switch result {
                 case let .success(foods):
                     self.array = foods
-//                    self.array.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
+                    print(self.array)
+                    self.array = self.array.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
                     // ここに入れることで起動時に表示
                     self.foodListPresenterOutput?.reloadData()
+//                    dispatchGroup.leave()
                 case let .failure(error):
                     print(error)
+//                    dispatchGroup.leave()
                 }
             }
         }
+//        dispatchGroup.leave()
+//        self.foodListPresenterOutput?.dismiss()
+//        FoodListPresenter.isTapRow = false
+        // ここで読み込む
+            self.foodListPresenterOutput?.dismiss()
+            FoodListPresenter.isTapRow = false
     }
 
     // 食材ボタンを押した際の動作
