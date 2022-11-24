@@ -26,7 +26,6 @@ class RecepieModel {
                 }
                 let decoder = JSONDecoder()
                 do {
-//                    var mediumArray:[MediumAndSmall]=[]
                     var array: [Small] = []
                     // 全体をDictionaryに変換
                     // オフラインの際ここでエラー発生、エラーハンドリングが必要
@@ -40,7 +39,7 @@ class RecepieModel {
                     let decodedSmall = try decoder.decode([Small].self, from: smallData)
                     array.append(contentsOf: decodedSmall)
                     // 食材名を含むものを配列から取り出す、今回は鶏肉
-                    var filteredSmall = array.filter { $0.categoryName.contains(keyword) }
+                    let filteredSmall = array.filter { $0.categoryName.contains(keyword) }
                     completion(.success(filteredSmall))
                 } catch {
                     print("デコードに失敗:\(error)")

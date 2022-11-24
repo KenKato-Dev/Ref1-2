@@ -78,14 +78,7 @@ class FoodAppendViewController: UIViewController {
             self.foodAppendPresenter.didTapKindButton(kind: .other)
         }), for: .touchUpInside)
         unitSelectButton.selectingUnit()
-        // UIMENUのボタンはViewが描写された瞬間に呼ばれる
-//        unitSelectButton.addAction(.init(handler: { _ in
-//            if !self.foodNameTextField.text!.isEmpty && !self.foodNameTextField.text!.isEmpty && self.unitSelectButton.selectedUnit != .initial {
-//                self.preserveButton.isEnabled = true
-//            } else {
-//                self.preserveButton.isEnabled = false
-//            }
-//        }), for: .touchUpInside)
+        // UIMENUのボタンはViewが描写された瞬間に呼ばれるためaddactionは利用不可
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
     }
 

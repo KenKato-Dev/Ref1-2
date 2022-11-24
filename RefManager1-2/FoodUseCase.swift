@@ -35,8 +35,10 @@ final class FoodUseCase {
     func isAddingKinds(selectedKinds: inout [Food.FoodKind]) {
         self.selectedKinds = selectedKinds
     }
-    func resetKinds() {
-        self.selectedKinds = []
+    func resetKinds(_ refrigator: Bool, _ freezer: Bool) {
+        if !refrigator && !freezer {
+            self.selectedKinds = []
+        }
     }
     func toggleDictionary(kind: Food.FoodKind) {
         self.foodKindDictionary[kind]!.toggle()

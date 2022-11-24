@@ -33,7 +33,6 @@ final class FoodListViewController: UIViewController {
     @IBOutlet var viewTitle: UINavigationItem!
     @IBOutlet var deleteButton: DeleteButton!
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
-//    private var nameTextField:UITextField = 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
