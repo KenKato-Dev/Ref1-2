@@ -17,73 +17,73 @@ final class FoodListViewController: UIViewController {
     @IBOutlet var locationButtonsStack: UIStackView!
     @IBOutlet var kindButtonsStack: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var kindButtonsBackgroundView: UIView!
-    @IBOutlet var filterRefrigeratorButton: UIButton!
-    @IBOutlet var filteredFreezerButton: UIButton!
-    @IBOutlet var filterForMeetButton: UIButton!
-    @IBOutlet var filterForFishButton: UIButton!
-    @IBOutlet var filterForVegAndFruitsButton: UIButton!
-    @IBOutlet var filterForMilkAndEggButton: UIButton!
-    @IBOutlet var filterForDishButton: UIButton!
-    @IBOutlet var filterForDrinkButton: UIButton!
-    @IBOutlet var filterForSeasoningButton: UIButton!
-    @IBOutlet var filterForSweetButton: UIButton!
-    @IBOutlet var filterForOthersButton: UIButton!
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var kindButtonsBackView: UIView!
+    @IBOutlet var refrigeratorButton: UIButton!
+    @IBOutlet var freezerButton: UIButton!
+    @IBOutlet var meatButton: UIButton!
+    @IBOutlet var fishButton: UIButton!
+    @IBOutlet var vegitableFruitsButton: UIButton!
+    @IBOutlet var milkEggButton: UIButton!
+    @IBOutlet var dishButton: UIButton!
+    @IBOutlet var drinkButton: UIButton!
+    @IBOutlet var seasoningButton: UIButton!
+    @IBOutlet var sweetButton: UIButton!
+    @IBOutlet var othersButton: UIButton!
+    @IBOutlet var foodListTableView: UITableView!
     @IBOutlet var viewTitle: UINavigationItem!
     @IBOutlet var deleteButton: DeleteButton!
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        tableView.delegate = self
-        tableView.dataSource = self
+        foodListTableView.delegate = self
+        foodListTableView.dataSource = self
         foodListPresenter.setOutput(foodListPresenterOutput: self)
         foodListPresenter.isLoadingList()
         deleteButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapDeleteButton()
         }), for: .touchUpInside)
-        filterRefrigeratorButton.addAction(.init(handler: { _ in
-            self.foodListPresenter.didTapRefrigiratorButton(self.filterRefrigeratorButton)
+        refrigeratorButton.addAction(.init(handler: { _ in
+            self.foodListPresenter.didTapRefrigiratorButton(self.refrigeratorButton)
         }), for: .touchUpInside)
-        filteredFreezerButton.addAction(.init(handler: { _ in
-            self.foodListPresenter.didTapFreezerButton(self.filteredFreezerButton)
+        freezerButton.addAction(.init(handler: { _ in
+            self.foodListPresenter.didTapFreezerButton(self.freezerButton)
         }), for: .touchUpInside)
-        filterForMeetButton.addAction(.init(handler: { _ in
-            self.foodListPresenter.didTapFoodKindButtons(kind: .meat)
-            self.foodListPresenter.kindButtonAnimation(kind: .meat, self.filterForMeetButton)
+        meatButton.addAction(.init(handler: { _ in
+            self.foodListPresenter.didTapFoodKindButtons(.meat, self.meatButton)
+//            self.foodListPresenter.kindButtonAnimation(kind: .meat, self.meatButton)
         }), for: .touchUpInside)
-        filterForFishButton.addAction(.init(handler: { _ in
-            self.foodListPresenter.didTapFoodKindButtons(kind: .fish)
-            self.foodListPresenter.kindButtonAnimation(kind: .fish, self.filterForFishButton)
+        fishButton.addAction(.init(handler: { _ in
+            self.foodListPresenter.didTapFoodKindButtons(.fish, self.fishButton)
+//            self.foodListPresenter.kindButtonAnimation(kind: .fish, self.fishButton)
         }), for: .touchUpInside)
-        filterForVegAndFruitsButton.addAction(.init(handler: { _ in
-            self.foodListPresenter.didTapFoodKindButtons(kind: .vegetableAndFruit)
-            self.foodListPresenter.kindButtonAnimation(kind: .vegetableAndFruit, self.filterForVegAndFruitsButton)
+        vegitableFruitsButton.addAction(.init(handler: { _ in
+            self.foodListPresenter.didTapFoodKindButtons(.vegetableAndFruit, self.vegitableFruitsButton)
+//            self.foodListPresenter.kindButtonAnimation(kind: .vegetableAndFruit, self.vegitableFruitsButton)
         }), for: .touchUpInside)
-        filterForMilkAndEggButton.addAction(.init(handler: { _ in
-            self.foodListPresenter.didTapFoodKindButtons(kind: .milkAndEgg)
-            self.foodListPresenter.kindButtonAnimation(kind: .milkAndEgg, self.filterForMilkAndEggButton)
+        milkEggButton.addAction(.init(handler: { _ in
+            self.foodListPresenter.didTapFoodKindButtons(.milkAndEgg, self.milkEggButton)
+//            self.foodListPresenter.kindButtonAnimation(kind: .milkAndEgg, self.milkEggButton)
         }), for: .touchUpInside)
-        filterForDishButton.addAction(.init(handler: { _ in
-            self.foodListPresenter.didTapFoodKindButtons(kind: .dish)
-            self.foodListPresenter.kindButtonAnimation(kind: .dish, self.filterForDishButton)
+        dishButton.addAction(.init(handler: { _ in
+            self.foodListPresenter.didTapFoodKindButtons(.dish, self.dishButton)
+//            self.foodListPresenter.kindButtonAnimation(kind: .dish, self.dishButton)
         }), for: .touchUpInside)
-        filterForDrinkButton.addAction(.init(handler: { _ in
-            self.foodListPresenter.didTapFoodKindButtons(kind: .drink)
-            self.foodListPresenter.kindButtonAnimation(kind: .drink, self.filterForDrinkButton)
+        drinkButton.addAction(.init(handler: { _ in
+            self.foodListPresenter.didTapFoodKindButtons(.drink, self.drinkButton)
+//            self.foodListPresenter.kindButtonAnimation(kind: .drink, self.drinkButton)
         }), for: .touchUpInside)
-        filterForSeasoningButton.addAction(.init(handler: { _ in
-            self.foodListPresenter.didTapFoodKindButtons(kind: .seasoning)
-            self.foodListPresenter.kindButtonAnimation(kind: .seasoning, self.filterForSeasoningButton)
+        seasoningButton.addAction(.init(handler: { _ in
+            self.foodListPresenter.didTapFoodKindButtons(.seasoning, self.seasoningButton)
+//            self.foodListPresenter.kindButtonAnimation(kind: .seasoning, self.seasoningButton)
         }), for: .touchUpInside)
-        filterForSweetButton.addAction(.init(handler: { _ in
-            self.foodListPresenter.didTapFoodKindButtons(kind: .sweet)
-            self.foodListPresenter.kindButtonAnimation(kind: .sweet, self.filterForSweetButton)
+        sweetButton.addAction(.init(handler: { _ in
+            self.foodListPresenter.didTapFoodKindButtons(.sweet, self.sweetButton)
+//            self.foodListPresenter.kindButtonAnimation(kind: .sweet, self.sweetButton)
         }), for: .touchUpInside)
-        filterForOthersButton.addAction(.init(handler: { _ in
-            self.foodListPresenter.didTapFoodKindButtons(kind: .other)
-            self.foodListPresenter.kindButtonAnimation(kind: .other, self.filterForOthersButton)
+        othersButton.addAction(.init(handler: { _ in
+            self.foodListPresenter.didTapFoodKindButtons(.other, self.othersButton)
+//            self.foodListPresenter.kindButtonAnimation(kind: .other, self.othersButton)
         }), for: .touchUpInside)
     }
 
@@ -144,10 +144,10 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension FoodListViewController: FoodListPresenterOutput {
     func reloadData() {
-        tableView.reloadData()
+        foodListTableView.reloadData()
     }
 
-    func present(inputView: FoodAppendViewController?) {
+    func present(_ inputView: FoodAppendViewController?) {
         if let inputView = inputView {
             present(inputView, animated: true)
 
@@ -156,7 +156,7 @@ extension FoodListViewController: FoodListPresenterOutput {
         }
     }
 
-    func presentAlert(alert: UIAlertController) {
+    func presentAlert(_ alert: UIAlertController) {
         present(alert, animated: true) {
             print("エラー発生")
         }
@@ -166,11 +166,11 @@ extension FoodListViewController: FoodListPresenterOutput {
         dismiss(animated: true, completion: nil)
     }
 
-    func performSegue(foodNameTextLabel: String?) {
+    func performSegue(_ foodNameTextLabel: String?) {
         performSegue(withIdentifier: "toRecepieTableView", sender: foodNameTextLabel)
     }
 
-    func setTitle(refigerator: Bool, freezer: Bool, selectedKinds: [Food.FoodKind], location: Food.Location) {
+    func setTitle(_ refigerator: Bool, _ freezer: Bool, _ selectedKinds: [Food.FoodKind], _ location: Food.Location) {
         // この処理でなく条件式も含めタイトルを入れるようにする
         if !refigerator,
            !freezer, selectedKinds.isEmpty {
@@ -185,22 +185,22 @@ extension FoodListViewController: FoodListPresenterOutput {
         }
     }
 
-    func didTapDeleteButton(isDelete: Bool) {
+    func didTapDeleteButton(_ isDelete: Bool) {
         deleteButton.imageChange(bool: isDelete)
         addButtton.isEnabled = isDelete
         locationButtonsStack.isHidden = !isDelete
         kindButtonsStack.isHidden = !isDelete
-        kindButtonsBackgroundView.isHidden = !isDelete
+        kindButtonsBackView.isHidden = !isDelete
         scrollView.isHidden = !isDelete
-        self.filterForMeetButton.isHidden = !isDelete
-        self.filterForFishButton.isHidden = !isDelete
-        self.filterForVegAndFruitsButton.isHidden = !isDelete
-        self.filterForMilkAndEggButton.isHidden = !isDelete
-        self.filterForDishButton.isHidden = !isDelete
-        self.filterForDrinkButton.isHidden = !isDelete
-        self.filterForSeasoningButton.isHidden = !isDelete
-        self.filterForSweetButton.isHidden = !isDelete
-        self.filterForOthersButton.isHidden = !isDelete
+        self.meatButton.isHidden = !isDelete
+        self.fishButton.isHidden = !isDelete
+        self.vegitableFruitsButton.isHidden = !isDelete
+        self.milkEggButton.isHidden = !isDelete
+        self.dishButton.isHidden = !isDelete
+        self.drinkButton.isHidden = !isDelete
+        self.seasoningButton.isHidden = !isDelete
+        self.sweetButton.isHidden = !isDelete
+        self.othersButton.isHidden = !isDelete
         if !isDelete {
             locationButtonsStack.backgroundColor = .clear
             kindButtonsStack.backgroundColor = .clear
@@ -211,36 +211,36 @@ extension FoodListViewController: FoodListPresenterOutput {
             tableViewBottomConstraint.constant = 0
         }
     }
-    func animateButton(isFilteringRef: Bool, isFilteringFreezer: Bool) {
+    func animateButton(_ isFilteringRef: Bool, _ isFilteringFreezer: Bool) {
         if isFilteringRef {
-            filterRefrigeratorButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            refrigeratorButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         } else {
-            filterRefrigeratorButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+            refrigeratorButton.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
         if isFilteringFreezer {
-            filteredFreezerButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            freezerButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         } else {
-            filteredFreezerButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+            freezerButton.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
     }
     func resetButtonColor() {
-        self.filterForMeetButton.backgroundColor = .clear
-        self.filterForMeetButton.transform = CGAffineTransform(scaleX: 1, y: 1)
-        self.filterForFishButton.backgroundColor = .clear
-        self.filterForFishButton.transform = CGAffineTransform(scaleX: 1, y: 1)
-        self.filterForVegAndFruitsButton.backgroundColor = .clear
-        self.filterForVegAndFruitsButton.transform = CGAffineTransform(scaleX: 1, y: 1)
-        self.filterForMilkAndEggButton.backgroundColor = .clear
-        self.filterForMilkAndEggButton.transform = CGAffineTransform(scaleX: 1, y: 1)
-        self.filterForDishButton.backgroundColor = .clear
-        self.filterForDishButton.transform = CGAffineTransform(scaleX: 1, y: 1)
-        self.filterForDrinkButton.backgroundColor = .clear
-        self.filterForDrinkButton.transform = CGAffineTransform(scaleX: 1, y: 1)
-        self.filterForSeasoningButton.backgroundColor = .clear
-        self.filterForSeasoningButton.transform = CGAffineTransform(scaleX: 1, y: 1)
-        self.filterForSweetButton.backgroundColor = .clear
-        self.filterForSweetButton.transform = CGAffineTransform(scaleX: 1, y: 1)
-        self.filterForOthersButton.backgroundColor = .clear
-        self.filterForOthersButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+        self.meatButton.setImage(UIImage(named: "meatButton"), for: .normal)
+        self.meatButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.fishButton.setImage(UIImage(named: "fishButton"), for: .normal)
+        self.fishButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.vegitableFruitsButton.setImage(UIImage(named: "vegetableAndFruitButton"), for: .normal)
+        self.vegitableFruitsButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.milkEggButton.setImage(UIImage(named: "milkAndEggButton"), for: .normal)
+        self.milkEggButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.dishButton.setImage(UIImage(named: "dishButton"), for: .normal)
+        self.dishButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.drinkButton.setImage(UIImage(named: "drinkButton"), for: .normal)
+        self.drinkButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.seasoningButton.setImage(UIImage(named: "seasoningButton"), for: .normal)
+        self.seasoningButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.sweetButton.setImage(UIImage(named: "sweetButton"), for: .normal)
+        self.sweetButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.othersButton.setImage(UIImage(named: "otherButton"), for: .normal)
+        self.othersButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
     }
 }

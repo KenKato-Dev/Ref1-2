@@ -27,7 +27,7 @@ final class RecepieCategoryListPresenter {
 
     func reloadArray(searchKeyword: String?) {
         if let searchKeyword = searchKeyword {
-            recepieModel.fetchCategory(keyword: searchKeyword) { result in
+            recepieModel.fetch(searchKeyword) { result in
                 switch result {
                 case let .success(categories):
                     self.array = categories

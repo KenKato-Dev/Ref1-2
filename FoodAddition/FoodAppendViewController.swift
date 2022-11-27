@@ -51,31 +51,31 @@ class FoodAppendViewController: UIViewController {
             self.foodAppendPresenter.didTaplocationButton(location: .freezer)
         }), for: .touchUpInside)
         meatButton.addAction(.init(handler: { _ in
-            self.foodAppendPresenter.didTapKindButton(kind: .meat)
+            self.foodAppendPresenter.didTapKindButton(kind: .meat, self.meatButton)
         }), for: .touchUpInside)
         fishButton.addAction(.init(handler: { _ in
-            self.foodAppendPresenter.didTapKindButton(kind: .fish)
+            self.foodAppendPresenter.didTapKindButton(kind: .fish, self.fishButton)
         }), for: .touchUpInside)
         vegetableAndFruitButton.addAction(.init(handler: { _ in
-            self.foodAppendPresenter.didTapKindButton(kind: .vegetableAndFruit)
+            self.foodAppendPresenter.didTapKindButton(kind: .vegetableAndFruit, self.vegetableAndFruitButton)
         }), for: .touchUpInside)
         milkAndEggButton.addAction(.init(handler: { _ in
-            self.foodAppendPresenter.didTapKindButton(kind: .milkAndEgg)
+            self.foodAppendPresenter.didTapKindButton(kind: .milkAndEgg, self.milkAndEggButton)
         }), for: .touchUpInside)
         dishButton.addAction(.init(handler: { _ in
-            self.foodAppendPresenter.didTapKindButton(kind: .dish)
+            self.foodAppendPresenter.didTapKindButton(kind: .dish, self.dishButton)
         }), for: .touchUpInside)
         drinkButton.addAction(.init(handler: { _ in
-            self.foodAppendPresenter.didTapKindButton(kind: .drink)
+            self.foodAppendPresenter.didTapKindButton(kind: .drink, self.drinkButton)
         }), for: .touchUpInside)
         seasoningButton.addAction(.init(handler: { _ in
-            self.foodAppendPresenter.didTapKindButton(kind: .seasoning)
+            self.foodAppendPresenter.didTapKindButton(kind: .seasoning, self.seasoningButton)
         }), for: .touchUpInside)
         sweetButton.addAction(.init(handler: { _ in
-            self.foodAppendPresenter.didTapKindButton(kind: .sweet)
+            self.foodAppendPresenter.didTapKindButton(kind: .sweet, self.sweetButton)
         }), for: .touchUpInside)
         othersButton.addAction(.init(handler: { _ in
-            self.foodAppendPresenter.didTapKindButton(kind: .other)
+            self.foodAppendPresenter.didTapKindButton(kind: .other, self.othersButton)
         }), for: .touchUpInside)
         unitSelectButton.selectingUnit()
         // UIMENUのボタンはViewが描写された瞬間に呼ばれるためaddactionは利用不可
@@ -84,7 +84,7 @@ class FoodAppendViewController: UIViewController {
 
     @objc func hideKeyboard() {
         view.endEditing(true)
-        self.foodAppendPresenter.disablingPreserveButton()
+//        self.foodAppendPresenter.disablingPreserveButton()
         print("hide作動")
     }
 
@@ -114,19 +114,61 @@ extension FoodAppendViewController: FoodAppendPresenterOutput {
         quantityTextField.keyboardType = .numberPad
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
         // 初期で無効化
-        if self.foodNameTextField.text!.isEmpty && self.quantityTextField.text!.isEmpty && unitSelectButton.selectedUnit == .initial {
-            self.preserveButton.isEnabled = false
-        }
+//        if self.foodNameTextField.text!.isEmpty && self.quantityTextField.text!.isEmpty && unitSelectButton.selectedUnit == .initial {
+//            self.preserveButton.isEnabled = false
+//        }
     }
 
     func dismiss() {
         dismiss(animated: true, completion: nil)
     }
     func didTapPreserveButtonWithoutEssential() {
-        if !self.foodNameTextField.text!.isEmpty && !self.quantityTextField.text!.isEmpty && unitSelectButton.selectedUnit != .initial {
-            self.preserveButton.isEnabled = true
+//        if !self.foodNameTextField.text!.isEmpty && !self.quantityTextField.text!.isEmpty && unitSelectButton.selectedUnit != .initial {
+//            self.preserveButton.isEnabled = true
+//        } else {
+//            self.preserveButton.isEnabled = false
+//        }
+        if self.foodNameTextField.text!.isEmpty {
+            self.foodNameTextField.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+
+    }
+        if self.quantityTextField.text!.isEmpty {
+        self.quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+    }
+        if self.unitSelectButton.selectedUnit == .initial {
+            unitSelectButton.tintColor = .red
+        }
+    }
+    func resettingButtonsImage() {
+        self.meatButton.setImage(UIImage(named: "meatButton"), for: .normal)
+        self.meatButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.fishButton.setImage(UIImage(named: "fishButton"), for: .normal)
+        self.fishButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.vegetableAndFruitButton.setImage(UIImage(named: "vegetableAndFruitButton"), for: .normal)
+        self.vegetableAndFruitButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.milkAndEggButton.setImage(UIImage(named: "milkAndEggButton"), for: .normal)
+        self.milkAndEggButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.dishButton.setImage(UIImage(named: "dishButton"), for: .normal)
+        self.dishButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.drinkButton.setImage(UIImage(named: "drinkButton"), for: .normal)
+        self.drinkButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.seasoningButton.setImage(UIImage(named: "seasoningButton"), for: .normal)
+        self.seasoningButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.sweetButton.setImage(UIImage(named: "sweetButton"), for: .normal)
+        self.sweetButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.othersButton.setImage(UIImage(named: "otherButton"), for: .normal)
+        self.othersButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+    }
+    func animateButton(_ location: Food.Location) {
+        if location == .refrigerator {
+            refrigeratorButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         } else {
-            self.preserveButton.isEnabled = false
+            refrigeratorButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+        if location == .freezer {
+            freezerButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        } else {
+            freezerButton.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
     }
 }

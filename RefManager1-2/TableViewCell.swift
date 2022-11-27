@@ -44,8 +44,8 @@ class TableViewCell: UITableViewCell {
     }
 
     func foodConfigure(food: Food) {
-        foodImage.image = UIImage(named: "\(food.kind.rawValue)") // foodArray[indexPath.row]
         preserveMethodTextLable.text = locationTranslator(location: food.location)
+        foodImage.image = UIImage(named: "\(food.kind.rawValue)") // ?.compositeText(preserveMethodTextLable.text as! NSString)
         foodNameTextLabel.text = food.name
         quantityTextLabel.text = String(food.quantity)
         unitTextLabel.text = UnitSelectButton().unitButtonTranslator(unit: food.unit)

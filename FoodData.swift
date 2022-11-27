@@ -112,12 +112,10 @@ final class FoodData {
                     decoder.dateDecodingStrategy = .formatted(.iso8601Full)
                     self.queryDocumentSnaphots.append(contentsOf: querySnapShot.documents)
                     self.countOfDocuments = querySnapShot.documents.count
-                    print(self.countOfDocuments)
                     let dictinaryDocuments = querySnapShot.documents.map { snapshot in
                         snapshot.data()
                     }
                     do {
-    //                    guard let dictinaryDocuments = dictinaryDocuments else {return}
                         let data = try JSONSerialization.data(withJSONObject: dictinaryDocuments, options: .prettyPrinted)
                         var decodedFoods = try decoder.decode([Food].self, from: data)
                         decodedFoods = decodedFoods.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
@@ -134,15 +132,12 @@ final class FoodData {
         let location = filter.location.rawValue
         let kinds = kinds.map {$0.rawValue}
 
-//        if (filterRef || filterFreezer) && !kindArray.isEmpty {
         if (filterRef || filterFreezer) && !kinds.isEmpty {
             // 1.冷蔵/冷凍がtrueでかつfoodも選択
             self.query = self.db.collection("foods").whereField("location", isEqualTo: location).whereField("kind", in: kindArray).limit(to: 10)
-//        } else if (filterRef || filterFreezer) && kindArray.isEmpty {
         } else if (filterRef || filterFreezer) && kinds.isEmpty {
             // 2.冷蔵/冷凍のみtrue
             self.query = self.db.collection("foods").whereField("location", isEqualTo: location).limit(to: 10)
-//        } else if (!filterRef && !filterFreezer) && !kindArray.isEmpty {
         } else if (!filterRef && !filterFreezer) && !kinds.isEmpty {
             // 3.foodのみ選択
             self.query = self.db.collection("foods").whereField("kind", in: kindArray).limit(to: 10)

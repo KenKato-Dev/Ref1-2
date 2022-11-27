@@ -14,7 +14,7 @@ struct Small: Codable {
 }
 
 class RecepieModel {
-    func fetchCategory(keyword: String, _ completion: @escaping (Result<[Small], Error>) -> Void) {
+    func fetch(_ keyword: String, _ completion: @escaping (Result<[Small], Error>) -> Void) {
         guard let url = URL(string:
             "https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426?format=json&applicationId=1050766026714426702"
         ) else { return }

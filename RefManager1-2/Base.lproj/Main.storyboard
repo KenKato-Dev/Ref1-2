@@ -153,7 +153,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="niJ-RN-24C">
                                                         <rect key="frame" x="129" y="0.0" width="64.5" height="54"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="野菜・果物" image="vegAndFruButton"/>
+                                                        <state key="normal" title="野菜・果物" image="vegetableAndFruitButton"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sBj-1b-ij6">
                                                         <rect key="frame" x="193.5" y="0.0" width="64.5" height="54"/>
@@ -178,12 +178,12 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bKq-yt-7xj">
                                                         <rect key="frame" x="451.5" y="0.0" width="64.5" height="54"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="お菓子" image="sweetsButton"/>
+                                                        <state key="normal" title="お菓子" image="sweetButton"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aSr-go-oo9">
                                                         <rect key="frame" x="516" y="0.0" width="64.5" height="54"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="その他" image="othersButton"/>
+                                                        <state key="normal" title="その他" image="otherButton"/>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -288,23 +288,23 @@
                     <connections>
                         <outlet property="addButtton" destination="CDt-br-9dE" id="enJ-HT-djg"/>
                         <outlet property="deleteButton" destination="8e0-Ob-ULs" id="Wy0-aH-WzM"/>
-                        <outlet property="filterForDishButton" destination="OGg-bs-jr3" id="881-uK-Zwv"/>
-                        <outlet property="filterForDrinkButton" destination="Hzr-gf-a9Z" id="MQ9-XW-Lk1"/>
-                        <outlet property="filterForFishButton" destination="nGF-Cl-bIX" id="h9N-ej-jCD"/>
-                        <outlet property="filterForMeetButton" destination="5Ci-GQ-MLm" id="Pys-Rg-maG"/>
-                        <outlet property="filterForMilkAndEggButton" destination="sBj-1b-ij6" id="oxE-Su-GFN"/>
-                        <outlet property="filterForOthersButton" destination="aSr-go-oo9" id="9pA-pR-hvR"/>
-                        <outlet property="filterForSeasoningButton" destination="zz3-RA-gu0" id="l7H-Mt-pC1"/>
-                        <outlet property="filterForSweetButton" destination="bKq-yt-7xj" id="HnO-4U-U9Z"/>
-                        <outlet property="filterForVegAndFruitsButton" destination="niJ-RN-24C" id="vR3-gl-cJA"/>
-                        <outlet property="filterRefrigeratorButton" destination="uCq-u3-tN4" id="h7c-pq-nnT"/>
-                        <outlet property="filteredFreezerButton" destination="YHM-94-Qkr" id="6I1-Tj-chX"/>
-                        <outlet property="kindButtonsBackgroundView" destination="tyq-DV-7WE" id="4NQ-ji-b8D"/>
+                        <outlet property="dishButton" destination="OGg-bs-jr3" id="Rlp-Lb-aY6"/>
+                        <outlet property="drinkButton" destination="Hzr-gf-a9Z" id="MQ9-XW-Lk1"/>
+                        <outlet property="fishButton" destination="nGF-Cl-bIX" id="h9N-ej-jCD"/>
+                        <outlet property="foodListTableView" destination="4fB-Nk-tQM" id="1a2-D3-sFa"/>
+                        <outlet property="freezerButton" destination="YHM-94-Qkr" id="6I1-Tj-chX"/>
+                        <outlet property="kindButtonsBackView" destination="tyq-DV-7WE" id="4NQ-ji-b8D"/>
                         <outlet property="kindButtonsStack" destination="hcp-aU-k7B" id="wZ7-FU-8YU"/>
                         <outlet property="locationButtonsStack" destination="CN4-Pj-DGz" id="96a-RO-xdl"/>
+                        <outlet property="meatButton" destination="5Ci-GQ-MLm" id="Pys-Rg-maG"/>
+                        <outlet property="milkEggButton" destination="sBj-1b-ij6" id="oxE-Su-GFN"/>
+                        <outlet property="othersButton" destination="aSr-go-oo9" id="9pA-pR-hvR"/>
+                        <outlet property="refrigeratorButton" destination="uCq-u3-tN4" id="h7c-pq-nnT"/>
                         <outlet property="scrollView" destination="7kW-7V-hcx" id="05F-YW-Vx9"/>
-                        <outlet property="tableView" destination="4fB-Nk-tQM" id="1a2-D3-sFa"/>
+                        <outlet property="seasoningButton" destination="zz3-RA-gu0" id="l7H-Mt-pC1"/>
+                        <outlet property="sweetButton" destination="bKq-yt-7xj" id="HnO-4U-U9Z"/>
                         <outlet property="tableViewBottomConstraint" destination="VMe-I7-9j5" id="hnP-oI-X2K"/>
+                        <outlet property="vegitableFruitsButton" destination="niJ-RN-24C" id="vR3-gl-cJA"/>
                         <outlet property="viewTitle" destination="ebQ-Yw-zQR" id="aOL-4D-cPZ"/>
                         <segue destination="rRR-Uk-hkv" kind="show" identifier="toRecepieTableView" id="jAc-dp-xnC"/>
                     </connections>
@@ -441,7 +441,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="2JB-Xc-ihz" userLabel="Parent Stack View">
-                                <rect key="frame" x="0.0" y="203.5" width="414" height="553"/>
+                                <rect key="frame" x="0.0" y="203.5" width="414" height="584.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="保存方法を選んでください" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1PN-Tn-dOu">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="36"/>
@@ -484,39 +484,39 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Es3-aD-GX4">
-                                        <rect key="frame" x="0.0" y="170.5" width="414" height="313.5"/>
+                                        <rect key="frame" x="0.0" y="170.5" width="414" height="345"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="gAZ-jo-Oae">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="104.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="115"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOq-Fh-0Vf">
-                                                        <rect key="frame" x="0.0" y="0.0" width="138" height="104.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="138" height="115"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" systemColor="systemRedColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="Button" image="meatButton"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Us5-D2-vPu">
-                                                        <rect key="frame" x="138" y="0.0" width="138" height="104.5"/>
+                                                        <rect key="frame" x="138" y="0.0" width="138" height="115"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" systemColor="systemBlueColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" image="fishButton"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2VJ-ai-do9">
-                                                        <rect key="frame" x="276" y="0.0" width="138" height="104.5"/>
+                                                        <rect key="frame" x="276" y="0.0" width="138" height="115"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" systemColor="systemGreenColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" image="vegAndFruButton"/>
+                                                        <state key="normal" image="vegetableAndFruitButton"/>
                                                     </button>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="OEq-cr-nOn">
-                                                <rect key="frame" x="0.0" y="104.5" width="414" height="104.5"/>
+                                                <rect key="frame" x="0.0" y="115" width="414" height="115"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jJE-3d-hb2">
-                                                        <rect key="frame" x="0.0" y="0.0" width="138" height="104.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="138" height="115"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" systemColor="systemYellowColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -526,7 +526,7 @@
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgE-hx-ogP">
-                                                        <rect key="frame" x="138" y="0.0" width="138" height="104.5"/>
+                                                        <rect key="frame" x="138" y="0.0" width="138" height="115"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" systemColor="systemBrownColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -535,7 +535,7 @@
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="43y-17-loP">
-                                                        <rect key="frame" x="276" y="0.0" width="138" height="104.5"/>
+                                                        <rect key="frame" x="276" y="0.0" width="138" height="115"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" systemColor="systemTealColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -546,10 +546,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hGe-Gp-Zrh">
-                                                <rect key="frame" x="0.0" y="209" width="414" height="104.5"/>
+                                                <rect key="frame" x="0.0" y="230" width="414" height="115"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGd-DE-kyN">
-                                                        <rect key="frame" x="0.0" y="0.0" width="138" height="104.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="138" height="115"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -558,24 +558,27 @@
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W3T-zu-67k">
-                                                        <rect key="frame" x="138" y="0.0" width="138" height="104.5"/>
+                                                        <rect key="frame" x="138" y="0.0" width="138" height="115"/>
                                                         <color key="tintColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" image="sweetsButton"/>
+                                                        <state key="normal" image="sweetButton"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zbk-L6-nFe">
-                                                        <rect key="frame" x="276" y="0.0" width="138" height="104.5"/>
+                                                        <rect key="frame" x="276" y="0.0" width="138" height="115"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="その他" image="othersButton"/>
+                                                        <state key="normal" title="その他" image="otherButton"/>
                                                     </button>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Es3-aD-GX4" secondAttribute="height" multiplier="1.2:1" id="rvk-1J-SM9"/>
+                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="jax-iL-4T8">
-                                        <rect key="frame" x="0.0" y="499" width="414" height="54"/>
+                                        <rect key="frame" x="0.0" y="530.5" width="414" height="54"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53s-yj-18u">
                                                 <rect key="frame" x="0.0" y="0.0" width="207" height="54"/>
@@ -616,7 +619,6 @@
                             <constraint firstItem="5O4-gL-wtm" firstAttribute="centerX" secondItem="qh5-El-XsC" secondAttribute="centerX" id="QId-cZ-J7r"/>
                             <constraint firstItem="1PN-Tn-dOu" firstAttribute="height" secondItem="qh5-El-XsC" secondAttribute="height" multiplier="0.04" id="Qnj-Np-YoM"/>
                             <constraint firstItem="HAv-4m-4lB" firstAttribute="top" secondItem="5O4-gL-wtm" secondAttribute="bottom" constant="20" id="TAC-E5-dFs"/>
-                            <constraint firstItem="Es3-aD-GX4" firstAttribute="height" secondItem="qh5-El-XsC" secondAttribute="height" multiplier="0.35" id="dkU-If-0h7"/>
                             <constraint firstItem="EBo-ON-V98" firstAttribute="trailing" secondItem="2JB-Xc-ihz" secondAttribute="trailing" id="e4D-uX-M80"/>
                             <constraint firstItem="gd3-UM-ewx" firstAttribute="height" secondItem="qh5-El-XsC" secondAttribute="height" multiplier="0.04" id="eoh-0H-4Sd"/>
                             <constraint firstItem="HAv-4m-4lB" firstAttribute="height" secondItem="qh5-El-XsC" secondAttribute="height" multiplier="0.05" id="g9F-97-XCD"/>
@@ -681,13 +683,13 @@
         <image name="fishButton" width="710" height="591"/>
         <image name="meatButton" width="710" height="591"/>
         <image name="milkAndEggButton" width="710" height="591"/>
-        <image name="othersButton" width="737" height="591"/>
+        <image name="otherButton" width="737" height="591"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="seasoningButton" width="710" height="591"/>
-        <image name="sweetsButton" width="737" height="591"/>
+        <image name="sweetButton" width="737" height="591"/>
         <image name="trash" catalog="system" width="121" height="128"/>
-        <image name="vegAndFruButton" width="710" height="591"/>
+        <image name="vegetableAndFruitButton" width="710" height="591"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
