@@ -7,51 +7,35 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
-class SignUpViewController: UICollectionViewController {
-
+class SignUpViewController: UIViewController {
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var userNameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var signUpButton: UIButton!
+    private let signUpPresenter = SignUpPresenter.init(signUp: SignUp())
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
+        self.signUpButton.addAction(.init(handler: { _ in
+            self.signUpPresenter.didTapSignUpButton(
+                self.emailTextField.text, self.userNameTextField.text, self.passwordTextField.text)
+        }), for: .touchUpInside)
+    }
+}
+extension SignUpViewController: UITextFieldDelegate {
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+}
+extension SignUpViewController: SignUpPresenterOutput {
+    func showEssential() {
+            self.emailTextField.placeholder = "メールアドレスを入力してください"
+            self.userNameTextField.placeholder = "ユーザー名を入力してください"
+            self.passwordTextField.placeholder = "パスワード(7桁)を入力してください"
+    }
+    func presentErrorIfNeeded(_ alert: UIAlertController) {
+        present(alert, animated: true) {
+            print("エラー発生")
+        }
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    // MARK: UICollectionViewDataSource
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-
-        // Configure the cell
-
-        return cell
-    }
-
-    // MARK: UICollectionViewDelegate
 }

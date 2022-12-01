@@ -51,39 +51,30 @@ final class FoodListViewController: UIViewController {
         }), for: .touchUpInside)
         meatButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(.meat, self.meatButton)
-//            self.foodListPresenter.kindButtonAnimation(kind: .meat, self.meatButton)
         }), for: .touchUpInside)
         fishButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(.fish, self.fishButton)
-//            self.foodListPresenter.kindButtonAnimation(kind: .fish, self.fishButton)
         }), for: .touchUpInside)
         vegitableFruitsButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(.vegetableAndFruit, self.vegitableFruitsButton)
-//            self.foodListPresenter.kindButtonAnimation(kind: .vegetableAndFruit, self.vegitableFruitsButton)
         }), for: .touchUpInside)
         milkEggButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(.milkAndEgg, self.milkEggButton)
-//            self.foodListPresenter.kindButtonAnimation(kind: .milkAndEgg, self.milkEggButton)
         }), for: .touchUpInside)
         dishButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(.dish, self.dishButton)
-//            self.foodListPresenter.kindButtonAnimation(kind: .dish, self.dishButton)
         }), for: .touchUpInside)
         drinkButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(.drink, self.drinkButton)
-//            self.foodListPresenter.kindButtonAnimation(kind: .drink, self.drinkButton)
         }), for: .touchUpInside)
         seasoningButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(.seasoning, self.seasoningButton)
-//            self.foodListPresenter.kindButtonAnimation(kind: .seasoning, self.seasoningButton)
         }), for: .touchUpInside)
         sweetButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(.sweet, self.sweetButton)
-//            self.foodListPresenter.kindButtonAnimation(kind: .sweet, self.sweetButton)
         }), for: .touchUpInside)
         othersButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(.other, self.othersButton)
-//            self.foodListPresenter.kindButtonAnimation(kind: .other, self.othersButton)
         }), for: .touchUpInside)
     }
 
@@ -114,7 +105,6 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
         guard let configuredFood = foodListPresenter.isManagingArray(row: indexPath.row),
               let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell
         else { return .init() }
-//        print("row:\(indexPath.row)")
         cell.foodConfigure(food: configuredFood)
         let isChecked = foodListPresenter.checkedID[configuredFood.IDkey] ?? false
         let shouldShowCheckBox = !foodListPresenter.isDelete
@@ -139,37 +129,35 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
         self.foodListPresenter.didScrollToLast(row: indexPath.row)
     }
 }
-
-// extension FoodListViewController: UITextFieldDelegate {}
-
 extension FoodListViewController: FoodListPresenterOutput {
     func reloadData() {
         foodListTableView.reloadData()
     }
-
     func present(_ inputView: FoodAppendViewController?) {
         if let inputView = inputView {
             present(inputView, animated: true)
-
         } else {
             print("presentのアンラップに失敗")
         }
     }
-
     func presentAlert(_ alert: UIAlertController) {
         present(alert, animated: true) {
-            print("エラー発生")
         }
     }
-
+    func presentErrorIfNeeded(_ errorOrNil: Error?) {
+        guard let error = errorOrNil else{return}
+        let message = "エラー発生:\(error)"
+        let alart = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alart, animated: true) {
+        }
+    }
     func dismiss() {
         dismiss(animated: true, completion: nil)
     }
-
     func performSegue(_ foodNameTextLabel: String?) {
         performSegue(withIdentifier: "toRecepieTableView", sender: foodNameTextLabel)
     }
-
     func setTitle(_ refigerator: Bool, _ freezer: Bool, _ selectedKinds: [Food.FoodKind], _ location: Food.Location) {
         // この処理でなく条件式も含めタイトルを入れるようにする
         if !refigerator,

@@ -11,6 +11,7 @@ protocol RecepieCategoryListPresenterOutput: AnyObject {
     func reloadData()
     func dismiss()
     func setTitle()
+    func presentErrorIfNeeded(_ errorOrNil: Error?)
 }
 
 final class RecepieCategoryListPresenter {
@@ -33,7 +34,7 @@ final class RecepieCategoryListPresenter {
                     self.array = categories
                     self.recepieCategoryListPresenterOutput?.reloadData()
                 case let .failure(error):
-                    print(error)
+                    self.recepieCategoryListPresenterOutput?.presentErrorIfNeeded(error)
                     self.recepieCategoryListPresenterOutput?.dismiss()
                 }
             }

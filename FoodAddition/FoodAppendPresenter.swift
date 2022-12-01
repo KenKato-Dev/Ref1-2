@@ -11,6 +11,7 @@ protocol FoodAppendPresenterOutput: AnyObject {
     func settingTextfield()
     func dismiss()
     func didTapPreserveButtonWithoutEssential()
+    func presentErrorIfNeeded(_ errorOrNil: Error?)
     func resettingButtonsImage()
     func animateButton(_ location: Food.Location)
 }
@@ -43,11 +44,6 @@ final class FoodAppendPresenter {
     func didTapKindButton(kind: Food.FoodKind, _ button: UIButton) { //
         baseArray.kind = kind
         self.foodAppendPresenterOutput?.resettingButtonsImage()
-//        let image = button.imageView!.image!.compositeImage(
-//            UIImage(named: kind.rawValue + "Button")!,
-//            button.imageView!.image!,
-//            UIImage(named: "selectedButton")!,
-//            0.5)
         var image = UIImage(named: kind.rawValue + "Button")
         if button.imageView!.image == UIImage(named: kind.rawValue + "Button") {
             image = button.imageView!.image!.compositeImage(
@@ -58,8 +54,7 @@ final class FoodAppendPresenter {
         }
         if baseArray.kind == kind {
             button.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-//            button.setImage(image, for: .normal)
-            button.imageView?.image
+            button.setImage(image, for: .normal)
 //            button.isHighlighted = true
         }
     }
@@ -82,14 +77,21 @@ final class FoodAppendPresenter {
         if !foodName!.isEmpty && !quantity!.isEmpty {
             if let foodName = foodName {
                 baseArray.name = foodName
-            }
+            }else{return}
             if let quantity = quantity {
                 baseArray.quantity = quantity
-            }
+            }else{return}
             baseArray.unit = unit
-            foodData.post(baseArray)
-            foodAppendPresenterOutput?.dismiss()
-            print("オリジナルのFuncが動作")
+            foodData.post(self.baseArray) { result in
+                switch result{
+                case .success:
+                    self.foodAppendPresenterOutput?.dismiss()
+                    print("オリジナルのFuncが動作")
+                case let .failure(error):
+                    self.foodAppendPresenterOutput?.presentErrorIfNeeded(error)
+                    print(error)
+                }
+            }
         }
         //
         } else {

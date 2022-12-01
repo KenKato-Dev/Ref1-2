@@ -38,7 +38,6 @@ class FoodAppendViewController: UIViewController {
         super.viewDidLoad()
         foodNameTextField.delegate = self
         quantityTextField.delegate = self
-
         settingTextfield()
         foodAppendPresenter.setOutput(foodAppendPresenterOutput: self)
 
@@ -137,6 +136,14 @@ extension FoodAppendViewController: FoodAppendPresenterOutput {
     }
         if self.unitSelectButton.selectedUnit == .initial {
             unitSelectButton.tintColor = .red
+        }
+    }
+    func presentErrorIfNeeded(_ errorOrNil: Error?) {
+        guard let error = errorOrNil else{return}
+        let message = "エラー発生:\(error)"
+        let alart = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alart, animated: true) {
         }
     }
     func resettingButtonsImage() {

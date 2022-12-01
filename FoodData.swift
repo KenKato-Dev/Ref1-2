@@ -67,8 +67,17 @@ struct Food: Equatable, Codable {
         case other
     }
 }
+protocol FoodDataProtocol {
+    func post(_ food: Food,_ completion: @escaping (Result<Void, Error>) -> Void)
+//    func post(_ food: Food) async
+    func fetch(_ completion: @escaping (Result<[Food], Error>) -> Void)
+    func isConfiguringQuery(_ filterRef: Bool, _ filterFreezer: Bool, _ filter: FoodData.Filter, _ kinds: [Food.FoodKind])
+    func paginate()
+    func delete(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void)
+}
 
-final class FoodData {
+final class FoodData: FoodDataProtocol {
+
     struct Filter: Codable {
         var location: Food.Location
         var kindArray: [Food.FoodKind]
@@ -77,29 +86,31 @@ final class FoodData {
     private (set) var query = Firestore.firestore().collection("foods").limit(to: 10)
     private (set) var queryDocumentSnaphots: [QueryDocumentSnapshot] = []
     private (set) var countOfDocuments = 0
-    func post(_ food: Food) {
+    func post(_ food: Food,_ completion: @escaping (Result<Void, Error>) -> Void) {
         // ドキュメントごとに保管、ドキュメントを他のものにするとDictionary方式に上書きされる
-        db.collection("foods").document("IDkey: \(food.IDkey)").setData([
-            "location": "\(food.location)",
-            "kind": "\(food.kind)",
-            "name": "\(food.name)",
-            "quantity": "\(food.quantity)",
-            "unit": "\(food.unit)",
-            "IDkey": "\(food.IDkey)",
-            "date": "\(food.date)"
-        ], merge: false) { err in
-            if let err = err {
-                print("FireStoreへの書き込みに失敗しました: \(err)")
-            } else {
-                print("FireStoreへの書き込みに成功しました")
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            self.db.collection("foods").document("IDkey: \(food.IDkey)").setData([
+                "location": "\(food.location)",
+                "kind": "\(food.kind)",
+                "name": "\(food.name)",
+                "quantity": "\(food.quantity)",
+                "unit": "\(food.unit)",
+                "IDkey": "\(food.IDkey)",
+                "date": "\(food.date)"
+            ], merge: false) { err in
+                if let err = err {
+                    completion(.failure(err))
+                    print("FireStoreへの書き込みに失敗しました: \(err)")
+                } else {
+                    print("FireStoreへの書き込みに成功しました")
+                }
             }
         }
     }
 
     func fetch(_ completion: @escaping (Result<[Food], Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now()) { // +0.3を削除し動作確認
-            // self.db.collection("foods")
-//            self.query = self.db.collection("foods").limit(to: 10)
+
             self.countOfDocuments = 0
             self.query.getDocuments { querySnapShot, error in
                 if let err = error {

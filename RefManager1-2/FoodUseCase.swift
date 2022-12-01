@@ -7,13 +7,8 @@
 
 import Foundation
 import UIKit
+
 final class FoodUseCase {
-//    enum ManagingArray {
-//        case empty(location:Food.Location)
-//        case didSelectKind(location:Food.Location)
-//    }
-//    static let shared: FoodUseCase = FoodUseCase()
-    //    var managingArray:ManagingArray = .empty(location: .refrigerator)
     private (set) var isFilteringRefrigerator = false
     private (set) var isFilteringFreezer = false
     private (set) var selectedKinds: [Food.FoodKind] = []

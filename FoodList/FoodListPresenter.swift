@@ -13,12 +13,14 @@ protocol FoodListPresenterOutput: AnyObject {
     func reloadData()
     func present(_ inputView: FoodAppendViewController?)
     func presentAlert(_ alert: UIAlertController)
+    func presentErrorIfNeeded(_ errorOrNil: Error?)
     func dismiss()
     func performSegue(_ foodNameTextLabel: String?)
     func setTitle(_ refigerator: Bool, _ freezer: Bool, _ selectedKinds: [Food.FoodKind], _ location: Food.Location)
     func didTapDeleteButton(_ isDelete: Bool)
     func animateButton(_ isFilteringRef: Bool, _ isFilteringFreezer: Bool)
     func resetButtonColor()
+    
 }
 
 final class FoodListPresenter {
@@ -108,12 +110,14 @@ final class FoodListPresenter {
                                 // このReloadにより削除がtableに反映
 //                                self.foodListPresenterOutput?.reloadData()
                             case let .failure(error):
+                                self.foodListPresenterOutput?.presentErrorIfNeeded(error)
                                 print("fetchfoodsに失敗:\(error)")
                             }
                             // 下記reloadがないと表示が反映されず1
                             self.foodListPresenterOutput?.reloadData()
                         }
                     case let .failure(error):
+                        self.foodListPresenterOutput?.presentErrorIfNeeded(error)
                         print("deleteに失敗:\(error)")
                     }
                 }
@@ -177,15 +181,15 @@ final class FoodListPresenter {
         if foodUseCase.foodKindDictionary[kind]! {
 //            button.setImage(UIImage(named: "selected"), for: .normal)
             button.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            button.layer.borderColor = UIColor.gray.cgColor
-            button.layer.borderWidth = 3.0
+//            button.layer.borderColor = UIColor.gray.cgColor
+//            button.layer.borderWidth = 3.0
             button.isHighlighted = true
             button.setImage(image, for: .normal)
         } else {
             button.transform = CGAffineTransform(scaleX: 1, y: 1)
 //            button.backgroundColor = .clear
-            button.layer.borderColor = UIColor.clear.cgColor
-            button.layer.borderWidth = 0.0
+//            button.layer.borderColor = UIColor.clear.cgColor
+//            button.layer.borderWidth = 0.0
             button.isHighlighted = false
             button.setImage(UIImage(named: kind.rawValue + "Button"), for: .normal)
         }
@@ -224,8 +228,8 @@ final class FoodListPresenter {
         // アラートアクションシート一項目目
         alert.addAction(.init(title: "数量・保存方法を変更する", style: .default, handler: { [self] _ in
             let inputView = storyboard
-            guard let inputView = inputView else {return}
-            guard let modalImput = inputView.sheetPresentationController else {return}
+            guard let inputView = inputView,
+                  let modalImput = inputView.sheetPresentationController else {return}
             modalImput.detents = [.medium()]
 
             self.foodListPresenterOutput?.present(inputView)
@@ -279,16 +283,14 @@ final class FoodListPresenter {
         alert.addAction(.init(title: "レシピを調べる", style: .default, handler: { _ in
             self.foodListPresenterOutput?.performSegue(self.array[row].name)
         }))
-        foodListPresenterOutput?.presentAlert(alert)
         // アラートアクションシート三項目目
         alert.addAction(.init(title: "キャンセル", style: .destructive, handler: { _ in
         }))
+        foodListPresenterOutput?.presentAlert(alert)
     }
 
     private func didTapPreserveOnInputView(foodName: String?, foodQuantity: String?, foodinArray: Food) {
         print("inputのアクションが操作")
-//        let dispatchGroup = DispatchGroup()
-//        let dispatchQueue = DispatchQueue(label: "queue")
         self.db.collection("foods").document("IDkey: \(foodinArray.IDkey)").setData([
             "name": "\(foodName!)",
             "quantity": "\(foodQuantity!)",
@@ -299,6 +301,7 @@ final class FoodListPresenter {
         ], merge: true) { err in
             if let err = err {
                 print("FireStoreへの書き込みに失敗しました: \(err)")
+                self.foodListPresenterOutput?.presentErrorIfNeeded(err)
                 FoodListPresenter.isTapRow = false
             } else {
                 print("FireStoreへの書き込みに成功しました")
@@ -320,6 +323,7 @@ final class FoodListPresenter {
                     // ここに入れることで起動時に表示
                     self.foodListPresenterOutput?.reloadData()
                 case let .failure(error):
+                    self.foodListPresenterOutput?.presentErrorIfNeeded(error)
                     print(error)
 
                 }
@@ -331,7 +335,6 @@ final class FoodListPresenter {
 extension UIImage {
     func compositeImage(_ originalImage: UIImage, _ currentImage: UIImage, _ image: UIImage, _ value: CGFloat) -> UIImage {
         print("オリジン:\(originalImage),今:\(currentImage)")
-//        if currentImage == originalImage {
             UIGraphicsBeginImageContextWithOptions(self.size, false, 0)
             self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
             let rect = CGRect(x: (self.size.width - image.size.width)/2,
@@ -342,23 +345,27 @@ extension UIImage {
             guard let image = UIGraphicsGetImageFromCurrentImageContext() else {return self}
             UIGraphicsEndImageContext()
             return image
-//        } else {
-//            return currentImage
-//        }
     }
     func compositeText(_ text: NSString) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(self.size, false, 0)
         self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
         let textRect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
-        let textStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        let textStyle = NSMutableParagraphStyle.default.mutableCopy() as? NSMutableParagraphStyle
         let textFontAttributes = [
             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 200),
             NSAttributedString.Key.foregroundColor: UIColor.darkGray,
             NSAttributedString.Key.paragraphStyle: textStyle
         ]
-        text.draw(in: textRect, withAttributes: textFontAttributes)
+        text.draw(in: textRect, withAttributes: textFontAttributes as [NSAttributedString.Key: Any])
         guard let newImage = UIGraphicsGetImageFromCurrentImageContext() else { return self}
         UIGraphicsEndImageContext()
         return newImage
+    }
+    func showErrorIfNeeded(_ alart:inout UIAlertController, _ errorOrNil: Error?) {
+        guard let error = errorOrNil else { return }
+        let message = "エラー発生:\(error)"
+         alart = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
     }
 }
