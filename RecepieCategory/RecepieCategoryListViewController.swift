@@ -63,7 +63,7 @@ extension RecepieCategoryListViewController: RecepieCategoryListPresenterOutput 
         }
     }
     func presentErrorIfNeeded(_ errorOrNil: Error?) {
-        guard let error = errorOrNil else{return}
+        guard let error = errorOrNil else {return}
         let message = "エラー発生:\(error)"
         let alart = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

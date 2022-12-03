@@ -68,7 +68,7 @@ struct Food: Equatable, Codable {
     }
 }
 protocol FoodDataProtocol {
-    func post(_ food: Food,_ completion: @escaping (Result<Void, Error>) -> Void)
+    func post(_ food: Food, _ completion: @escaping (Result<Void, Error>) -> Void)
 //    func post(_ food: Food) async
     func fetch(_ completion: @escaping (Result<[Food], Error>) -> Void)
     func isConfiguringQuery(_ filterRef: Bool, _ filterFreezer: Bool, _ filter: FoodData.Filter, _ kinds: [Food.FoodKind])
@@ -83,13 +83,17 @@ final class FoodData: FoodDataProtocol {
         var kindArray: [Food.FoodKind]
     }
     private let db = Firestore.firestore()
+    private let collectionPath = "foods"
+    private let fieldElementIDKey = "IDkey"
+    private let fieldElementLocation = "location"
+    private let fieldElementKind = "kind"
     private (set) var query = Firestore.firestore().collection("foods").limit(to: 10)
     private (set) var queryDocumentSnaphots: [QueryDocumentSnapshot] = []
     private (set) var countOfDocuments = 0
-    func post(_ food: Food,_ completion: @escaping (Result<Void, Error>) -> Void) {
+    func post(_ food: Food, _ completion: @escaping (Result<Void, Error>) -> Void) {
         // ドキュメントごとに保管、ドキュメントを他のものにするとDictionary方式に上書きされる
         DispatchQueue.main.asyncAfter(deadline: .now()) {
-            self.db.collection("foods").document("IDkey: \(food.IDkey)").setData([
+            self.db.collection(self.collectionPath).document("\(self.fieldElementIDKey): \(food.IDkey)").setData([
                 "location": "\(food.location)",
                 "kind": "\(food.kind)",
                 "name": "\(food.name)",
@@ -102,12 +106,34 @@ final class FoodData: FoodDataProtocol {
                     completion(.failure(err))
                     print("FireStoreへの書き込みに失敗しました: \(err)")
                 } else {
+                    completion(.success(()))
                     print("FireStoreへの書き込みに成功しました")
                 }
             }
         }
     }
 
+    func postFromInputView(foodName: String?, foodQuantity: String?, foodinArray: Food, _ completion: @escaping (Result<Void, Error>) -> Void) {
+        self.db.collection(self.collectionPath).document("\(self.fieldElementIDKey): \(foodinArray.IDkey)").setData([
+            "name": "\(foodName!)",
+            "quantity": "\(foodQuantity!)",
+            "date": "\(Date())",
+            "IDkey": "\(foodinArray.IDkey)",
+            "kind": "\(foodinArray.kind)",
+            "unit": "\(foodinArray.unit)"
+        ], merge: true) { err in
+            if let err = err {
+                completion(.failure(err))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+    func setLocation(_ IDKey: String, _ location: String) {
+        self.db.collection(self.collectionPath).document("\(self.fieldElementIDKey): \(IDKey)").setData([
+            self.fieldElementLocation: "\(location)"
+        ])
+    }
     func fetch(_ completion: @escaping (Result<[Food], Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now()) { // +0.3を削除し動作確認
 
@@ -145,16 +171,16 @@ final class FoodData: FoodDataProtocol {
 
         if (filterRef || filterFreezer) && !kinds.isEmpty {
             // 1.冷蔵/冷凍がtrueでかつfoodも選択
-            self.query = self.db.collection("foods").whereField("location", isEqualTo: location).whereField("kind", in: kindArray).limit(to: 10)
+            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementLocation, isEqualTo: location).whereField(self.fieldElementKind, in: kindArray).limit(to: 10)
         } else if (filterRef || filterFreezer) && kinds.isEmpty {
             // 2.冷蔵/冷凍のみtrue
-            self.query = self.db.collection("foods").whereField("location", isEqualTo: location).limit(to: 10)
+            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementLocation, isEqualTo: location).limit(to: 10)
         } else if (!filterRef && !filterFreezer) && !kinds.isEmpty {
             // 3.foodのみ選択
-            self.query = self.db.collection("foods").whereField("kind", in: kindArray).limit(to: 10)
+            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementKind, in: kindArray).limit(to: 10)
         } else {
             // 4.何も選択されていない状態
-            self.query = Firestore.firestore().collection("foods").limit(to: 10)
+            self.query = Firestore.firestore().collection(self.collectionPath).limit(to: 10)
         }
     }
     func paginate() {
@@ -163,11 +189,11 @@ final class FoodData: FoodDataProtocol {
 
     }
 
-    func delete(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
+    func delete2(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
         guard !idKeys.isEmpty else {
             return
         }
-        let query = db.collection("foods").whereField("IDkey", in: idKeys)
+        let query = db.collection(self.collectionPath).whereField(self.fieldElementIDKey, in: idKeys)
         query.getDocuments { snapshot, error in
             if let error = error {
                 completion(.failure(error))
@@ -187,6 +213,28 @@ final class FoodData: FoodDataProtocol {
                 }
             }
             completion(.success(()))
+        }
+    }
+    func delete(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
+        guard !idKeys.isEmpty else {
+            return
+        }
+        let query = db.collection(self.collectionPath).whereField(self.fieldElementIDKey, in: idKeys)
+        query.getDocuments { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            let batch = self.db.batch()
+            guard let snapshot = snapshot else {return}
+            snapshot.documents.forEach {batch.deleteDocument($0.reference)}
+            batch.commit { error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
+                }
+            }
         }
     }
 }

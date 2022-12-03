@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 struct Small: Codable {
     let categoryName: String
     let parentCategoryId: String
@@ -28,8 +29,11 @@ class RecepieModel {
                 do {
                     var array: [Small] = []
                     // 全体をDictionaryに変換
-                    // オフラインの際ここでエラー発生、エラーハンドリングが必要
-                    let recepieData = try JSONSerialization.jsonObject(with: data!) as? [String: Any]
+                    // オフラインの際ここでエラー発生、エラーハンドリング
+                    guard let data = data else {
+                        return
+                    }
+                    let recepieData = try JSONSerialization.jsonObject(with: data) as? [String: Any]
                     // 全体からKeyで内部をDictionaryにて取り出し
                     let result = recepieData?["result"] as? [String: Any]
                     // dataからsmallに変換

@@ -37,7 +37,8 @@
 		ECBD104B2933573300AF2702 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD104A2933573300AF2702 /* SignInViewController.swift */; };
 		ECBD104D2933578100AF2702 /* SignInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD104C2933578100AF2702 /* SignInPresenter.swift */; };
 		ECBD105529339C9400AF2702 /* RefManager1_2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD105429339C9400AF2702 /* RefManager1_2Tests.swift */; };
-		ECC2590E28E7369600F790F5 /* RecepieCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2590D28E7369600F790F5 /* RecepieCategory.swift */; };
+		ECBD105C293A3D9F00AF2702 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD105B293A3D9F00AF2702 /* UIImage+Extension.swift */; };
+		ECC2590E28E7369600F790F5 /* RecepieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2590D28E7369600F790F5 /* RecepieModel.swift */; };
 		ECCAA677290045D800CE141B /* RecepieCategoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCAA676290045D800CE141B /* RecepieCategoryListPresenter.swift */; };
 		ECDF47A928B4F7B7004BC6A9 /* RecepieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47A828B4F7B7004BC6A9 /* RecepieTableViewCell.swift */; };
 		ECDF47AB28B4F7DC004BC6A9 /* RecepieCategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47AA28B4F7DB004BC6A9 /* RecepieCategoryListViewController.swift */; };
@@ -81,7 +82,8 @@
 		ECBD104C2933578100AF2702 /* SignInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresenter.swift; sourceTree = "<group>"; };
 		ECBD105229339C9400AF2702 /* RefManager1-2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RefManager1-2Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECBD105429339C9400AF2702 /* RefManager1_2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefManager1_2Tests.swift; sourceTree = "<group>"; };
-		ECC2590D28E7369600F790F5 /* RecepieCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieCategory.swift; sourceTree = "<group>"; };
+		ECBD105B293A3D9F00AF2702 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		ECC2590D28E7369600F790F5 /* RecepieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieModel.swift; sourceTree = "<group>"; };
 		ECCAA676290045D800CE141B /* RecepieCategoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieCategoryListPresenter.swift; sourceTree = "<group>"; };
 		ECDF47A828B4F7B7004BC6A9 /* RecepieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieTableViewCell.swift; sourceTree = "<group>"; };
 		ECDF47AA28B4F7DB004BC6A9 /* RecepieCategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieCategoryListViewController.swift; sourceTree = "<group>"; };
@@ -160,7 +162,8 @@
 				ECA6F44528026B0C00CA7C2D /* AppDelegate.swift */,
 				ECA6F44728026B0C00CA7C2D /* SceneDelegate.swift */,
 				ECA6F45C28026BAE00CA7C2D /* FoodData.swift */,
-				ECC2590D28E7369600F790F5 /* RecepieCategory.swift */,
+				ECC2590D28E7369600F790F5 /* RecepieModel.swift */,
+				ECBD105B293A3D9F00AF2702 /* UIImage+Extension.swift */,
 				EC9C1C0A28F3E8650024570D /* FoodList */,
 				EC9C1C0B28F3E8A60024570D /* FoodAddition */,
 				EC9C1C0928F3E8260024570D /* RecepieCategory */,
@@ -348,7 +351,8 @@
 				ECBD104B2933573300AF2702 /* SignInViewController.swift in Sources */,
 				ECA41AE1290E5A5D0030BF16 /* TapFeedback.swift in Sources */,
 				ECA60EB128FEE28B00B7C7F6 /* FoodAppendPresenter.swift in Sources */,
-				ECC2590E28E7369600F790F5 /* RecepieCategory.swift in Sources */,
+				ECBD105C293A3D9F00AF2702 /* UIImage+Extension.swift in Sources */,
+				ECC2590E28E7369600F790F5 /* RecepieModel.swift in Sources */,
 				ECDF47A928B4F7B7004BC6A9 /* RecepieTableViewCell.swift in Sources */,
 				ECE2F0E028349FBC00975A38 /* FoodUseCase.swift in Sources */,
 				EC77EA2628F2A813009B3EBA /* AddButton.swift in Sources */,

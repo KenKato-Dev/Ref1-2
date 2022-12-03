@@ -77,13 +77,13 @@ final class FoodAppendPresenter {
         if !foodName!.isEmpty && !quantity!.isEmpty {
             if let foodName = foodName {
                 baseArray.name = foodName
-            }else{return}
+            } else {return}
             if let quantity = quantity {
                 baseArray.quantity = quantity
-            }else{return}
+            } else {return}
             baseArray.unit = unit
             foodData.post(self.baseArray) { result in
-                switch result{
+                switch result {
                 case .success:
                     self.foodAppendPresenterOutput?.dismiss()
                     print("オリジナルのFuncが動作")
@@ -92,6 +92,7 @@ final class FoodAppendPresenter {
                     print(error)
                 }
             }
+
         }
         //
         } else {

@@ -37,25 +37,28 @@ class RefManager1_2Tests: XCTestCase {
     }
 
 }
-class FoodDataMock: FoodDataProtocol {
-    func post(_ food: Food) {
-        <#code#>
-    }
-
-    func fetch(_ completion: @escaping (Result<[Food], Error>) -> Void) {
-        <#code#>
-    }
-
-    func isConfiguringQuery(_ filterRef: Bool, _ filterFreezer: Bool, _ filter: FoodData.Filter, _ kinds: [Food.FoodKind]) {
-        <#code#>
-    }
-
-    func paginate() {
-        <#code#>
-    }
-
-    func delete(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
-        <#code#>
-    }
-
-}
+// ModelはUIテスト、ビジネスロジックのテスト、データベースにつなげずに参照するのみ、
+// データベースの参照＋ビジネスロジックのメソッドの分けて
+// firebaseのMockで調べた方が良い
+// class FoodDataMock: FoodDataProtocol {
+//    func post(_ food: Food) {
+//        <#code#>
+//    }
+//
+//    func fetch(_ completion: @escaping (Result<[Food], Error>) -> Void) {
+//        <#code#>
+//    }
+//
+//    func isConfiguringQuery(_ filterRef: Bool, _ filterFreezer: Bool, _ filter: FoodData.Filter, _ kinds: [Food.FoodKind]) {
+//        <#code#>
+//    }
+//
+//    func paginate() {
+//        <#code#>
+//    }
+//
+//    func delete(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
+//        <#code#>
+//    }
+//
+// }

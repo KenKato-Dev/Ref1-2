@@ -90,37 +90,6 @@ class SignUp {
 //
 //        alart = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        
 
     }
 }
-//    func didTapSignUPButton() {
-//        let email: String = ""
-//        let password: String = ""
-//        let userName: String = ""
-//
-//        Auth.auth().createUser(withEmail: email, password: password) { [weak self]result, err in
-//            guard let self = self else {return}
-//            if let user = result?.user {
-//                let request = user.createProfileChangeRequest()
-//                request.displayName = userName
-//                request.commitChanges { [weak self]error in
-//                    guard let self = self else {return}
-//                    if error == nil {
-//                        user.sendEmailVerification { [weak self]error in
-//                            guard let self = self else {return}
-//                            if error == nil {
-//                                // 登録完了画面へ遷移する処理
-//                            }
-//                            // errorハンドル
-//                            self.showErrorIfNeeded(errorOrNil: error)
-//                        }
-//                    }
-//                    // errorハンドル
-//                    self.showErrorIfNeeded(errorOrNil: error)
-//                }
-//            }
-//            // errorハンドル
-//            self.showErrorIfNeeded(errorOrNil: err)
-//        }
-//    }

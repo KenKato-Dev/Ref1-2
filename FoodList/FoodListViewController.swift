@@ -133,19 +133,19 @@ extension FoodListViewController: FoodListPresenterOutput {
     func reloadData() {
         foodListTableView.reloadData()
     }
-    func present(_ inputView: FoodAppendViewController?) {
-        if let inputView = inputView {
-            present(inputView, animated: true)
-        } else {
-            print("presentのアンラップに失敗")
-        }
-    }
+//    func present1(_ inputView: FoodAppendViewController?) {
+//        if let inputView = inputView {
+//            present(inputView, animated: true)
+//        } else {
+//            print("presentのアンラップに失敗")
+//        }
+//    }
     func presentAlert(_ alert: UIAlertController) {
         present(alert, animated: true) {
         }
     }
     func presentErrorIfNeeded(_ errorOrNil: Error?) {
-        guard let error = errorOrNil else{return}
+        guard let error = errorOrNil else {return}
         let message = "エラー発生:\(error)"
         let alart = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -155,9 +155,9 @@ extension FoodListViewController: FoodListPresenterOutput {
     func dismiss() {
         dismiss(animated: true, completion: nil)
     }
-    func performSegue(_ foodNameTextLabel: String?) {
-        performSegue(withIdentifier: "toRecepieTableView", sender: foodNameTextLabel)
-    }
+//    func performSegue1(_ foodNameTextLabel: String?) {
+//        performSegue(withIdentifier: "toRecepieTableView", sender: foodNameTextLabel)
+//    }
     func setTitle(_ refigerator: Bool, _ freezer: Bool, _ selectedKinds: [Food.FoodKind], _ location: Food.Location) {
         // この処理でなく条件式も含めタイトルを入れるようにする
         if !refigerator,
@@ -230,5 +230,81 @@ extension FoodListViewController: FoodListPresenterOutput {
         self.sweetButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         self.othersButton.setImage(UIImage(named: "otherButton"), for: .normal)
         self.othersButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+    }
+    func showAlertInCell(_ storyboard: FoodAppendViewController?, _ array: [Food], _ row: Int) {
+        let alert = UIAlertController(title: "選択してください", message: "", preferredStyle: .actionSheet)
+        // アラートアクションシート一項目目
+        alert.addAction(.init(title: "数量・保存方法を変更する", style: .default, handler: { [self] _ in
+            let inputView = storyboard
+            guard let inputView = inputView,
+                  let modalImput = inputView.sheetPresentationController else {return}
+            modalImput.detents = [.medium()]
+
+            present(inputView, animated: true)
+            // 共通部分をここに収める
+            inputView.kindSelectText.isHidden = true
+            inputView.unitSelectButton.isEnabled = false
+            inputView.unitSelectButton.alpha = 1.0
+            // 下記で消せるがボタンがViewの一番上まで来てしまうためConstraintを上書きする必要あり
+            inputView.foodKindsStacks.isHidden = true
+            inputView.parentStacKView.spacing = 50
+            inputView.nameTextHeightconstraint.constant = 20
+            inputView.quantityTextHeightConstraint.constant = 20
+            if FoodListPresenter.isTapRow {
+
+                inputView.unitSelectButton.setTitle(inputView.unitSelectButton.unitButtonTranslator(unit: array[row].unit), for: .normal)
+                inputView.foodNameTextField.text = array[row].name
+                inputView.quantityTextField.text = array[row].quantity
+                if !inputView.foodNameTextField.text!.isEmpty && !inputView.quantityTextField.text!.isEmpty {
+                    inputView.preserveButton.isEnabled = true
+                } else {
+                    inputView.preserveButton.isEnabled = false
+                }
+                var locationString = ""
+                inputView.refrigeratorButton.addAction(.init(handler: { _ in
+                    // Model→Presenter→ここ
+                    locationString = Food.Location.refrigerator.rawValue
+                    self.foodListPresenter.setLocationInInputView(row, locationString: locationString)
+                }), for: .touchUpInside)
+                inputView.freezerButton.addAction(.init(handler: { _ in
+                    locationString = Food.Location.freezer.rawValue
+                    self.foodListPresenter.setLocationInInputView(row, locationString: locationString)
+                }), for: .touchUpInside)
+            }
+                inputView.preserveButton.addAction(.init(handler: { [self] _ in
+
+                    if inputView.foodNameTextField.text!.isEmpty {
+                        inputView.foodNameTextField.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+
+                    }
+                    if inputView.quantityTextField.text!.isEmpty {
+                        inputView.quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+                    }
+                    if !inputView.foodNameTextField.text!.isEmpty && !inputView.quantityTextField.text!.isEmpty {
+                        self.foodListPresenter.didTapPreserveOnInputView(foodName: inputView.foodNameTextField.text, foodQuantity: inputView.quantityTextField.text, foodinArray: array[row])
+                    }
+                }), for: .touchUpInside)
+        }))
+        // アラートアクションシート二項目目
+        alert.addAction(.init(title: "レシピを調べる", style: .default, handler: { _ in
+            self.performSegue(withIdentifier: "toRecepieTableView", sender: array[row].name)
+        }))
+        // アラートアクションシート三項目目
+        alert.addAction(.init(title: "キャンセル", style: .destructive, handler: { _ in
+        }))
+        present(alert, animated: true)
+    }
+    func showDeleteAlert() {
+        // 削除するかどうかアラート
+        let alert = UIAlertController(title: "削除しますか?", message: "", preferredStyle: .actionSheet)
+        alert.addAction(.init(title: "はい", style: .default, handler: { _ in
+            self.foodListPresenter.deleteAction()
+            self.reloadData()
+        }))
+        alert.addAction(.init(title: "いいえ", style: .destructive, handler: { _ in
+            self.foodListPresenter.resetCheckedID()
+            print("削除をキャンセル")
+        }))
+        present(alert, animated: true)
     }
 }
