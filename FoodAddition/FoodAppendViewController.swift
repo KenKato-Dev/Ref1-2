@@ -117,7 +117,6 @@ extension FoodAppendViewController: FoodAppendPresenterOutput {
 //            self.preserveButton.isEnabled = false
 //        }
     }
-
     func dismiss() {
         dismiss(animated: true, completion: nil)
     }

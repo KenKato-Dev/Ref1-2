@@ -23,17 +23,12 @@ struct User {
 class SignUp {
     private let db = Firestore.firestore()
     private var alart = UIAlertController(title: nil, message: "エラー発生:\(Error?.self)", preferredStyle: .alert)
-//    private var user = User(data: [
-//        "email": "",
-//        "userName": "",
-//        "createdAt": Timestamp()
-//    ])
-    func postUser(_ email: String, _ userName: String?, _ pass: String) {
+    func postUser(_ email: String, _ userName: String?, _ pass: String, _ completion: @escaping (Result<Void, Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now()) {
         Auth.auth().createUser(withEmail: email, password: pass) { result, err in
             if let err = err {
+                completion(.failure(err))
                 print("manager認証にエラー発生:\(err)")
-                self.addAlartActionIfNeeded(self.alart, err)
             }
             print("manager認証に成功")
             //
@@ -47,27 +42,15 @@ class SignUp {
             self.db.collection("Users").document(userID).setData(documentData) { err in
                 if let err = err {
                     print("manager情報保存に失敗：\(err)")
-                    self.addAlartActionIfNeeded(self.alart, err)
+                    completion(.failure(err))
                     return
                 }
+                completion(.success(()))
                 print("manager情報の保存に成功")
             }
         }
         }
     }
-//    func fetchUserInfo() {
-//        guard let uid = Auth.auth().currentUser?.uid else {return}
-//        self.db.collection("Users").document(uid).getDocument { documentSnapshot, error in
-//            if let error = error {
-//                print("ユーザー情報取得に失敗:\(error)")
-//                self.addAlartActionIfNeeded(self.alart, error)
-//                return
-//            }
-//            guard let documentSnapshot = documentSnapshot, let data = documentSnapshot.data() else {return}
-//            let user = User(data: data)
-//            self.user = user
-//        }
-//    }
     func fetchUserInfo(_ completion: @escaping (Result<User, Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             guard let uid = Auth.auth().currentUser?.uid else {return}
@@ -79,17 +62,8 @@ class SignUp {
                 }
                 guard let documentSnapshot = documentSnapshot, let data = documentSnapshot.data() else {return}
                 let user = User(data: data)
-//                self.user = user
                 completion(.success(user))
             }
         }
-    }
-    func addAlartActionIfNeeded(_ alart: UIAlertController, _ errorOrNil: Error?) {
-//        guard let error = errorOrNil else { return }
-//        let message = "エラー発生:\(error)"
-//
-//        alart = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-
     }
 }
