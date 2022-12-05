@@ -106,6 +106,9 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
               let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell
         else { return .init() }
         cell.foodConfigure(food: configuredFood)
+//        cell.isUserInteractionEnabled = self.foodListPresenter.isDelete
+//        cell.disableSelectCell(self.foodListPresenter.isDelete)
+//        cell.checkBoxButton.isEnabled = !self.foodListPresenter.isDelete
         let isChecked = foodListPresenter.checkedID[configuredFood.IDkey] ?? false
         let shouldShowCheckBox = !foodListPresenter.isDelete
         if shouldShowCheckBox {
@@ -193,6 +196,7 @@ extension FoodListViewController: FoodListPresenterOutput {
             locationButtonsStack.backgroundColor = .clear
             kindButtonsStack.backgroundColor = .clear
             tableViewBottomConstraint.constant = 165
+
         } else {
             locationButtonsStack.backgroundColor = .clear
             kindButtonsStack.backgroundColor = .white
@@ -283,15 +287,19 @@ extension FoodListViewController: FoodListPresenterOutput {
                     if !inputView.foodNameTextField.text!.isEmpty && !inputView.quantityTextField.text!.isEmpty {
                         self.foodListPresenter.didTapPreserveOnInputView(foodName: inputView.foodNameTextField.text, foodQuantity: inputView.quantityTextField.text, foodinArray: array[row])
                     }
+//                    self.foodListPresenter.resetIsTapRow()
                 }), for: .touchUpInside)
         }))
         // アラートアクションシート二項目目
         alert.addAction(.init(title: "レシピを調べる", style: .default, handler: { _ in
             self.performSegue(withIdentifier: "toRecepieTableView", sender: array[row].name)
+//            self.foodListPresenter.resetIsTapRow()
         }))
         // アラートアクションシート三項目目
         alert.addAction(.init(title: "キャンセル", style: .destructive, handler: { _ in
+//            self.foodListPresenter.resetIsTapRow()
         }))
+        self.foodListPresenter.resetIsTapRow()
         present(alert, animated: true)
     }
     func showDeleteAlert() {

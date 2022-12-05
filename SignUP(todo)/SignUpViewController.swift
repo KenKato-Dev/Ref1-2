@@ -32,9 +32,12 @@ extension SignUpViewController: SignUpPresenterOutput {
             self.userNameTextField.placeholder = "ユーザー名を入力してください"
             self.passwordTextField.placeholder = "パスワード(7桁)を入力してください"
     }
-    func presentErrorIfNeeded(_ alert: UIAlertController) {
-        present(alert, animated: true) {
-            print("エラー発生")
+    func presentErrorIfNeeded(_ errorOrNil: Error?) {
+        guard let error = errorOrNil else {return}
+        let message = "エラー発生:\(error)"
+        let alart = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alart, animated: true) {
         }
     }
 

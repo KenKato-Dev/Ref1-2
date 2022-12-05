@@ -33,6 +33,7 @@ final class FoodListPresenter {
     private(set) static var isTapRow = false
     private let foodUseCase: FoodUseCase
     private let db = Firestore.firestore()
+//    var disableCellSelect:((Bool)->Void)?
     init(foodData: FoodData, foodUseCase: FoodUseCase) {
         self.foodData = foodData
         self.foodUseCase = foodUseCase
@@ -261,5 +262,8 @@ final class FoodListPresenter {
     }
     func resetCheckedID() {
         self.checkedID = [:]
+    }
+    func resetIsTapRow() {
+        FoodListPresenter.isTapRow = false
     }
 }

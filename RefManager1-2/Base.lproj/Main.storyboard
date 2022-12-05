@@ -874,11 +874,11 @@
         <image name="fishButton" width="710" height="591"/>
         <image name="meatButton" width="710" height="591"/>
         <image name="milkAndEggButton" width="710" height="591"/>
-        <image name="otherButton" width="737" height="591"/>
+        <image name="otherButton" width="710" height="591"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="seasoningButton" width="710" height="591"/>
-        <image name="sweetButton" width="737" height="591"/>
+        <image name="sweetButton" width="710" height="591"/>
         <image name="trash" catalog="system" width="121" height="128"/>
         <image name="vegetableAndFruitButton" width="710" height="591"/>
         <namedColor name="Color">

@@ -69,7 +69,7 @@ struct Food: Equatable, Codable {
 }
 protocol FoodDataProtocol {
     func post(_ food: Food, _ completion: @escaping (Result<Void, Error>) -> Void)
-//    func post(_ food: Food) async
+    //    func post(_ food: Food) async
     func fetch(_ completion: @escaping (Result<[Food], Error>) -> Void)
     func isConfiguringQuery(_ filterRef: Bool, _ filterFreezer: Bool, _ filter: FoodData.Filter, _ kinds: [Food.FoodKind])
     func paginate()
@@ -188,33 +188,6 @@ final class FoodData: FoodDataProtocol {
         query = query.start(afterDocument: nextDocument).limit(to: 10)
 
     }
-
-    func delete2(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
-        guard !idKeys.isEmpty else {
-            return
-        }
-        let query = db.collection(self.collectionPath).whereField(self.fieldElementIDKey, in: idKeys)
-        query.getDocuments { snapshot, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            var count = 0
-            for document in snapshot!.documents { // ここにsuccessを入れるとfor分毎に呼ばれる
-                document.reference.delete { error in
-                    count += 1
-                    if let error = error {
-                        completion(.failure(error))
-                        return
-                    }
-                    if count == snapshot?.count {
-                        completion(.success(()))
-                    }
-                }
-            }
-            completion(.success(()))
-        }
-    }
     func delete(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
         guard !idKeys.isEmpty else {
             return
@@ -238,3 +211,29 @@ final class FoodData: FoodDataProtocol {
         }
     }
 }
+//    func delete2(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
+//        guard !idKeys.isEmpty else {
+//            return
+//        }
+//        let query = db.collection(self.collectionPath).whereField(self.fieldElementIDKey, in: idKeys)
+//        query.getDocuments { snapshot, error in
+//            if let error = error {
+//                completion(.failure(error))
+//                return
+//            }
+//            var count = 0
+//            for document in snapshot!.documents { // ここにsuccessを入れるとfor分毎に呼ばれる
+//                document.reference.delete { error in
+//                    count += 1
+//                    if let error = error {
+//                        completion(.failure(error))
+//                        return
+//                    }
+//                    if count == snapshot?.count {
+//                        completion(.success(()))
+//                    }
+//                }
+//            }
+//            completion(.success(()))
+//        }
+//    }
