@@ -19,31 +19,32 @@ class UnitSelectButton: UIButton {
         case people
     }
 
-    var selectedUnit = UnitMenu.initial
+    private (set) var selectedUnit = UnitMenu.initial
 
-    func unitSelection() {
+    func selectingUnit() {
         var unitActions = [UIMenuElement]()
         // グラム
         unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.gram), image: nil, state: selectedUnit == UnitMenu.gram ? .on : .off, handler: { _ in
             self.selectedUnit = .gram
-            self.unitSelection()
+            print(self.selectedUnit)
+            self.selectingUnit()
         }))
         // 個数
         unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.piece), image: nil, state: selectedUnit == UnitMenu.piece ? .on : .off, handler: { _ in
             self.selectedUnit = .piece
-            self.unitSelection()
+            self.selectingUnit()
         }))
         unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.bottle), image: nil, state: selectedUnit == UnitMenu.bottle ? .on : .off, handler: { _ in
             self.selectedUnit = .bottle
-            self.unitSelection()
+            self.selectingUnit()
         }))
         unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.bag), image: nil, state: selectedUnit == UnitMenu.bag ? .on : .off, handler: { _ in
             self.selectedUnit = .bag
-            self.unitSelection()
+            self.selectingUnit()
         }))
         unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.people), image: nil, state: selectedUnit == UnitMenu.people ? .on : .off, handler: { _ in
             self.selectedUnit = .people
-            self.unitSelection()
+            self.selectingUnit()
         }))
         menu = UIMenu(title: "", options: .displayInline, children: unitActions)
         showsMenuAsPrimaryAction = true
@@ -66,6 +67,13 @@ class UnitSelectButton: UIButton {
             trasnlatedUnit = "単位を選んでください"
         }
         return trasnlatedUnit
+    }
+    func isEnablingPreserveButton(foodNameTextField: Bool, quantityTextField: Bool, preserveButton: UIButton) {
+        if !foodNameTextField && !quantityTextField {
+            preserveButton.isEnabled = true
+        } else {
+            preserveButton.isEnabled = false
+        }
     }
     /*
      // Only override draw() if you perform custom drawing.

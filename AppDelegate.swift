@@ -14,18 +14,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-//        FoodData.shared.delete(idKeys: ["1C7F7790-54BA-4498-8861-2EF7F037D13D", "3E28A2AE-9282-4A64-A513-7B5037F8ACE6", "633D8AEF-B7B3-448D-A9CB-158FE30936CA"])
-//        FoodData.shared.fetchFoods { result in
-//            switch result {
-//            case .success(let foods):
-//                print(foods)
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-//        FoodData.shared.fetchListCount { count in
-//            print("リストの数：\(count)")
-//        }
+//        SignUp().criateUser("katoken8823@gmail.com", "test", "password6")
 
         // Override point for customization after application launch.
         return true

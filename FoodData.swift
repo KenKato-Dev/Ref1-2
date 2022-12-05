@@ -65,55 +65,91 @@ struct Food: Equatable, Codable {
         case seasoning
         case sweet
         case other
-//        case meat = "1.meet"
-//        case fish = "2.fish"
-//        case vegetableAndFruit = "3.vegetableAndFruit"
-//        case milkAndEgg = "4.milkAndEgg"
-//        case dish = "5.dish"
-//        case drink = "6.drink"
-//        case seasoning = "7.seasoning"
-//        case sweet = "8.sweet"
-//        case other = "9.other"
     }
 }
+protocol FoodDataProtocol {
+    func post(_ food: Food, _ completion: @escaping (Result<Void, Error>) -> Void)
+//    func post(_ food: Food) async
+    func fetch(_ completion: @escaping (Result<[Food], Error>) -> Void)
+    func isConfiguringQuery(_ filterRef: Bool, _ filterFreezer: Bool, _ filter: FoodData.Filter, _ kinds: [Food.FoodKind])
+    func paginate()
+    func delete(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void)
+}
 
-final class FoodData {
-    struct Fiter: Codable {
+final class FoodData: FoodDataProtocol {
+
+    struct Filter: Codable {
         var location: Food.Location
         var kindArray: [Food.FoodKind]
     }
-
     private let db = Firestore.firestore()
-    func post(_ food: Food) {
+    private let collectionPath = "foods"
+    private let fieldElementIDKey = "IDkey"
+    private let fieldElementLocation = "location"
+    private let fieldElementKind = "kind"
+    private (set) var query = Firestore.firestore().collection("foods").limit(to: 10)
+    private (set) var queryDocumentSnaphots: [QueryDocumentSnapshot] = []
+    private (set) var countOfDocuments = 0
+    func post(_ food: Food, _ completion: @escaping (Result<Void, Error>) -> Void) {
         // ドキュメントごとに保管、ドキュメントを他のものにするとDictionary方式に上書きされる
-        db.collection("foods").document("IDkey: \(food.IDkey)").setData([
-            "location": "\(food.location)",
-            "kind": "\(food.kind)",
-            "name": "\(food.name)",
-            "quantity": "\(food.quantity)",
-            "unit": "\(food.unit)",
-            "IDkey": "\(food.IDkey)",
-            "date": "\(food.date)",
-        ], merge: false) { err in
-            if let err = err {
-                print("FireStoreへの書き込みに失敗しました: \(err)")
-            } else {
-                print("FireStoreへの書き込みに成功しました")
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            self.db.collection(self.collectionPath).document("\(self.fieldElementIDKey): \(food.IDkey)").setData([
+                "location": "\(food.location)",
+                "kind": "\(food.kind)",
+                "name": "\(food.name)",
+                "quantity": "\(food.quantity)",
+                "unit": "\(food.unit)",
+                "IDkey": "\(food.IDkey)",
+                "date": "\(food.date)"
+            ], merge: false) { err in
+                if let err = err {
+                    completion(.failure(err))
+                    print("FireStoreへの書き込みに失敗しました: \(err)")
+                } else {
+                    completion(.success(()))
+                    print("FireStoreへの書き込みに成功しました")
+                }
             }
         }
     }
 
+    func postFromInputView(foodName: String?, foodQuantity: String?, foodinArray: Food, _ completion: @escaping (Result<Void, Error>) -> Void) {
+        self.db.collection(self.collectionPath).document("\(self.fieldElementIDKey): \(foodinArray.IDkey)").setData([
+            "name": "\(foodName!)",
+            "quantity": "\(foodQuantity!)",
+            "date": "\(Date())",
+            "IDkey": "\(foodinArray.IDkey)",
+            "kind": "\(foodinArray.kind)",
+            "unit": "\(foodinArray.unit)"
+        ], merge: true) { err in
+            if let err = err {
+                completion(.failure(err))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+    func setLocation(_ IDKey: String, _ location: String) {
+        self.db.collection(self.collectionPath).document("\(self.fieldElementIDKey): \(IDKey)").setData([
+            self.fieldElementLocation: "\(location)"
+        ])
+    }
     func fetch(_ completion: @escaping (Result<[Food], Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now()) { // +0.3を削除し動作確認
-            self.db.collection("foods").getDocuments { querySnapShot, error in
+
+            self.countOfDocuments = 0
+            self.query.getDocuments { querySnapShot, error in
                 if let err = error {
                     completion(.failure(err))
                     print("FireStoreへの読み込みに失敗しました: \(err)")
                 } else {
                     print("FireStoreへの読み込みに成功しました")
+                    guard let querySnapShot = querySnapShot else { return }
                     let decoder = JSONDecoder()
                     decoder.dateDecodingStrategy = .formatted(.iso8601Full)
-                    var dictinaryDocuments = querySnapShot?.documents.map { snapshot in
+                    self.queryDocumentSnaphots.append(contentsOf: querySnapShot.documents)
+                    self.countOfDocuments = querySnapShot.documents.count
+                    let dictinaryDocuments = querySnapShot.documents.map { snapshot in
                         snapshot.data()
                     }
                     do {
@@ -128,12 +164,36 @@ final class FoodData {
             }
         }
     }
+    func isConfiguringQuery(_ filterRef: Bool, _ filterFreezer: Bool, _ filter: Filter, _ kinds: [Food.FoodKind]) {
+        let kindArray = filter.kindArray.map {$0.rawValue}
+        let location = filter.location.rawValue
+        let kinds = kinds.map {$0.rawValue}
 
-    func delete(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
+        if (filterRef || filterFreezer) && !kinds.isEmpty {
+            // 1.冷蔵/冷凍がtrueでかつfoodも選択
+            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementLocation, isEqualTo: location).whereField(self.fieldElementKind, in: kindArray).limit(to: 10)
+        } else if (filterRef || filterFreezer) && kinds.isEmpty {
+            // 2.冷蔵/冷凍のみtrue
+            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementLocation, isEqualTo: location).limit(to: 10)
+        } else if (!filterRef && !filterFreezer) && !kinds.isEmpty {
+            // 3.foodのみ選択
+            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementKind, in: kindArray).limit(to: 10)
+        } else {
+            // 4.何も選択されていない状態
+            self.query = Firestore.firestore().collection(self.collectionPath).limit(to: 10)
+        }
+    }
+    func paginate() {
+        guard let nextDocument = queryDocumentSnaphots.last else { return}
+        query = query.start(afterDocument: nextDocument).limit(to: 10)
+
+    }
+
+    func delete2(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
         guard !idKeys.isEmpty else {
             return
         }
-        let query = db.collection("foods").whereField("IDkey", in: idKeys)
+        let query = db.collection(self.collectionPath).whereField(self.fieldElementIDKey, in: idKeys)
         query.getDocuments { snapshot, error in
             if let error = error {
                 completion(.failure(error))
@@ -153,6 +213,28 @@ final class FoodData {
                 }
             }
             completion(.success(()))
+        }
+    }
+    func delete(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
+        guard !idKeys.isEmpty else {
+            return
+        }
+        let query = db.collection(self.collectionPath).whereField(self.fieldElementIDKey, in: idKeys)
+        query.getDocuments { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            let batch = self.db.batch()
+            guard let snapshot = snapshot else {return}
+            snapshot.documents.forEach {batch.deleteDocument($0.reference)}
+            batch.commit { error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
+                }
+            }
         }
     }
 }

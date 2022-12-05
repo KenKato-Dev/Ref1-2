@@ -6,9 +6,6 @@
 //
 
 import UIKit
-// エラー発生Thread 1: "[<UITableViewCell 0x13b642400> setValue:forUndefinedKey:]: this class is not key value coding-compliant for the key checkBoxButton."
-// サブクラスを入れていないからかと緊急的にcheckBoxButtonを入れたがうまくいかず
-// ターゲットからモジュールを先導を選択しエラー解決、Inherit module from targetカスタムクラス作成時に使用する
 class TableViewCell: UITableViewCell {
     // 下記enumを追加、normal. trueとfalseの3肢を用意
     // checkboxの出現、checkboxのsetImage切り替えをこれでまとめる
@@ -26,43 +23,29 @@ class TableViewCell: UITableViewCell {
     @IBOutlet var unitTextLabel: UILabel!
     // インスタンスを追加
     private var state: State = .normal
-//    var showCheckBox: Bool = false {
-//        didSet {
-//            // Boolの関係性を理解し
-//            checkBoxButton.isHidden = showCheckBox
-//        }
-//    }
-
     var didTapCheckBox: ((Bool) -> Void)?
     // awakeFromNib
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         checkBoxButton.addAction(.init(handler: { _ in
-            //            self.checkBoxButton.isTap.toggle()
-            //            self.checkBoxButton.updateAppearance(isChecked: self.checkBoxButton.isTap)
-            //            self.didTapCheckBox?(self.checkBoxButton.isTap)
+
             if case let .shownCheckBox(isChecked) = self.state {
                 let nextIsChecked = !isChecked
-                // 下記記載はconfigureと重複するため不要
-//                self.checkBoxButton.updateAppearance(isChecked: nextIsChecked)
                 self.didTapCheckBox?(nextIsChecked)
                 self.configure(state: .shownCheckBox(isChecked: nextIsChecked))
             }
         }), for: .touchUpInside)
     }
 
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//    }
     override func prepareForReuse() {
         super.prepareForReuse()
         configure(state: .normal)
     }
 
     func foodConfigure(food: Food) {
-        foodImage.image = UIImage(named: "\(food.kind.rawValue)") // foodArray[indexPath.row]
         preserveMethodTextLable.text = locationTranslator(location: food.location)
+        foodImage.image = UIImage(named: "\(food.kind.rawValue)") // ?.compositeText(preserveMethodTextLable.text as! NSString)
         foodNameTextLabel.text = food.name
         quantityTextLabel.text = String(food.quantity)
         unitTextLabel.text = UnitSelectButton().unitButtonTranslator(unit: food.unit)

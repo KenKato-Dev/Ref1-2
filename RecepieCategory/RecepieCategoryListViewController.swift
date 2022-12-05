@@ -8,6 +8,7 @@
 import UIKit
 
 class RecepieCategoryListViewController: UIViewController {
+
     @IBOutlet var recepieTable: UITableView!
     private let recepieCategoryListPresenter = RecepieCategoryListPresenter(recepieModel: RecepieModel())
     override func viewDidLoad() {
@@ -36,7 +37,6 @@ extension RecepieCategoryListViewController: UITableViewDelegate, UITableViewDat
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recepieCell", for: indexPath) as? RecepieTableViewCell
-        cell?.circlefill.text = "●"
         cell?.categoryName.text = recepieCategoryListPresenter.cellForRowAt(indexPath: indexPath)
         return cell!
     }
@@ -60,6 +60,14 @@ extension RecepieCategoryListViewController: RecepieCategoryListPresenterOutput 
     func setTitle() {
         if let title = navigationItem.title {
             navigationItem.title = "\(title)のレシピ集"
+        }
+    }
+    func presentErrorIfNeeded(_ errorOrNil: Error?) {
+        guard let error = errorOrNil else {return}
+        let message = "エラー発生:\(error)"
+        let alart = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alart, animated: true) {
         }
     }
 }

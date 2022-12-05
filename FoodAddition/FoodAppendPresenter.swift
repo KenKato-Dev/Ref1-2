@@ -6,9 +6,14 @@
 //
 
 import Foundation
+import UIKit
 protocol FoodAppendPresenterOutput: AnyObject {
     func settingTextfield()
     func dismiss()
+    func didTapPreserveButtonWithoutEssential()
+    func presentErrorIfNeeded(_ errorOrNil: Error?)
+    func resettingButtonsImage()
+    func animateButton(_ location: Food.Location)
 }
 
 final class FoodAppendPresenter {
@@ -30,13 +35,28 @@ final class FoodAppendPresenter {
     func didTaplocationButton(location: Food.Location) {
         if FoodListPresenter.isTapRow == false {
             baseArray.location = location
+            self.foodAppendPresenterOutput?.animateButton(location)
         } else {
             print("editの冷蔵ボタン")
         }
     }
 
-    func didTapKindButton(kind: Food.FoodKind) {
+    func didTapKindButton(kind: Food.FoodKind, _ button: UIButton) { //
         baseArray.kind = kind
+        self.foodAppendPresenterOutput?.resettingButtonsImage()
+        var image = UIImage(named: kind.rawValue + "Button")
+        if button.imageView!.image == UIImage(named: kind.rawValue + "Button") {
+            image = button.imageView!.image!.compositeImage(
+                UIImage(named: kind.rawValue + "Button")!,
+                button.imageView!.image!,
+                UIImage(named: "selectedButton")!,
+                0.5)
+        }
+        if baseArray.kind == kind {
+            button.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            button.setImage(image, for: .normal)
+//            button.isHighlighted = true
+        }
     }
 
     func didTapCancelButton() {
@@ -44,6 +64,42 @@ final class FoodAppendPresenter {
     }
 
     func didTapPreserveButton(foodName: String?, quantity: String?, unit: UnitSelectButton.UnitMenu) {
+        //
+        if FoodListPresenter.isTapRow == false {
+//        if foodName!.isEmpty {
+//            foodName!.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+//
+//        }
+//        if quantity!.isEmpty {
+//            self!.quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+//        }
+            self.foodAppendPresenterOutput?.didTapPreserveButtonWithoutEssential()
+        if !foodName!.isEmpty && !quantity!.isEmpty {
+            if let foodName = foodName {
+                baseArray.name = foodName
+            } else {return}
+            if let quantity = quantity {
+                baseArray.quantity = quantity
+            } else {return}
+            baseArray.unit = unit
+            foodData.post(self.baseArray) { result in
+                switch result {
+                case .success:
+                    self.foodAppendPresenterOutput?.dismiss()
+                    print("オリジナルのFuncが動作")
+                case let .failure(error):
+                    self.foodAppendPresenterOutput?.presentErrorIfNeeded(error)
+                    print(error)
+                }
+            }
+
+        }
+        //
+        } else {
+            print(FoodListPresenter.isTapRow)
+        }
+    }
+    func didEditingTextFields(foodName: String?, quantity: String?, unit: UnitSelectButton.UnitMenu) {
         if FoodListPresenter.isTapRow == false {
             if let foodName = foodName {
                 baseArray.name = foodName
@@ -51,14 +107,15 @@ final class FoodAppendPresenter {
             if let quantity = quantity {
                 baseArray.quantity = quantity
             }
-//             = String(Double(quantityTextField.text!) ?? 0.0) ?? "0.0"
             baseArray.unit = unit
-//            FoodData.shared.add(baseArray)
-            foodData.post(baseArray)
-            foodAppendPresenterOutput?.dismiss()
             print("オリジナルのFuncが動作")
         } else {
             print(FoodListPresenter.isTapRow)
         }
     }
+//    func disablingPreserveButton() {
+//        if FoodListPresenter.isTapRow == false {
+//        self.foodAppendPresenterOutput?.didTapPreserveButtonWithoutEssential()
+//        }
+//    }
 }

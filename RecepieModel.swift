@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 struct Small: Codable {
     let categoryName: String
     let parentCategoryId: String
@@ -14,7 +15,7 @@ struct Small: Codable {
 }
 
 class RecepieModel {
-    func fetchCategory(keyword: String, _ completion: @escaping (Result<[Small], Error>) -> Void) {
+    func fetch(_ keyword: String, _ completion: @escaping (Result<[Small], Error>) -> Void) {
         guard let url = URL(string:
             "https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426?format=json&applicationId=1050766026714426702"
         ) else { return }
@@ -26,20 +27,23 @@ class RecepieModel {
                 }
                 let decoder = JSONDecoder()
                 do {
-//                    var mediumArray:[MediumAndSmall]=[]
                     var array: [Small] = []
                     // 全体をDictionaryに変換
-                    // オフラインの際ここでエラー発生、エラーハンドリングが必要
-                    let recepieData = try JSONSerialization.jsonObject(with: data!) as? [String: Any]
+                    // オフラインの際ここでエラー発生、エラーハンドリング
+                    guard let data = data else {
+                        return
+                    }
+                    let recepieData = try JSONSerialization.jsonObject(with: data) as? [String: Any]
                     // 全体からKeyで内部をDictionaryにて取り出し
                     let result = recepieData?["result"] as? [String: Any]
                     // dataからsmallに変換
                     let small = result?["small"] as? [[String: Any]]
-                    let smallData = try JSONSerialization.data(withJSONObject: small!, options: .prettyPrinted)
+                    guard let small = small else {return}
+                    let smallData = try JSONSerialization.data(withJSONObject: small, options: .prettyPrinted)
                     let decodedSmall = try decoder.decode([Small].self, from: smallData)
                     array.append(contentsOf: decodedSmall)
                     // 食材名を含むものを配列から取り出す、今回は鶏肉
-                    var filteredSmall = array.filter { $0.categoryName.contains(keyword) }
+                    let filteredSmall = array.filter { $0.categoryName.contains(keyword) }
                     completion(.success(filteredSmall))
                 } catch {
                     print("デコードに失敗:\(error)")
