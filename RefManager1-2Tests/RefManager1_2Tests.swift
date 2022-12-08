@@ -10,32 +10,42 @@ import XCTest
 
 class RefManager1_2Tests: XCTestCase {
     var viewController: FoodListViewController!
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        try super.setUpWithError()
-        let storyboard = UIStoryboard(name: "viewController", bundle: nil)
-        self.viewController = storyboard.instantiateInitialViewController() as? FoodListViewController
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        try super.tearDownWithError()
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        viewController.loadViewIfNeeded()
-
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
+    var food = Food(location: .refrigerator, kind: .other, name: "unittest", quantity: "10", unit: .piece, IDkey: "IDKeyForSample", date: .now)
+    let model = FoodData()
+    func test_post機能() {
+        self.model.post(self.food) { result in
+            switch result {
+            case let .success(success):
+                print(success)
+            case let .failure(err):
+                print(err)
+            }
         }
     }
-
+    func test_fetch機能() {
+        self.model.fetch { result in
+            switch result {
+            case let .success(foods):
+                print(foods)
+            case let .failure(err):
+                print(err)
+            }
+        }
+    }
+    func test_delete機能() {
+        let ids = [UUID().uuidString]
+        self.model.delete(ids) { result in
+            switch result {
+            case let .success(success):
+                print(success)
+            case let .failure(err):
+                print(err)
+            }
+        }
+    }
+    func test(){
+        self.model.
+    }
 }
 // ModelはUIテスト、ビジネスロジックのテスト、データベースにつなげずに参照するのみ、
 // データベースの参照＋ビジネスロジックのメソッドの分けて

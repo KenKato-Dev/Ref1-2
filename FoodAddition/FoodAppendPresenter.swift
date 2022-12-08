@@ -74,7 +74,7 @@ final class FoodAppendPresenter {
 //            self!.quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
 //        }
             self.foodAppendPresenterOutput?.didTapPreserveButtonWithoutEssential()
-        if !foodName!.isEmpty && !quantity!.isEmpty {
+            if !foodName!.isEmpty && !quantity!.isEmpty && unit != .initial {
             if let foodName = foodName {
                 baseArray.name = foodName
             } else {return}

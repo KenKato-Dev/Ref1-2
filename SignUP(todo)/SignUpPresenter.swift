@@ -10,7 +10,7 @@ import Firebase
 
 protocol SignUpPresenterOutput: AnyObject {
     func showEssential()
-    func presentErrorIfNeeded(_ alert: UIAlertController)
+    func presentErrorIfNeeded(_ errorOrNil: Error?)
 }
 class SignUpPresenter {
     private let signUp: SignUp
@@ -26,7 +26,14 @@ class SignUpPresenter {
         if email.isEmpty || pass.isEmpty || pass.count < 6 || userName.isEmpty {
             self.signUpPresenterOutput?.showEssential()
         } else {
-            self.signUp.postUser(email, userName, pass)
+            self.signUp.postUser(email, userName, pass) { result in
+                switch result {
+                case .success:
+                    break
+                case let .failure(error):
+                    self.signUpPresenterOutput?.presentErrorIfNeeded(error)
+                }
+            }
         }
 
     }
