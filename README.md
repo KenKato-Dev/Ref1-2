@@ -12,8 +12,8 @@ You can manage food stylishly with following 5 feature.
 ・easily understandable cell provides how many is in which location from when.  
 ・display contents quickly by pagination even if lots of item has been preserved on cloud.  
 ## Usage
-<img src="https://user-images.githubusercontent.com/84781651/206842125-53fdc0ab-dbff-4bb1-8601-d78b61dc3181.png" width="25%">
-## Todo
+<img src="https://user-images.githubusercontent.com/84781651/206842125-53fdc0ab-dbff-4bb1-8601-d78b61dc3181.png" width="25%">  
+## Todo  
 ・Account and share function.
 ・Preservation function of several foods at once.
 ・search function.
