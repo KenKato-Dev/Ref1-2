@@ -5,9 +5,9 @@ You can manage food stylishly with following 5 feature.
 ・Can preserve food classified by 2type of preserve location(Refrigerator/freezer),9 food type in total such as meat, seafood, seasoning and so forth, and selectable 5 kinds of quantity units.  
 ・Can understand where everything was by location button and food type buttons.  
 ・Easily can update name, quantity and location.  
-・Can check recommended recepies on web site using food you chose.  
+・Can check recommended recipes on web site using food you chose.  
 ・Can delete several foods at once.
-## Charactor
+## Character
 ・Can control display contents by buttons placed on bottom of screen with one hand easily when you’re shopping or on your way home.  
 ・easily understandable cell provides how many is in which location from when.  
 ・display contents quickly by pagination even if lots of item has been preserved on cloud.  
@@ -15,8 +15,9 @@ You can manage food stylishly with following 5 feature.
 <img src="https://user-images.githubusercontent.com/84781651/206842125-53fdc0ab-dbff-4bb1-8601-d78b61dc3181.png" width="25%">
 
 ## Todo
-・Account and share function.  
-・Preservation function of several foods at once.  
-・search function.  
-・alart function of expiry date.  
+・Account and share function.
+・Preservation of several foods at once.  
+・Keyword search.  
+・notification/alert of expiry date.  
 ・release on appstore.  
+
