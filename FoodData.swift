@@ -87,7 +87,7 @@ final class FoodData: FoodDataProtocol {
     private let fieldElementIDKey = "IDkey"
     private let fieldElementLocation = "location"
     private let fieldElementKind = "kind"
-    private (set) var query = Firestore.firestore().collection("foods").limit(to: 10)
+    private (set) var query = Firestore.firestore().collection("foods").order(by: "kind").limit(to: 10)
     private (set) var queryDocumentSnaphots: [QueryDocumentSnapshot] = []
     private (set) var countOfDocuments = 0
     func post(_ food: Food, _ completion: @escaping (Result<Void, Error>) -> Void) {
@@ -155,7 +155,7 @@ final class FoodData: FoodDataProtocol {
                     do {
                         let data = try JSONSerialization.data(withJSONObject: dictinaryDocuments, options: .prettyPrinted)
                         var decodedFoods = try decoder.decode([Food].self, from: data)
-                        decodedFoods = decodedFoods.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
+//                        decodedFoods = decodedFoods.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
                         completion(.success(decodedFoods))
                     } catch {
                         completion(.failure(error))
@@ -174,13 +174,16 @@ final class FoodData: FoodDataProtocol {
             self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementLocation, isEqualTo: location).whereField(self.fieldElementKind, in: kindArray).limit(to: 10)
         } else if (filterRef || filterFreezer) && kinds.isEmpty {
             // 2.冷蔵/冷凍のみtrue
-            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementLocation, isEqualTo: location).limit(to: 10)
+            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementLocation, isEqualTo: location).order(by: self.fieldElementKind).limit(to: 10)
         } else if (!filterRef && !filterFreezer) && !kinds.isEmpty {
             // 3.foodのみ選択
-            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementKind, in: kindArray).limit(to: 10)
+//            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementKind, in: kindArray).order(by: self.fieldElementKind).limit(to: 10)
+            self.query = self.db.collection(self.collectionPath).order(by: self.fieldElementKind).
+//            kindArray.forEach {self.db.collection(self.collectionPath).whereField(self.fieldElementKind, isEqualTo: $0)}
+//            kindArray.forEach {print($0)}
         } else {
             // 4.何も選択されていない状態
-            self.query = Firestore.firestore().collection(self.collectionPath).limit(to: 10)
+            self.query = Firestore.firestore().collection(self.collectionPath).order(by: self.fieldElementKind).limit(to: 10)
         }
     }
     func paginate() {

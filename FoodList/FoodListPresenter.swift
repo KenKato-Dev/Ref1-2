@@ -57,7 +57,8 @@ final class FoodListPresenter {
                 switch result {
                 case let .success(foods):
                     self.array = foods
-                    self.array = self.array.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
+//                    self.array.append(contentsOf: foods)
+//                    self.array = self.array.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
                     self.foodListPresenterOutput?.reloadData()
                 case let .failure(error):
                     print(error)
@@ -73,7 +74,7 @@ final class FoodListPresenter {
                     switch result {
                     case let .success(foods):
                         self.array.append(contentsOf: foods)
-                        self.array = self.array.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
+//                        self.array = self.array.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
                         self.foodListPresenterOutput?.reloadData()
                     case let .failure(error):
                         print(error)
