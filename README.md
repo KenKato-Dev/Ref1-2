@@ -15,7 +15,7 @@ You can manage food stylishly with following 5 feature.
 <img src="https://user-images.githubusercontent.com/84781651/206842125-53fdc0ab-dbff-4bb1-8601-d78b61dc3181.png" width="25%">
 
 ## Todo
-・Account and share function.
+・Account and share function.  
 ・Preservation of several foods at once.  
 ・Keyword search.  
 ・notification/alert of expiry date.  
