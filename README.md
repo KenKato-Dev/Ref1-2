@@ -1,5 +1,5 @@
  # RefManager （tentative）
-REFManager is an iOS application for managing food like ingredients, beverages, dishes, sweets, etc. in refrigerator, which is configured by Swift and Firebase.
+REFManager is an iOS application for managing food like ingredients, beverages, dishes, sweets, etc. in refrigerator, which is configured by Swift and Firebase and Rakuten recepie API.
 ## About RefManager
 You can manage food stylishly with following 5 feature.  
 ・Can preserve food classified by 2type of preserve location(Refrigerator/freezer),9 food type in total such as meat, seafood, seasoning and so forth, and selectable 5 kinds of quantity units.  
