@@ -13,6 +13,7 @@ You can manage food stylishly with following 5 feature.
 ・display contents quickly by pagination even if lots of item has been preserved on cloud.
 ## Composition  
 The App is managed with custom strcut “Food” and Cloud firestore. Composition of Food is as follows.  
+
 ```swift
 struct Food: Equatable, Codable {
     var location: Location
@@ -39,10 +40,12 @@ struct Food: Equatable, Codable {
     }
 }
 ```
-It is composed by 8 properties, and location managing preserved location, kind managing food kinds and unit managing quantity unit of food are enum. It confirms Codable but not CodingKey.
-Tree composition of Firestore is as follows.
-<img width="1000" alt="スクリーンショット 2022-12-12 13 21 39" src="https://user-images.githubusercontent.com/84781651/206960175-2393d5a3-a101-41e1-b6bb-30b3f8b20ce0.png">
 
+It is composed by 8 properties, and location managing preserved location, kind managing food kinds and unit managing quantity unit of food are enum. It confirms Codable but not CodingKey.  
+Tree composition of Firestore is as follows.
+<img width="1200" alt="スクリーンショット 2022-12-12 13 21 39" src="https://user-images.githubusercontent.com/84781651/206960175-2393d5a3-a101-41e1-b6bb-30b3f8b20ce0.png">
+
+Based on an initial layer "foods", food struct items are stored in second layer "document" with UUID.
 
 ## Installation
 
