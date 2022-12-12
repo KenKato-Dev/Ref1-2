@@ -48,7 +48,7 @@ Tree composition of Firestore is as follows.
 Based on an initial layer "foods", food struct items are stored in second layer "document" with UUID.
 
 ## Installation
-
+googleservice-info.plist is neccesary for using this app. Please get it from Firebase account.
 ## Usage
 <img src="https://user-images.githubusercontent.com/84781651/206842125-53fdc0ab-dbff-4bb1-8601-d78b61dc3181.png" width="25%">
 
