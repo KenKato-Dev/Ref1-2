@@ -41,7 +41,7 @@ struct Food: Equatable, Codable {
 ```
 It is composed by 8 properties, and location managing preserved location, kind managing food kinds and unit managing quantity unit of food are enum. It confirms Codable but not CodingKey.
 Tree composition of Firestore is as follows.
-<img width="500" alt="スクリーンショット 2022-12-12 13 21 39" src="https://user-images.githubusercontent.com/84781651/206960175-2393d5a3-a101-41e1-b6bb-30b3f8b20ce0.png">
+<img width="1000" alt="スクリーンショット 2022-12-12 13 21 39" src="https://user-images.githubusercontent.com/84781651/206960175-2393d5a3-a101-41e1-b6bb-30b3f8b20ce0.png">
 
 
 ## Installation
