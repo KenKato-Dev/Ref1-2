@@ -45,10 +45,10 @@ It is composed by 8 properties, and location managing preserved location, kind m
 Tree composition of Firestore is as follows.
 <img width="1200" alt="スクリーンショット 2022-12-12 13 21 39" src="https://user-images.githubusercontent.com/84781651/206960175-2393d5a3-a101-41e1-b6bb-30b3f8b20ce0.png">
 
-Based on an initial layer "foods", food struct items are stored in second layer "document" with UUID.
+Based on an initial layer "foods", food struct items are stored in second layer "document" with UUID. concrete information like name or quantity is stored in each field of third layer.  
 
 ## Installation
-googleservice-info.plist is neccesary for using this app. Please get it from Firebase account.
+googleservice-info.plist is neccesary for using this app. Please get it from Firebase account.  
 ## Usage
 <img src="https://user-images.githubusercontent.com/84781651/206842125-53fdc0ab-dbff-4bb1-8601-d78b61dc3181.png" width="25%">
 
