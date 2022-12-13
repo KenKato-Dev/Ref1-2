@@ -65,6 +65,29 @@ struct Food: Equatable, Codable {
         case seasoning
         case sweet
         case other
+
+        var kindNumber: String {
+            switch self {
+            case .meat:
+                return "1"
+            case .fish:
+                return "2"
+            case .vegetableAndFruit:
+                return "3"
+            case .milkAndEgg:
+                return "4"
+            case .dish:
+                return "5"
+            case .drink:
+                return "6"
+            case .seasoning:
+                return "7"
+            case .sweet:
+                return "8"
+            case .other:
+                return "9"
+            }
+        }
     }
 }
 protocol FoodDataProtocol {
@@ -74,6 +97,7 @@ protocol FoodDataProtocol {
     func isConfiguringQuery(_ filterRef: Bool, _ filterFreezer: Bool, _ filter: FoodData.Filter, _ kinds: [Food.FoodKind])
     func paginate()
     func delete(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void)
+    func returnKindNumber(_ kind: Food.FoodKind)
 }
 
 final class FoodData: FoodDataProtocol {
@@ -96,6 +120,7 @@ final class FoodData: FoodDataProtocol {
             self.db.collection(self.collectionPath).document("\(self.fieldElementIDKey): \(food.IDkey)").setData([
                 "location": "\(food.location)",
                 "kind": "\(food.kind)",
+                "kindNumber": "\(food.kind.kindNumber)", //
                 "name": "\(food.name)",
                 "quantity": "\(food.quantity)",
                 "unit": "\(food.unit)",
@@ -120,6 +145,7 @@ final class FoodData: FoodDataProtocol {
             "date": "\(Date())",
             "IDkey": "\(foodinArray.IDkey)",
             "kind": "\(foodinArray.kind)",
+            "kindNumber": "\(foodinArray.kind.kindNumber)",
             "unit": "\(foodinArray.unit)"
         ], merge: true) { err in
             if let err = err {
@@ -171,19 +197,19 @@ final class FoodData: FoodDataProtocol {
 
         if (filterRef || filterFreezer) && !kinds.isEmpty {
             // 1.冷蔵/冷凍がtrueでかつfoodも選択
-            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementLocation, isEqualTo: location).whereField(self.fieldElementKind, in: kindArray).limit(to: 10)
+            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementLocation, isEqualTo: location).whereField(self.fieldElementKind, in: kindArray).order(by: "kindNumber").limit(to: 10)
         } else if (filterRef || filterFreezer) && kinds.isEmpty {
             // 2.冷蔵/冷凍のみtrue
-            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementLocation, isEqualTo: location).order(by: self.fieldElementKind).limit(to: 10)
+            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementLocation, isEqualTo: location).order(by: "kindNumber").limit(to: 10)
         } else if (!filterRef && !filterFreezer) && !kinds.isEmpty {
             // 3.foodのみ選択
-//            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementKind, in: kindArray).order(by: self.fieldElementKind).limit(to: 10)
-            self.query = self.db.collection(self.collectionPath).order(by: self.fieldElementKind).
+            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementKind, in: kindArray).order(by: "kindNumber").limit(to: 10)
+//            self.query = self.db.collection(self.collectionPath).order(by: self.fieldElementKind)
 //            kindArray.forEach {self.db.collection(self.collectionPath).whereField(self.fieldElementKind, isEqualTo: $0)}
 //            kindArray.forEach {print($0)}
         } else {
             // 4.何も選択されていない状態
-            self.query = Firestore.firestore().collection(self.collectionPath).order(by: self.fieldElementKind).limit(to: 10)
+            self.query = Firestore.firestore().collection(self.collectionPath).order(by: "kindNumber").limit(to: 10)
         }
     }
     func paginate() {
@@ -213,30 +239,7 @@ final class FoodData: FoodDataProtocol {
             }
         }
     }
+    func returnKindNumber(_ kind: Food.FoodKind) {
+
+    }
 }
-//    func delete2(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
-//        guard !idKeys.isEmpty else {
-//            return
-//        }
-//        let query = db.collection(self.collectionPath).whereField(self.fieldElementIDKey, in: idKeys)
-//        query.getDocuments { snapshot, error in
-//            if let error = error {
-//                completion(.failure(error))
-//                return
-//            }
-//            var count = 0
-//            for document in snapshot!.documents { // ここにsuccessを入れるとfor分毎に呼ばれる
-//                document.reference.delete { error in
-//                    count += 1
-//                    if let error = error {
-//                        completion(.failure(error))
-//                        return
-//                    }
-//                    if count == snapshot?.count {
-//                        completion(.success(()))
-//                    }
-//                }
-//            }
-//            completion(.success(()))
-//        }
-//    }

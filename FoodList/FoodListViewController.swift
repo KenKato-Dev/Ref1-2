@@ -235,7 +235,7 @@ extension FoodListViewController: FoodListPresenterOutput {
         self.othersButton.setImage(UIImage(named: "otherButton"), for: .normal)
         self.othersButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
     }
-    func showAlertInCell(_ storyboard: FoodAppendViewController?, _ array: [Food], _ row: Int) {
+    func showAlertInCell(_ storyboard: FoodAppendViewController?, _ array: [Food], _ row: Int, _ isTapRow: Bool) {
         let alert = UIAlertController(title: "選択してください", message: "", preferredStyle: .actionSheet)
         // アラートアクションシート一項目目
         alert.addAction(.init(title: "数量・保存方法を変更する", style: .default, handler: { [self] _ in
@@ -253,9 +253,12 @@ extension FoodListViewController: FoodListPresenterOutput {
             inputView.foodKindsStacks.isHidden = true
             inputView.parentStacKView.spacing = 50
             inputView.nameTextHeightconstraint.constant = 20
-            inputView.quantityTextHeightConstraint.constant = 20
-            if FoodListPresenter.isTapRow {
 
+            inputView.quantityTextHeightConstraint.constant = 20
+            print("staticRow：\(row)")
+            print("IsTapRow：\(FoodListPresenter.isTapRow),\(isTapRow)")
+            // 以下直接FoodListPresenter.isTapRowだと不可能
+            if isTapRow {
                 inputView.unitSelectButton.setTitle(inputView.unitSelectButton.unitButtonTranslator(unit: array[row].unit), for: .normal)
                 inputView.foodNameTextField.text = array[row].name
                 inputView.quantityTextField.text = array[row].quantity

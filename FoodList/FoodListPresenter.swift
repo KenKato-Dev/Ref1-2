@@ -19,7 +19,7 @@ protocol FoodListPresenterOutput: AnyObject {
     func didTapDeleteButton(_ isDelete: Bool)
     func animateButton(_ isFilteringRef: Bool, _ isFilteringFreezer: Bool)
     func resetButtonColor()
-    func showAlertInCell(_ storyboard: FoodAppendViewController?, _ array: [Food], _ row: Int)
+    func showAlertInCell(_ storyboard: FoodAppendViewController?, _ array: [Food], _ row: Int, _ isTapRow: Bool)
     func showDeleteAlert()
 }
 
@@ -188,7 +188,10 @@ final class FoodListPresenter {
     }
     func didSelectRow(storyboard: FoodAppendViewController?, row: Int) {
         FoodListPresenter.isTapRow = true
-        self.foodListPresenterOutput?.showAlertInCell(storyboard, self.array, row)
+        self.foodListPresenterOutput?.showAlertInCell(storyboard, self.array, row, FoodListPresenter.isTapRow)
+        //
+
+        //
     }
      func didTapPreserveOnInputView(foodName: String?, foodQuantity: String?, foodinArray: Food) {
         print("inputのアクションが操作")

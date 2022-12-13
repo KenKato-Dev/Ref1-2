@@ -55,7 +55,7 @@ final class FoodAppendPresenter {
         if baseArray.kind == kind {
             button.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             button.setImage(image, for: .normal)
-//            button.isHighlighted = true
+            print(baseArray.kind.kindNumber)
         }
     }
 
@@ -66,13 +66,6 @@ final class FoodAppendPresenter {
     func didTapPreserveButton(foodName: String?, quantity: String?, unit: UnitSelectButton.UnitMenu) {
         //
         if FoodListPresenter.isTapRow == false {
-//        if foodName!.isEmpty {
-//            foodName!.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
-//
-//        }
-//        if quantity!.isEmpty {
-//            self!.quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
-//        }
             self.foodAppendPresenterOutput?.didTapPreserveButtonWithoutEssential()
             if !foodName!.isEmpty && !quantity!.isEmpty && unit != .initial {
             if let foodName = foodName {
