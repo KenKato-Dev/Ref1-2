@@ -13,14 +13,12 @@ class RecepieTableViewCell: UITableViewCell {
     @IBOutlet var categoryName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         self.isSettingIconImage()
         self.isSettingCategoryName()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
     }
     func isSettingIconImage() {
         let image = UIImage(systemName: "fork.knife.circle")?.withTintColor(.systemOrange)

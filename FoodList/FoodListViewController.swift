@@ -9,11 +9,11 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import UIKit
-
+// FoodListVIewVC
 final class FoodListViewController: UIViewController {
     private let foodListPresenter = FoodListPresenter(foodData: FoodData(), foodUseCase: FoodUseCase())
-
     @IBOutlet var addButtton: AddButton!
+    @IBOutlet var deleteButton: DeleteButton!
     @IBOutlet var locationButtonsStack: UIStackView!
     @IBOutlet var kindButtonsStack: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -31,15 +31,15 @@ final class FoodListViewController: UIViewController {
     @IBOutlet var othersButton: UIButton!
     @IBOutlet var foodListTableView: UITableView!
     @IBOutlet var viewTitle: UINavigationItem!
-    @IBOutlet var deleteButton: DeleteButton!
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         foodListTableView.delegate = self
         foodListTableView.dataSource = self
         foodListPresenter.setOutput(foodListPresenterOutput: self)
-        foodListPresenter.isLoadingList()
+        foodListPresenter.isFetchingArray()
+        // 各種ボタン操作
         deleteButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapDeleteButton()
         }), for: .touchUpInside)
@@ -80,14 +80,14 @@ final class FoodListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        foodListPresenter.isLoadingList()
+        self.foodListPresenter.isFetchingArray()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        foodListPresenter.isLoadingList()
+        self.foodListPresenter.isFetchingArray()
     }
-
+// performsegueと連動
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toRecepieTableView" {
             let recepieView = segue.destination as? RecepieCategoryListViewController
@@ -97,18 +97,16 @@ final class FoodListViewController: UIViewController {
 }
 
 extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
+    // cellの数
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         foodListPresenter.numberOfRows()
     }
-
+    // cellの中身の表示
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let configuredFood = foodListPresenter.isManagingArray(row: indexPath.row),
+        guard let configuredFood = foodListPresenter.refreshArray(row: indexPath.row),
               let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell
         else { return .init() }
         cell.foodConfigure(food: configuredFood)
-//        cell.isUserInteractionEnabled = self.foodListPresenter.isDelete
-//        cell.disableSelectCell(self.foodListPresenter.isDelete)
-//        cell.checkBoxButton.isEnabled = !self.foodListPresenter.isDelete
         let isChecked = foodListPresenter.checkedID[configuredFood.IDkey] ?? false
         let shouldShowCheckBox = !foodListPresenter.isDelete
         if shouldShowCheckBox {
@@ -119,34 +117,25 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.didTapCheckBox = foodListPresenter.isTapCheckboxButton(row: indexPath.row)
         return cell
     }
-
+    // cell選択時の動作
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let inputView = storyboard?.instantiateViewController(withIdentifier: "modal") as? FoodAppendViewController
+        let updationView = storyboard?.instantiateViewController(withIdentifier: "modal") as? FoodAppendViewController
         // ここで選択しているセルにアクセス
         tableView.deselectRow(at: indexPath, animated: false)
-        foodListPresenter.didSelectRow(storyboard: inputView, row: indexPath.row)
+        foodListPresenter.didSelectRow(storyboard: updationView, row: indexPath.row)
     }
-        // スクロールし、indexPathのセルが表示される直前に呼ばれる
+    // スクロールし、indexPathのセルが表示される直前に呼ばれる
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-
         self.foodListPresenter.didScrollToLast(row: indexPath.row)
     }
 }
+// Presenter側で定義したOutputに準拠した拡張
 extension FoodListViewController: FoodListPresenterOutput {
+    // tableのリロード
     func reloadData() {
         foodListTableView.reloadData()
     }
-//    func present1(_ inputView: FoodAppendViewController?) {
-//        if let inputView = inputView {
-//            present(inputView, animated: true)
-//        } else {
-//            print("presentのアンラップに失敗")
-//        }
-//    }
-    func presentAlert(_ alert: UIAlertController) {
-        present(alert, animated: true) {
-        }
-    }
+
     func presentErrorIfNeeded(_ errorOrNil: Error?) {
         guard let error = errorOrNil else {return}
         let message = "エラー発生:\(error)"
@@ -155,27 +144,29 @@ extension FoodListViewController: FoodListPresenterOutput {
         present(alart, animated: true) {
         }
     }
+    // viewのdismiss
     func dismiss() {
         dismiss(animated: true, completion: nil)
     }
-//    func performSegue1(_ foodNameTextLabel: String?) {
-//        performSegue(withIdentifier: "toRecepieTableView", sender: foodNameTextLabel)
-//    }
+    // navigationItemのタイトルをBool値に応じて変更、色が変わらず要改善
     func setTitle(_ refigerator: Bool, _ freezer: Bool, _ selectedKinds: [Food.FoodKind], _ location: Food.Location) {
         // この処理でなく条件式も含めタイトルを入れるようにする
         if !refigerator,
            !freezer, selectedKinds.isEmpty {
             viewTitle.title = "冷蔵品と冷凍品"
+            viewTitle.titleView?.tintColor = .black
 
         } else {
             if location == .refrigerator {
                 viewTitle.title = "冷蔵品"
+                viewTitle.titleView?.tintColor = .darkGray
             } else if location == .freezer {
                 viewTitle.title = "冷凍品"
+                viewTitle.titleView?.tintColor = .blue
             }
         }
     }
-
+// 削除ボタンを押した際の処理
     func didTapDeleteButton(_ isDelete: Bool) {
         deleteButton.imageChange(bool: isDelete)
         addButtton.isEnabled = isDelete
@@ -203,7 +194,8 @@ extension FoodListViewController: FoodListPresenterOutput {
             tableViewBottomConstraint.constant = 0
         }
     }
-    func animateButton(_ isFilteringRef: Bool, _ isFilteringFreezer: Bool) {
+// 保管場所のボタンを押した際のアニメーション
+    func animateLocationButton(_ isFilteringRef: Bool, _ isFilteringFreezer: Bool) {
         if isFilteringRef {
             refrigeratorButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         } else {
@@ -215,6 +207,7 @@ extension FoodListViewController: FoodListPresenterOutput {
             freezerButton.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
     }
+// 押したボタンのイメージと大きさを初期化
     func resetButtonColor() {
         self.meatButton.setImage(UIImage(named: "meatButton"), for: .normal)
         self.meatButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
@@ -235,76 +228,77 @@ extension FoodListViewController: FoodListPresenterOutput {
         self.othersButton.setImage(UIImage(named: "otherButton"), for: .normal)
         self.othersButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
     }
+    // cell選択時に表示するアラートを表示
     func showAlertInCell(_ storyboard: FoodAppendViewController?, _ array: [Food], _ row: Int, _ isTapRow: Bool) {
         let alert = UIAlertController(title: "選択してください", message: "", preferredStyle: .actionSheet)
         // アラートアクションシート一項目目
         alert.addAction(.init(title: "数量・保存方法を変更する", style: .default, handler: { [self] _ in
-            let inputView = storyboard
-            guard let inputView = inputView,
-                  let modalImput = inputView.sheetPresentationController else {return}
+            let updationView = storyboard
+            guard let updationView = updationView,
+                  let modalImput = updationView.sheetPresentationController else {return}
             modalImput.detents = [.medium()]
 
-            present(inputView, animated: true)
+            present(updationView, animated: true)
             // 共通部分をここに収める
-            inputView.kindSelectText.isHidden = true
-            inputView.unitSelectButton.isEnabled = false
-            inputView.unitSelectButton.alpha = 1.0
+            updationView.kindSelectText.isHidden = true
+            updationView.unitSelectButton.isEnabled = false
+            updationView.unitSelectButton.alpha = 1.0
             // 下記で消せるがボタンがViewの一番上まで来てしまうためConstraintを上書きする必要あり
-            inputView.foodKindsStacks.isHidden = true
-            inputView.parentStacKView.spacing = 50
-            inputView.nameTextHeightconstraint.constant = 20
+            updationView.foodKindsStacks.isHidden = true
+            updationView.parentStacKView.spacing = 50
+            updationView.nameTextHeightconstraint.constant = 20
 
-            inputView.quantityTextHeightConstraint.constant = 20
+            updationView.quantityTextHeightConstraint.constant = 20
             print("staticRow：\(row)")
             print("IsTapRow：\(FoodListPresenter.isTapRow),\(isTapRow)")
-            // 以下直接FoodListPresenter.isTapRowだと不可能
+            // 以下直接FoodListPresenter.isTapRowだと不可
             if isTapRow {
-                inputView.unitSelectButton.setTitle(inputView.unitSelectButton.unitButtonTranslator(unit: array[row].unit), for: .normal)
-                inputView.foodNameTextField.text = array[row].name
-                inputView.quantityTextField.text = array[row].quantity
-                if !inputView.foodNameTextField.text!.isEmpty && !inputView.quantityTextField.text!.isEmpty {
-                    inputView.preserveButton.isEnabled = true
+                updationView.unitSelectButton.setTitle(updationView.unitSelectButton.unitButtonTranslator(unit: array[row].unit), for: .normal)
+                updationView.foodNameTextField.text = array[row].name
+                updationView.quantityTextField.text = array[row].quantity
+                if !updationView.foodNameTextField.text!.isEmpty && !updationView.quantityTextField.text!.isEmpty {
+                    updationView.preserveButton.isEnabled = true
                 } else {
-                    inputView.preserveButton.isEnabled = false
+                    updationView.preserveButton.isEnabled = false
                 }
                 var locationString = ""
-                inputView.refrigeratorButton.addAction(.init(handler: { _ in
+                updationView.refrigeratorButton.addAction(.init(handler: { _ in
                     // Model→Presenter→ここ
                     locationString = Food.Location.refrigerator.rawValue
-                    self.foodListPresenter.setLocationInInputView(row, locationString: locationString)
+                    self.foodListPresenter.setLocationOnUpdationView(row, locationString: locationString)
                 }), for: .touchUpInside)
-                inputView.freezerButton.addAction(.init(handler: { _ in
+                updationView.freezerButton.addAction(.init(handler: { _ in
                     locationString = Food.Location.freezer.rawValue
-                    self.foodListPresenter.setLocationInInputView(row, locationString: locationString)
+                    self.foodListPresenter.setLocationOnUpdationView(row, locationString: locationString)
                 }), for: .touchUpInside)
             }
-                inputView.preserveButton.addAction(.init(handler: { [self] _ in
+                updationView.preserveButton.addAction(.init(handler: { [self] _ in
 
-                    if inputView.foodNameTextField.text!.isEmpty {
-                        inputView.foodNameTextField.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+                    if updationView.foodNameTextField.text!.isEmpty {
+                        updationView.foodNameTextField.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
 
                     }
-                    if inputView.quantityTextField.text!.isEmpty {
-                        inputView.quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+                    if updationView.quantityTextField.text!.isEmpty {
+                        updationView.quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
                     }
-                    if !inputView.foodNameTextField.text!.isEmpty && !inputView.quantityTextField.text!.isEmpty {
-                        self.foodListPresenter.didTapPreserveOnInputView(foodName: inputView.foodNameTextField.text, foodQuantity: inputView.quantityTextField.text, foodinArray: array[row])
+                    if !updationView.foodNameTextField.text!.isEmpty && !updationView.quantityTextField.text!.isEmpty {
+                        self.foodListPresenter.didTapPreserveOnUpdationView(foodName: updationView.foodNameTextField.text, foodQuantity: updationView.quantityTextField.text, foodinArray: array[row])
                     }
 //                    self.foodListPresenter.resetIsTapRow()
                 }), for: .touchUpInside)
         }))
         // アラートアクションシート二項目目
         alert.addAction(.init(title: "レシピを調べる", style: .default, handler: { _ in
+            // prepareと連動、RecepieCategoryViewへ移動
             self.performSegue(withIdentifier: "toRecepieTableView", sender: array[row].name)
-//            self.foodListPresenter.resetIsTapRow()
         }))
         // アラートアクションシート三項目目
         alert.addAction(.init(title: "キャンセル", style: .destructive, handler: { _ in
-//            self.foodListPresenter.resetIsTapRow()
         }))
         self.foodListPresenter.resetIsTapRow()
         present(alert, animated: true)
     }
+    // 項目選択時に削除ボタンを押すと表示するアラートを表示
     func showDeleteAlert() {
         // 削除するかどうかアラート
         let alert = UIAlertController(title: "削除しますか?", message: "", preferredStyle: .actionSheet)

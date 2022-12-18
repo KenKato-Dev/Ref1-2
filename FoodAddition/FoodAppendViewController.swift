@@ -7,6 +7,7 @@
 
 import UIKit
 
+    // FoodAppendViewのVC
 class FoodAppendViewController: UIViewController {
     private let foodAppendPresenter = FoodAppendPresenter(foodData: FoodData())
     @IBOutlet var foodNameTextField: UITextField!
@@ -40,12 +41,10 @@ class FoodAppendViewController: UIViewController {
         quantityTextField.delegate = self
         settingTextfield()
         foodAppendPresenter.setOutput(foodAppendPresenterOutput: self)
-
-        // 冷蔵ボタン
+        // 各種ボタン操作
         refrigeratorButton.addAction(.init(handler: { _ in
             self.foodAppendPresenter.didTaplocationButton(location: .refrigerator)
         }), for: .touchUpInside)
-        // 冷凍ボタン
         freezerButton.addAction(.init(handler: { _ in
             self.foodAppendPresenter.didTaplocationButton(location: .freezer)
         }), for: .touchUpInside)
@@ -77,66 +76,58 @@ class FoodAppendViewController: UIViewController {
             self.foodAppendPresenter.didTapKindButton(kind: .other, self.othersButton)
         }), for: .touchUpInside)
         unitSelectButton.selectingUnit()
-        // UIMENUのボタンはViewが描写された瞬間に呼ばれるためaddactionは利用不可
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
     }
-
+    // キーボードを下げる処理
     @objc func hideKeyboard() {
         view.endEditing(true)
-//        self.foodAppendPresenter.disablingPreserveButton()
-        print("hide作動")
     }
-
+    // キャンセルボタンの処理
     @IBAction func cancel(_: Any) {
         foodAppendPresenter.didTapCancelButton()
     }
-
+    // 保存ボタンの処理
     @IBAction func preserve(_: Any) {
         foodAppendPresenter.didTapPreserveButton(foodName: foodNameTextField.text, quantity: quantityTextField.text, unit: unitSelectButton.selectedUnit)
     }
 }
-
+// enterでキーボードを下げる処理
 extension FoodAppendViewController: UITextFieldDelegate {
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        return true
-//    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
 }
-
+// Outputの中身を注入
 extension FoodAppendViewController: FoodAppendPresenterOutput {
+    // placeholderとキーボードの種類を指定
     func settingTextfield() {
         foodNameTextField.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
         quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
         quantityTextField.keyboardType = .numberPad
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
-        // 初期で無効化
-//        if self.foodNameTextField.text!.isEmpty && self.quantityTextField.text!.isEmpty && unitSelectButton.selectedUnit == .initial {
-//            self.preserveButton.isEnabled = false
-//        }
     }
+    // dismiss処理
     func dismiss() {
         dismiss(animated: true, completion: nil)
     }
+    // テキストフィールドの入力内容、選択ボタンの種類で条件付けしプレースホルダーの表示とボタンテキスト色を変更
     func didTapPreserveButtonWithoutEssential() {
-//        if !self.foodNameTextField.text!.isEmpty && !self.quantityTextField.text!.isEmpty && unitSelectButton.selectedUnit != .initial {
-//            self.preserveButton.isEnabled = true
-//        } else {
-//            self.preserveButton.isEnabled = false
-//        }
         if self.foodNameTextField.text!.isEmpty {
             self.foodNameTextField.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
 
     }
         if self.quantityTextField.text!.isEmpty {
         self.quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
-    }
+        } else if Int(self.quantityTextField.text!) == nil {
+            self.quantityTextField.text = ""
+            self.quantityTextField.attributedPlaceholder = NSAttributedString(string: "数字を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+        }
         if self.unitSelectButton.selectedUnit == .initial {
             unitSelectButton.tintColor = .red
         }
     }
+    // エラーハンドル、内容を表示
     func presentErrorIfNeeded(_ errorOrNil: Error?) {
         guard let error = errorOrNil else {return}
         let message = "エラー発生:\(error)"
@@ -145,7 +136,18 @@ extension FoodAppendViewController: FoodAppendPresenterOutput {
         present(alart, animated: true) {
         }
     }
-    func resettingButtonsImage() {
+    //
+    func presentMessageIfNeeded2(_ errorOrNil: Error?, _ comment: String) {
+        guard let error = errorOrNil else {return}
+        let message = "エラー発生:\(error)"
+        let alart = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alart, animated: true) {
+        }
+    }
+
+    //
+    func resetButtonsImage() {
         self.meatButton.setImage(UIImage(named: "meatButton"), for: .normal)
         self.meatButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         self.fishButton.setImage(UIImage(named: "fishButton"), for: .normal)

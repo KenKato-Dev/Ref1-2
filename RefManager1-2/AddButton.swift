@@ -43,7 +43,7 @@ class AddButton: UIButton {
                          delay: 0.0,
                          options: UIView.AnimationOptions.curveEaseIn,
                          animations: {
-                             // 少しだけビューを小さく縮めて、奥に行ったような「凹み」を演出する
+                             // 少しだけビューを小さく縮めて、奥への凹みを演出
                              self.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                          },
                          completion: nil)
@@ -73,7 +73,7 @@ class AddButton: UIButton {
         // マスク適用
         layer.masksToBounds = true
         // 角丸み
-//        layer.cornerRadius = 15.0
+        layer.cornerRadius = 30.0
         // 枠線の色
 //        layer.borderColor = UIColor(displayP3Red: 79/255, green: 172/255, blue: 254/255,alpha: 1.0).cgColor
         // 枠線の太さ
