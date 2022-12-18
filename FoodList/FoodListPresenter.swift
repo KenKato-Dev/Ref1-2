@@ -168,7 +168,9 @@ final class FoodListPresenter {
     // cell選択時の処理
     func didSelectRow(storyboard: FoodAppendViewController?, row: Int) {
         FoodListPresenter.isTapRow = true
-        self.foodListPresenterOutput?.showAlertInCell(storyboard, self.array, row, FoodListPresenter.isTapRow)
+        if self.isDelete {
+            self.foodListPresenterOutput?.showAlertInCell(storyboard, self.array, row, FoodListPresenter.isTapRow)
+        }
     }
     //
      func didTapPreserveOnUpdationView(foodName: String?, foodQuantity: String?, foodinArray: Food) {

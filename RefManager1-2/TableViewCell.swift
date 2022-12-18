@@ -60,6 +60,7 @@ class TableViewCell: UITableViewCell {
         case let .shownCheckBox(isChecked):
             checkBoxButton.isHidden = false
             checkBoxButton.updateAppearance(isChecked: isChecked)
+            self.selectionStyle = .none
         }
     }
 
