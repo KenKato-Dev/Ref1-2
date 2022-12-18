@@ -8,8 +8,6 @@
 import UIKit
 
 class CheckBoxButton: TapFeedbackView {
-    //    var isTap = false
-
     // ボタンの内容
     override init(frame: CGRect) {
         super.init(frame: frame)

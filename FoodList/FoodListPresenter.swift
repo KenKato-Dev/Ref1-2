@@ -8,21 +8,19 @@
 import Firebase
 import Foundation
 
+// ViewController側の処理を定義
 protocol FoodListPresenterOutput: AnyObject {
     func reloadData()
-//    func present1(_ inputView: FoodAppendViewController?)
-    func presentAlert(_ alert: UIAlertController)
     func presentErrorIfNeeded(_ errorOrNil: Error?)
     func dismiss()
-//    func performSegue1(_ foodNameTextLabel: String?)
     func setTitle(_ refigerator: Bool, _ freezer: Bool, _ selectedKinds: [Food.FoodKind], _ location: Food.Location)
     func didTapDeleteButton(_ isDelete: Bool)
-    func animateButton(_ isFilteringRef: Bool, _ isFilteringFreezer: Bool)
+    func animateLocationButton(_ isFilteringRef: Bool, _ isFilteringFreezer: Bool)
     func resetButtonColor()
-    func showAlertInCell(_ storyboard: FoodAppendViewController?, _ array: [Food], _ row: Int)
+    func showAlertInCell(_ storyboard: FoodAppendViewController?, _ array: [Food], _ row: Int, _ isTapRow: Bool)
     func showDeleteAlert()
 }
-
+// FoodListのPresenter
 final class FoodListPresenter {
     private let foodData: FoodData
     private weak var foodListPresenterOutput: FoodListPresenterOutput?
@@ -33,20 +31,16 @@ final class FoodListPresenter {
     private(set) static var isTapRow = false
     private let foodUseCase: FoodUseCase
     private let db = Firestore.firestore()
-//    var disableCellSelect:((Bool)->Void)?
     init(foodData: FoodData, foodUseCase: FoodUseCase) {
         self.foodData = foodData
         self.foodUseCase = foodUseCase
     }
-
+    // インスタンス変数の中身をViewController側から注入させる
     func setOutput(foodListPresenterOutput: FoodListPresenterOutput) {
         self.foodListPresenterOutput = foodListPresenterOutput
     }
-    func isLoadingList() {
-        isFetchingArray()
-//        foodListPresenterOutput?.reloadData()
-    }
-    private func isFetchingArray() {
+    // QUeryの生成、fetch、reloadDataを実行し配列表示を構築
+    func isFetchingArray() {
         self.foodData.isConfiguringQuery(
             foodUseCase.isFilteringRefrigerator,
             foodUseCase.isFilteringFreezer,
@@ -57,34 +51,31 @@ final class FoodListPresenter {
                 switch result {
                 case let .success(foods):
                     self.array = foods
-                    self.array = self.array.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
                     self.foodListPresenterOutput?.reloadData()
                 case let .failure(error):
-                    print(error)
+                    self.foodListPresenterOutput?.presentErrorIfNeeded(error)
                 }
             }
         }
     }
+    // ページネート処理、cell番号と配列数、querydoumentsnapshotの数で条件
     func didScrollToLast(row: Int) {
         if row == self.array.count - 1 && foodData.countOfDocuments != 0 {
             foodData.paginate()
             foodData.fetch { result in
-                DispatchQueue.main.asyncAfter(deadline: .now()) {
                     switch result {
                     case let .success(foods):
                         self.array.append(contentsOf: foods)
-                        self.array = self.array.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
                         self.foodListPresenterOutput?.reloadData()
                     case let .failure(error):
-                        print(error)
+                        self.foodListPresenterOutput?.presentErrorIfNeeded(error)
                     }
-                }
             }
         }
     }
+    // 削除ボタンの処理
     func didTapDeleteButton() {
         isDelete.toggle()
-
         // ボタンの無効化
         foodListPresenterOutput?.didTapDeleteButton(isDelete)
         if isDelete, checkedID.values.contains(true) {
@@ -93,20 +84,20 @@ final class FoodListPresenter {
         }
         foodListPresenterOutput?.reloadData()
     }
-    // 冷蔵ボタン
+    // 冷蔵ボタンの処理
     func didTapRefrigiratorButton(_: UIButton) {
         foodUseCase.didTapRefrigeratorButton()
         // ボタンの色を変更
-        foodListPresenterOutput?.animateButton(foodUseCase.isFilteringRefrigerator, foodUseCase.isFilteringFreezer)
+        foodListPresenterOutput?.animateLocationButton(foodUseCase.isFilteringRefrigerator, foodUseCase.isFilteringFreezer)
         didSwitchLocation(location: .refrigerator)
     }
-    // 冷凍ボタン
+    // 冷凍ボタンの処理
     func didTapFreezerButton(_: UIButton) {
         foodUseCase.didTapFreezerButton()
-        foodListPresenterOutput?.animateButton(foodUseCase.isFilteringRefrigerator, foodUseCase.isFilteringFreezer)
+        foodListPresenterOutput?.animateLocationButton(foodUseCase.isFilteringRefrigerator, foodUseCase.isFilteringFreezer)
         didSwitchLocation(location: .freezer)
     }
-    // 冷蔵冷凍ボタンを押した際実行する
+    // 冷蔵/冷凍ボタンの共通処理
     private func didSwitchLocation(location: Food.Location) {
         foodUseCase.foodFilter.location = location
         foodUseCase.resetKinds(foodUseCase.isFilteringRefrigerator, foodUseCase.isFilteringFreezer)
@@ -121,17 +112,17 @@ final class FoodListPresenter {
         print(foodData.query)
         foodListPresenterOutput?.reloadData()
     }
-    // 食材ボタン
+    // 食材ボタンの共通処理
     func didTapFoodKindButtons(_ kind: Food.FoodKind, _ button: UIButton) {
         foodUseCase.toggleDictionary(kind: kind)
         let selectedDictionary = foodUseCase.foodKindDictionary.filter { $0.value == true }
         var selectedFoodKinds = selectedDictionary.map(\.key)
         foodUseCase.foodFilter.kindArray = selectedFoodKinds
-        // ここで入る
+        // ここでselectedKindsに入る
         foodUseCase.isAddingKinds(selectedKinds: &selectedFoodKinds)
         self.isFetchingArray()
         print(foodData.query)
-
+        // 押したボタン画像を変更
         var image = UIImage(named: kind.rawValue + "Button")
         if button.imageView!.image == UIImage(named: kind.rawValue + "Button") {
             image = button.imageView!.image!.compositeImage(
@@ -140,30 +131,19 @@ final class FoodListPresenter {
                 UIImage(named: "selectedButton")!,
                 0.5)
         }
+        // 押されたボタンのBool値Valueを基準にボタン外観を変更
         if foodUseCase.foodKindDictionary[kind]! {
-//            button.setImage(UIImage(named: "selected"), for: .normal)
             button.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-//            button.layer.borderColor = UIColor.gray.cgColor
-//            button.layer.borderWidth = 3.0
             button.isHighlighted = true
             button.setImage(image, for: .normal)
         } else {
             button.transform = CGAffineTransform(scaleX: 1, y: 1)
-//            button.backgroundColor = .clear
-//            button.layer.borderColor = UIColor.clear.cgColor
-//            button.layer.borderWidth = 0.0
             button.isHighlighted = false
             button.setImage(UIImage(named: kind.rawValue + "Button"), for: .normal)
         }
         foodListPresenterOutput?.reloadData()
     }
-    // 食材を選択した状態で冷蔵冷凍ボタンを押した際に
-    private func refreshFoodKindDictionary() {
-        foodUseCase.resetDictionary()
-        foodUseCase.foodFilter.kindArray = Food.FoodKind.allCases
-        self.foodListPresenterOutput?.resetButtonColor()
-    }
-    /// UUIDをDictionaryに追加
+    // UUIDをDictionaryに追加
     func isTapCheckboxButton(row: Int) -> ((Bool) -> Void)? {
         didTapCheckBox = { isChecked in
             self.checkedID[self.array[row].IDkey] = isChecked
@@ -171,28 +151,30 @@ final class FoodListPresenter {
         }
         return didTapCheckBox
     }
-
-    func isManagingArray(row: Int) -> Food? {
-
+    // Bool値を条件に配列フィルターと配列を初期化
+    func refreshArray(row: Int) -> Food? {
         if !foodUseCase.isFilteringFreezer && !foodUseCase.isFilteringRefrigerator && foodUseCase.selectedKinds.isEmpty {
-            self.refreshFoodKindDictionary()
+            foodUseCase.resetDictionary()
+            foodUseCase.foodFilter.kindArray = Food.FoodKind.allCases
+            self.foodListPresenterOutput?.resetButtonColor()
         }
         return array[row]
     }
-
+    // tableViewのcellの列数の処理
     func numberOfRows() -> Int {
-//        self.isFetchingArray()
         return self.array.count
 
     }
+    // cell選択時の処理
     func didSelectRow(storyboard: FoodAppendViewController?, row: Int) {
         FoodListPresenter.isTapRow = true
-        self.foodListPresenterOutput?.showAlertInCell(storyboard, self.array, row)
+        self.foodListPresenterOutput?.showAlertInCell(storyboard, self.array, row, FoodListPresenter.isTapRow)
     }
-     func didTapPreserveOnInputView(foodName: String?, foodQuantity: String?, foodinArray: Food) {
-        print("inputのアクションが操作")
+    //
+     func didTapPreserveOnUpdationView(foodName: String?, foodQuantity: String?, foodinArray: Food) {
+        print("UpdationViewのFunc操作")
 
-        self.foodData.postFromInputView(foodName: foodName, foodQuantity: foodQuantity, foodinArray: foodinArray) { result in
+        self.foodData.postFromUpdationView(foodName: foodName, foodQuantity: foodQuantity, foodinArray: foodinArray) { result in
             switch result {
             case .success:
                 FoodListPresenter.isTapRow = false
@@ -224,7 +206,7 @@ final class FoodListPresenter {
         }
             self.foodListPresenterOutput?.dismiss()
     }
-    func setLocationInInputView(_ row: Int, locationString: String) {
+    func setLocationOnUpdationView(_ row: Int, locationString: String) {
         self.foodData.setLocation(self.array[row].IDkey, locationString)
     }
     func deleteAction() {

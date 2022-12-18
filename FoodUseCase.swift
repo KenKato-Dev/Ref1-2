@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// ボタン操作時の処理のうちBool値の変化やEnumの追加削除等フィルター機能を担当
 final class FoodUseCase {
     private (set) var isFilteringRefrigerator = false
     private (set) var isFilteringFreezer = false
@@ -18,26 +19,31 @@ final class FoodUseCase {
         .milkAndEgg: false, .dish: false, .drink: false,
         .seasoning: false, .sweet: false, .other: false
     ]
+    // 冷蔵ボタン操作の際のBool値操作
     func didTapRefrigeratorButton() {
         self.isFilteringRefrigerator.toggle()
         self.isFilteringFreezer = false
     }
-
+    // 冷凍ボタン操作の際のBool値操作
     func didTapFreezerButton() {
         self.isFilteringFreezer.toggle()
         self.isFilteringRefrigerator = false
     }
+    // 種類ボタン操作時に押されたボタンのEnum値を変数selectedKindsに代入
     func isAddingKinds(selectedKinds: inout [Food.FoodKind]) {
         self.selectedKinds = selectedKinds
     }
+    // Bool値を条件に変数selectedKindsを空にする処理
     func resetKinds(_ refrigator: Bool, _ freezer: Bool) {
         if !refrigator && !freezer {
             self.selectedKinds = []
         }
     }
+    // 種類ボタンを押した際ディクショナリfoodKindDictionaryのボタンと連動するEnum値KeyのBool値のValueをtoggle
     func toggleDictionary(kind: Food.FoodKind) {
         self.foodKindDictionary[kind]!.toggle()
     }
+    // ディクショナリfoodKindDictionaryを初期値に戻す
     func resetDictionary() {
     foodKindDictionary = [
         .meat: false, .fish: false, .vegetableAndFruit: false,

@@ -7,15 +7,16 @@
 
 import Foundation
 import UIKit
+//  ViewController側の処理を定義
 protocol FoodAppendPresenterOutput: AnyObject {
     func settingTextfield()
     func dismiss()
     func didTapPreserveButtonWithoutEssential()
     func presentErrorIfNeeded(_ errorOrNil: Error?)
-    func resettingButtonsImage()
+    func resetButtonsImage()
     func animateButton(_ location: Food.Location)
 }
-
+// FoodAppendViewのPresenter
 final class FoodAppendPresenter {
     private let foodData: FoodData
     private weak var foodAppendPresenterOutput: FoodAppendPresenterOutput?
@@ -23,7 +24,7 @@ final class FoodAppendPresenter {
     init(foodData: FoodData) {
         self.foodData = foodData
     }
-
+    // インスタンス変数の中身をViewController側から注入させる
     func setOutput(foodAppendPresenterOutput: FoodAppendPresenterOutput?) {
         self.foodAppendPresenterOutput = foodAppendPresenterOutput
     }
@@ -31,7 +32,7 @@ final class FoodAppendPresenter {
     func settingTextField() {
         foodAppendPresenterOutput?.settingTextfield()
     }
-
+    // isTapRowで条件決めし、選択内容をFood型のBaseArrayに保存
     func didTaplocationButton(location: Food.Location) {
         if FoodListPresenter.isTapRow == false {
             baseArray.location = location
@@ -40,10 +41,10 @@ final class FoodAppendPresenter {
             print("editの冷蔵ボタン")
         }
     }
-
-    func didTapKindButton(kind: Food.FoodKind, _ button: UIButton) { //
+    //　選択されたkindの選択内容をFood型のBaseArrayに保存
+    func didTapKindButton(kind: Food.FoodKind, _ button: UIButton) {
         baseArray.kind = kind
-        self.foodAppendPresenterOutput?.resettingButtonsImage()
+        self.foodAppendPresenterOutput?.resetButtonsImage()
         var image = UIImage(named: kind.rawValue + "Button")
         if button.imageView!.image == UIImage(named: kind.rawValue + "Button") {
             image = button.imageView!.image!.compositeImage(
@@ -55,26 +56,18 @@ final class FoodAppendPresenter {
         if baseArray.kind == kind {
             button.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             button.setImage(image, for: .normal)
-//            button.isHighlighted = true
+            print(baseArray.kind.kindNumber)
         }
     }
-
+    // キャンセルボタンを押した際の処理
     func didTapCancelButton() {
         foodAppendPresenterOutput?.dismiss()
     }
-
+    // isTapRowで条件決めし、保存ボタンを押した際の処理
     func didTapPreserveButton(foodName: String?, quantity: String?, unit: UnitSelectButton.UnitMenu) {
-        //
         if FoodListPresenter.isTapRow == false {
-//        if foodName!.isEmpty {
-//            foodName!.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
-//
-//        }
-//        if quantity!.isEmpty {
-//            self!.quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
-//        }
             self.foodAppendPresenterOutput?.didTapPreserveButtonWithoutEssential()
-            if !foodName!.isEmpty && !quantity!.isEmpty && unit != .initial {
+            if !foodName!.isEmpty && !quantity!.isEmpty && Int(quantity!) != nil && unit != .initial {
             if let foodName = foodName {
                 baseArray.name = foodName
             } else {return}
@@ -92,13 +85,12 @@ final class FoodAppendPresenter {
                     print(error)
                 }
             }
-
         }
-        //
         } else {
             print(FoodListPresenter.isTapRow)
         }
     }
+    // isTapRowで条件決めし、Food型のBaseArrayに保存
     func didEditingTextFields(foodName: String?, quantity: String?, unit: UnitSelectButton.UnitMenu) {
         if FoodListPresenter.isTapRow == false {
             if let foodName = foodName {
@@ -113,9 +105,4 @@ final class FoodAppendPresenter {
             print(FoodListPresenter.isTapRow)
         }
     }
-//    func disablingPreserveButton() {
-//        if FoodListPresenter.isTapRow == false {
-//        self.foodAppendPresenterOutput?.didTapPreserveButtonWithoutEssential()
-//        }
-//    }
 }

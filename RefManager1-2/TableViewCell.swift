@@ -45,7 +45,7 @@ class TableViewCell: UITableViewCell {
 
     func foodConfigure(food: Food) {
         preserveMethodTextLable.text = locationTranslator(location: food.location)
-        foodImage.image = UIImage(named: "\(food.kind.rawValue)") // ?.compositeText(preserveMethodTextLable.text as! NSString)
+        foodImage.image = UIImage(named: "\(food.kind.rawValue)")
         foodNameTextLabel.text = food.name
         quantityTextLabel.text = String(food.quantity)
         unitTextLabel.text = UnitSelectButton().unitButtonTranslator(unit: food.unit)
@@ -62,13 +62,7 @@ class TableViewCell: UITableViewCell {
             checkBoxButton.updateAppearance(isChecked: isChecked)
         }
     }
-//    func disableSelectCell(_ isDelete: Bool) {
-//        self.foodImage.isUserInteractionEnabled = isDelete
-//        self.foodNameTextLabel.isUserInteractionEnabled = isDelete
-//        self.dateTextLabel.isUserInteractionEnabled = isDelete
-//        self.quantityTextLabel.isUserInteractionEnabled = isDelete
-//        self.unitTextLabel.isUserInteractionEnabled = isDelete
-//    }
+
     private func locationTranslator(location: Food.Location) -> String {
         var trasnlatedlocation = String()
         if location == .refrigerator {

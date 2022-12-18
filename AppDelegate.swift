@@ -14,14 +14,15 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-        if ProcessInfo.processInfo.environment["unitTests"] == "true" {
-            print("Setting up Firebase emulator localhost:8080")
-            let settings = Firestore.firestore().settings
-              settings.host = "localhost:8080"
-              settings.isPersistenceEnabled = false
-              settings.isSSLEnabled = false
-              Firestore.firestore().settings = settings
-        }
+        // Test時はlocal下で実行できるよう設定
+//        if ProcessInfo.processInfo.environment["unitTests"] == "true" {
+//            print("Setting up Firebase emulator localhost:8080")
+//            let settings = Firestore.firestore().settings
+//              settings.host = "localhost:8080"
+//              settings.isPersistenceEnabled = false
+//              settings.isSSLEnabled = false
+//              Firestore.firestore().settings = settings
+//        }
 
         // Override point for customization after application launch.
         return true

@@ -7,14 +7,16 @@
 
 import Foundation
 import SwiftUI
+// 楽天APIからレシピ集を取り出す際使用する構造体
 struct Small: Codable {
     let categoryName: String
     let parentCategoryId: String
     let categoryId: Int
     var categoryUrl: String
 }
-
+// RecepieCategoryのModel、楽天APIへのリクエスト処理
 class RecepieModel {
+    // 楽天APIへのリクエスト処理
     func fetch(_ keyword: String, _ completion: @escaping (Result<[Small], Error>) -> Void) {
         guard let url = URL(string:
             "https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426?format=json&applicationId=1050766026714426702"
@@ -22,8 +24,8 @@ class RecepieModel {
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             let task = URLSession.shared.dataTask(with: url) { data, _, error in
                 if let error = error {
-                    print("URL取得に失敗:\(error)")
                     completion(.failure(error))
+                    print("URL取得に失敗:\(error)")
                 }
                 let decoder = JSONDecoder()
                 do {
