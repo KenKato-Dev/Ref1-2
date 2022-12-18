@@ -93,7 +93,13 @@ googleservice-info.plist is neccesary for using this app. Please get it from Fir
 Usage is as follows.  
 <img src="https://user-images.githubusercontent.com/84781651/206842125-53fdc0ab-dbff-4bb1-8601-d78b61dc3181.png" width="25%">
 
-## Todo
+## 今後の方針/To do next  
+・アカウントとグループ間での共有機能
+・複数の食材を一度に保存
+・任意のキーワードで食材を検索
+・消費期限の通知やアラート表示
+・AppStoreでのリリース  
+
 ・Account and share function.  
 ・Preservation of several foods at once.  
 ・Keyword search.  
