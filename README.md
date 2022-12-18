@@ -1,5 +1,8 @@
- # 冷蔵庫くん / RefManager  
+# 冷蔵庫くん/RefManager  
+ <img src="https://user-images.githubusercontent.com/84781651/206842125-53fdc0ab-dbff-4bb1-8601-d78b61dc3181.png" width="25%">
+  
 冷蔵庫くんは冷蔵庫内の食材や総菜、飲料、スイーツなどの食品をクラウド上で管理するiOSアプリです。SwiftとFirebaseにより構築されております。  
+  
 REFManager is an iOS application for managing food like ingredients, beverages, dishes, sweets, etc. in refrigerator on cloud(firestore), which is configured by Swift, Firebase and Rakuten recepie API.
 ## 概要/About RefManager  
 以下5つの機能で食材を管理できます。  
@@ -24,7 +27,8 @@ You can manage food stylishly with following 5 features.
 ・easily understandable cell provides how many is in which location from when.  
 ・display contents smoothly by pagination even if lots of item has been preserved on cloud.
 ## 構成/Composition  
-本アプリはMVPアーキテクチャを採用しております。構造体Food型をFirebaseのCloud firestoreにて管理しており、Food型は下記の構成となります。
+本アプリはMVPアーキテクチャを採用しております。構造体Food型をFirebaseのCloud firestoreにて管理しており、Food型は下記の構成となります。  
+  
 Architecture of the App. is MVP. It is managed with custom strcut “Food” and Cloud firestore. Composition of Food is as follows.  
 
 ```swift
@@ -84,15 +88,11 @@ Tree composition of Firestore is as follows.
 <img width="1200" alt="スクリーンショット 2022-12-12 13 21 39" src="https://user-images.githubusercontent.com/84781651/206960175-2393d5a3-a101-41e1-b6bb-30b3f8b20ce0.png">
 一層目コレクション"foods"を基に、Food構造体を二層目ドキュメントにUUIDにて保管し、名称や量などの具体的な情報は三層目の各fieldに保管されています。  
 Based on an initial layer "collection" named "foods", Food struct items are stored in second layer "document" with UUID. concrete information like name or quantity is stored in each field of third layer.  
-
+  
 ## 導入/Installation
 googleservice-info.plistが必要となりますのFirebaseから本ファイルをダウンロードし本アプリのプロジェクトファイルに追加してください。  
 googleservice-info.plist is neccesary for using this app. Please get it from Firebase account and add it to the app. project file.  
-## 使い方 Usage
-使い方は下記の通りです。  
-Usage is as follows.  
-<img src="https://user-images.githubusercontent.com/84781651/206842125-53fdc0ab-dbff-4bb1-8601-d78b61dc3181.png" width="25%">
-
+  
 ## 今後の方針/To do next  
 ・アカウントとグループ間での共有機能
 ・複数の食材を一度に保存
