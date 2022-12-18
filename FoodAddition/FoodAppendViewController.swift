@@ -15,6 +15,7 @@ class FoodAppendViewController: UIViewController {
     @IBOutlet var methodSelectText: UILabel!
     @IBOutlet var refrigeratorButton: UIButton!
     @IBOutlet var freezerButton: UIButton!
+    @IBOutlet weak var locationButtonsStack: UIStackView!
     @IBOutlet var kindSelectText: UILabel!
     @IBOutlet var foodKindsStacks: UIStackView!
     @IBOutlet var meatButton: UIButton!

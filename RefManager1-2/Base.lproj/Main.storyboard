@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bEj-8Y-jp3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -261,7 +260,7 @@
                     <navigationItem key="navigationItem" title="冷蔵品と冷凍品" id="ebQ-Yw-zQR">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="ZNo-GJ-wc7">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="CDt-br-9dE" customClass="AddButton" customModule="RefManager1_2" customModuleProvider="target">
-                                <rect key="frame" x="20" y="5" width="97.5" height="34.5"/>
+                                <rect key="frame" x="20" y="4.5" width="97.5" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
@@ -279,7 +278,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="WPw-lO-9Qe">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="8e0-Ob-ULs" customClass="DeleteButton" customModule="RefManager1_2" customModuleProvider="target">
-                                <rect key="frame" x="295" y="5" width="99" height="34.5"/>
+                                <rect key="frame" x="295" y="4.5" width="99" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="trash" catalog="system">
@@ -448,7 +447,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="2JB-Xc-ihz" userLabel="Parent Stack View">
-                                <rect key="frame" x="5" y="207.5" width="404" height="576"/>
+                                <rect key="frame" x="5" y="207.5" width="404" height="567"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="保存方法を選んでください" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1PN-Tn-dOu">
                                         <rect key="frame" x="0.0" y="0.0" width="404" height="36"/>
@@ -457,10 +456,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="xHE-PH-oGY">
-                                        <rect key="frame" x="0.0" y="51" width="404" height="53.5"/>
+                                        <rect key="frame" x="0.0" y="51" width="404" height="45"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dnC-0g-6bP">
-                                                <rect key="frame" x="0.0" y="0.0" width="199.5" height="53.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="199.5" height="45"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="冷蔵">
@@ -471,7 +470,7 @@
                                                 </buttonConfiguration>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qCC-LR-hc8">
-                                                <rect key="frame" x="204.5" y="0.0" width="199.5" height="53.5"/>
+                                                <rect key="frame" x="204.5" y="0.0" width="199.5" height="45"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Button"/>
@@ -483,35 +482,38 @@
                                                 </buttonConfiguration>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="6Qv-0a-SxU"/>
+                                        </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="食品の種類を選択してください" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gd3-UM-ewx">
-                                        <rect key="frame" x="0.0" y="119.5" width="404" height="36"/>
+                                        <rect key="frame" x="0.0" y="111" width="404" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Es3-aD-GX4">
-                                        <rect key="frame" x="0.0" y="170.5" width="404" height="336.5"/>
+                                        <rect key="frame" x="0.0" y="162" width="404" height="336.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="gAZ-jo-Oae">
-                                                <rect key="frame" x="0.0" y="0.0" width="404" height="112.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="404" height="112"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOq-Fh-0Vf">
-                                                        <rect key="frame" x="0.0" y="0.0" width="134.5" height="112.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="134.5" height="112"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" systemColor="systemRedColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="Button" image="meatButton"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Us5-D2-vPu">
-                                                        <rect key="frame" x="134.5" y="0.0" width="135" height="112.5"/>
+                                                        <rect key="frame" x="134.5" y="0.0" width="135" height="112"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" systemColor="systemBlueColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" image="fishButton"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2VJ-ai-do9">
-                                                        <rect key="frame" x="269.5" y="0.0" width="134.5" height="112.5"/>
+                                                        <rect key="frame" x="269.5" y="0.0" width="134.5" height="112"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" systemColor="systemGreenColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -520,7 +522,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="OEq-cr-nOn">
-                                                <rect key="frame" x="0.0" y="112.5" width="404" height="112"/>
+                                                <rect key="frame" x="0.0" y="112" width="404" height="112"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jJE-3d-hb2">
                                                         <rect key="frame" x="0.0" y="0.0" width="134.5" height="112"/>
@@ -553,10 +555,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hGe-Gp-Zrh">
-                                                <rect key="frame" x="0.0" y="224.5" width="404" height="112"/>
+                                                <rect key="frame" x="0.0" y="224" width="404" height="112.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGd-DE-kyN">
-                                                        <rect key="frame" x="0.0" y="0.0" width="134.5" height="112"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="134.5" height="112.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -565,13 +567,13 @@
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W3T-zu-67k">
-                                                        <rect key="frame" x="134.5" y="0.0" width="135" height="112"/>
+                                                        <rect key="frame" x="134.5" y="0.0" width="135" height="112.5"/>
                                                         <color key="tintColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" image="sweetButton"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zbk-L6-nFe">
-                                                        <rect key="frame" x="269.5" y="0.0" width="134.5" height="112"/>
+                                                        <rect key="frame" x="269.5" y="0.0" width="134.5" height="112.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -585,10 +587,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="jax-iL-4T8">
-                                        <rect key="frame" x="0.0" y="522" width="404" height="54"/>
+                                        <rect key="frame" x="0.0" y="513.5" width="404" height="53.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53s-yj-18u">
-                                                <rect key="frame" x="0.0" y="0.0" width="202" height="54"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="202" height="53.5"/>
                                                 <color key="tintColor" systemColor="systemRedColor"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="キャンセル"/>
@@ -597,7 +599,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3K5-hI-9uA">
-                                                <rect key="frame" x="202" y="0.0" width="202" height="54"/>
+                                                <rect key="frame" x="202" y="0.0" width="202" height="53.5"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="保存する" titleAlignment="center"/>
                                                 <connections>
@@ -629,7 +631,6 @@
                             <constraint firstItem="gd3-UM-ewx" firstAttribute="height" secondItem="qh5-El-XsC" secondAttribute="height" multiplier="0.04" id="eoh-0H-4Sd"/>
                             <constraint firstItem="HAv-4m-4lB" firstAttribute="height" secondItem="qh5-El-XsC" secondAttribute="height" multiplier="0.05" id="g9F-97-XCD"/>
                             <constraint firstItem="5O4-gL-wtm" firstAttribute="height" secondItem="qh5-El-XsC" secondAttribute="height" multiplier="0.05" id="gMu-uX-2Jf"/>
-                            <constraint firstItem="xHE-PH-oGY" firstAttribute="height" secondItem="qh5-El-XsC" secondAttribute="height" multiplier="0.06" id="r9H-DJ-ZKM"/>
                             <constraint firstItem="jax-iL-4T8" firstAttribute="height" secondItem="qh5-El-XsC" secondAttribute="height" multiplier="0.06" id="taW-kQ-Snd"/>
                             <constraint firstItem="5O4-gL-wtm" firstAttribute="width" secondItem="qh5-El-XsC" secondAttribute="width" multiplier="0.9" id="wuY-yc-F6u"/>
                             <constraint firstItem="2JB-Xc-ihz" firstAttribute="leading" secondItem="EBo-ON-V98" secondAttribute="leading" constant="5" id="yPJ-hF-wco"/>
@@ -645,6 +646,7 @@
                         <outlet property="foodNameTextField" destination="5O4-gL-wtm" id="RFg-Ux-jVt"/>
                         <outlet property="freezerButton" destination="qCC-LR-hc8" id="AMe-2h-ElO"/>
                         <outlet property="kindSelectText" destination="gd3-UM-ewx" id="Hpr-yh-jca"/>
+                        <outlet property="locationButtonsStack" destination="xHE-PH-oGY" id="WXY-dO-AmU"/>
                         <outlet property="meatButton" destination="KOq-Fh-0Vf" id="OGP-9z-czn"/>
                         <outlet property="methodSelectText" destination="1PN-Tn-dOu" id="CS2-ui-mZD"/>
                         <outlet property="milkAndEggButton" destination="jJE-3d-hb2" id="lVN-KK-okL"/>
@@ -765,7 +767,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アカウント作成" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ny-iT-qud">
-                                <rect key="frame" x="101" y="98" width="212.5" height="36"/>
+                                <rect key="frame" x="100.5" y="98" width="213" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
