@@ -85,11 +85,11 @@ Tree composition of Firestore is as follows.
 一層目コレクション"foods"を基に、Food構造体を二層目ドキュメントにUUIDにて保管し、名称や量などの具体的な情報は三層目の各fieldに保管されています。  
 Based on an initial layer "collection" named "foods", Food struct items are stored in second layer "document" with UUID. concrete information like name or quantity is stored in each field of third layer.  
 
-##導入/Installation
+## 導入/Installation
 googleservice-info.plistが必要となりますのFirebaseから本ファイルをダウンロードし本アプリのプロジェクトファイルに追加してください。  
 googleservice-info.plist is neccesary for using this app. Please get it from Firebase account and add it to the app. project file.  
-##使い方 Usage
-使い方は下記の通りです。
+## 使い方 Usage
+使い方は下記の通りです。  
 Usage is as follows. 
 <img src="https://user-images.githubusercontent.com/84781651/206842125-53fdc0ab-dbff-4bb1-8601-d78b61dc3181.png" width="25%">
 
