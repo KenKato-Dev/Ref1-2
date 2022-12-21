@@ -38,7 +38,7 @@ final class FoodListViewController: UIViewController {
         foodListTableView.delegate = self
         foodListTableView.dataSource = self
         foodListPresenter.setOutput(foodListPresenterOutput: self)
-        foodListPresenter.isFetchingArray()
+        foodListPresenter.fetchArray()
         // 各種ボタン操作
         deleteButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapDeleteButton()
@@ -80,12 +80,12 @@ final class FoodListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.foodListPresenter.isFetchingArray()
+        self.foodListPresenter.fetchArray()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.foodListPresenter.isFetchingArray()
+        self.foodListPresenter.fetchArray()
     }
 // performsegueと連動
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -103,18 +103,19 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     // cellの中身の表示
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let configuredFood = foodListPresenter.refreshArray(row: indexPath.row),
-              let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell
+        guard let foodInRow = foodListPresenter.refreshArrayIfNeeded(row: indexPath.row),
+              let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? FoodListCell
         else { return .init() }
-        cell.foodConfigure(food: configuredFood)
-        let isChecked = foodListPresenter.checkedID[configuredFood.IDkey] ?? false
+        cell.composeFood(food: foodInRow)
+        // delete関連、選択してcheckedIDに入ったFoodIDkeyのValueのBool値(初期値true)をisCheckedに代入
+        let isCheckedDictionary = foodListPresenter.checkedID[foodInRow.IDkey] ?? false
         let shouldShowCheckBox = !foodListPresenter.isDelete
         if shouldShowCheckBox {
-            cell.configure(state: .shownCheckBox(isChecked: isChecked))
+            cell.controllCheckBox(state: .shownCheckBox(isChecked: isCheckedDictionary))
         } else {
-            cell.configure(state: .normal)
+            cell.controllCheckBox(state: .normal)
         }
-        cell.didTapCheckBox = foodListPresenter.isTapCheckboxButton(row: indexPath.row)
+        cell.didTapCheckBox = foodListPresenter.setArgInDidTapCheckBox(at: indexPath.row)
         return cell
     }
     // cell選択時の動作
@@ -167,7 +168,7 @@ extension FoodListViewController: FoodListPresenterOutput {
         }
     }
 // 削除ボタンを押した際の処理
-    func didTapDeleteButton(_ isDelete: Bool) {
+    func arrangeDisplayingView(_ isDelete: Bool) {
         deleteButton.imageChange(bool: isDelete)
         addButtton.isEnabled = isDelete
         locationButtonsStack.isHidden = !isDelete

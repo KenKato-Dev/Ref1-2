@@ -163,7 +163,7 @@ final class FoodData: FoodDataProtocol {
     }
     // Firebaseから情報を読み込む処理
     func fetch(_ completion: @escaping (Result<[Food], Error>) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now()) { // +0.3を削除し動作確認
+//        DispatchQueue.main.asyncAfter(deadline: .now()) { // +0.3を削除し動作確認
 
             self.countOfDocuments = 0
             self.query.getDocuments { querySnapShot, error in
@@ -177,8 +177,8 @@ final class FoodData: FoodDataProtocol {
                     decoder.dateDecodingStrategy = .formatted(.iso8601Full)
                     self.queryDocumentSnaphots.append(contentsOf: querySnapShot.documents)
                     self.countOfDocuments = querySnapShot.documents.count
-                    let dictinaryDocuments = querySnapShot.documents.map { snapshot in
-                        snapshot.data()
+                    let dictinaryDocuments = querySnapShot.documents.map { documentSnapshot in
+                        documentSnapshot.data()
                     }
                     do {
                         let data = try JSONSerialization.data(withJSONObject: dictinaryDocuments, options: .prettyPrinted)
@@ -189,7 +189,7 @@ final class FoodData: FoodDataProtocol {
                     }
                 }
             }
-        }
+//        }
     }
     // 上記Fetch前にて使用するQuery作成処理、ボタンによるBool値と選択された食材の配列から処理
     func isConfiguringQuery(_ filterRef: Bool, _ filterFreezer: Bool, _ filter: Filter, _ kinds: [Food.FoodKind]) {

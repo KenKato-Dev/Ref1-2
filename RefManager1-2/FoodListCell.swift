@@ -6,7 +6,7 @@
 //
 
 import UIKit
-class TableViewCell: UITableViewCell {
+class FoodListCell: UITableViewCell {
     // 下記enumを追加、normal. trueとfalseの3肢を用意
     // checkboxの出現、checkboxのsetImage切り替えをこれでまとめる
     enum State {
@@ -33,17 +33,17 @@ class TableViewCell: UITableViewCell {
             if case let .shownCheckBox(isChecked) = self.state {
                 let nextIsChecked = !isChecked
                 self.didTapCheckBox?(nextIsChecked)
-                self.configure(state: .shownCheckBox(isChecked: nextIsChecked))
+                self.controllCheckBox(state: .shownCheckBox(isChecked: nextIsChecked))
             }
         }), for: .touchUpInside)
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        configure(state: .normal)
+        controllCheckBox( state: .normal)
     }
 
-    func foodConfigure(food: Food) {
+    func composeFood(food: Food) {
         preserveMethodTextLable.text = locationTranslator(location: food.location)
         foodImage.image = UIImage(named: "\(food.kind.rawValue)")
         foodNameTextLabel.text = food.name
@@ -52,7 +52,7 @@ class TableViewCell: UITableViewCell {
         dateTextLabel.text = food.date.formatted(date: .abbreviated, time: .omitted)
     }
 
-    func configure(state: State) {
+    func controllCheckBox(state: State) {
         self.state = state
         switch state {
         case .normal:

@@ -14,7 +14,7 @@ protocol FoodListPresenterOutput: AnyObject {
     func presentErrorIfNeeded(_ errorOrNil: Error?)
     func dismiss()
     func setTitle(_ refigerator: Bool, _ freezer: Bool, _ selectedKinds: [Food.FoodKind], _ location: Food.Location)
-    func didTapDeleteButton(_ isDelete: Bool)
+    func arrangeDisplayingView(_ isDelete: Bool)
     func animateLocationButton(_ isFilteringRef: Bool, _ isFilteringFreezer: Bool)
     func resetButtonColor()
     func showAlertInCell(_ storyboard: FoodAppendViewController?, _ array: [Food], _ row: Int, _ isTapRow: Bool)
@@ -23,13 +23,13 @@ protocol FoodListPresenterOutput: AnyObject {
 // FoodListのPresenter
 final class FoodListPresenter {
     private let foodData: FoodData
+    private let foodUseCase: FoodUseCase
     private weak var foodListPresenterOutput: FoodListPresenterOutput?
     private(set) var array: [Food] = []
     private(set) var isDelete = true
     private(set) var checkedID: [String: Bool] = [:]
     private var didTapCheckBox: ((Bool) -> Void)?
     private(set) static var isTapRow = false
-    private let foodUseCase: FoodUseCase
     private let db = Firestore.firestore()
     init(foodData: FoodData, foodUseCase: FoodUseCase) {
         self.foodData = foodData
@@ -39,8 +39,8 @@ final class FoodListPresenter {
     func setOutput(foodListPresenterOutput: FoodListPresenterOutput) {
         self.foodListPresenterOutput = foodListPresenterOutput
     }
-    // QUeryの生成、fetch、reloadDataを実行し配列表示を構築
-    func isFetchingArray() {
+    // Queryの生成、fetch、reloadDataを実行し配列表示を構築
+    func fetchArray() {
         self.foodData.isConfiguringQuery(
             foodUseCase.isFilteringRefrigerator,
             foodUseCase.isFilteringFreezer,
@@ -73,32 +73,21 @@ final class FoodListPresenter {
             }
         }
     }
-    // 削除ボタンの処理
-    func didTapDeleteButton() {
-        isDelete.toggle()
-        // ボタンの無効化
-        foodListPresenterOutput?.didTapDeleteButton(isDelete)
-        if isDelete, checkedID.values.contains(true) {
-            self.foodListPresenterOutput?.showDeleteAlert()
-
-        }
-        foodListPresenterOutput?.reloadData()
-    }
     // 冷蔵ボタンの処理
     func didTapRefrigiratorButton(_: UIButton) {
         foodUseCase.didTapRefrigeratorButton()
         // ボタンの色を変更
         foodListPresenterOutput?.animateLocationButton(foodUseCase.isFilteringRefrigerator, foodUseCase.isFilteringFreezer)
-        didSwitchLocation(location: .refrigerator)
+        switchLocation(location: .refrigerator)
     }
     // 冷凍ボタンの処理
     func didTapFreezerButton(_: UIButton) {
         foodUseCase.didTapFreezerButton()
         foodListPresenterOutput?.animateLocationButton(foodUseCase.isFilteringRefrigerator, foodUseCase.isFilteringFreezer)
-        didSwitchLocation(location: .freezer)
+        switchLocation(location: .freezer)
     }
     // 冷蔵/冷凍ボタンの共通処理
-    private func didSwitchLocation(location: Food.Location) {
+    private func switchLocation(location: Food.Location) {
         foodUseCase.foodFilter.location = location
         foodUseCase.resetKinds(foodUseCase.isFilteringRefrigerator, foodUseCase.isFilteringFreezer)
         // タイトル編集
@@ -108,7 +97,7 @@ final class FoodListPresenter {
             foodUseCase.selectedKinds,
             foodUseCase.foodFilter.location
         )
-        self.isFetchingArray()
+        self.fetchArray()
         print(foodData.query)
         foodListPresenterOutput?.reloadData()
     }
@@ -120,7 +109,7 @@ final class FoodListPresenter {
         foodUseCase.foodFilter.kindArray = selectedFoodKinds
         // ここでselectedKindsに入る
         foodUseCase.isAddingKinds(selectedKinds: &selectedFoodKinds)
-        self.isFetchingArray()
+        self.fetchArray()
         print(foodData.query)
         // 押したボタン画像を変更
         var image = UIImage(named: kind.rawValue + "Button")
@@ -143,22 +132,31 @@ final class FoodListPresenter {
         }
         foodListPresenterOutput?.reloadData()
     }
-    // UUIDをDictionaryに追加
-    func isTapCheckboxButton(row: Int) -> ((Bool) -> Void)? {
-        didTapCheckBox = { isChecked in
-            self.checkedID[self.array[row].IDkey] = isChecked
-
-        }
-        return didTapCheckBox
-    }
     // Bool値を条件に配列フィルターと配列を初期化
-    func refreshArray(row: Int) -> Food? {
+    func refreshArrayIfNeeded(row: Int) -> Food? {
         if !foodUseCase.isFilteringFreezer && !foodUseCase.isFilteringRefrigerator && foodUseCase.selectedKinds.isEmpty {
             foodUseCase.resetDictionary()
             foodUseCase.foodFilter.kindArray = Food.FoodKind.allCases
             self.foodListPresenterOutput?.resetButtonColor()
         }
         return array[row]
+    }
+    // 削除ボタンの処理
+    func didTapDeleteButton() {
+        isDelete.toggle()
+        // ボタンの無効化
+        foodListPresenterOutput?.arrangeDisplayingView(isDelete)
+        if isDelete, checkedID.values.contains(true) {
+            self.foodListPresenterOutput?.showDeleteAlert()
+        }
+        foodListPresenterOutput?.reloadData()
+    }
+    // クロージャ変数didTapに引数atを加えて返す、返り値をcell定義のクロージャに代入するための処理
+    func setArgInDidTapCheckBox(at: Int) -> ((Bool) -> Void)? {
+        didTapCheckBox = { isChecked in
+            self.checkedID[self.array[at].IDkey] = isChecked
+        }
+        return didTapCheckBox
     }
     // tableViewのcellの列数の処理
     func numberOfRows() -> Int {
