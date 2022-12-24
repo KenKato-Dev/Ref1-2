@@ -14,6 +14,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+//        FoodData().post2 { result in
+//            switch result {
+//            case .success:
+//                break
+//            case let .failure(error):
+//                print(error)
+//            }
+//        }
         // Test時はlocal下で実行できるよう設定
 //        if ProcessInfo.processInfo.environment["unitTests"] == "true" {
 //            print("Setting up Firebase emulator localhost:8080")

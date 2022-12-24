@@ -27,7 +27,7 @@ extension RecepieCategoryListViewController: UITableViewDelegate, UITableViewDat
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "recepieCell", for: indexPath) as? RecepieTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recepieCell", for: indexPath) as? RecepieCategoryCell
         cell?.categoryName.text = recepieCategoryListPresenter.cellForRowAt(indexPath: indexPath)
         return cell!
     }

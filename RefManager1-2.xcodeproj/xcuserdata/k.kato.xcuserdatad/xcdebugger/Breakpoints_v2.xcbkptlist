@@ -7,271 +7,319 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "42BECD12-60E1-4A9E-9659-1D664572C292"
-            shouldBeEnabled = "No"
+            uuid = "2A34FB1E-56E5-4C74-8481-DEB3EBB9ACAF"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FoodList/FoodListViewController.swift"
+            filePath = "FoodAddition/FoodAppendViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
-            landmarkName = "showAlertInCell(_:_:_:_:)"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "preserve(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D4D1E825-5D7F-4028-8B0C-799957FC8456"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FoodList/FoodListViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
-            landmarkName = "showAlertInCell(_:_:_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "834894A1-2503-40CC-AAB2-F9745487BB7A"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FoodList/FoodListViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
-            landmarkName = "showAlertInCell(_:_:_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4261BBCD-84B0-483E-9946-0159C3806EC4"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FoodList/FoodListPresenter.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
-            landmarkName = "didSelectRow(storyboard:row:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9EF20AC9-A273-4E59-8F9B-52AB7A6765D8"
-            shouldBeEnabled = "No"
+            uuid = "62D02C0D-0048-4606-9D40-D84869B9C2F6"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FoodAddition/FoodAppendPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "didTapKindButton(kind:_:)"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "didTapPreserveButton(foodName:quantity:unit:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8DC51429-A6C8-4134-85CE-CA5C5C2AF8F8"
-            shouldBeEnabled = "No"
+            uuid = "FA76A2B6-B817-40C5-AEA9-146D6C209CA8"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FoodList/FoodListViewController.swift"
+            filePath = "FoodAddition/FoodAppendPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "viewWillAppear(_:)"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "didTapPreserveButton(foodName:quantity:unit:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6B467A3F-7546-4173-8EA3-D2A932DA2B09"
-            shouldBeEnabled = "No"
+            uuid = "DF664674-D74E-4D24-8A4A-A52E7348BA61"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FoodList/FoodListViewController.swift"
+            filePath = "FoodAddition/FoodAppendPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "didTapPreserveButton(foodName:quantity:unit:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F5E9BA1F-5412-4D1E-87CD-D1239ED5B675"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FoodAddition/FoodAppendPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "didTapPreserveButton(foodName:quantity:unit:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D4226397-2428-4D35-906E-D926CAA2867F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FoodAddition/FoodAppendPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "didTapPreserveButton(foodName:quantity:unit:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "48F0D49A-915F-4BAA-B6F8-EE92F9DA5E0E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FoodAddition/FoodAppendPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "didTapPreserveButton(foodName:quantity:unit:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4398213B-769C-4FDC-9A70-BA17F811FC48"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FoodAddition/FoodAppendPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "didTapPreserveButton(foodName:quantity:unit:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "96E05762-46A1-4ADC-9D41-0E275350396A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FoodAddition/FoodAppendPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "didTapPreserveButton(foodName:quantity:unit:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "243E7A26-199F-495F-B54F-F971F7E567A1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FoodAddition/FoodAppendPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "didTapPreserveButton(foodName:quantity:unit:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F2839708-9173-4A2F-95EC-33FD11C8867F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FoodAddition/FoodAppendPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "didTapPreserveButton(foodName:quantity:unit:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "90070938-B3D9-4379-9749-84D436034899"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FoodAddition/FoodAppendPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "didTapPreserveButton(foodName:quantity:unit:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2DFBEB9B-B0A4-4931-AB58-FBDEA047FE3A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FoodAddition/FoodAppendPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "88"
             endingLineNumber = "88"
-            landmarkName = "viewDidAppear(_:)"
+            landmarkName = "didTapPreserveButton(foodName:quantity:unit:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "79A421E1-94D5-4E7C-9458-D17E9CA1DB86"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FoodList/FoodListViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B59C285F-DAE3-48A0-A277-620A571E8EA6"
+            uuid = "FB08C8F4-0E47-4A61-8E1F-0FA2D550980E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FoodList/FoodListViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "setTitle(_:_:_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1433A50B-DAF6-4D4D-B0F1-E47861C3FE7D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FoodList/FoodListViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
-            landmarkName = "setTitle(_:_:_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E18C3ECA-0162-48DD-9FDF-C86E6C63C88E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FoodList/FoodListViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "setTitle(_:_:_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "BA2DAA99-AFC0-4E07-9C52-278B94504ED2"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FoodAddition/FoodAppendViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "didTapPreserveButtonWithoutEssential()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "BEA2E58C-D7C3-4882-8967-0D485D33F145"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FoodAddition/FoodAppendViewController.swift"
+            filePath = "FoodData.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "125"
             endingLineNumber = "125"
-            landmarkName = "didTapPreserveButtonWithoutEssential()"
+            landmarkName = "post(_:_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9BC6D2D0-1124-424C-9393-726817EC3991"
-            shouldBeEnabled = "No"
+            uuid = "D98F455D-BD11-4DE2-8916-8905F36F233A"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FoodAddition/FoodAppendViewController.swift"
+            filePath = "FoodData.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "didTapPreserveButtonWithoutEssential()"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "post(_:_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5E20CD2C-8EB8-4F8C-99F6-299CC327586F"
-            shouldBeEnabled = "No"
+            uuid = "52D984F9-19AB-4F03-9F60-7C1B988FD1BA"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/RefManagerTests.swift"
+            filePath = "FoodData.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "test_post&#x6a5f;&#x80fd;()"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "post(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C936E85C-C156-4EFB-BECC-0DC8957CB605"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FoodData.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "post(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "96954414-2DC3-44B1-9FDB-BD8695875A92"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FoodData.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "post(_:_:_:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "5E20CD2C-8EB8-4F8C-99F6-299CC327586F - a88562d183df6966"
+                  uuid = "96954414-2DC3-44B1-9FDB-BD8695875A92 - c140ef6bcd96d9a9"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in RefManager1_2Tests.RefManagerTests.test_post&#x6a5f;&#x80fd;() -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
+                  symbolName = "RefManager1_2.FoodData.post(Swift.String, RefManager1_2.Food, (Swift.Result&lt;(), Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "RefManager1-2"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManagerTests.swift"
+                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/FoodData.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "22"
-                  endingLineNumber = "22"
-                  offsetFromSymbolStart = "304">
+                  startingLineNumber = "134"
+                  endingLineNumber = "134"
+                  offsetFromSymbolStart = "3488">
                </Location>
                <Location
-                  uuid = "5E20CD2C-8EB8-4F8C-99F6-299CC327586F - a88562d183df6966"
+                  uuid = "96954414-2DC3-44B1-9FDB-BD8695875A92 - 41be864ae661b68"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in RefManager1_2Tests.RefManagerTests.test_post&#x6a5f;&#x80fd;() -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in RefManager1_2.FoodData.post(Swift.String, RefManager1_2.Food, (Swift.Result&lt;(), Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "RefManager1-2"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManagerTests.swift"
+                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/FoodData.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "22"
-                  endingLineNumber = "22"
-                  offsetFromSymbolStart = "316">
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "80">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -279,748 +327,207 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CEC3EA8E-3669-4563-B10D-25F45510729E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/RefManagerTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "test_post&#x6a5f;&#x80fd;()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "CEC3EA8E-3669-4563-B10D-25F45510729E - a88562d183df6a85"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in RefManager1_2Tests.RefManagerTests.test_post&#x6a5f;&#x80fd;() -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManagerTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25"
-                  offsetFromSymbolStart = "596">
-               </Location>
-               <Location
-                  uuid = "CEC3EA8E-3669-4563-B10D-25F45510729E - a88562d183df6a85"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in RefManager1_2Tests.RefManagerTests.test_post&#x6a5f;&#x80fd;() -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManagerTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25"
-                  offsetFromSymbolStart = "620">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "BAEB62AC-5226-4949-98F2-3C3730A88FB1"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/RefManagerTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "test_post&#x6a5f;&#x80fd;()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "BAEB62AC-5226-4949-98F2-3C3730A88FB1 - a88562d183df6aea"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in RefManager1_2Tests.RefManagerTests.test_post&#x6a5f;&#x80fd;() -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManagerTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "872">
-               </Location>
-               <Location
-                  uuid = "BAEB62AC-5226-4949-98F2-3C3730A88FB1 - a88562d183df6aea"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in RefManager1_2Tests.RefManagerTests.test_post&#x6a5f;&#x80fd;() -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManagerTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "900">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "25E22372-7E6E-4D29-A3DB-CB9FBB0E2B42"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/RefManagerTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "test_post&#x6a5f;&#x80fd;()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "25E22372-7E6E-4D29-A3DB-CB9FBB0E2B42 - a88562d183df6947"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in RefManager1_2Tests.RefManagerTests.test_post&#x6a5f;&#x80fd;() -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManagerTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "504">
-               </Location>
-               <Location
-                  uuid = "25E22372-7E6E-4D29-A3DB-CB9FBB0E2B42 - a88562d183df6947"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in RefManager1_2Tests.RefManagerTests.test_post&#x6a5f;&#x80fd;() -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManagerTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "524">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "AE9A9822-99BD-4F5F-AD0C-F5CAF55191B1"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AppDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
-            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CAE0870B-609B-432E-A373-2CDC220BAB81"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AppDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E57D4E4E-C240-4DD3-A477-4632E799A854"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AppDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E6EF9F5C-40C5-418E-A63F-1A8B992338E5"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AppDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D4D647BE-1653-4ED9-AC27-25DB9B87927B"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AppDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CCD1F788-CD85-45E4-9FCB-4191F6E15744"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AppDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "82BF5D4B-F5B9-4213-9AA5-974D1020DB57"
+            uuid = "57CB75D4-CEAB-4579-9485-1D0B5ADD4270"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/RefManagerTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "test_fetch&#x6a5f;&#x80fd;()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "147F1C3F-6E34-469D-8576-84CF90015323"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/RefManagerTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "test_fetch&#x6a5f;&#x80fd;()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DBC65639-A6A5-48A0-A7AC-8DEB165F81D9"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/FoodDataTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "test_delete&#x6a5f;&#x80fd;()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "DBC65639-A6A5-48A0-A7AC-8DEB165F81D9 - dba463e95d4485e7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in RefManager1_2Tests.FoodDataTests.test_delete&#x6a5f;&#x80fd;() -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "54"
-                  endingLineNumber = "54"
-                  offsetFromSymbolStart = "912">
-               </Location>
-               <Location
-                  uuid = "DBC65639-A6A5-48A0-A7AC-8DEB165F81D9 - dba463e95d4485e7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in RefManager1_2Tests.FoodDataTests.test_delete&#x6a5f;&#x80fd;() -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "54"
-                  endingLineNumber = "54"
-                  offsetFromSymbolStart = "240">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "255FE870-7D5A-410C-8970-948CCF52C024"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/FoodDataTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "test_delete&#x6a5f;&#x80fd;()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "255FE870-7D5A-410C-8970-948CCF52C024 - dba463e95d448540"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in RefManager1_2Tests.FoodDataTests.test_delete&#x6a5f;&#x80fd;() -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "504">
-               </Location>
-               <Location
-                  uuid = "255FE870-7D5A-410C-8970-948CCF52C024 - dba463e95d448540"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in RefManager1_2Tests.FoodDataTests.test_delete&#x6a5f;&#x80fd;() -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "160">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "410FAE90-BE0E-42F2-8B46-9CE71A900A17"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/FoodDataTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "test_delete&#x6a5f;&#x80fd;()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "410FAE90-BE0E-42F2-8B46-9CE71A900A17 - dba463e95d448563"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in RefManager1_2Tests.FoodDataTests.test_delete&#x6a5f;&#x80fd;() -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "304">
-               </Location>
-               <Location
-                  uuid = "410FAE90-BE0E-42F2-8B46-9CE71A900A17 - dba463e95d448540"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in RefManager1_2Tests.FoodDataTests.test_delete&#x6a5f;&#x80fd;() -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "160">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FD2D5755-C9DA-493A-AFC2-EA63E387E065"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/FoodDataTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "test_delete&#x6a5f;&#x80fd;()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "FD2D5755-C9DA-493A-AFC2-EA63E387E065 - dba463e95d448506"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in RefManager1_2Tests.FoodDataTests.test_delete&#x6a5f;&#x80fd;() -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "53"
-                  endingLineNumber = "53"
-                  offsetFromSymbolStart = "632">
-               </Location>
-               <Location
-                  uuid = "FD2D5755-C9DA-493A-AFC2-EA63E387E065 - dba463e95d4485e7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in RefManager1_2Tests.FoodDataTests.test_delete&#x6a5f;&#x80fd;() -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "54"
-                  endingLineNumber = "54"
-                  offsetFromSymbolStart = "240">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "61AA3BCC-F475-40CF-BB1F-738A7176F0BB"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/FoodDataTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "test_post&#x6a5f;&#x80fd;()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A027524E-0FA6-4DFA-A005-7E5652CD9EEE"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/FoodDataTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "test_post&#x6a5f;&#x80fd;()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "EDA39003-575A-408E-96B4-94890F2F0FC3"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/FoodDataTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "test_delete&#x6a5f;&#x80fd;()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "EC482BA0-33FA-44D7-8C21-3839B0237D9D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/FoodDataTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
-            landmarkName = "test_delete&#x52d5;&#x4f5c;(_:_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "EC482BA0-33FA-44D7-8C21-3839B0237D9D - 8cb8a9f216e2734e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 () -&gt; () in RefManager1_2Tests.FoodDataMock.test_delete&#x52d5;&#x4f5c;(Swift.Array&lt;Swift.String&gt;, (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "138"
-                  endingLineNumber = "138"
-                  offsetFromSymbolStart = "88">
-               </Location>
-               <Location
-                  uuid = "EC482BA0-33FA-44D7-8C21-3839B0237D9D - 8cb8a9f216e273ad"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 () -&gt; () in RefManager1_2Tests.FoodDataMock.test_delete&#x52d5;&#x4f5c;(Swift.Array&lt;Swift.String&gt;, (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "139"
-                  endingLineNumber = "139"
-                  offsetFromSymbolStart = "88">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7A8C5834-93E6-465E-80AA-A09B4684F914"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/FoodDataTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "test_delete&#x52d5;&#x4f5c;(_:_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "7A8C5834-93E6-465E-80AA-A09B4684F914 - 8cb8a9f216e27300"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 () -&gt; () in RefManager1_2Tests.FoodDataMock.test_delete&#x52d5;&#x4f5c;(Swift.Array&lt;Swift.String&gt;, (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "136"
-                  endingLineNumber = "136"
-                  offsetFromSymbolStart = "196">
-               </Location>
-               <Location
-                  uuid = "7A8C5834-93E6-465E-80AA-A09B4684F914 - 8cb8a9f216e2736f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 () -&gt; () in RefManager1_2Tests.FoodDataMock.test_delete&#x52d5;&#x4f5c;(Swift.Array&lt;Swift.String&gt;, (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "137"
-                  endingLineNumber = "137"
-                  offsetFromSymbolStart = "196">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A009F070-1921-4AB1-A543-33641158EC3A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/FoodDataTests.swift"
+            filePath = "FoodData.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "136"
             endingLineNumber = "136"
-            landmarkName = "test_delete&#x52d5;&#x4f5c;(_:_:)"
+            landmarkName = "post(_:_:_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A009F070-1921-4AB1-A543-33641158EC3A - 60bc00bf1b288c46"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 () -&gt; () in RefManager1_2Tests.FoodDataMock.test_delete&#x52d5;&#x4f5c;(Swift.Array&lt;Swift.String&gt;, (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "133"
-                  endingLineNumber = "133"
-                  offsetFromSymbolStart = "368">
-               </Location>
-               <Location
-                  uuid = "A009F070-1921-4AB1-A543-33641158EC3A - a93b4f152d5ba648"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.FIRQueryDocumentSnapshot) -&gt; () in closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 () -&gt; () in RefManager1_2Tests.FoodDataMock.test_delete&#x52d5;&#x4f5c;(Swift.Array&lt;Swift.String&gt;, (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "133"
-                  endingLineNumber = "133"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "A009F070-1921-4AB1-A543-33641158EC3A - 60bc00bf1b288c67"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 () -&gt; () in RefManager1_2Tests.FoodDataMock.test_delete&#x52d5;&#x4f5c;(Swift.Array&lt;Swift.String&gt;, (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "134"
-                  endingLineNumber = "134"
-                  offsetFromSymbolStart = "616">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "09BBD2AE-B313-4E2E-9E83-3F4693478947"
+            uuid = "F118A147-3CE1-445A-8A38-197804F0FC8B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/FoodDataTests.swift"
+            filePath = "FoodData.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "137"
             endingLineNumber = "137"
-            landmarkName = "test_delete&#x52d5;&#x4f5c;(_:_:)"
+            landmarkName = "post(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "45483A4E-8FCE-482B-965D-114BF88B9D51"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FoodData.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "post(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BC72867F-8566-48C7-902F-4AB1CA01E3FC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FoodData.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "post(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F07771EA-C006-438F-B604-722176857AC2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FoodData.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "post(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "169001F9-EF6D-4B1A-BB72-22243C2C1668"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "didTapSignInButton(_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B5B4080A-2BAF-4653-BA3E-DA8A9AB4582B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "didTapSignInButton(_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D527EB26-E5AD-4F45-B5D7-5C23264D79F9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "didTapSignInButton(_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C513B9AC-7372-4822-A600-C07169EFE7D4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "didTapSignInButton(_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B7E81DC1-4AC6-418D-A223-18F098E09DFD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "performSegue(uid:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3EE7D3A0-60C3-445B-A667-61220B2EF47D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "didTapSignInButton(_:_:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "09BBD2AE-B313-4E2E-9E83-3F4693478947 - 60bc00bf1b288c67"
+                  uuid = "3EE7D3A0-60C3-445B-A667-61220B2EF47D - e7441edaf5d2366f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 () -&gt; () in RefManager1_2Tests.FoodDataMock.test_delete&#x52d5;&#x4f5c;(Swift.Array&lt;Swift.String&gt;, (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
+                  symbolName = "RefManager1_2.SignInPresenter.didTapSignInButton(Swift.String, Swift.String) -&gt; ()"
+                  moduleName = "RefManager1-2"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
+                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/SignUP(todo)/SignInPresenter.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "134"
-                  endingLineNumber = "134"
-                  offsetFromSymbolStart = "652">
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "248">
                </Location>
                <Location
-                  uuid = "09BBD2AE-B313-4E2E-9E83-3F4693478947 - 8cb8a9f216e27321"
+                  uuid = "3EE7D3A0-60C3-445B-A667-61220B2EF47D - bf2c76e29354c4c6"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 () -&gt; () in RefManager1_2Tests.FoodDataMock.test_delete&#x52d5;&#x4f5c;(Swift.Array&lt;Swift.String&gt;, (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in RefManager1_2.SignInPresenter.didTapSignInButton(Swift.String, Swift.String) -&gt; ()"
+                  moduleName = "RefManager1-2"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
+                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/SignUP(todo)/SignInPresenter.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "135"
-                  endingLineNumber = "135"
-                  offsetFromSymbolStart = "56">
-               </Location>
-               <Location
-                  uuid = "09BBD2AE-B313-4E2E-9E83-3F4693478947 - 60bc00bf1b288f84"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 () -&gt; () in RefManager1_2Tests.FoodDataMock.test_delete&#x52d5;&#x4f5c;(Swift.Array&lt;Swift.String&gt;, (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "135"
-                  endingLineNumber = "135"
-                  offsetFromSymbolStart = "884">
-               </Location>
-               <Location
-                  uuid = "09BBD2AE-B313-4E2E-9E83-3F4693478947 - 8cb8a9f216e27300"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 () -&gt; () in RefManager1_2Tests.FoodDataMock.test_delete&#x52d5;&#x4f5c;(Swift.Array&lt;Swift.String&gt;, (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/FoodDataTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "136"
-                  endingLineNumber = "136"
-                  offsetFromSymbolStart = "56">
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "120">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1028,62 +535,78 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F605D454-CDE8-49F2-AB3D-DA232B35D255"
+            uuid = "1A02AD21-D2DE-4F44-A686-2731198FD87A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/RefManager1_2Tests.swift"
+            filePath = "SignUP(todo)/signUp.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "test_isConfiguringQuery&#x52d5;&#x4f5c;(_:_:_:_:)"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "signIn(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A9556802-DB12-456B-AFA1-99C7B4782C47"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/signUp.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "signIn(_:_:_:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "F605D454-CDE8-49F2-AB3D-DA232B35D255 - 6ad4bfc62e808984"
+                  uuid = "A9556802-DB12-456B-AFA1-99C7B4782C47 - b1c4092c4b68c66a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "RefManager1_2Tests.FoodDataMock.test_isConfiguringQuery&#x52d5;&#x4f5c;(Swift.Bool, Swift.Bool, RefManager1_2.FoodData.Filter, Swift.Array&lt;RefManager1_2.Food.FoodKind&gt;) -&gt; __C.FIRQuery"
-                  moduleName = "RefManager1-2Tests"
+                  symbolName = "RefManager1_2.SignUp.signIn(Swift.String, Swift.String, (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "RefManager1-2"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManager1_2Tests.swift"
+                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/SignUP(todo)/signUp.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "154"
-                  endingLineNumber = "154"
-                  offsetFromSymbolStart = "560">
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "100">
                </Location>
                <Location
-                  uuid = "F605D454-CDE8-49F2-AB3D-DA232B35D255 - 6ad4bfc62e8089a5"
+                  uuid = "A9556802-DB12-456B-AFA1-99C7B4782C47 - b1c4092c4b68c66a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "RefManager1_2Tests.FoodDataMock.test_isConfiguringQuery&#x52d5;&#x4f5c;(Swift.Bool, Swift.Bool, RefManager1_2.FoodData.Filter, Swift.Array&lt;RefManager1_2.Food.FoodKind&gt;) -&gt; __C.FIRQuery"
-                  moduleName = "RefManager1-2Tests"
+                  symbolName = "RefManager1_2.SignUp.signIn(Swift.String, Swift.String, (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "RefManager1-2"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManager1_2Tests.swift"
+                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/SignUP(todo)/signUp.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "153"
-                  endingLineNumber = "153"
-                  offsetFromSymbolStart = "560">
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "212">
                </Location>
                <Location
-                  uuid = "F605D454-CDE8-49F2-AB3D-DA232B35D255 - 6ad4bfc62e8089e7"
+                  uuid = "A9556802-DB12-456B-AFA1-99C7B4782C47 - dccd4d708721be2e"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "RefManager1_2Tests.FoodDataMock.test_isConfiguringQuery&#x52d5;&#x4f5c;(Swift.Bool, Swift.Bool, RefManager1_2.FoodData.Filter, Swift.Array&lt;RefManager1_2.Food.FoodKind&gt;) -&gt; __C.FIRQuery"
-                  moduleName = "RefManager1-2Tests"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in RefManager1_2.SignUp.signIn(Swift.String, Swift.String, (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "RefManager1-2"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManager1_2Tests.swift"
+                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/SignUP(todo)/signUp.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "155"
-                  endingLineNumber = "155"
-                  offsetFromSymbolStart = "560">
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "100">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1091,62 +614,207 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "091831C4-D82F-4C5C-963F-5B8EA7B4BBA1"
+            uuid = "B5A3462B-8DFC-49EF-ACB3-2D4C18312B37"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/RefManager1_2Tests.swift"
+            filePath = "SignUP(todo)/signUp.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "test_isConfiguringQuery&#x52d5;&#x4f5c;(_:_:_:_:)"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "signIn(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4871A98F-96B7-4EC4-BB73-9C92F387C5AC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/signUp.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "signIn(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BB5C526C-5979-4B01-AD58-93319FC8E1D4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/signUp.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "signIn(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8BA143F0-E538-475B-908B-C8CEB184CC58"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/signUp.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "signIn(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "901DCC83-464F-4460-877F-D968B1544D5A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/signUp.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "signIn(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8559D152-9DFC-436E-AF28-8563289AAE5C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/signUp.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "signIn(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F78E908E-332F-4B05-B15D-971BFB00A000"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/signUp.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "signIn(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7973EBC9-477C-4E45-B46B-B4740083A19D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "didTapSignInButton(_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "80953253-C9EF-4145-9F2B-3C6B5E66EA5F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/signUp.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "signIn(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1C2676B2-CE3B-46FC-A560-6E9871480CB9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/signUp.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "signIn(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7FD5AF8B-902F-43B3-B38E-94EA2776720A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "didTapSignInButton(_:_:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "091831C4-D82F-4C5C-963F-5B8EA7B4BBA1 - 6ad4bfc62e808921"
+                  uuid = "7FD5AF8B-902F-43B3-B38E-94EA2776720A - e7441edaf5d2366f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "RefManager1_2Tests.FoodDataMock.test_isConfiguringQuery&#x52d5;&#x4f5c;(Swift.Bool, Swift.Bool, RefManager1_2.FoodData.Filter, Swift.Array&lt;RefManager1_2.Food.FoodKind&gt;) -&gt; __C.FIRQuery"
-                  moduleName = "RefManager1-2Tests"
+                  symbolName = "RefManager1_2.SignInPresenter.didTapSignInButton(Swift.String, Swift.String) -&gt; ()"
+                  moduleName = "RefManager1-2"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManager1_2Tests.swift"
+                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/SignUP(todo)/SignInPresenter.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "157"
-                  endingLineNumber = "157"
-                  offsetFromSymbolStart = "1492">
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "248">
                </Location>
                <Location
-                  uuid = "091831C4-D82F-4C5C-963F-5B8EA7B4BBA1 - 6ad4bfc62e8089c6"
+                  uuid = "7FD5AF8B-902F-43B3-B38E-94EA2776720A - bf2c76e29354c4c6"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "RefManager1_2Tests.FoodDataMock.test_isConfiguringQuery&#x52d5;&#x4f5c;(Swift.Bool, Swift.Bool, RefManager1_2.FoodData.Filter, Swift.Array&lt;RefManager1_2.Food.FoodKind&gt;) -&gt; __C.FIRQuery"
-                  moduleName = "RefManager1-2Tests"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in RefManager1_2.SignInPresenter.didTapSignInButton(Swift.String, Swift.String) -&gt; ()"
+                  moduleName = "RefManager1-2"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManager1_2Tests.swift"
+                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/SignUP(todo)/SignInPresenter.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "156"
-                  endingLineNumber = "156"
-                  offsetFromSymbolStart = "1492">
-               </Location>
-               <Location
-                  uuid = "091831C4-D82F-4C5C-963F-5B8EA7B4BBA1 - 6ad4bfc62e808900"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "RefManager1_2Tests.FoodDataMock.test_isConfiguringQuery&#x52d5;&#x4f5c;(Swift.Bool, Swift.Bool, RefManager1_2.FoodData.Filter, Swift.Array&lt;RefManager1_2.Food.FoodKind&gt;) -&gt; __C.FIRQuery"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManager1_2Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "158"
-                  endingLineNumber = "158"
-                  offsetFromSymbolStart = "1492">
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "120">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1154,62 +822,207 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4FA41592-D251-43FC-880B-591DEA4008B4"
+            uuid = "537D1F57-F876-48AA-9E16-E649CBD81ADA"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/RefManager1_2Tests.swift"
+            filePath = "SignUP(todo)/SignInViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
-            landmarkName = "test_isConfiguringQuery&#x52d5;&#x4f5c;(_:_:_:_:)"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "shouldPerformSegue(withIdentifier:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0F357E09-4CD9-4A62-B503-F7910F33B2F7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "shouldPerformSegue(withIdentifier:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4A9BC62B-E584-4320-9432-52A76233D76B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "shouldPerformSegue(withIdentifier:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B6BBACD2-F889-4184-8009-023282DCFC19"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "shouldPerformSegue(withIdentifier:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3FEEFEC2-A03D-42DB-B73B-ABD9FD493BCA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "shouldPerformSegue(withIdentifier:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "689A1226-1858-411B-BC57-DDC35787534F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "shouldPerformSegue(withIdentifier:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E2DEF550-5984-427C-99AD-3C071C5DD1A4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "shouldPerformSegue(withIdentifier:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3BD7D83D-FB4F-4FE9-ACB2-4411EA032D08"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "SignInViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EC58EF4D-B18F-4936-B572-410260F1F8BD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "prepare(for:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1D458DC2-DB04-4C7B-9FB8-2A9B0D9CFA79"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "prepare(for:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AF3B9950-07B9-4E5F-8735-F8B450A3712B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "4FA41592-D251-43FC-880B-591DEA4008B4 - 6ad4bfc62e808942"
+                  uuid = "AF3B9950-07B9-4E5F-8735-F8B450A3712B - 8e323a7eae7b94de"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "RefManager1_2Tests.FoodDataMock.test_isConfiguringQuery&#x52d5;&#x4f5c;(Swift.Bool, Swift.Bool, RefManager1_2.FoodData.Filter, Swift.Array&lt;RefManager1_2.Food.FoodKind&gt;) -&gt; __C.FIRQuery"
-                  moduleName = "RefManager1-2Tests"
+                  symbolName = "RefManager1_2.SignInViewController.prepare(for: __C.UIStoryboardSegue, sender: Swift.Optional&lt;Any&gt;) -&gt; ()"
+                  moduleName = "RefManager1-2"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManager1_2Tests.swift"
+                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/SignUP(todo)/SignInViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "160"
-                  endingLineNumber = "160"
-                  offsetFromSymbolStart = "2256">
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "696">
                </Location>
                <Location
-                  uuid = "4FA41592-D251-43FC-880B-591DEA4008B4 - 6ad4bfc62e808963"
+                  uuid = "AF3B9950-07B9-4E5F-8735-F8B450A3712B - 8e323a7eae7b94de"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "RefManager1_2Tests.FoodDataMock.test_isConfiguringQuery&#x52d5;&#x4f5c;(Swift.Bool, Swift.Bool, RefManager1_2.FoodData.Filter, Swift.Array&lt;RefManager1_2.Food.FoodKind&gt;) -&gt; __C.FIRQuery"
-                  moduleName = "RefManager1-2Tests"
+                  symbolName = "RefManager1_2.SignInViewController.prepare(for: __C.UIStoryboardSegue, sender: Swift.Optional&lt;Any&gt;) -&gt; ()"
+                  moduleName = "RefManager1-2"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManager1_2Tests.swift"
+                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/SignUP(todo)/SignInViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "159"
-                  endingLineNumber = "159"
-                  offsetFromSymbolStart = "2256">
-               </Location>
-               <Location
-                  uuid = "4FA41592-D251-43FC-880B-591DEA4008B4 - 6ad4bfc62e80889d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "RefManager1_2Tests.FoodDataMock.test_isConfiguringQuery&#x52d5;&#x4f5c;(Swift.Bool, Swift.Bool, RefManager1_2.FoodData.Filter, Swift.Array&lt;RefManager1_2.Food.FoodKind&gt;) -&gt; __C.FIRQuery"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManager1_2Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "161"
-                  endingLineNumber = "161"
-                  offsetFromSymbolStart = "2256">
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "748">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1217,95 +1030,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1B8848BC-37EB-484B-87A2-785FC2D6A5EA"
+            uuid = "452BAA41-97EA-4540-AAC4-F396CE9BE5D5"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/RefManager1_2Tests.swift"
+            filePath = "SignUP(todo)/SignInViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
-            landmarkName = "test_isConfiguringQuery&#x52d5;&#x4f5c;(_:_:_:_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1B8848BC-37EB-484B-87A2-785FC2D6A5EA - 6ad4bfc62e8088df"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "RefManager1_2Tests.FoodDataMock.test_isConfiguringQuery&#x52d5;&#x4f5c;(Swift.Bool, Swift.Bool, RefManager1_2.FoodData.Filter, Swift.Array&lt;RefManager1_2.Food.FoodKind&gt;) -&gt; __C.FIRQuery"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManager1_2Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "163"
-                  endingLineNumber = "163"
-                  offsetFromSymbolStart = "2872">
-               </Location>
-               <Location
-                  uuid = "1B8848BC-37EB-484B-87A2-785FC2D6A5EA - 6ad4bfc62e8088fc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "RefManager1_2Tests.FoodDataMock.test_isConfiguringQuery&#x52d5;&#x4f5c;(Swift.Bool, Swift.Bool, RefManager1_2.FoodData.Filter, Swift.Array&lt;RefManager1_2.Food.FoodKind&gt;) -&gt; __C.FIRQuery"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManager1_2Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "162"
-                  endingLineNumber = "162"
-                  offsetFromSymbolStart = "2872">
-               </Location>
-               <Location
-                  uuid = "1B8848BC-37EB-484B-87A2-785FC2D6A5EA - 6ad4bfc62e80883e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "RefManager1_2Tests.FoodDataMock.test_isConfiguringQuery&#x52d5;&#x4f5c;(Swift.Bool, Swift.Bool, RefManager1_2.FoodData.Filter, Swift.Array&lt;RefManager1_2.Food.FoodKind&gt;) -&gt; __C.FIRQuery"
-                  moduleName = "RefManager1-2Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/k.kato/Documents/Training50/RefManager1-2/RefManager1-2Tests/RefManager1_2Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "164"
-                  endingLineNumber = "164"
-                  offsetFromSymbolStart = "2872">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8891109F-D805-45C5-88A9-8B99BCEDB545"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/RefManager1_2Tests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "test_isConfiguringQuery&#x52d5;&#x4f5c;()"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F1B24021-6570-49F5-BD60-A287B1BCB080"
+            uuid = "2D338A57-0F34-4CF6-A5AB-EEF41E6EFB4E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RefManager1-2Tests/RefManager1_2Tests.swift"
+            filePath = "SignUP(todo)/SignInViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "test_isConfiguringQuery&#x52d5;&#x4f5c;()"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "prepare(for:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "50A733A6-108B-453D-84BC-C94D10BFE411"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "prepare(for:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6DF26CB4-91D9-45C1-A307-4CCDE7EC59CF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUP(todo)/SignInViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

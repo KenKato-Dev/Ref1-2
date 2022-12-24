@@ -18,6 +18,7 @@ protocol FoodListPresenterOutput: AnyObject {
     func animateLocationButton(_ isFilteringRef: Bool, _ isFilteringFreezer: Bool)
     func resetButtonColor()
     func showAlertInCell(_ storyboard: FoodAppendViewController?, _ array: [Food], _ row: Int, _ isTapRow: Bool)
+    func perfomSeguetofoodAppendVC()
     func showDeleteAlert()
 }
 // FoodListのPresenter
@@ -31,6 +32,7 @@ final class FoodListPresenter {
     private var didTapCheckBox: ((Bool) -> Void)?
     private(set) static var isTapRow = false
     private let db = Firestore.firestore()
+    private var uid = Auth.auth().currentUser?.uid
     init(foodData: FoodData, foodUseCase: FoodUseCase) {
         self.foodData = foodData
         self.foodUseCase = foodUseCase
@@ -39,9 +41,14 @@ final class FoodListPresenter {
     func setOutput(foodListPresenterOutput: FoodListPresenterOutput) {
         self.foodListPresenterOutput = foodListPresenterOutput
     }
+//    func receiveUID(_ receivedUID: String) {
+//        self.uid = receivedUID
+//    }
     // Queryの生成、fetch、reloadDataを実行し配列表示を構築
     func fetchArray() {
+        guard let uid = self.uid else {return}
         self.foodData.isConfiguringQuery(
+            uid,
             foodUseCase.isFilteringRefrigerator,
             foodUseCase.isFilteringFreezer,
             foodUseCase.foodFilter,
@@ -158,6 +165,10 @@ final class FoodListPresenter {
         }
         return didTapCheckBox
     }
+    // addButtonを押した時の処理
+    func didTapAddButton() {
+        self.foodListPresenterOutput?.perfomSeguetofoodAppendVC()
+    }
     // tableViewのcellの列数の処理
     func numberOfRows() -> Int {
         return self.array.count
@@ -172,9 +183,8 @@ final class FoodListPresenter {
     }
     //
      func didTapPreserveOnUpdationView(foodName: String?, foodQuantity: String?, foodinArray: Food) {
-        print("UpdationViewのFunc操作")
-
-        self.foodData.postFromUpdationView(foodName: foodName, foodQuantity: foodQuantity, foodinArray: foodinArray) { result in
+         guard let uid = self.uid else {return}
+         self.foodData.postFromUpdationView(uid, foodName: foodName, foodQuantity: foodQuantity, foodinArray: foodinArray) { result in
             switch result {
             case .success:
                 FoodListPresenter.isTapRow = false
@@ -184,11 +194,12 @@ final class FoodListPresenter {
             }
         }
         self.foodData.isConfiguringQuery(
+            uid,
             foodUseCase.isFilteringRefrigerator,
             foodUseCase.isFilteringFreezer,
             foodUseCase.foodFilter,
             foodUseCase.selectedKinds)
-        self.foodData.fetch { result in
+         self.foodData.fetch { result in
             DispatchQueue.main.asyncAfter(deadline: .now()) {
                 switch result {
                 case let .success(foods):
@@ -207,17 +218,20 @@ final class FoodListPresenter {
             self.foodListPresenterOutput?.dismiss()
     }
     func setLocationOnUpdationView(_ row: Int, locationString: String) {
-        self.foodData.setLocation(self.array[row].IDkey, locationString)
+        guard let uid = self.uid else {return}
+        self.foodData.setLocation(uid, self.array[row].IDkey, locationString)
     }
     func deleteAction() {
         //                 filterで値のみを取り出し、defoはTrueを取り出す
         let filteredIDictionary = self.checkedID.filter(\.value).map(\.key)
-        self.foodData.delete(filteredIDictionary) { result in
+        guard let uid = self.uid else {return}
+        self.foodData.delete(uid, filteredIDictionary) { result in
             switch result {
             case .success:
                 // ここから
                 self.checkedID = [:]
                 self.foodData.isConfiguringQuery(
+                    uid,
                     self.foodUseCase.isFilteringRefrigerator,
                     self.foodUseCase.isFilteringFreezer,
                     self.foodUseCase.foodFilter,

@@ -93,11 +93,11 @@ struct Food: Equatable, Codable {
 }
 // FoodDataクラスのプロトコル
 protocol FoodDataProtocol {
-    func post(_ food: Food, _ completion: @escaping (Result<Void, Error>) -> Void)
+    func post(_ uid: String, _ food: Food, _ completion: @escaping (Result<Void, Error>) -> Void)
     func fetch(_ completion: @escaping (Result<[Food], Error>) -> Void)
-    func isConfiguringQuery(_ filterRef: Bool, _ filterFreezer: Bool, _ filter: FoodData.Filter, _ kinds: [Food.FoodKind])
+    func isConfiguringQuery(_ uid: String, _ filterRef: Bool, _ filterFreezer: Bool, _ filter: FoodData.Filter, _ kinds: [Food.FoodKind])
     func paginate()
-    func delete(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void)
+    func delete(_ uid: String, _ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void)
 }
 // FoodListとFoodAdditionのModelになるクラス、Firebaseへの書込み、リクエスト処理
 final class FoodData: FoodDataProtocol {
@@ -111,14 +111,18 @@ final class FoodData: FoodDataProtocol {
     private let fieldElementIDKey = "IDkey"
     private let fieldElementLocation = "location"
     private let fieldElementKind = "kind"
+//    private (set) var query:Query?
     private (set) var query = Firestore.firestore().collection("foods").order(by: "kind").limit(to: 10)
+//    private (set) var query:((String) -> Query) = { (_ uid:String) -> Query in
+//       return Firestore.firestore().collection(uid).order(by: "kind").limit(to: 10)
+//    }
     private (set) var queryDocumentSnaphots: [QueryDocumentSnapshot] = []
     private (set) var countOfDocuments = 0
 
     // Firebaseへの書込み処理
-    func post(_ food: Food, _ completion: @escaping (Result<Void, Error>) -> Void) {
+    func post(_ uid: String, _ food: Food, _ completion: @escaping (Result<Void, Error>) -> Void) {
         // ドキュメントごとに保管、ドキュメントを他のものにするとDictionary方式に上書きされる
-            self.db.collection(self.collectionPath).document("\(self.fieldElementIDKey): \(food.IDkey)").setData([
+        self.db.collection("Users").document(uid).collection("foods").document("\(self.fieldElementIDKey): \(food.IDkey)").setData([
                 "location": "\(food.location)",
                 "kind": "\(food.kind)",
                 "kindNumber": "\(food.kind.kindNumber)",
@@ -137,9 +141,29 @@ final class FoodData: FoodDataProtocol {
                 }
             }
     }
+//    func post2(_ completion: @escaping (Result<Void, Error>) -> Void) {
+//        self.db.collection("Users").document("eTd6VEBzjidDOtUId08Ucj7RKQq1").collection("foods").document("\(self.fieldElementIDKey): test").setData([
+//            "location": Food.Location.refrigerator.rawValue,
+//            "kind": Food.FoodKind.meat.rawValue,
+//            "kindNumber": Food.FoodKind.meat.kindNumber,
+//                "name": "testFood",
+//                "quantity": "1000",
+//            "unit": "\(UnitSelectButton.UnitMenu.gram)",
+//            "IDkey": UUID().uuidString,
+//            "date": "\(Date.now)"
+//            ], merge: false) { error in
+//                if let error = error {
+//                    completion(.failure(error))
+//                    print("FireStoreへの書き込みに失敗しました: \(error)")
+//                } else {
+//                    completion(.success(()))
+//                    print("FireStoreへの書き込みに成功しました")
+//                }
+//            }
+//    }
     // FirebaseへUpdationView経由で書込みする際の処理
-    func postFromUpdationView(foodName: String?, foodQuantity: String?, foodinArray: Food, _ completion: @escaping (Result<Void, Error>) -> Void) {
-        self.db.collection(self.collectionPath).document("\(self.fieldElementIDKey): \(foodinArray.IDkey)").setData([
+    func postFromUpdationView(_ uid: String, foodName: String?, foodQuantity: String?, foodinArray: Food, _ completion: @escaping (Result<Void, Error>) -> Void) {
+        self.db.collection("Users").document(uid).collection("foods").document("\(self.fieldElementIDKey): \(foodinArray.IDkey)").setData([
             "name": "\(foodName!)",
             "quantity": "\(foodQuantity!)",
             "date": "\(Date())",
@@ -156,14 +180,15 @@ final class FoodData: FoodDataProtocol {
         }
     }
     // UpdationView経由の保管場所変更処理
-    func setLocation(_ IDKey: String, _ location: String) {
-        self.db.collection(self.collectionPath).document("\(self.fieldElementIDKey): \(IDKey)").setData([
+    func setLocation(_ uid: String, _ IDKey: String, _ location: String) {
+        self.db.collection("Users").document(uid).collection("foods").document("\(self.fieldElementIDKey): \(IDKey)").setData([
             self.fieldElementLocation: "\(location)"
         ])
     }
     // Firebaseから情報を読み込む処理
     func fetch(_ completion: @escaping (Result<[Food], Error>) -> Void) {
 //        DispatchQueue.main.asyncAfter(deadline: .now()) { // +0.3を削除し動作確認
+//        self.query = self.db.collection(uid).order(by: "kindNumber").order(by: "date").limit(to: 10)
 
             self.countOfDocuments = 0
             self.query.getDocuments { querySnapShot, error in
@@ -192,23 +217,23 @@ final class FoodData: FoodDataProtocol {
 //        }
     }
     // 上記Fetch前にて使用するQuery作成処理、ボタンによるBool値と選択された食材の配列から処理
-    func isConfiguringQuery(_ filterRef: Bool, _ filterFreezer: Bool, _ filter: Filter, _ kinds: [Food.FoodKind]) {
+    func isConfiguringQuery(_ uid: String, _ filterRef: Bool, _ filterFreezer: Bool, _ filter: Filter, _ kinds: [Food.FoodKind]) {
         let kindArray = filter.kindArray.map {$0.rawValue}
         let location = filter.location.rawValue
         let kinds = kinds.map {$0.rawValue}
 
         if (filterRef || filterFreezer) && !kinds.isEmpty {
             // 1.冷蔵/冷凍がtrueでかつfoodも選択
-            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementLocation, isEqualTo: location).whereField(self.fieldElementKind, in: kindArray).order(by: "kindNumber").order(by: "date").limit(to: 10)
+            self.query = self.db.collection("Users").document(uid).collection("foods").whereField(self.fieldElementLocation, isEqualTo: location).whereField(self.fieldElementKind, in: kindArray).order(by: "kindNumber").order(by: "date").limit(to: 10)
         } else if (filterRef || filterFreezer) && kinds.isEmpty {
             // 2.冷蔵/冷凍のみtrue
-            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementLocation, isEqualTo: location).order(by: "kindNumber").order(by: "date").limit(to: 10)
+            self.query = self.db.collection("Users").document(uid).collection("foods").whereField(self.fieldElementLocation, isEqualTo: location).order(by: "kindNumber").order(by: "date").limit(to: 10)
         } else if (!filterRef && !filterFreezer) && !kinds.isEmpty {
             // 3.foodのみ選択
-            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementKind, in: kindArray).order(by: "kindNumber").order(by: "date").limit(to: 10)
+            self.query = self.db.collection("Users").document(uid).collection("foods").whereField(self.fieldElementKind, in: kindArray).order(by: "kindNumber").order(by: "date").limit(to: 10)
         } else {
             // 4.何も選択されていない状態
-            self.query = Firestore.firestore().collection(self.collectionPath).order(by: "kindNumber").order(by: "date").limit(to: 10)
+            self.query = Firestore.firestore().collection("Users").document(uid).collection("foods").order(by: "kindNumber").order(by: "date").limit(to: 10)
         }
     }
     // ページネート用のquery調整処理、前回取り出したQDSの最後の1つあとからQueryを作成
@@ -218,11 +243,11 @@ final class FoodData: FoodDataProtocol {
 
     }
     // 削除処理
-    func delete(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
+    func delete(_ uid: String, _ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
         guard !idKeys.isEmpty else {
             return
         }
-        let query = db.collection(self.collectionPath).whereField(self.fieldElementIDKey, in: idKeys)
+        let query = self.db.collection("Users").document(uid).collection("foods").whereField(self.fieldElementIDKey, in: idKeys)
         query.getDocuments { snapshot, error in
             if let error = error {
                 completion(.failure(error))

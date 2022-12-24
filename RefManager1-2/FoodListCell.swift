@@ -29,10 +29,12 @@ class FoodListCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         checkBoxButton.addAction(.init(handler: { _ in
-
+            // isCheckにはVCにてcheckdIDの戻り値Valueが代入
             if case let .shownCheckBox(isChecked) = self.state {
                 let nextIsChecked = !isChecked
+                // didTapにはPresenterで用意した同じクロージャ型をVC上で代入
                 self.didTapCheckBox?(nextIsChecked)
+
                 self.controllCheckBox(state: .shownCheckBox(isChecked: nextIsChecked))
             }
         }), for: .touchUpInside)

@@ -32,16 +32,21 @@ final class FoodListViewController: UIViewController {
     @IBOutlet var foodListTableView: UITableView!
     @IBOutlet var viewTitle: UINavigationItem!
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
+//    var receivedUIDFromSignInVC = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         foodListTableView.delegate = self
         foodListTableView.dataSource = self
         foodListPresenter.setOutput(foodListPresenterOutput: self)
+//        foodListPresenter.receiveUID(receivedUIDFromSignInVC)
         foodListPresenter.fetchArray()
         // 各種ボタン操作
         deleteButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapDeleteButton()
+        }), for: .touchUpInside)
+        addButtton.addAction(.init(handler: { _ in
+            self.foodListPresenter.didTapAddButton()
         }), for: .touchUpInside)
         refrigeratorButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapRefrigiratorButton(self.refrigeratorButton)
@@ -92,7 +97,12 @@ final class FoodListViewController: UIViewController {
         if segue.identifier == "toRecepieTableView" {
             let recepieView = segue.destination as? RecepieCategoryListViewController
             recepieView?.navigationItem.title = String("\(sender!)")
+
         }
+//        else if segue.identifier == "toFoodAppendVC"{
+//            let foodAppendView = segue.destination as? FoodAppendViewController
+//            foodAppendView?.receivedUIDFromFoodListVC = String("\(sender!)")
+//        }
     }
 }
 
@@ -107,7 +117,7 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
               let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? FoodListCell
         else { return .init() }
         cell.composeFood(food: foodInRow)
-        // delete関連、選択してcheckedIDに入ったFoodIDkeyのValueのBool値(初期値true)をisCheckedに代入
+        // checkedIDに入ったFood.IDkeyのValueのBool値(初期値true)をisCheckedに代入
         let isCheckedDictionary = foodListPresenter.checkedID[foodInRow.IDkey] ?? false
         let shouldShowCheckBox = !foodListPresenter.isDelete
         if shouldShowCheckBox {
@@ -115,6 +125,7 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.controllCheckBox(state: .normal)
         }
+
         cell.didTapCheckBox = foodListPresenter.setArgInDidTapCheckBox(at: indexPath.row)
         return cell
     }
@@ -298,6 +309,10 @@ extension FoodListViewController: FoodListPresenterOutput {
         }))
         self.foodListPresenter.resetIsTapRow()
         present(alert, animated: true)
+    }
+    func perfomSeguetofoodAppendVC() { // (_ array:[Food],at:Int)
+//        self.performSegue(withIdentifier: "toRecepieTableView", sender: array[at].name)
+        self.performSegue(withIdentifier: "toFoodAppendVC", sender: nil)
     }
     // 項目選択時に削除ボタンを押すと表示するアラートを表示
     func showDeleteAlert() {

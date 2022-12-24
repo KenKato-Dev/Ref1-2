@@ -34,13 +34,15 @@ class FoodAppendViewController: UIViewController {
     @IBOutlet var buttonsStack: UIStackView!
     @IBOutlet var preserveButton: UIButton!
     @IBOutlet var cancelButton: UIButton!
+    var receivedUIDFromFoodListVC = ""
 
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         foodNameTextField.delegate = self
         quantityTextField.delegate = self
-        settingTextfield()
+        foodAppendPresenter.settingVC()
+//        setPlaceholderAndKeyboard()
         foodAppendPresenter.setOutput(foodAppendPresenterOutput: self)
         // 各種ボタン操作
         refrigeratorButton.addAction(.init(handler: { _ in
@@ -102,7 +104,8 @@ extension FoodAppendViewController: UITextFieldDelegate {
 // Outputの中身を注入
 extension FoodAppendViewController: FoodAppendPresenterOutput {
     // placeholderとキーボードの種類を指定
-    func settingTextfield() {
+    func setPlaceholderAndKeyboard() {
+
         foodNameTextField.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
         quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
         quantityTextField.keyboardType = .numberPad
