@@ -12,6 +12,7 @@ import UIKit
 // FoodListVIewVC
 final class FoodListViewController: UIViewController {
     private let foodListPresenter = FoodListPresenter(foodData: FoodData(), foodUseCase: FoodUseCase())
+    @IBOutlet weak var accountButton: UIButton!
     @IBOutlet var addButtton: AddButton!
     @IBOutlet var deleteButton: DeleteButton!
     @IBOutlet var locationButtonsStack: UIStackView!
@@ -32,6 +33,7 @@ final class FoodListViewController: UIViewController {
     @IBOutlet var foodListTableView: UITableView!
     @IBOutlet var viewTitle: UINavigationItem!
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
+    private var userNameLabel = UILabel()
 //    var receivedUIDFromSignInVC = ""
 
     override func viewDidLoad() {
@@ -39,7 +41,7 @@ final class FoodListViewController: UIViewController {
         foodListTableView.delegate = self
         foodListTableView.dataSource = self
         foodListPresenter.setOutput(foodListPresenterOutput: self)
-//        foodListPresenter.receiveUID(receivedUIDFromSignInVC)
+        foodListPresenter.greentingToUser()
         foodListPresenter.fetchArray()
         // 各種ボタン操作
         deleteButton.addAction(.init(handler: { _ in
@@ -82,7 +84,10 @@ final class FoodListViewController: UIViewController {
             self.foodListPresenter.didTapFoodKindButtons(.other, self.othersButton)
         }), for: .touchUpInside)
     }
-
+//    override func loadView() {
+//        super.loadView()
+//        foodListPresenter.greentingToUser()
+//    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.foodListPresenter.fetchArray()
@@ -315,6 +320,37 @@ extension FoodListViewController: FoodListPresenterOutput {
         self.performSegue(withIdentifier: "toFoodAppendVC", sender: nil)
     }
     // 項目選択時に削除ボタンを押すと表示するアラートを表示
+    func shouldShowUserName(_ userName: String) {
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]
+        self.viewTitle.title = "\(userName)さんの冷蔵庫"
+        // 表示試験
+        let window = UIApplication.shared.keyWindow
+        self.userNameLabel.text = "\(userName)さんこんにちは！"
+        userNameLabel.frame = CGRect(
+            x: 0, // self.foodListTableView.frame.width/2
+            y: self.foodListTableView.frame.height/3,
+            width: self.foodListTableView.frame.width,
+            height: 50)
+        self.userNameLabel.textAlignment = .center
+        self.userNameLabel.font = .systemFont(ofSize: 25)
+        self.userNameLabel.textColor = UIColor.gray
+        self.userNameLabel.backgroundColor = UIColor.white.withAlphaComponent(0.6)
+        userNameLabel.adjustsFontSizeToFitWidth = true
+        // navigationItemでは表示されず
+        self.foodListTableView.addSubview(userNameLabel)
+        self.userNameLabel.alpha = 1
+    }
+    func fadeout() {
+        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { time in
+            if self.userNameLabel.alpha > 0 {
+                self.userNameLabel.alpha -= 0.05
+            } else {
+                time.invalidate()
+                self.userNameLabel.isHidden = true
+            }
+        }
+    }
+
     func showDeleteAlert() {
         // 削除するかどうかアラート
         let alert = UIAlertController(title: "削除しますか?", message: "", preferredStyle: .actionSheet)

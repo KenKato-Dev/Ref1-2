@@ -8,54 +8,97 @@
 import UIKit
 import Firebase
 
-class SignInViewController: UIViewController {
+final class SignInViewController: UIViewController {
 
     @IBOutlet weak var mainLabelText: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var wrongInputLabel: UILabel!
     @IBOutlet weak var showSignUpViewButton: UIButton!
+    @IBOutlet weak var resetPassButton: UIButton!
     private let signInPresenter = SignInPresenter(signUp: SignUp())
     override func viewDidLoad() {
         super.viewDidLoad()
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
         self.signInPresenter.setOutput(signInPresenterOutput: self)
+        self.signInPresenter.hideWrongInputInInitial()
+        self.signInPresenter.hidePassword()
         self.signInButton.addAction(.init(handler: { _ in
             guard let email = self.emailTextField.text, let password = self.passwordTextField.text else {return}
             self.signInPresenter.didTapSignInButton(email, password)
         }), for: .touchUpInside)
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+        self.resetPassButton.addAction(.init(handler: { _ in
+            self.signInPresenter.didTapResetPassButton()
+        }), for: .touchUpInside)
     }
-    // performsegueと連動
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "toFoodListView" {
-//            let foodListView = segue.destination as? FoodListViewController
-//            foodListView?.receivedUIDFromSignInVC = "\(sender!)"
-//        }
-//    }
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "toFoodListView" && self.signInPresenter.isFillOutNecessary {
+            return true
+        } else if identifier == "toSignUpVC"{
             return true
         } else {
             return false
         }
+    }
+    @objc func hideKeyboard() {
+        view.endEditing(true)
     }
 }
 extension SignInViewController: UITextFieldDelegate {
 
 }
 extension SignInViewController: SignInPresenterOutput {
+    func isSequrePassEntry() {
+        self.passwordTextField.isSecureTextEntry = true
+    }
     func didTapWithoutNecessaryFields() {
         if emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
             emailTextField.placeholder = "メールアドレスを入力してください"
             passwordTextField.placeholder = "パスワードを入力してください"
         }
     }
+    func showWorngInputIfNeeded(_ isHidden: Bool) {
+        self.wrongInputLabel.isHidden = isHidden
+    }
+    func resetContetntsOfTextField() {
+        self.emailTextField.text = ""
+        self.passwordTextField.text = ""
+        self.signInPresenter.resetIsFillOutNecessary()
+    }
     func performSegue(uid: String) {
-//        if self.shouldPerformSegue(withIdentifier: "toFoodListView", sender: uid) {
-//            performSegue(uid: uid)
-//        }
         self.performSegue(withIdentifier: "toFoodListView", sender: uid)
+    }
+    func showAlertPassReset() {
+        // 削除するかどうかアラート
+        var textFieldOfAlert = UITextField()
+        textFieldOfAlert.delegate = self
+        let alert = UIAlertController(title: "パスワードをリセットします", message: "パスワード再設定メールを送りします", preferredStyle: .alert)
+        let sendEmail = UIAlertAction(title: "送信", style: .default, handler: { _ in
+            guard let textInTextField = textFieldOfAlert.text else {return}
+            self.signInPresenter.sendResetMail(textInTextField)
+        })
+        let cancel = UIAlertAction(title: "キャンセル", style: .destructive)
+
+        alert.addTextField(configurationHandler: { (textField) -> Void in
+            textField.addAction(.init(handler: { _ in
+                guard let textInTextField = textField.text else {return}
+                if textInTextField.isEmpty {
+                    textField.attributedPlaceholder = NSAttributedString(string: "メールアドレスを入力してください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+                    sendEmail.isEnabled = false
+                } else {
+                    textFieldOfAlert = textField
+                    sendEmail.isEnabled = true
+                }
+            }), for: .allEditingEvents)
+            textField.resignFirstResponder()
+        })
+        alert.addAction(sendEmail)
+        alert.addAction(cancel)
+
+        present(alert, animated: true)
     }
     func presentErrorIfNeeded(_ errorOrNil: Error?) {
         guard let error = errorOrNil else {return}

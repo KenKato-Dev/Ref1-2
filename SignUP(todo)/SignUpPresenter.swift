@@ -12,7 +12,7 @@ protocol SignUpPresenterOutput: AnyObject {
     func showEssential()
     func presentErrorIfNeeded(_ errorOrNil: Error?)
 }
-class SignUpPresenter {
+final class SignUpPresenter {
     private let signUp: SignUp
     private weak var signUpPresenterOutput: SignUpPresenterOutput?
     init(signUp: SignUp) {

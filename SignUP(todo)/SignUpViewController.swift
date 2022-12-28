@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+final class SignUpViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -15,8 +15,10 @@ class SignUpViewController: UIViewController {
     private let signUpPresenter = SignUpPresenter.init(signUp: SignUp())
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.userNameTextField.delegate = self
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
+        self.signUpPresenter.setOutput(signUpPresenterOutput: self)
         self.signUpButton.addAction(.init(handler: { _ in
             self.signUpPresenter.didTapSignUpButton(
                 self.emailTextField.text, self.userNameTextField.text, self.passwordTextField.text)

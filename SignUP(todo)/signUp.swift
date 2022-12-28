@@ -21,11 +21,12 @@ struct UserData {
     }
 }
 class SignUp {
+    private let auth = Auth.auth()
     private let db = Firestore.firestore()
     private var alart = UIAlertController(title: nil, message: "エラー発生:\(Error?.self)", preferredStyle: .alert)
 
     func signIn(_ email: String, _ password: String, _ completion:@escaping (Result<String, Error>) -> Void) {
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authDataResult, error in
+        self.auth.signIn(withEmail: email, password: password) { [weak self] authDataResult, error in
             if let error = error {
                 print(error)
                 completion(.failure(error))
@@ -37,7 +38,7 @@ class SignUp {
     }
     func postUser(_ email: String, _ userName: String?, _ pass: String, _ completion: @escaping (Result<Void, Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now()) {
-        Auth.auth().createUser(withEmail: email, password: pass) { result, err in
+            self.auth.createUser(withEmail: email, password: pass) { result, err in
             if let err = err {
                 completion(.failure(err))
                 print("manager認証にエラー発生:\(err)")
@@ -62,19 +63,22 @@ class SignUp {
         }
         }
     }
-    func fetchUserInfo(_ completion: @escaping (Result<UserData, Error>) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
-            guard let uid = Auth.auth().currentUser?.uid else {return}
-            self.db.collection("Users").document(uid).getDocument { documentSnapshot, error in
-                if let error = error {
-                    print("ユーザー情報取得に失敗:\(error)")
-                    completion(.failure(error))
-                    return
-                }
-                guard let documentSnapshot = documentSnapshot, let data = documentSnapshot.data() else {return}
-                let user = UserData(data: data)
-                completion(.success(user))
-            }
-        }
+    func resetPasswordWithMail(_ mail: String) {
+        self.auth.sendPasswordReset(withEmail: mail)
     }
+//    func fetchUserInfo(_ completion: @escaping (Result<UserData, Error>) -> Void) {
+//        DispatchQueue.main.asyncAfter(deadline: .now()) {
+//            guard let uid = Auth.auth().currentUser?.uid else {return}
+//            self.db.collection("Users").document(uid).getDocument { documentSnapshot, error in
+//                if let error = error {
+//                    print("ユーザー情報取得に失敗:\(error)")
+//                    completion(.failure(error))
+//                    return
+//                }
+//                guard let documentSnapshot = documentSnapshot, let data = documentSnapshot.data() else {return}
+//                let user = UserData(data: data)
+//                completion(.success(user))
+//            }
+//        }
+//    }
 }

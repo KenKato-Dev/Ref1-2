@@ -19,6 +19,8 @@ protocol FoodListPresenterOutput: AnyObject {
     func resetButtonColor()
     func showAlertInCell(_ storyboard: FoodAppendViewController?, _ array: [Food], _ row: Int, _ isTapRow: Bool)
     func perfomSeguetofoodAppendVC()
+    func fadeout()
+    func shouldShowUserName(_ userName: String)
     func showDeleteAlert()
 }
 // FoodListのPresenter
@@ -33,6 +35,7 @@ final class FoodListPresenter {
     private(set) static var isTapRow = false
     private let db = Firestore.firestore()
     private var uid = Auth.auth().currentUser?.uid
+    private (set) var titleText = ""
     init(foodData: FoodData, foodUseCase: FoodUseCase) {
         self.foodData = foodData
         self.foodUseCase = foodUseCase
@@ -261,5 +264,27 @@ final class FoodListPresenter {
     }
     func resetIsTapRow() {
         FoodListPresenter.isTapRow = false
+    }
+//    private func shouldReturnUserName() {
+//
+//        self.foodData.fetchUserInfo { result in
+//                switch result {
+//                case let .success(user):
+//                    self.titleText = "\(user.userName)さん、こんにちは！"
+//                case .failure:
+//                    self.titleText = "情報取得に失敗しました"
+//                }
+//        }
+//    }
+    func greentingToUser() {
+        self.foodData.fetchUserInfo { result in
+                switch result {
+                case let .success(user):
+                    self.foodListPresenterOutput?.shouldShowUserName(user.userName)
+                    self.foodListPresenterOutput?.fadeout()
+                case .failure:
+                    self.foodListPresenterOutput?.shouldShowUserName("情報取得を失敗しました")
+                }
+        }
     }
 }
