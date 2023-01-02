@@ -176,6 +176,7 @@ extension FoodAppendViewController: FoodAppendPresenterOutput {
         if location == .refrigerator {
             refrigeratorButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             refrigeratorButton.layer.borderColor = UIColor.gray.cgColor
+            refrigeratorButton.setTitleColor(.red, for: .highlighted)
             refrigeratorButton.layer.cornerRadius = 20
             refrigeratorButton.layer.borderWidth = 3.0
         } else {
@@ -185,7 +186,7 @@ extension FoodAppendViewController: FoodAppendPresenterOutput {
         if location == .freezer {
             freezerButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             freezerButton.layer.borderColor = UIColor.gray.cgColor
-            freezerButton.setTitleColor(.gray, for: .normal)
+            freezerButton.setTitleColor(.red, for: .highlighted)
             freezerButton.layer.cornerRadius = 20
             freezerButton.layer.borderWidth = 3.0
         } else {

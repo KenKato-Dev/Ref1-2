@@ -16,6 +16,8 @@ protocol SignInPresenterOutput: AnyObject {
     func showWorngInputIfNeeded(_ isHidden: Bool)
     func showAlertPassReset()
     func presentErrorIfNeeded(_ errorOrNil: Error?)
+    func showLoadingSpin()
+    func hideIndicator(_ isHidden: Bool)
 }
 final class SignInPresenter {
     private let userService: UserService
@@ -35,8 +37,10 @@ final class SignInPresenter {
     }
     func didTapSignInButton(_ email: String, _ password: String) {
         self.signInPresenterOutput?.didTapWithoutNecessaryFields()
+        self.signInPresenterOutput?.showLoadingSpin()
 //        self.isFillOutNecessary = isFillOutNecessary
             userService.signIn(email, password) { result in
+                self.signInPresenterOutput?.hideIndicator(true)
                 switch result {
                 case let .success(uid):
                     self.isFillOutNecessary = true
@@ -48,6 +52,7 @@ final class SignInPresenter {
                     self.signInPresenterOutput?.showWorngInputIfNeeded(self.isFillOutNecessary)
                     print(error)
                 }
+
             }
     }
     func didTapResetPassButton() {

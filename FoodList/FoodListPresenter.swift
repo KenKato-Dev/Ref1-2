@@ -21,7 +21,7 @@ protocol FoodListPresenterOutput: AnyObject {
     func perfomSeguetofoodAppendVC()
     func fadeout()
     func showRecoomendation()
-    func removeRecommendationLabel(_ array: [Food])
+    func removeRecommendationLabel()
     func shouldShowUserName(_ userName: String)
     func showDeleteAlert()
 }
@@ -67,7 +67,7 @@ final class FoodListPresenter {
                     if self.array.isEmpty {
                         self.foodListPresenterOutput?.showRecoomendation()
                     } else {
-                        self.foodListPresenterOutput?.removeRecommendationLabel(self.array)
+                        self.foodListPresenterOutput?.removeRecommendationLabel()
                     }
                 case let .failure(error):
                     self.foodListPresenterOutput?.presentErrorIfNeeded(error)

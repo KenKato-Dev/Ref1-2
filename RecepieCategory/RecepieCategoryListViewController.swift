@@ -60,7 +60,6 @@ extension RecepieCategoryListViewController: RecepieCategoryListPresenterOutput 
         self.indicatorBackView = UIView(frame: self.view.bounds)
         self.indicatorBackView.backgroundColor = .white
         self.indicatorBackView.alpha = 0.5
-        self.indicatorBackView.tag = 100100
 
         self.activityIndicator.hidesWhenStopped = true
         self.activityIndicator.style = .large
@@ -70,10 +69,9 @@ extension RecepieCategoryListViewController: RecepieCategoryListPresenterOutput 
         self.view.addSubview(indicatorBackView)
         self.activityIndicator.startAnimating()
     }
-    func hideIndicator() {
-        if let backView = self.view.viewWithTag(100100) {
-            backView.removeFromSuperview()
-        }
+    func hideIndicator(_ isHidden: Bool) {
+        self.activityIndicator.isHidden = isHidden
+        self.indicatorBackView.isHidden = isHidden
     }
     func showNoResult() {
             self.navigationController?.navigationBar.titleTextAttributes =

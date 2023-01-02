@@ -13,6 +13,8 @@ final class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var wrongInputLabel: UILabel!
+    private var indicatorBackView = UIView()
+    private let activityIndicator = UIActivityIndicatorView()
     private let signUpPresenter = SignUpPresenter.init(userService: UserService())
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +56,11 @@ extension SignUpViewController: SignUpPresenterOutput {
         self.wrongInputLabel.text = "そのメールアドレスは既に使われています"
         self.wrongInputLabel.textColor = .red
     }
+    func performSegue(uid: String) {
+        self.performSegue(withIdentifier: "toFoodListViewDirectly", sender: uid)
+    }
     func dismiss() {
-        dismiss(animated: true, completion: nil)
+//        dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
 
     }
@@ -67,5 +72,21 @@ extension SignUpViewController: SignUpPresenterOutput {
         present(alart, animated: true) {
         }
     }
+    func showLoadingSpin() {
+        self.indicatorBackView = UIView(frame: self.view.bounds)
+        self.indicatorBackView.backgroundColor = .white
+        self.indicatorBackView.alpha = 0.5
 
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.style = .large
+        self.activityIndicator.color = .gray
+        self.activityIndicator.center = self.view.center
+        self.indicatorBackView.addSubview(activityIndicator)
+        self.view.addSubview(indicatorBackView)
+        self.activityIndicator.startAnimating()
+    }
+    func hideIndicator(_ isHidden: Bool) {
+        activityIndicator.isHidden = isHidden
+        indicatorBackView.isHidden = isHidden
+        }
 }

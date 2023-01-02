@@ -12,7 +12,7 @@ protocol RecepieCategoryListPresenterOutput: AnyObject {
     func dismiss()
     func setTitle()
     func showLoadingSpin()
-    func hideIndicator()
+    func hideIndicator(_ isHidden: Bool)
     func showNoResult()
     func presentErrorIfNeeded(_ errorOrNil: Error?)
 }
@@ -37,7 +37,7 @@ final class RecepieCategoryListPresenter {
                 case let .success(categories):
                     self.array = categories
                     self.recepieCategoryListPresenterOutput?.reloadData()
-                    self.recepieCategoryListPresenterOutput?.hideIndicator()
+                    self.recepieCategoryListPresenterOutput?.hideIndicator(true)
                     if self.array.isEmpty {
                         self.recepieCategoryListPresenterOutput?.showNoResult()
                     }

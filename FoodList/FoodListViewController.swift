@@ -372,12 +372,10 @@ extension FoodListViewController: FoodListPresenterOutput {
         self.foodListTableView.addSubview(self.recommendToAddLabel)
     }
     // recommendationLabelを削除
-    func removeRecommendationLabel(_ array: [Food]) {
-        if array.isEmpty {
-            if let recommendToAddLabel = self.view.viewWithTag(100101) {
+    func removeRecommendationLabel() {
+            if let recommendToAddLabel = self.foodListTableView.viewWithTag(100101) {
                 recommendToAddLabel.removeFromSuperview()
             }
-        }
     }
     func showDeleteAlert() {
         // 削除するかどうかアラート

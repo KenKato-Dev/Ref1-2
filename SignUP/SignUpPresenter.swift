@@ -13,7 +13,10 @@ protocol SignUpPresenterOutput: AnyObject {
     func showEssential()
     func showUsedEmail()
     func dismiss()
+    func performSegue(uid: String)
     func presentErrorIfNeeded(_ errorOrNil: Error?)
+    func showLoadingSpin()
+    func hideIndicator(_ isHidden: Bool)
 }
 final class SignUpPresenter {
     private let userService: UserService
@@ -32,15 +35,18 @@ final class SignUpPresenter {
         if email.isEmpty || pass.count < 6 || userName.isEmpty {
             self.signUpPresenterOutput?.showEssential()
         } else {
+            self.signUpPresenterOutput?.showLoadingSpin()
             self.userService.checkEmailUsed(email) { result in
                 switch result {
                 case var .success(isUnusing):
                     if isUnusing {
                         self.userService.postUser(email, userName, pass) { result in
+                            self.signUpPresenterOutput?.hideIndicator(true)
                             switch result {
                             case .success:
                                 print("ユーザー登録に成功")
-                                self.signUpPresenterOutput?.dismiss()
+//                                self.signUpPresenterOutput?.dismiss()
+                                self.signUpPresenterOutput?.performSegue(uid: Auth.auth().currentUser!.uid)
                             case let .failure(error):
                                 self.signUpPresenterOutput?.presentErrorIfNeeded(error)
                             }

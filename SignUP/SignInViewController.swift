@@ -17,6 +17,8 @@ final class SignInViewController: UIViewController {
     @IBOutlet weak var wrongInputLabel: UILabel!
     @IBOutlet weak var showSignUpViewButton: UIButton!
     @IBOutlet weak var resetPassButton: UIButton!
+    private var indicatorBackView = UIView()
+    private let activityIndicator = UIActivityIndicatorView()
     private let signInPresenter = SignInPresenter(userService: UserService())
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,4 +134,21 @@ extension SignInViewController: SignInPresenterOutput {
             return foodListVC
         }
     }
+    func showLoadingSpin() {
+        self.indicatorBackView = UIView(frame: self.view.bounds)
+        self.indicatorBackView.backgroundColor = .white
+        self.indicatorBackView.alpha = 0.5
+
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.style = .large
+        self.activityIndicator.color = .gray
+        self.activityIndicator.center = self.view.center
+        self.indicatorBackView.addSubview(activityIndicator)
+        self.view.addSubview(indicatorBackView)
+        self.activityIndicator.startAnimating()
+    }
+    func hideIndicator(_ isHidden: Bool) {
+        activityIndicator.isHidden = isHidden
+        indicatorBackView.isHidden = isHidden
+        }
 }
