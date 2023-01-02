@@ -33,7 +33,7 @@
 		ECA6F45228026B0E00CA7C2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA6F45028026B0E00CA7C2D /* LaunchScreen.storyboard */; };
 		ECA6F45B28026B8E00CA7C2D /* FoodAppendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6F45A28026B8E00CA7C2D /* FoodAppendViewController.swift */; };
 		ECA6F45D28026BAE00CA7C2D /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6F45C28026BAE00CA7C2D /* FoodData.swift */; };
-		ECBD104929334D5400AF2702 /* signUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD104829334D5400AF2702 /* signUp.swift */; };
+		ECBD104929334D5400AF2702 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD104829334D5400AF2702 /* UserService.swift */; };
 		ECBD104B2933573300AF2702 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD104A2933573300AF2702 /* SignInViewController.swift */; };
 		ECBD104D2933578100AF2702 /* SignInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD104C2933578100AF2702 /* SignInPresenter.swift */; };
 		ECBD105529339C9400AF2702 /* RefManager1_2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD105429339C9400AF2702 /* RefManager1_2Tests.swift */; };
@@ -81,7 +81,7 @@
 		ECA6F45328026B0E00CA7C2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ECA6F45A28026B8E00CA7C2D /* FoodAppendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAppendViewController.swift; sourceTree = "<group>"; };
 		ECA6F45C28026BAE00CA7C2D /* FoodData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
-		ECBD104829334D5400AF2702 /* signUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signUp.swift; sourceTree = "<group>"; };
+		ECBD104829334D5400AF2702 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		ECBD104A2933573300AF2702 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		ECBD104C2933578100AF2702 /* SignInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresenter.swift; sourceTree = "<group>"; };
 		ECBD105229339C9400AF2702 /* RefManager1-2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RefManager1-2Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,16 +126,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EC5AAD8F2924B241004EAF94 /* SignUP(todo) */ = {
+		EC5AAD8F2924B241004EAF94 /* SignUP */ = {
 			isa = PBXGroup;
 			children = (
 				ECBD104A2933573300AF2702 /* SignInViewController.swift */,
 				ECBD104C2933578100AF2702 /* SignInPresenter.swift */,
 				EC5AAD8D2924B239004EAF94 /* SignUpViewController.swift */,
 				EC5AAD8B292383B1004EAF94 /* SignUpPresenter.swift */,
-				ECBD104829334D5400AF2702 /* signUp.swift */,
+				ECBD104829334D5400AF2702 /* UserService.swift */,
 			);
-			path = "SignUP(todo)";
+			path = SignUP;
 			sourceTree = "<group>";
 		};
 		EC9C1C0928F3E8260024570D /* RecepieCategory */ = {
@@ -176,7 +176,7 @@
 				EC9C1C0A28F3E8650024570D /* FoodList */,
 				EC9C1C0B28F3E8A60024570D /* FoodAddition */,
 				EC9C1C0928F3E8260024570D /* RecepieCategory */,
-				EC5AAD8F2924B241004EAF94 /* SignUP(todo) */,
+				EC5AAD8F2924B241004EAF94 /* SignUP */,
 				ECC4532229582A140064CF13 /* Account Information */,
 				ECA6F44428026B0C00CA7C2D /* RefManager1-2 */,
 				ECBD105329339C9400AF2702 /* RefManager1-2Tests */,
@@ -383,7 +383,7 @@
 				ECA6F45B28026B8E00CA7C2D /* FoodAppendViewController.swift in Sources */,
 				ECA6F44A28026B0C00CA7C2D /* FoodListViewController.swift in Sources */,
 				ECBD104D2933578100AF2702 /* SignInPresenter.swift in Sources */,
-				ECBD104929334D5400AF2702 /* signUp.swift in Sources */,
+				ECBD104929334D5400AF2702 /* UserService.swift in Sources */,
 				ECA6F44628026B0C00CA7C2D /* AppDelegate.swift in Sources */,
 				ECEB7103280314BD00B157FB /* FoodListCell.swift in Sources */,
 				ECC4532629582A760064CF13 /* AccountInformationPresenter.swift in Sources */,

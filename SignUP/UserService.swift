@@ -20,7 +20,7 @@ struct UserData {
         self.createdAt = data["createdAt"] as? Timestamp ?? Timestamp()
     }
 }
-class SignUp {
+class UserService {
     private let auth = Auth.auth()
     private let db = Firestore.firestore()
     private var alart = UIAlertController(title: nil, message: "エラー発生:\(Error?.self)", preferredStyle: .alert)
@@ -35,13 +35,47 @@ class SignUp {
                 completion(.success(uid))
             }
         }
+//        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+//        UserDefaults.standard.set(credential, forKey: "credential")
     }
-    func postUser(_ email: String, _ userName: String?, _ pass: String, _ completion: @escaping (Result<Void, Error>) -> Void) {
+    // userdefaultsに記録
+     func checkSignInStatus(_ completion:@escaping (Bool) -> Void) {
+        Auth.auth().addStateDidChangeListener { _, user in
+            if user == nil {
+                // 新規
+                completion(false)
+//                print("USER状態:\(user)")
+            } else {
+                // ログイン済み
+                completion(true)
+//                print("USER状態:\(user)")
+            }
+        }
+    }
+
+    func save(_ mail: String, _ pass: String, _ uid: String) {
+        self.auth.addStateDidChangeListener { _, user in
+            if user != nil {
+                print("USER状態:\(user)")
+            } else {
+                print("USER状態:\(user)")
+            }
+        }
+    }
+    // userdefaultsから読み込み
+//    func load(){
+//        UserDefaults.standard.string(forKey: <#T##String#>)
+//    }
+    func postUser(_ email: String,
+                  _ userName: String?,
+                  _ pass: String,
+                  _ completion: @escaping (Result<Void, Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             self.auth.createUser(withEmail: email, password: pass) { result, err in
             if let err = err {
                 completion(.failure(err))
                 print("manager認証にエラー発生:\(err)")
+                return
             }
             print("manager認証に成功")
             //
@@ -63,22 +97,25 @@ class SignUp {
         }
         }
     }
+    func checkEmailUsed(_ email: String, _ completion: @escaping(Result<Bool, Error>) -> Void) {
+        self.auth.fetchSignInMethods(forEmail: email) { method, error in
+            if let error = error {
+                completion(.failure(error))
+                print("checkEmailUsedに失敗")
+                return
+            }
+
+            guard method != nil else {
+                completion(.success(true))
+                print("未使用のEmail")
+                return
+            }
+            completion(.success(false))
+            print("既に使われているEmail")
+        }
+    }
     func resetPasswordWithMail(_ mail: String) {
         self.auth.sendPasswordReset(withEmail: mail)
     }
-//    func fetchUserInfo(_ completion: @escaping (Result<UserData, Error>) -> Void) {
-//        DispatchQueue.main.asyncAfter(deadline: .now()) {
-//            guard let uid = Auth.auth().currentUser?.uid else {return}
-//            self.db.collection("Users").document(uid).getDocument { documentSnapshot, error in
-//                if let error = error {
-//                    print("ユーザー情報取得に失敗:\(error)")
-//                    completion(.failure(error))
-//                    return
-//                }
-//                guard let documentSnapshot = documentSnapshot, let data = documentSnapshot.data() else {return}
-//                let user = UserData(data: data)
-//                completion(.success(user))
-//            }
-//        }
-//    }
+
 }

@@ -24,25 +24,29 @@ class UnitSelectButton: UIButton {
     func selectingUnit() {
         var unitActions = [UIMenuElement]()
         // グラム
-        unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.gram), image: nil, state: selectedUnit == UnitMenu.gram ? .on : .off, handler: { _ in
+        unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.gram),
+                                    image: nil, state: selectedUnit == UnitMenu.gram ? .on : .off, handler: { _ in
             self.selectedUnit = .gram
-            print(self.selectedUnit)
             self.selectingUnit()
         }))
         // 個数
-        unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.piece), image: nil, state: selectedUnit == UnitMenu.piece ? .on : .off, handler: { _ in
+        unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.piece),
+                                    image: nil, state: selectedUnit == UnitMenu.piece ? .on : .off, handler: { _ in
             self.selectedUnit = .piece
             self.selectingUnit()
         }))
-        unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.bottle), image: nil, state: selectedUnit == UnitMenu.bottle ? .on : .off, handler: { _ in
+        unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.bottle),
+                                    image: nil, state: selectedUnit == UnitMenu.bottle ? .on : .off, handler: { _ in
             self.selectedUnit = .bottle
             self.selectingUnit()
         }))
-        unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.bag), image: nil, state: selectedUnit == UnitMenu.bag ? .on : .off, handler: { _ in
+        unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.bag),
+                                    image: nil, state: selectedUnit == UnitMenu.bag ? .on : .off, handler: { _ in
             self.selectedUnit = .bag
             self.selectingUnit()
         }))
-        unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.people), image: nil, state: selectedUnit == UnitMenu.people ? .on : .off, handler: { _ in
+        unitActions.append(UIAction(title: unitButtonTranslator(unit: UnitMenu.people),
+                                    image: nil, state: selectedUnit == UnitMenu.people ? .on : .off, handler: { _ in
             self.selectedUnit = .people
             self.selectingUnit()
         }))

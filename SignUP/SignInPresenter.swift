@@ -18,11 +18,11 @@ protocol SignInPresenterOutput: AnyObject {
     func presentErrorIfNeeded(_ errorOrNil: Error?)
 }
 final class SignInPresenter {
-    private let signUp: SignUp
+    private let userService: UserService
     private weak var signInPresenterOutput: SignInPresenterOutput?
     private (set) var isFillOutNecessary = false
-    init(signUp: SignUp) {
-        self.signUp = signUp
+    init(userService: UserService) {
+        self.userService = userService
     }
     func setOutput(signInPresenterOutput: SignInPresenterOutput?) {
         self.signInPresenterOutput = signInPresenterOutput
@@ -36,7 +36,7 @@ final class SignInPresenter {
     func didTapSignInButton(_ email: String, _ password: String) {
         self.signInPresenterOutput?.didTapWithoutNecessaryFields()
 //        self.isFillOutNecessary = isFillOutNecessary
-            signUp.signIn(email, password) { result in
+            userService.signIn(email, password) { result in
                 switch result {
                 case let .success(uid):
                     self.isFillOutNecessary = true
@@ -54,7 +54,16 @@ final class SignInPresenter {
         self.signInPresenterOutput?.showAlertPassReset()
     }
     func sendResetMail(_ mail: String) {
-        signUp.resetPasswordWithMail(mail)
+        userService.resetPasswordWithMail(mail)
+    }
+    func performsegueIfAlreadySignIn() {
+        userService.checkSignInStatus { isSignIn in
+            if isSignIn {
+                self.signInPresenterOutput?.performSegue(uid: Auth.auth().currentUser!.uid)
+            } else {
+                print("サインイン履歴なし")
+            }
+        }
     }
     func resetIsFillOutNecessary() {
         self.isFillOutNecessary = false

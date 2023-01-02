@@ -46,7 +46,9 @@ class RecepieModel {
                     array.append(contentsOf: decodedSmall)
                     // 食材名を含むものを配列から取り出す、今回は鶏肉
                     let filteredSmall = array.filter { $0.categoryName.contains(keyword) }
-                    completion(.success(filteredSmall))
+                    DispatchQueue.main.async {
+                        completion(.success(filteredSmall))
+                    }
                 } catch {
                     print("デコードに失敗:\(error)")
                 }

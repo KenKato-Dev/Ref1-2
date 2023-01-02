@@ -17,19 +17,20 @@ final class SignInViewController: UIViewController {
     @IBOutlet weak var wrongInputLabel: UILabel!
     @IBOutlet weak var showSignUpViewButton: UIButton!
     @IBOutlet weak var resetPassButton: UIButton!
-    private let signInPresenter = SignInPresenter(signUp: SignUp())
+    private let signInPresenter = SignInPresenter(userService: UserService())
     override func viewDidLoad() {
         super.viewDidLoad()
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
         self.signInPresenter.setOutput(signInPresenterOutput: self)
+        self.signInPresenter.performsegueIfAlreadySignIn()
         self.signInPresenter.hideWrongInputInInitial()
         self.signInPresenter.hidePassword()
         self.signInButton.addAction(.init(handler: { _ in
             guard let email = self.emailTextField.text, let password = self.passwordTextField.text else {return}
             self.signInPresenter.didTapSignInButton(email, password)
         }), for: .touchUpInside)
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
         self.resetPassButton.addAction(.init(handler: { _ in
             self.signInPresenter.didTapResetPassButton()
         }), for: .touchUpInside)
@@ -44,11 +45,14 @@ final class SignInViewController: UIViewController {
         }
     }
     @objc func hideKeyboard() {
-        view.endEditing(true)
+        self.view.endEditing(true)
     }
 }
 extension SignInViewController: UITextFieldDelegate {
-
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 extension SignInViewController: SignInPresenterOutput {
     func isSequrePassEntry() {
@@ -86,7 +90,11 @@ extension SignInViewController: SignInPresenterOutput {
             textField.addAction(.init(handler: { _ in
                 guard let textInTextField = textField.text else {return}
                 if textInTextField.isEmpty {
-                    textField.attributedPlaceholder = NSAttributedString(string: "メールアドレスを入力してください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+                    textField.attributedPlaceholder =
+                    NSAttributedString(
+                        string: "メールアドレスを入力してください",
+                        attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+                    )
                     sendEmail.isEnabled = false
                 } else {
                     textFieldOfAlert = textField
@@ -106,6 +114,22 @@ extension SignInViewController: SignInPresenterOutput {
         let alart = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alart, animated: true) {
+        }
+    }
+    func checkSignInStatus(_ isSignIn: Bool) -> UIViewController {
+        let keyWindow = UIApplication.shared.connectedScenes
+            .filter({$0.activationState == .foregroundActive})
+            .compactMap({$0 as? UIWindowScene})
+            .first?.windows.filter({$0.isKeyWindow}).first
+
+        let rootVC = UIApplication.shared.keyWindow
+
+        if isSignIn {
+            let signInVC = SignInViewController()
+            return signInVC
+        } else {
+            let foodListVC = FoodListViewController()
+            return foodListVC
         }
     }
 }

@@ -21,7 +21,9 @@ protocol FoodAppendPresenterOutput: AnyObject {
 final class FoodAppendPresenter {
     private let foodData: FoodData
     private weak var foodAppendPresenterOutput: FoodAppendPresenterOutput?
-    private var baseArray = Food(location: .refrigerator, kind: .other, name: String(), quantity: String(), unit: UnitSelectButton.UnitMenu.initial, IDkey: UUID().uuidString, date: Date())
+    private var baseArray = Food(location: .refrigerator, kind: .other, name: String(),
+                                 quantity: String(), unit: UnitSelectButton.UnitMenu.initial,
+                                 IDkey: UUID().uuidString, date: Date())
 //    private var uid: String = ""
     init(foodData: FoodData) {
         self.foodData = foodData
@@ -84,6 +86,7 @@ final class FoodAppendPresenter {
                 foodData.post(uid, self.baseArray) { result in
                 switch result {
                 case .success:
+
                     self.foodAppendPresenterOutput?.dismiss()
                     print("オリジナルのFuncが動作")
                 case let .failure(error):

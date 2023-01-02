@@ -11,6 +11,9 @@ protocol RecepieCategoryListPresenterOutput: AnyObject {
     func reloadData()
     func dismiss()
     func setTitle()
+    func showLoadingSpin()
+    func hideIndicator()
+    func showNoResult()
     func presentErrorIfNeeded(_ errorOrNil: Error?)
 }
 
@@ -27,12 +30,17 @@ final class RecepieCategoryListPresenter {
     }
 
     func reloadArray(searchKeyword: String?) {
+        self.recepieCategoryListPresenterOutput?.showLoadingSpin()
         if let searchKeyword = searchKeyword {
             recepieModel.fetch(searchKeyword) { result in
                 switch result {
                 case let .success(categories):
                     self.array = categories
                     self.recepieCategoryListPresenterOutput?.reloadData()
+                    self.recepieCategoryListPresenterOutput?.hideIndicator()
+                    if self.array.isEmpty {
+                        self.recepieCategoryListPresenterOutput?.showNoResult()
+                    }
                 case let .failure(error):
                     self.recepieCategoryListPresenterOutput?.presentErrorIfNeeded(error)
                     self.recepieCategoryListPresenterOutput?.dismiss()

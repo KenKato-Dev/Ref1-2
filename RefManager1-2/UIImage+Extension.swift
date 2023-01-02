@@ -9,7 +9,10 @@ import Foundation
 import UIKit
 extension UIImage {
     // 画像同士を重ねて新たな画像を生成する処理
-    func compositeImage(_ originalImage: UIImage, _ currentImage: UIImage, _ image: UIImage, _ value: CGFloat) -> UIImage {
+    func compositeImage(_ originalImage: UIImage,
+                        _ currentImage: UIImage,
+                        _ image: UIImage,
+                        _ value: CGFloat) -> UIImage {
         print("オリジン:\(originalImage),今:\(currentImage)")
             UIGraphicsBeginImageContextWithOptions(self.size, false, 0)
             self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
