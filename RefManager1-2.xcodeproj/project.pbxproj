@@ -47,6 +47,7 @@
 		ECDF47A928B4F7B7004BC6A9 /* RecepieCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47A828B4F7B7004BC6A9 /* RecepieCategoryCell.swift */; };
 		ECDF47AB28B4F7DC004BC6A9 /* RecepieCategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47AA28B4F7DB004BC6A9 /* RecepieCategoryListViewController.swift */; };
 		ECE2F0E028349FBC00975A38 /* FoodUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */; };
+		ECEA02B82963C4D300869A0D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEA02B72963C4D300869A0D /* Environment.swift */; };
 		ECEB7103280314BD00B157FB /* FoodListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEB7102280314BD00B157FB /* FoodListCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,7 @@
 		ECDF47A828B4F7B7004BC6A9 /* RecepieCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieCategoryCell.swift; sourceTree = "<group>"; };
 		ECDF47AA28B4F7DB004BC6A9 /* RecepieCategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieCategoryListViewController.swift; sourceTree = "<group>"; };
 		ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodUseCase.swift; sourceTree = "<group>"; };
+		ECEA02B72963C4D300869A0D /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		ECEB7102280314BD00B157FB /* FoodListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -203,6 +205,7 @@
 				EC77EA2128F2A813009B3EBA /* UnitSelectButton.swift */,
 				EC77EA2228F2A813009B3EBA /* AddButton.swift */,
 				ECA41AE0290E5A5D0030BF16 /* TapFeedback.swift */,
+				ECEA02B72963C4D300869A0D /* Environment.swift */,
 				ECBD105B293A3D9F00AF2702 /* UIImage+Extension.swift */,
 				ECA6F44B28026B0C00CA7C2D /* Main.storyboard */,
 				ECA6F44E28026B0E00CA7C2D /* Assets.xcassets */,
@@ -239,6 +242,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ECA6F45628026B0E00CA7C2D /* Build configuration list for PBXNativeTarget "RefManager1-2" */;
 			buildPhases = (
+				ECEA02B62963B66400869A0D /* Run Env */,
 				ECA6F43E28026B0C00CA7C2D /* Sources */,
 				ECA6F43F28026B0C00CA7C2D /* Frameworks */,
 				ECA6F44028026B0C00CA7C2D /* Resources */,
@@ -364,6 +368,24 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif test -d /opt/homebrew/bin; then\n    PATH=/opt/homebrew/bin/:$PATH\nfi\nif which swiftlint >/dev/null; then\n    swiftlint\n    swiftlint --fix\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		ECEA02B62963B66400869A0D /* Run Env */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Env";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/buildEnv.sh\" \"${SRCROOT}/.env\" \"${SRCROOT}/${PROJECT}\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -388,6 +410,7 @@
 				ECEB7103280314BD00B157FB /* FoodListCell.swift in Sources */,
 				ECC4532629582A760064CF13 /* AccountInformationPresenter.swift in Sources */,
 				ECC45328295847910064CF13 /* AccountInformation.swift in Sources */,
+				ECEA02B82963C4D300869A0D /* Environment.swift in Sources */,
 				ECDF47AB28B4F7DC004BC6A9 /* RecepieCategoryListViewController.swift in Sources */,
 				EC77EA2428F2A813009B3EBA /* DeleteButton.swift in Sources */,
 				ECCAA677290045D800CE141B /* RecepieCategoryListPresenter.swift in Sources */,

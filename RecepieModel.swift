@@ -16,11 +16,10 @@ struct Small: Codable {
 }
 // RecepieCategoryのModel、楽天APIへのリクエスト処理
 class RecepieModel {
+    let rakutenAPIKey = env["rakutenAPIKey"]!
     // 楽天APIへのリクエスト処理
     func fetch(_ keyword: String, _ completion: @escaping (Result<[Small], Error>) -> Void) {
-        guard let url = URL(string:
-            "https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426?format=json&applicationId=1050766026714426702"
-        ) else { return }
+        guard let url = URL(string: rakutenAPIKey) else { return }
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             let task = URLSession.shared.dataTask(with: url) { data, _, error in
                 if let error = error {

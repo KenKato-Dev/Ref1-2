@@ -101,7 +101,8 @@ class DeleteButton: UIButton {
 
         } else {
             setImage(.remove, for: .normal)
-            setTitle("削除", for: .normal)
+            setTitle("", for: .normal)
+//            setTitle("削除", for: .normal)
             setTitleColor(.red, for: .normal)
         }
     }
