@@ -34,7 +34,6 @@ final class FoodAppendPresenter {
     }
     func settingVC() {
         self.foodAppendPresenterOutput?.setPlaceholderAndKeyboard()
-//        self.uid = receivedUID
     }
     func settingTextField() {
         foodAppendPresenterOutput?.setPlaceholderAndKeyboard()
@@ -109,7 +108,6 @@ final class FoodAppendPresenter {
                 baseArray.quantity = quantity
             }
             baseArray.unit = unit
-            print("オリジナルのFuncが動作")
         } else {
             print(FoodListPresenter.isTapRow)
         }

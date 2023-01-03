@@ -41,7 +41,6 @@ class FoodAppendViewController: UIViewController {
         super.viewDidLoad()
         foodNameTextField.delegate = self
         quantityTextField.delegate = self
-//        setPlaceholderAndKeyboard()
         foodAppendPresenter.setOutput(foodAppendPresenterOutput: self)
         foodAppendPresenter.settingVC()
         // 各種ボタン操作
@@ -151,7 +150,7 @@ extension FoodAppendViewController: FoodAppendPresenterOutput {
         }
     }
 
-    //
+    // ボタンの状態を初期状態へリセット
     func resetButtonsImage() {
         self.meatButton.setImage(UIImage(named: "meatButton"), for: .normal)
         self.meatButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
@@ -172,11 +171,10 @@ extension FoodAppendViewController: FoodAppendPresenterOutput {
         self.othersButton.setImage(UIImage(named: "otherButton"), for: .normal)
         self.othersButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
     }
+    // 押された際のボタンの外観を変化
     func animateButton(_ location: Food.Location) {
         if location == .refrigerator {
             refrigeratorButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            refrigeratorButton.layer.borderColor = UIColor.gray.cgColor
-            refrigeratorButton.setTitleColor(.red, for: .highlighted)
             refrigeratorButton.layer.cornerRadius = 20
             refrigeratorButton.layer.borderWidth = 3.0
         } else {
@@ -185,13 +183,10 @@ extension FoodAppendViewController: FoodAppendPresenterOutput {
         }
         if location == .freezer {
             freezerButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            freezerButton.layer.borderColor = UIColor.gray.cgColor
-            freezerButton.setTitleColor(.red, for: .highlighted)
             freezerButton.layer.cornerRadius = 20
             freezerButton.layer.borderWidth = 3.0
         } else {
             freezerButton.transform = CGAffineTransform(scaleX: 1, y: 1)
-            freezerButton.setTitleColor(.white, for: .normal)
             freezerButton.layer.borderColor = UIColor.clear.cgColor
         }
     }

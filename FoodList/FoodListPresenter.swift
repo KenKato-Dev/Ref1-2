@@ -21,7 +21,7 @@ protocol FoodListPresenterOutput: AnyObject {
     func perfomSeguetofoodAppendVC()
     func fadeout()
     func showRecoomendation()
-    func removeRecommendationLabel()
+    func removeRecommendToAddLabel(_ isHidden: Bool)
     func shouldShowUserName(_ userName: String)
     func showDeleteAlert()
 }
@@ -46,9 +46,6 @@ final class FoodListPresenter {
     func setOutput(foodListPresenterOutput: FoodListPresenterOutput) {
         self.foodListPresenterOutput = foodListPresenterOutput
     }
-//    func receiveUID(_ receivedUID: String) {
-//        self.uid = receivedUID
-//    }
     // Queryの生成、fetch、reloadDataを実行し配列表示を構築
     func fetchArray() {
         guard let uid = self.uid else {return}
@@ -67,7 +64,7 @@ final class FoodListPresenter {
                     if self.array.isEmpty {
                         self.foodListPresenterOutput?.showRecoomendation()
                     } else {
-                        self.foodListPresenterOutput?.removeRecommendationLabel()
+                        self.foodListPresenterOutput?.removeRecommendToAddLabel(true)
                     }
                 case let .failure(error):
                     self.foodListPresenterOutput?.presentErrorIfNeeded(error)

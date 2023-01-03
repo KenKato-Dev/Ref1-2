@@ -10,26 +10,6 @@ import FirebaseFirestoreSwift
 import Foundation
 import UIKit
 
-// extension StringTo: Decodable {
-//    init(from decoder: Decoder) throws {
-//        let container = try decoder.singleValueContainer()
-//        let string = try container.decode(String.self)
-//        guard let value = T(string) else {
-//            let debugDescription = "'\(string)' は\(T.self)にStringToのコンバート処理ができませんでした."
-//            let context = DecodingError.Context(
-//                codingPath: decoder.codingPath,
-//                debugDescription: debugDescription
-//            )
-//            throw DecodingError.dataCorrupted(context)
-//        }
-//        self.value = value
-//    }
-// }
-
-// struct StringTo<T: LosslessStringConvertible> {
-//    let value: T
-// }
-
 // Firebaseからデコード時に取り出せる形に調整
 extension DateFormatter {
     static let iso8601Full: DateFormatter = {
@@ -114,11 +94,7 @@ final class FoodData: FoodDataProtocol {
     private let fieldElementIDKey = "IDkey"
     private let fieldElementLocation = "location"
     private let fieldElementKind = "kind"
-//    private (set) var query:Query?
     private (set) var query = Firestore.firestore().collection("foods").order(by: "kind").limit(to: 10)
-//    private (set) var query:((String) -> Query) = { (_ uid:String) -> Query in
-//       return Firestore.firestore().collection(uid).order(by: "kind").limit(to: 10)
-//    }
     private (set) var queryDocumentSnaphots: [QueryDocumentSnapshot] = []
     private (set) var countOfDocuments = 0
 
@@ -268,6 +244,7 @@ final class FoodData: FoodDataProtocol {
             }
         }
     }
+    // ユーザー情報の取得
     func fetchUserInfo(_ completion: @escaping (Result<UserData, Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             guard let uid = Auth.auth().currentUser?.uid else {return}

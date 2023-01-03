@@ -22,8 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?)
     -> Bool {
         FirebaseApp.configure()
-        print(String(env["rakutenAPIKey"]!))
-
         // Override point for customization after application launch.
         return true
     }

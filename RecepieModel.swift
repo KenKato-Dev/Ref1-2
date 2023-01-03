@@ -16,6 +16,7 @@ struct Small: Codable {
 }
 // RecepieCategoryのModel、楽天APIへのリクエスト処理
 class RecepieModel {
+    // envファイルより生成
     let rakutenAPIKey = env["rakutenAPIKey"]!
     // 楽天APIへのリクエスト処理
     func fetch(_ keyword: String, _ completion: @escaping (Result<[Small], Error>) -> Void) {

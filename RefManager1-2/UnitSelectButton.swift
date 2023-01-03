@@ -4,8 +4,6 @@
 //
 //  Created by 加藤研太郎 on 2022/04/10.
 //
-// 参考１：https://qiita.com/takashico/items/3a94831801869f4203f2
-// 2：https://note.com/creative_life/n/n2f4eb376c568
 
 import UIKit
 

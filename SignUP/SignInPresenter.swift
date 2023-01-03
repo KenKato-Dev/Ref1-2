@@ -38,7 +38,6 @@ final class SignInPresenter {
     func didTapSignInButton(_ email: String, _ password: String) {
         self.signInPresenterOutput?.didTapWithoutNecessaryFields()
         self.signInPresenterOutput?.showLoadingSpin()
-//        self.isFillOutNecessary = isFillOutNecessary
             userService.signIn(email, password) { result in
                 self.signInPresenterOutput?.hideIndicator(true)
                 switch result {
@@ -46,7 +45,6 @@ final class SignInPresenter {
                     self.isFillOutNecessary = true
                     self.signInPresenterOutput?.performSegue(uid: uid)
                     self.signInPresenterOutput?.resetContetntsOfTextField()
-                    self.signInPresenterOutput?.showWorngInputIfNeeded(self.isFillOutNecessary)
                 case let .failure(error):
                     self.isFillOutNecessary = false
                     self.signInPresenterOutput?.showWorngInputIfNeeded(self.isFillOutNecessary)

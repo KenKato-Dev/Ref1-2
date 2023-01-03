@@ -12,7 +12,6 @@ protocol SignUpPresenterOutput: AnyObject {
     func isSequrePassEntry()
     func showEssential()
     func showUsedEmail()
-    func dismiss()
     func performSegue(uid: String)
     func presentErrorIfNeeded(_ errorOrNil: Error?)
     func showLoadingSpin()
@@ -45,7 +44,6 @@ final class SignUpPresenter {
                             switch result {
                             case .success:
                                 print("ユーザー登録に成功")
-//                                self.signUpPresenterOutput?.dismiss()
                                 self.signUpPresenterOutput?.performSegue(uid: Auth.auth().currentUser!.uid)
                             case let .failure(error):
                                 self.signUpPresenterOutput?.presentErrorIfNeeded(error)

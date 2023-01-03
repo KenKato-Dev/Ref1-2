@@ -28,7 +28,7 @@ final class RecepieCategoryListPresenter {
     func setOutput(recepieCategoryListPresenterOutput: RecepieCategoryListPresenterOutput?) {
         self.recepieCategoryListPresenterOutput = recepieCategoryListPresenterOutput
     }
-
+// indicatorの表示と楽天APIへのリクエストを実施
     func reloadArray(searchKeyword: String?) {
         self.recepieCategoryListPresenterOutput?.showLoadingSpin()
         if let searchKeyword = searchKeyword {

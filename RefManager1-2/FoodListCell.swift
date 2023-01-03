@@ -7,8 +7,7 @@
 
 import UIKit
 class FoodListCell: UITableViewCell {
-    // 下記enumを追加、normal. trueとfalseの3肢を用意
-    // checkboxの出現、checkboxのsetImage切り替えをこれでまとめる
+    // normal. trueとfalseの3択によりcheckboxの出現、checkboxのsetImage切り替えを本Enumにまとめる
     enum State {
         case normal
         case shownCheckBox(isChecked: Bool)

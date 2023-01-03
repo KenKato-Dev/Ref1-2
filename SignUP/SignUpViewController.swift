@@ -59,11 +59,6 @@ extension SignUpViewController: SignUpPresenterOutput {
     func performSegue(uid: String) {
         self.performSegue(withIdentifier: "toFoodListViewDirectly", sender: uid)
     }
-    func dismiss() {
-//        dismiss(animated: true, completion: nil)
-        self.navigationController?.popViewController(animated: true)
-
-    }
     func presentErrorIfNeeded(_ errorOrNil: Error?) {
         guard let error = errorOrNil else {return}
         let message = "エラー発生:\(error)"

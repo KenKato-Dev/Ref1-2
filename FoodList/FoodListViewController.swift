@@ -364,21 +364,18 @@ extension FoodListViewController: FoodListPresenterOutput {
             width: self.foodListTableView.frame.width,
             height: 50
         )
-        self.recommendToAddLabel.tag = 100101
         self.recommendToAddLabel.textAlignment = .center
         self.recommendToAddLabel.font = .systemFont(ofSize: 20)
         self.recommendToAddLabel.textColor = .gray
         self.recommendToAddLabel.backgroundColor = .clear
         self.foodListTableView.addSubview(self.recommendToAddLabel)
     }
-    // recommendationLabelを削除
-    func removeRecommendationLabel() {
-            if let recommendToAddLabel = self.foodListTableView.viewWithTag(100101) {
-                recommendToAddLabel.removeFromSuperview()
-            }
+    // recommendToAddLabelを削除
+    func removeRecommendToAddLabel(_ isHidden: Bool) {
+        self.recommendToAddLabel.isHidden = isHidden
     }
+    // 削除するかどうかアラート
     func showDeleteAlert() {
-        // 削除するかどうかアラート
         let alert = UIAlertController(title: "削除しますか?", message: "", preferredStyle: .actionSheet)
         alert.addAction(.init(title: "はい", style: .default, handler: { _ in
             self.foodListPresenter.deleteAction()

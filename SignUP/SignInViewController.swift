@@ -37,6 +37,7 @@ final class SignInViewController: UIViewController {
             self.signInPresenter.didTapResetPassButton()
         }), for: .touchUpInside)
     }
+    // performsegueの動作を制御
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "toFoodListView" && self.signInPresenter.isFillOutNecessary {
             return true
@@ -57,22 +58,29 @@ extension SignInViewController: UITextFieldDelegate {
     }
 }
 extension SignInViewController: SignInPresenterOutput {
+    // 入力したパスワードを●に変更
     func isSequrePassEntry() {
         self.passwordTextField.isSecureTextEntry = true
     }
+    // 必要事項を入力していなければ下記を表示
     func didTapWithoutNecessaryFields() {
         if emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
             emailTextField.placeholder = "メールアドレスを入力してください"
             passwordTextField.placeholder = "パスワードを入力してください"
         }
     }
+    // textFieldへの記載が誤っている場合Boolにて表示
     func showWorngInputIfNeeded(_ isHidden: Bool) {
-        self.wrongInputLabel.isHidden = isHidden
+        if !isHidden {
+            self.wrongInputLabel.textColor = .red
+        }
     }
+    // 画面遷移後テキストフィールドの記述を削除しShouldperformSegueの条件をリセット
     func resetContetntsOfTextField() {
         self.emailTextField.text = ""
         self.passwordTextField.text = ""
         self.signInPresenter.resetIsFillOutNecessary()
+        self.wrongInputLabel.textColor = .clear
     }
     func performSegue(uid: String) {
         self.performSegue(withIdentifier: "toFoodListView", sender: uid)
@@ -119,13 +127,6 @@ extension SignInViewController: SignInPresenterOutput {
         }
     }
     func checkSignInStatus(_ isSignIn: Bool) -> UIViewController {
-        let keyWindow = UIApplication.shared.connectedScenes
-            .filter({$0.activationState == .foregroundActive})
-            .compactMap({$0 as? UIWindowScene})
-            .first?.windows.filter({$0.isKeyWindow}).first
-
-        let rootVC = UIApplication.shared.keyWindow
-
         if isSignIn {
             let signInVC = SignInViewController()
             return signInVC

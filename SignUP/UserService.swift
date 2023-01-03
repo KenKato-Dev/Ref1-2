@@ -3,8 +3,6 @@
 //  RefManager1-2
 //
 //  Created by 加藤研太郎 on 2022/11/27.
-//
-// 参考：https://tomo-bb-aki0117115.hatenablog.com/entry/2021/01/19/021832
 
 import Foundation
 import Firebase
@@ -35,37 +33,18 @@ class UserService {
                 completion(.success(uid))
             }
         }
-//        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-//        UserDefaults.standard.set(credential, forKey: "credential")
     }
-    // userdefaultsに記録
      func checkSignInStatus(_ completion:@escaping (Bool) -> Void) {
         Auth.auth().addStateDidChangeListener { _, user in
             if user == nil {
                 // 新規
                 completion(false)
-//                print("USER状態:\(user)")
             } else {
                 // ログイン済み
                 completion(true)
-//                print("USER状態:\(user)")
             }
         }
     }
-
-    func save(_ mail: String, _ pass: String, _ uid: String) {
-        self.auth.addStateDidChangeListener { _, user in
-            if user != nil {
-                print("USER状態:\(user)")
-            } else {
-                print("USER状態:\(user)")
-            }
-        }
-    }
-    // userdefaultsから読み込み
-//    func load(){
-//        UserDefaults.standard.string(forKey: <#T##String#>)
-//    }
     func postUser(_ email: String,
                   _ userName: String?,
                   _ pass: String,
