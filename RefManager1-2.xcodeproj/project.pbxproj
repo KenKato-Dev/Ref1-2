@@ -33,17 +33,21 @@
 		ECA6F45228026B0E00CA7C2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA6F45028026B0E00CA7C2D /* LaunchScreen.storyboard */; };
 		ECA6F45B28026B8E00CA7C2D /* FoodAppendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6F45A28026B8E00CA7C2D /* FoodAppendViewController.swift */; };
 		ECA6F45D28026BAE00CA7C2D /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6F45C28026BAE00CA7C2D /* FoodData.swift */; };
-		ECBD104929334D5400AF2702 /* signUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD104829334D5400AF2702 /* signUp.swift */; };
+		ECBD104929334D5400AF2702 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD104829334D5400AF2702 /* UserService.swift */; };
 		ECBD104B2933573300AF2702 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD104A2933573300AF2702 /* SignInViewController.swift */; };
 		ECBD104D2933578100AF2702 /* SignInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD104C2933578100AF2702 /* SignInPresenter.swift */; };
 		ECBD105529339C9400AF2702 /* RefManager1_2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD105429339C9400AF2702 /* RefManager1_2Tests.swift */; };
 		ECBD105C293A3D9F00AF2702 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD105B293A3D9F00AF2702 /* UIImage+Extension.swift */; };
 		ECBD105F293B94DD00AF2702 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ECBD1061293B94DD00AF2702 /* Localizable.strings */; };
 		ECC2590E28E7369600F790F5 /* RecepieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2590D28E7369600F790F5 /* RecepieModel.swift */; };
+		ECC4532429582A5E0064CF13 /* AccountInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4532329582A5E0064CF13 /* AccountInformationViewController.swift */; };
+		ECC4532629582A760064CF13 /* AccountInformationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4532529582A760064CF13 /* AccountInformationPresenter.swift */; };
+		ECC45328295847910064CF13 /* AccountInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC45327295847910064CF13 /* AccountInformation.swift */; };
 		ECCAA677290045D800CE141B /* RecepieCategoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCAA676290045D800CE141B /* RecepieCategoryListPresenter.swift */; };
-		ECDF47A928B4F7B7004BC6A9 /* RecepieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47A828B4F7B7004BC6A9 /* RecepieTableViewCell.swift */; };
+		ECDF47A928B4F7B7004BC6A9 /* RecepieCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47A828B4F7B7004BC6A9 /* RecepieCategoryCell.swift */; };
 		ECDF47AB28B4F7DC004BC6A9 /* RecepieCategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47AA28B4F7DB004BC6A9 /* RecepieCategoryListViewController.swift */; };
 		ECE2F0E028349FBC00975A38 /* FoodUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */; };
+		ECEA02B82963C4D300869A0D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEA02B72963C4D300869A0D /* Environment.swift */; };
 		ECEB7103280314BD00B157FB /* FoodListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEB7102280314BD00B157FB /* FoodListCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,7 +82,7 @@
 		ECA6F45328026B0E00CA7C2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ECA6F45A28026B8E00CA7C2D /* FoodAppendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAppendViewController.swift; sourceTree = "<group>"; };
 		ECA6F45C28026BAE00CA7C2D /* FoodData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
-		ECBD104829334D5400AF2702 /* signUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signUp.swift; sourceTree = "<group>"; };
+		ECBD104829334D5400AF2702 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		ECBD104A2933573300AF2702 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		ECBD104C2933578100AF2702 /* SignInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresenter.swift; sourceTree = "<group>"; };
 		ECBD105229339C9400AF2702 /* RefManager1-2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RefManager1-2Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,10 +91,14 @@
 		ECBD1060293B94DD00AF2702 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ECBD1062293B951A00AF2702 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ECC2590D28E7369600F790F5 /* RecepieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieModel.swift; sourceTree = "<group>"; };
+		ECC4532329582A5E0064CF13 /* AccountInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInformationViewController.swift; sourceTree = "<group>"; };
+		ECC4532529582A760064CF13 /* AccountInformationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInformationPresenter.swift; sourceTree = "<group>"; };
+		ECC45327295847910064CF13 /* AccountInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInformation.swift; sourceTree = "<group>"; };
 		ECCAA676290045D800CE141B /* RecepieCategoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieCategoryListPresenter.swift; sourceTree = "<group>"; };
-		ECDF47A828B4F7B7004BC6A9 /* RecepieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieTableViewCell.swift; sourceTree = "<group>"; };
+		ECDF47A828B4F7B7004BC6A9 /* RecepieCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieCategoryCell.swift; sourceTree = "<group>"; };
 		ECDF47AA28B4F7DB004BC6A9 /* RecepieCategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieCategoryListViewController.swift; sourceTree = "<group>"; };
 		ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodUseCase.swift; sourceTree = "<group>"; };
+		ECEA02B72963C4D300869A0D /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		ECEB7102280314BD00B157FB /* FoodListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,16 +128,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EC5AAD8F2924B241004EAF94 /* SignUP(todo) */ = {
+		EC5AAD8F2924B241004EAF94 /* SignUP */ = {
 			isa = PBXGroup;
 			children = (
 				ECBD104A2933573300AF2702 /* SignInViewController.swift */,
 				ECBD104C2933578100AF2702 /* SignInPresenter.swift */,
 				EC5AAD8D2924B239004EAF94 /* SignUpViewController.swift */,
 				EC5AAD8B292383B1004EAF94 /* SignUpPresenter.swift */,
-				ECBD104829334D5400AF2702 /* signUp.swift */,
+				ECBD104829334D5400AF2702 /* UserService.swift */,
 			);
-			path = "SignUP(todo)";
+			path = SignUP;
 			sourceTree = "<group>";
 		};
 		EC9C1C0928F3E8260024570D /* RecepieCategory */ = {
@@ -170,7 +178,8 @@
 				EC9C1C0A28F3E8650024570D /* FoodList */,
 				EC9C1C0B28F3E8A60024570D /* FoodAddition */,
 				EC9C1C0928F3E8260024570D /* RecepieCategory */,
-				EC5AAD8F2924B241004EAF94 /* SignUP(todo) */,
+				EC5AAD8F2924B241004EAF94 /* SignUP */,
+				ECC4532229582A140064CF13 /* Account Information */,
 				ECA6F44428026B0C00CA7C2D /* RefManager1-2 */,
 				ECBD105329339C9400AF2702 /* RefManager1-2Tests */,
 				ECA6F44328026B0C00CA7C2D /* Products */,
@@ -190,12 +199,13 @@
 			isa = PBXGroup;
 			children = (
 				ECEB7102280314BD00B157FB /* FoodListCell.swift */,
-				ECDF47A828B4F7B7004BC6A9 /* RecepieTableViewCell.swift */,
+				ECDF47A828B4F7B7004BC6A9 /* RecepieCategoryCell.swift */,
 				EC77EA1F28F2A813009B3EBA /* CheckBoxButton.swift */,
 				EC77EA2028F2A813009B3EBA /* DeleteButton.swift */,
 				EC77EA2128F2A813009B3EBA /* UnitSelectButton.swift */,
 				EC77EA2228F2A813009B3EBA /* AddButton.swift */,
 				ECA41AE0290E5A5D0030BF16 /* TapFeedback.swift */,
+				ECEA02B72963C4D300869A0D /* Environment.swift */,
 				ECBD105B293A3D9F00AF2702 /* UIImage+Extension.swift */,
 				ECA6F44B28026B0C00CA7C2D /* Main.storyboard */,
 				ECA6F44E28026B0E00CA7C2D /* Assets.xcassets */,
@@ -215,6 +225,16 @@
 			path = "RefManager1-2Tests";
 			sourceTree = "<group>";
 		};
+		ECC4532229582A140064CF13 /* Account Information */ = {
+			isa = PBXGroup;
+			children = (
+				ECC4532329582A5E0064CF13 /* AccountInformationViewController.swift */,
+				ECC4532529582A760064CF13 /* AccountInformationPresenter.swift */,
+				ECC45327295847910064CF13 /* AccountInformation.swift */,
+			);
+			path = "Account Information";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -222,6 +242,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ECA6F45628026B0E00CA7C2D /* Build configuration list for PBXNativeTarget "RefManager1-2" */;
 			buildPhases = (
+				ECEA02B62963B66400869A0D /* Run Env */,
 				ECA6F43E28026B0C00CA7C2D /* Sources */,
 				ECA6F43F28026B0C00CA7C2D /* Frameworks */,
 				ECA6F44028026B0C00CA7C2D /* Resources */,
@@ -347,6 +368,24 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif test -d /opt/homebrew/bin; then\n    PATH=/opt/homebrew/bin/:$PATH\nfi\nif which swiftlint >/dev/null; then\n    swiftlint\n    swiftlint --fix\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		ECEA02B62963B66400869A0D /* Run Env */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Env";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/buildEnv.sh\" \"${SRCROOT}/.env\" \"${SRCROOT}/${PROJECT}\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -356,18 +395,22 @@
 			files = (
 				ECBD104B2933573300AF2702 /* SignInViewController.swift in Sources */,
 				ECA41AE1290E5A5D0030BF16 /* TapFeedback.swift in Sources */,
+				ECC4532429582A5E0064CF13 /* AccountInformationViewController.swift in Sources */,
 				ECA60EB128FEE28B00B7C7F6 /* FoodAppendPresenter.swift in Sources */,
 				ECBD105C293A3D9F00AF2702 /* UIImage+Extension.swift in Sources */,
 				ECC2590E28E7369600F790F5 /* RecepieModel.swift in Sources */,
-				ECDF47A928B4F7B7004BC6A9 /* RecepieTableViewCell.swift in Sources */,
+				ECDF47A928B4F7B7004BC6A9 /* RecepieCategoryCell.swift in Sources */,
 				ECE2F0E028349FBC00975A38 /* FoodUseCase.swift in Sources */,
 				EC77EA2628F2A813009B3EBA /* AddButton.swift in Sources */,
 				ECA6F45B28026B8E00CA7C2D /* FoodAppendViewController.swift in Sources */,
 				ECA6F44A28026B0C00CA7C2D /* FoodListViewController.swift in Sources */,
 				ECBD104D2933578100AF2702 /* SignInPresenter.swift in Sources */,
-				ECBD104929334D5400AF2702 /* signUp.swift in Sources */,
+				ECBD104929334D5400AF2702 /* UserService.swift in Sources */,
 				ECA6F44628026B0C00CA7C2D /* AppDelegate.swift in Sources */,
 				ECEB7103280314BD00B157FB /* FoodListCell.swift in Sources */,
+				ECC4532629582A760064CF13 /* AccountInformationPresenter.swift in Sources */,
+				ECC45328295847910064CF13 /* AccountInformation.swift in Sources */,
+				ECEA02B82963C4D300869A0D /* Environment.swift in Sources */,
 				ECDF47AB28B4F7DC004BC6A9 /* RecepieCategoryListViewController.swift in Sources */,
 				EC77EA2428F2A813009B3EBA /* DeleteButton.swift in Sources */,
 				ECCAA677290045D800CE141B /* RecepieCategoryListPresenter.swift in Sources */,

@@ -7,8 +7,7 @@
 
 import UIKit
 class FoodListCell: UITableViewCell {
-    // 下記enumを追加、normal. trueとfalseの3肢を用意
-    // checkboxの出現、checkboxのsetImage切り替えをこれでまとめる
+    // normal. trueとfalseの3択によりcheckboxの出現、checkboxのsetImage切り替えを本Enumにまとめる
     enum State {
         case normal
         case shownCheckBox(isChecked: Bool)
@@ -29,10 +28,12 @@ class FoodListCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         checkBoxButton.addAction(.init(handler: { _ in
-
+            // isCheckにはVCにてcheckdIDの戻り値Valueが代入
             if case let .shownCheckBox(isChecked) = self.state {
                 let nextIsChecked = !isChecked
+                // didTapにはPresenterで用意した同じクロージャ型をVC上で代入
                 self.didTapCheckBox?(nextIsChecked)
+
                 self.controllCheckBox(state: .shownCheckBox(isChecked: nextIsChecked))
             }
         }), for: .touchUpInside)

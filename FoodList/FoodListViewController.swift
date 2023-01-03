@@ -12,6 +12,7 @@ import UIKit
 // FoodListVIewVC
 final class FoodListViewController: UIViewController {
     private let foodListPresenter = FoodListPresenter(foodData: FoodData(), foodUseCase: FoodUseCase())
+    @IBOutlet weak var accountButton: UIButton!
     @IBOutlet var addButtton: AddButton!
     @IBOutlet var deleteButton: DeleteButton!
     @IBOutlet var locationButtonsStack: UIStackView!
@@ -32,16 +33,23 @@ final class FoodListViewController: UIViewController {
     @IBOutlet var foodListTableView: UITableView!
     @IBOutlet var viewTitle: UINavigationItem!
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
+    private var userNameLabel = UILabel()
+    private let recommendToAddLabel = UILabel()
+//    var receivedUIDFromSignInVC = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         foodListTableView.delegate = self
         foodListTableView.dataSource = self
         foodListPresenter.setOutput(foodListPresenterOutput: self)
+        foodListPresenter.greentingToUser()
         foodListPresenter.fetchArray()
         // 各種ボタン操作
         deleteButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapDeleteButton()
+        }), for: .touchUpInside)
+        addButtton.addAction(.init(handler: { _ in
+            self.foodListPresenter.didTapAddButton()
         }), for: .touchUpInside)
         refrigeratorButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapRefrigiratorButton(self.refrigeratorButton)
@@ -92,6 +100,7 @@ final class FoodListViewController: UIViewController {
         if segue.identifier == "toRecepieTableView" {
             let recepieView = segue.destination as? RecepieCategoryListViewController
             recepieView?.navigationItem.title = String("\(sender!)")
+
         }
     }
 }
@@ -107,7 +116,6 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
               let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? FoodListCell
         else { return .init() }
         cell.composeFood(food: foodInRow)
-        // delete関連、選択してcheckedIDに入ったFoodIDkeyのValueのBool値(初期値true)をisCheckedに代入
         let isCheckedDictionary = foodListPresenter.checkedID[foodInRow.IDkey] ?? false
         let shouldShowCheckBox = !foodListPresenter.isDelete
         if shouldShowCheckBox {
@@ -115,6 +123,7 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.controllCheckBox(state: .normal)
         }
+
         cell.didTapCheckBox = foodListPresenter.setArgInDidTapCheckBox(at: indexPath.row)
         return cell
     }
@@ -136,7 +145,7 @@ extension FoodListViewController: FoodListPresenterOutput {
     func reloadData() {
         foodListTableView.reloadData()
     }
-
+// エラー表示
     func presentErrorIfNeeded(_ errorOrNil: Error?) {
         guard let error = errorOrNil else {return}
         let message = "エラー発生:\(error)"
@@ -152,6 +161,8 @@ extension FoodListViewController: FoodListPresenterOutput {
     // navigationItemのタイトルをBool値に応じて変更、色が変わらず要改善
     func setTitle(_ refigerator: Bool, _ freezer: Bool, _ selectedKinds: [Food.FoodKind], _ location: Food.Location) {
         // この処理でなく条件式も含めタイトルを入れるようにする
+        self.navigationController?.navigationBar.titleTextAttributes =
+        [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20)]
         if !refigerator,
            !freezer, selectedKinds.isEmpty {
             viewTitle.title = "冷蔵品と冷凍品"
@@ -254,7 +265,9 @@ extension FoodListViewController: FoodListPresenterOutput {
             print("IsTapRow：\(FoodListPresenter.isTapRow),\(isTapRow)")
             // 以下直接FoodListPresenter.isTapRowだと不可
             if isTapRow {
-                updationView.unitSelectButton.setTitle(updationView.unitSelectButton.unitButtonTranslator(unit: array[row].unit), for: .normal)
+                updationView.unitSelectButton
+                    .setTitle(updationView.unitSelectButton
+                        .unitButtonTranslator(unit: array[row].unit), for: .normal)
                 updationView.foodNameTextField.text = array[row].name
                 updationView.quantityTextField.text = array[row].quantity
                 if !updationView.foodNameTextField.text!.isEmpty && !updationView.quantityTextField.text!.isEmpty {
@@ -276,14 +289,21 @@ extension FoodListViewController: FoodListPresenterOutput {
                 updationView.preserveButton.addAction(.init(handler: { [self] _ in
 
                     if updationView.foodNameTextField.text!.isEmpty {
-                        updationView.foodNameTextField.attributedPlaceholder = NSAttributedString(string: "名称を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+                        updationView.foodNameTextField.attributedPlaceholder =
+                        NSAttributedString(string: "名称を入れてください",
+                                           attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
 
                     }
                     if updationView.quantityTextField.text!.isEmpty {
-                        updationView.quantityTextField.attributedPlaceholder = NSAttributedString(string: "数量を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+                        updationView.quantityTextField.attributedPlaceholder =
+                        NSAttributedString(string: "数量を入れてください",
+                                           attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
                     }
                     if !updationView.foodNameTextField.text!.isEmpty && !updationView.quantityTextField.text!.isEmpty {
-                        self.foodListPresenter.didTapPreserveOnUpdationView(foodName: updationView.foodNameTextField.text, foodQuantity: updationView.quantityTextField.text, foodinArray: array[row])
+                        self.foodListPresenter.didTapPreserveOnUpdationView(
+                            foodName: updationView.foodNameTextField.text,
+                            foodQuantity: updationView.quantityTextField.text,
+                            foodinArray: array[row])
                     }
 //                    self.foodListPresenter.resetIsTapRow()
                 }), for: .touchUpInside)
@@ -299,9 +319,63 @@ extension FoodListViewController: FoodListPresenterOutput {
         self.foodListPresenter.resetIsTapRow()
         present(alert, animated: true)
     }
+    // AppendViewControllerへの遷移処理
+    func perfomSeguetofoodAppendVC() { // (_ array:[Food],at:Int)
+//        self.performSegue(withIdentifier: "toRecepieTableView", sender: array[at].name)
+        self.performSegue(withIdentifier: "toFoodAppendVC", sender: nil)
+    }
     // 項目選択時に削除ボタンを押すと表示するアラートを表示
+    func shouldShowUserName(_ userName: String) {
+        self.navigationController?.navigationBar.titleTextAttributes =
+        [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]
+        self.viewTitle.title = "\(userName)さんの冷蔵庫"
+        // 名前を試験表示
+        self.userNameLabel.text = "\(userName)さんこんにちは！"
+        userNameLabel.frame = CGRect(
+            x: 0, // self.foodListTableView.frame.width/2
+            y: self.foodListTableView.frame.height/3,
+            width: self.foodListTableView.frame.width,
+            height: 50)
+        self.userNameLabel.textAlignment = .center
+        self.userNameLabel.font = .systemFont(ofSize: 25)
+        self.userNameLabel.textColor = UIColor.gray
+        self.userNameLabel.backgroundColor = UIColor.white.withAlphaComponent(0.6)
+        userNameLabel.adjustsFontSizeToFitWidth = true
+        // navigationItemでは表示されず
+        self.foodListTableView.addSubview(userNameLabel)
+        self.userNameLabel.alpha = 1
+    }
+    func fadeout() {
+        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { time in
+            if self.userNameLabel.alpha > 0 {
+                self.userNameLabel.alpha -= 0.05
+            } else {
+                time.invalidate()
+                self.userNameLabel.isHidden = true
+            }
+        }
+    }
+    // tableviewに説明文を表示
+    func showRecoomendation() {
+        self.recommendToAddLabel.text = "左上の＋から食品を登録できます"
+        self.recommendToAddLabel.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: self.foodListTableView.frame.width,
+            height: 50
+        )
+        self.recommendToAddLabel.textAlignment = .center
+        self.recommendToAddLabel.font = .systemFont(ofSize: 20)
+        self.recommendToAddLabel.textColor = .gray
+        self.recommendToAddLabel.backgroundColor = .clear
+        self.foodListTableView.addSubview(self.recommendToAddLabel)
+    }
+    // recommendToAddLabelを削除
+    func removeRecommendToAddLabel(_ isHidden: Bool) {
+        self.recommendToAddLabel.isHidden = isHidden
+    }
+    // 削除するかどうかアラート
     func showDeleteAlert() {
-        // 削除するかどうかアラート
         let alert = UIAlertController(title: "削除しますか?", message: "", preferredStyle: .actionSheet)
         alert.addAction(.init(title: "はい", style: .default, handler: { _ in
             self.foodListPresenter.deleteAction()

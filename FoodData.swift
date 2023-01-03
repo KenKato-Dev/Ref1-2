@@ -4,31 +4,11 @@
 //
 //  Created by 加藤研太郎 on 2022/04/05.
 //
-
+import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Foundation
 import UIKit
-
-// extension StringTo: Decodable {
-//    init(from decoder: Decoder) throws {
-//        let container = try decoder.singleValueContainer()
-//        let string = try container.decode(String.self)
-//        guard let value = T(string) else {
-//            let debugDescription = "'\(string)' は\(T.self)にStringToのコンバート処理ができませんでした."
-//            let context = DecodingError.Context(
-//                codingPath: decoder.codingPath,
-//                debugDescription: debugDescription
-//            )
-//            throw DecodingError.dataCorrupted(context)
-//        }
-//        self.value = value
-//    }
-// }
-
-// struct StringTo<T: LosslessStringConvertible> {
-//    let value: T
-// }
 
 // Firebaseからデコード時に取り出せる形に調整
 extension DateFormatter {
@@ -93,11 +73,14 @@ struct Food: Equatable, Codable {
 }
 // FoodDataクラスのプロトコル
 protocol FoodDataProtocol {
-    func post(_ food: Food, _ completion: @escaping (Result<Void, Error>) -> Void)
+    func post(_ uid: String, _ food: Food, _ completion: @escaping (Result<Void, Error>) -> Void)
     func fetch(_ completion: @escaping (Result<[Food], Error>) -> Void)
-    func isConfiguringQuery(_ filterRef: Bool, _ filterFreezer: Bool, _ filter: FoodData.Filter, _ kinds: [Food.FoodKind])
+    func isConfiguringQuery(
+        _ uid: String, _ filterRef: Bool, _ filterFreezer: Bool,
+        _ filter: FoodData.Filter, _ kinds: [Food.FoodKind]
+    )
     func paginate()
-    func delete(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void)
+    func delete(_ uid: String, _ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void)
 }
 // FoodListとFoodAdditionのModelになるクラス、Firebaseへの書込み、リクエスト処理
 final class FoodData: FoodDataProtocol {
@@ -116,9 +99,10 @@ final class FoodData: FoodDataProtocol {
     private (set) var countOfDocuments = 0
 
     // Firebaseへの書込み処理
-    func post(_ food: Food, _ completion: @escaping (Result<Void, Error>) -> Void) {
+    func post(_ uid: String, _ food: Food, _ completion: @escaping (Result<Void, Error>) -> Void) {
         // ドキュメントごとに保管、ドキュメントを他のものにするとDictionary方式に上書きされる
-            self.db.collection(self.collectionPath).document("\(self.fieldElementIDKey): \(food.IDkey)").setData([
+        self.db.collection("Users").document(uid).collection("foods")
+            .document("\(self.fieldElementIDKey): \(food.IDkey)").setData([
                 "location": "\(food.location)",
                 "kind": "\(food.kind)",
                 "kindNumber": "\(food.kind.kindNumber)",
@@ -138,8 +122,10 @@ final class FoodData: FoodDataProtocol {
             }
     }
     // FirebaseへUpdationView経由で書込みする際の処理
-    func postFromUpdationView(foodName: String?, foodQuantity: String?, foodinArray: Food, _ completion: @escaping (Result<Void, Error>) -> Void) {
-        self.db.collection(self.collectionPath).document("\(self.fieldElementIDKey): \(foodinArray.IDkey)").setData([
+    func postFromUpdationView(_ uid: String, foodName: String?, foodQuantity: String?,
+                              foodinArray: Food, _ completion: @escaping (Result<Void, Error>) -> Void) {
+        self.db.collection("Users").document(uid).collection("foods")
+            .document("\(self.fieldElementIDKey): \(foodinArray.IDkey)").setData([
             "name": "\(foodName!)",
             "quantity": "\(foodQuantity!)",
             "date": "\(Date())",
@@ -156,14 +142,14 @@ final class FoodData: FoodDataProtocol {
         }
     }
     // UpdationView経由の保管場所変更処理
-    func setLocation(_ IDKey: String, _ location: String) {
-        self.db.collection(self.collectionPath).document("\(self.fieldElementIDKey): \(IDKey)").setData([
+    func setLocation(_ uid: String, _ IDKey: String, _ location: String) {
+        self.db.collection("Users").document(uid).collection("foods")
+            .document("\(self.fieldElementIDKey): \(IDKey)").setData([
             self.fieldElementLocation: "\(location)"
         ])
     }
     // Firebaseから情報を読み込む処理
     func fetch(_ completion: @escaping (Result<[Food], Error>) -> Void) {
-//        DispatchQueue.main.asyncAfter(deadline: .now()) { // +0.3を削除し動作確認
 
             self.countOfDocuments = 0
             self.query.getDocuments { querySnapShot, error in
@@ -181,9 +167,14 @@ final class FoodData: FoodDataProtocol {
                         documentSnapshot.data()
                     }
                     do {
-                        let data = try JSONSerialization.data(withJSONObject: dictinaryDocuments, options: .prettyPrinted)
-                        var decodedFoods = try decoder.decode([Food].self, from: data)
-                        completion(.success(decodedFoods))
+                        let data = try JSONSerialization.data(
+                            withJSONObject: dictinaryDocuments,
+                            options: .prettyPrinted
+                        )
+                        let decodedFoods = try decoder.decode([Food].self, from: data)
+                        DispatchQueue.main.async {
+                            completion(.success(decodedFoods))
+                        }
                     } catch {
                         completion(.failure(error))
                     }
@@ -192,23 +183,35 @@ final class FoodData: FoodDataProtocol {
 //        }
     }
     // 上記Fetch前にて使用するQuery作成処理、ボタンによるBool値と選択された食材の配列から処理
-    func isConfiguringQuery(_ filterRef: Bool, _ filterFreezer: Bool, _ filter: Filter, _ kinds: [Food.FoodKind]) {
+    func isConfiguringQuery(_ uid: String,
+                            _ filterRef: Bool,
+                            _ filterFreezer: Bool,
+                            _ filter: Filter,
+                            _ kinds: [Food.FoodKind]) {
         let kindArray = filter.kindArray.map {$0.rawValue}
         let location = filter.location.rawValue
         let kinds = kinds.map {$0.rawValue}
 
         if (filterRef || filterFreezer) && !kinds.isEmpty {
             // 1.冷蔵/冷凍がtrueでかつfoodも選択
-            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementLocation, isEqualTo: location).whereField(self.fieldElementKind, in: kindArray).order(by: "kindNumber").order(by: "date").limit(to: 10)
+            self.query = self.db.collection("Users").document(uid).collection("foods")
+                .whereField(self.fieldElementLocation, isEqualTo: location)
+                .whereField(self.fieldElementKind, in: kindArray)
+                .order(by: "kindNumber").order(by: "date").limit(to: 10)
         } else if (filterRef || filterFreezer) && kinds.isEmpty {
             // 2.冷蔵/冷凍のみtrue
-            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementLocation, isEqualTo: location).order(by: "kindNumber").order(by: "date").limit(to: 10)
+            self.query = self.db.collection("Users").document(uid).collection("foods")
+                .whereField(self.fieldElementLocation, isEqualTo: location)
+                .order(by: "kindNumber").order(by: "date").limit(to: 10)
         } else if (!filterRef && !filterFreezer) && !kinds.isEmpty {
             // 3.foodのみ選択
-            self.query = self.db.collection(self.collectionPath).whereField(self.fieldElementKind, in: kindArray).order(by: "kindNumber").order(by: "date").limit(to: 10)
+            self.query = self.db.collection("Users").document(uid).collection("foods")
+                .whereField(self.fieldElementKind, in: kindArray)
+                .order(by: "kindNumber").order(by: "date").limit(to: 10)
         } else {
             // 4.何も選択されていない状態
-            self.query = Firestore.firestore().collection(self.collectionPath).order(by: "kindNumber").order(by: "date").limit(to: 10)
+            self.query = Firestore.firestore().collection("Users").document(uid).collection("foods")
+                .order(by: "kindNumber").order(by: "date").limit(to: 10)
         }
     }
     // ページネート用のquery調整処理、前回取り出したQDSの最後の1つあとからQueryを作成
@@ -218,11 +221,12 @@ final class FoodData: FoodDataProtocol {
 
     }
     // 削除処理
-    func delete(_ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
+    func delete(_ uid: String, _ idKeys: [String], _ completion: @escaping (Result<Void, Error>) -> Void) {
         guard !idKeys.isEmpty else {
             return
         }
-        let query = db.collection(self.collectionPath).whereField(self.fieldElementIDKey, in: idKeys)
+        let query = self.db.collection("Users").document(uid).collection("foods")
+            .whereField(self.fieldElementIDKey, in: idKeys)
         query.getDocuments { snapshot, error in
             if let error = error {
                 completion(.failure(error))
@@ -237,6 +241,22 @@ final class FoodData: FoodDataProtocol {
                 } else {
                     completion(.success(()))
                 }
+            }
+        }
+    }
+    // ユーザー情報の取得
+    func fetchUserInfo(_ completion: @escaping (Result<UserData, Error>) -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            guard let uid = Auth.auth().currentUser?.uid else {return}
+            self.db.collection("Users").document(uid).getDocument { documentSnapshot, error in
+                if let error = error {
+                    print("ユーザー情報取得に失敗:\(error)")
+                    completion(.failure(error))
+                    return
+                }
+                guard let documentSnapshot = documentSnapshot, let data = documentSnapshot.data() else {return}
+                let user = UserData(data: data)
+                completion(.success(user))
             }
         }
     }

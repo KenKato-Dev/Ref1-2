@@ -10,9 +10,12 @@ import Firebase
 import FirebaseFirestoreSwift
 @testable import RefManager1_2
 
-class RefManager1_2ModelTests: XCTestCase {
+class RefManagerModelTests: XCTestCase { // RefManager1_2
     var mock = FoodDataMock()
-    var testFood = RefManager1_2.Food.init(location: Food.Location.allCases.randomElement()!, kind: RefManager1_2.Food.FoodKind.allCases.randomElement()!, name: "testFood", quantity: String(Int.random(in: 1...100)), unit: .gram, IDkey: UUID().uuidString, date: .now)
+    var testFood = RefManager1_2.Food.init(location: Food.Location.allCases.randomElement()!,
+                                           kind: RefManager1_2.Food.FoodKind.allCases.randomElement()!,
+                                           name: "testFood", quantity: String(Int.random(in: 1...100)),
+                                           unit: .gram, IDkey: UUID().uuidString, date: .now)
     let exp = XCTestExpectation(description: "test実行")
     func test_post機能() {
         let successMessage = "書き込みに成功"
@@ -31,7 +34,7 @@ class RefManager1_2ModelTests: XCTestCase {
     func test_fetch機能() {
         self.mock.test_fetch動作 { result in
             switch result {
-            case let .success(successFood):
+            case .success:
                 self.exp.fulfill()
             case let .failure(err):
                 XCTAssertThrowsError(err)
@@ -56,13 +59,6 @@ class RefManager1_2ModelTests: XCTestCase {
         self.wait(for: [self.exp], timeout: 5.0)
     }
     func test_isConfiguringQuery動作() {
-//        print("Query:\( self.mock.test_isConfiguringQuery動作(true, false, FoodData.Filter.init(location: .refrigerator, kindArray: Food.FoodKind.allCases), []))")
-//        print("Return:\(Firestore.firestore().collection("unitTest").whereField("location", isEqualTo: Food.Location.refrigerator.rawValue ).order(by: "kindNumber").order(by: "date").limit(to: 10))")
-//        XCTAssertEqual(
-//            // 場所のみで
-//            self.mock.test_isConfiguringQuery動作(true, false, FoodData.Filter.init(location: .refrigerator, kindArray: Food.FoodKind.allCases), []),
-//            Firestore.firestore().collection("unitTest").whereField("location", isEqualTo: Food.Location.refrigerator).order(by: "kindNumber").order(by: "date").limit(to: 10)
-//        )
     }
 }
     // ModelはUIテスト、ビジネスロジックのテスト、データベースにつなげずに参照するのみ、
@@ -113,7 +109,9 @@ class RefManager1_2ModelTests: XCTestCase {
                             snapshot.data()
                         }
                         do {
-                            let data = try JSONSerialization.data(withJSONObject: dictinaryDocuments, options: .prettyPrinted)
+                            let data = try JSONSerialization.data(
+                                withJSONObject: dictinaryDocuments,
+                                options: .prettyPrinted)
                             var decodedFoods = try decoder.decode([Food].self, from: data)
                             completion(.success(decodedFoods))
                         } catch {
@@ -152,16 +150,20 @@ class RefManager1_2ModelTests: XCTestCase {
 
                 if (filterRef || filterFreezer) && !kinds.isEmpty {
                     // 1.冷蔵/冷凍がtrueでかつfoodも選択
-                    return Firestore.firestore().collection("unitTest").whereField("location", isEqualTo: location).whereField("kind", in: kindArray).order(by: "kindNumber").order(by: "date").limit(to: 10)
+                    return Firestore.firestore().collection("unitTest").whereField("location", isEqualTo: location)
+                        .whereField("kind", in: kindArray).order(by: "kindNumber").order(by: "date").limit(to: 10)
                 } else if (filterRef || filterFreezer) && kinds.isEmpty {
                     // 2.冷蔵/冷凍のみtrue
-                    return Firestore.firestore().collection("unitTest").whereField("location", isEqualTo: location).order(by: "kindNumber").order(by: "date").limit(to: 10)
+                    return Firestore.firestore().collection("unitTest").whereField("location", isEqualTo: location)
+                        .order(by: "kindNumber").order(by: "date").limit(to: 10)
                 } else if (!filterRef && !filterFreezer) && !kinds.isEmpty {
                     // 3.foodのみ選択
-                    return Firestore.firestore().collection("unitTest").whereField("kind", in: kindArray).order(by: "kindNumber").order(by: "date").limit(to: 10)
+                    return Firestore.firestore().collection("unitTest").whereField("kind", in: kindArray)
+                        .order(by: "kindNumber").order(by: "date").limit(to: 10)
                 } else {
                     // 4.何も選択されていない状態
-                    return  Firestore.firestore().collection("unitTest").order(by: "kindNumber").order(by: "date").limit(to: 10)
+                    return  Firestore.firestore().collection("unitTest").order(by: "kindNumber")
+                        .order(by: "date").limit(to: 10)
                 }
             }
         //

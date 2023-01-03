@@ -7,9 +7,10 @@
 
 import Foundation
 import UIKit
+import Firebase
 //  ViewController側の処理を定義
 protocol FoodAppendPresenterOutput: AnyObject {
-    func settingTextfield()
+    func setPlaceholderAndKeyboard()
     func dismiss()
     func didTapPreserveButtonWithoutEssential()
     func presentErrorIfNeeded(_ errorOrNil: Error?)
@@ -20,7 +21,10 @@ protocol FoodAppendPresenterOutput: AnyObject {
 final class FoodAppendPresenter {
     private let foodData: FoodData
     private weak var foodAppendPresenterOutput: FoodAppendPresenterOutput?
-    private var baseArray = Food(location: .refrigerator, kind: .other, name: String(), quantity: String(), unit: UnitSelectButton.UnitMenu.initial, IDkey: UUID().uuidString, date: Date())
+    private var baseArray = Food(location: .refrigerator, kind: .other, name: String(),
+                                 quantity: String(), unit: UnitSelectButton.UnitMenu.initial,
+                                 IDkey: UUID().uuidString, date: Date())
+//    private var uid: String = ""
     init(foodData: FoodData) {
         self.foodData = foodData
     }
@@ -28,9 +32,11 @@ final class FoodAppendPresenter {
     func setOutput(foodAppendPresenterOutput: FoodAppendPresenterOutput?) {
         self.foodAppendPresenterOutput = foodAppendPresenterOutput
     }
-
+    func settingVC() {
+        self.foodAppendPresenterOutput?.setPlaceholderAndKeyboard()
+    }
     func settingTextField() {
-        foodAppendPresenterOutput?.settingTextfield()
+        foodAppendPresenterOutput?.setPlaceholderAndKeyboard()
     }
     // isTapRowで条件決めし、選択内容をFood型のBaseArrayに保存
     func didTaplocationButton(location: Food.Location) {
@@ -75,9 +81,11 @@ final class FoodAppendPresenter {
                 baseArray.quantity = quantity
             } else {return}
             baseArray.unit = unit
-            foodData.post(self.baseArray) { result in
+                guard let uid = Auth.auth().currentUser?.uid else {return}
+                foodData.post(uid, self.baseArray) { result in
                 switch result {
                 case .success:
+
                     self.foodAppendPresenterOutput?.dismiss()
                     print("オリジナルのFuncが動作")
                 case let .failure(error):
@@ -100,7 +108,6 @@ final class FoodAppendPresenter {
                 baseArray.quantity = quantity
             }
             baseArray.unit = unit
-            print("オリジナルのFuncが動作")
         } else {
             print(FoodListPresenter.isTapRow)
         }
