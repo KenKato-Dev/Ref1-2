@@ -1,6 +1,6 @@
 # 冷蔵庫くん/RefManager  
- <img src="https://user-images.githubusercontent.com/84781651/206842125-53fdc0ab-dbff-4bb1-8601-d78b61dc3181.png" width="25%">
-  
+ <img src="https://user-images.githubusercontent.com/84781651/210377761-d29f1662-e458-4f77-bc17-411c88b78933.png" width="50%">
+
 冷蔵庫くんは冷蔵庫内の食材や総菜、飲料、スイーツなどの食品をクラウド上で管理するiOSアプリです。SwiftとFirebaseにより構築されております。  
   
 REFManager is an iOS application for managing food like ingredients, beverages, dishes, sweets, etc. in refrigerator on cloud(firestore), which is configured by Swift, Firebase and Rakuten recepie API.
