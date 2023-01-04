@@ -8,7 +8,7 @@
 ```  
 $ git clone https://github.com/KenKato-Dev/Ref1-2  
 
-cd Refmanager1-2  
+$ cd Refmanager1-2  
 ```  
 2. 移動したディレクトリにあるhoge.xcodeprojを開いてください。
 3. Xcodeからアプリを実行してください。(※GoogleService-Info.plist及びEnvironment.Swiftはプロジェクト内に含まれておりません。送付しますのでGit又はメール等でご連絡ください)
