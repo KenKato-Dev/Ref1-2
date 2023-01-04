@@ -140,13 +140,13 @@
 			path = SignUP;
 			sourceTree = "<group>";
 		};
-		EC9C1C0928F3E8260024570D /* RecepieCategory */ = {
+		EC9C1C0928F3E8260024570D /* RecipeCategory */ = {
 			isa = PBXGroup;
 			children = (
 				ECDF47AA28B4F7DB004BC6A9 /* RecipeCategoryListViewController.swift */,
 				ECCAA676290045D800CE141B /* RecipeCategoryListPresenter.swift */,
 			);
-			path = RecepieCategory;
+			path = RecipeCategory;
 			sourceTree = "<group>";
 		};
 		EC9C1C0A28F3E8650024570D /* FoodList */ = {
@@ -177,7 +177,7 @@
 				ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */,
 				EC9C1C0A28F3E8650024570D /* FoodList */,
 				EC9C1C0B28F3E8A60024570D /* FoodAddition */,
-				EC9C1C0928F3E8260024570D /* RecepieCategory */,
+				EC9C1C0928F3E8260024570D /* RecipeCategory */,
 				EC5AAD8F2924B241004EAF94 /* SignUP */,
 				ECC4532229582A140064CF13 /* Account Information */,
 				ECA6F44428026B0C00CA7C2D /* RefManager1-2 */,
