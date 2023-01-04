@@ -12,7 +12,7 @@ class AccountInformation {
     private let auth = Auth.auth()
     private let db = Firestore.firestore()
     func fetchUserInfo(_ completion: @escaping (Result<UserData, Error>) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
+        DispatchQueue.main.async {
             guard let uid = self.auth.currentUser?.uid else {return}
             self.db.collection("Users").document(uid).getDocument { documentSnapshot, error in
                 if let error = error {

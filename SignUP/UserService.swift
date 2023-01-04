@@ -49,7 +49,7 @@ class UserService {
                   _ userName: String?,
                   _ pass: String,
                   _ completion: @escaping (Result<Void, Error>) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
+        DispatchQueue.main.async {
             self.auth.createUser(withEmail: email, password: pass) { result, err in
             if let err = err {
                 completion(.failure(err))

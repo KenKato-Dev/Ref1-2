@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-protocol RecepieCategoryListPresenterOutput: AnyObject {
+protocol RecipeCategoryListPresenterOutput: AnyObject {
     func reloadData()
     func dismiss()
     func setTitle()
@@ -17,36 +17,36 @@ protocol RecepieCategoryListPresenterOutput: AnyObject {
     func presentErrorIfNeeded(_ errorOrNil: Error?)
 }
 
-final class RecepieCategoryListPresenter {
+final class RecipeCategoryListPresenter {
     private(set) var array: [Small] = []
-    private weak var recepieCategoryListPresenterOutput: RecepieCategoryListPresenterOutput?
-    private let recepieModel: RecepieModel
-    init(recepieModel: RecepieModel) {
-        self.recepieModel = recepieModel
+    private weak var recipeCategoryListPresenterOutput: RecipeCategoryListPresenterOutput?
+    private let recipeModel: RecipeModel
+    init(recipeModel: RecipeModel) {
+        self.recipeModel = recipeModel
     }
 
-    func setOutput(recepieCategoryListPresenterOutput: RecepieCategoryListPresenterOutput?) {
-        self.recepieCategoryListPresenterOutput = recepieCategoryListPresenterOutput
+    func setOutput(recipeCategoryListPresenterOutput: RecipeCategoryListPresenterOutput?) {
+        self.recipeCategoryListPresenterOutput = recipeCategoryListPresenterOutput
     }
 // indicatorの表示と楽天APIへのリクエストを実施
     func reloadArray(searchKeyword: String?) {
-        self.recepieCategoryListPresenterOutput?.showLoadingSpin()
+        self.recipeCategoryListPresenterOutput?.showLoadingSpin()
         if let searchKeyword = searchKeyword {
-            recepieModel.fetch(searchKeyword) { result in
+            recipeModel.fetch(searchKeyword) { result in
                 switch result {
                 case let .success(categories):
                     self.array = categories
-                    self.recepieCategoryListPresenterOutput?.reloadData()
-                    self.recepieCategoryListPresenterOutput?.hideIndicator(true)
+                    self.recipeCategoryListPresenterOutput?.reloadData()
+                    self.recipeCategoryListPresenterOutput?.hideIndicator(true)
                     if self.array.isEmpty {
-                        self.recepieCategoryListPresenterOutput?.showNoResult()
+                        self.recipeCategoryListPresenterOutput?.showNoResult()
                     }
                 case let .failure(error):
-                    self.recepieCategoryListPresenterOutput?.presentErrorIfNeeded(error)
-                    self.recepieCategoryListPresenterOutput?.dismiss()
+                    self.recipeCategoryListPresenterOutput?.presentErrorIfNeeded(error)
+                    self.recipeCategoryListPresenterOutput?.dismiss()
                 }
             }
-            recepieCategoryListPresenterOutput?.setTitle()
+            recipeCategoryListPresenterOutput?.setTitle()
         }
     }
 

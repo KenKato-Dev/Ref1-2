@@ -98,8 +98,8 @@ final class FoodListViewController: UIViewController {
 // performsegueと連動
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toRecepieTableView" {
-            let recepieView = segue.destination as? RecepieCategoryListViewController
-            recepieView?.navigationItem.title = String("\(sender!)")
+            let recipeView = segue.destination as? RecipeCategoryListViewController
+            recipeView?.navigationItem.title = String("\(sender!)")
 
         }
     }

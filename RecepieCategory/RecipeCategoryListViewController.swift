@@ -8,40 +8,40 @@
 import UIKit
 
 // RecepieCategoryViewのVC
-class RecepieCategoryListViewController: UIViewController {
+class RecipeCategoryListViewController: UIViewController {
 
-    @IBOutlet var recepieTable: UITableView!
+    @IBOutlet var recipeTable: UITableView!
     private let activityIndicator = UIActivityIndicatorView()
     private var indicatorBackView = UIView()
     private let seatchResultLabel = UILabel()
-    private let recepieCategoryListPresenter = RecepieCategoryListPresenter(recepieModel: RecepieModel())
+    private let recipeCategoryListPresenter = RecipeCategoryListPresenter(recipeModel: RecipeModel())
     override func viewDidLoad() {
         super.viewDidLoad()
-        recepieTable.delegate = self
-        recepieTable.dataSource = self
-        recepieCategoryListPresenter.setOutput(recepieCategoryListPresenterOutput: self)
-        recepieCategoryListPresenter.reloadArray(searchKeyword: navigationItem.title)
+        recipeTable.delegate = self
+        recipeTable.dataSource = self
+        recipeCategoryListPresenter.setOutput(recipeCategoryListPresenterOutput: self)
+        recipeCategoryListPresenter.reloadArray(searchKeyword: navigationItem.title)
     }
 }
 // tableViewの各処理をVCに準拠
-extension RecepieCategoryListViewController: UITableViewDelegate, UITableViewDataSource {
+extension RecipeCategoryListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        recepieCategoryListPresenter.numberOfRows()
+        recipeCategoryListPresenter.numberOfRows()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "recepieCell", for: indexPath) as? RecepieCategoryCell
-        cell?.categoryName.text = recepieCategoryListPresenter.cellForRowAt(indexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recepieCell", for: indexPath) as? RecipeCategoryCell
+        cell?.categoryName.text = recipeCategoryListPresenter.cellForRowAt(indexPath: indexPath)
         return cell!
     }
 
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        recepieCategoryListPresenter.didSelectRow(indexPath: indexPath)
+        recipeCategoryListPresenter.didSelectRow(indexPath: indexPath)
     }
 }
-extension RecepieCategoryListViewController: RecepieCategoryListPresenterOutput {
+extension RecipeCategoryListViewController: RecipeCategoryListPresenterOutput {
     func reloadData() {
-            self.recepieTable.reloadData()
+            self.recipeTable.reloadData()
     }
 
     func dismiss() {
@@ -80,8 +80,8 @@ extension RecepieCategoryListViewController: RecepieCategoryListPresenterOutput 
         self.seatchResultLabel.text = "\(navigationItem.title!)のレシピは見つかりませんでした"
         self.seatchResultLabel.frame = CGRect(
                 x: 0, // self.foodListTableView.frame.width/2
-                y: self.recepieTable.frame.height/3,
-                width: self.recepieTable.frame.width,
+                y: self.recipeTable.frame.height/3,
+                width: self.recipeTable.frame.width,
                 height: 50)
         self.seatchResultLabel.textAlignment = .center
         self.seatchResultLabel.font = .systemFont(ofSize: 20)
@@ -89,7 +89,7 @@ extension RecepieCategoryListViewController: RecepieCategoryListPresenterOutput 
         self.seatchResultLabel.backgroundColor = UIColor.white.withAlphaComponent(0.6)
         self.seatchResultLabel.adjustsFontSizeToFitWidth = true
             // navigationItemでは表示されず
-        self.recepieTable.addSubview(self.seatchResultLabel)
+        self.recipeTable.addSubview(self.seatchResultLabel)
         self.seatchResultLabel.alpha = 1
     }
     // エラー内容を表示、将来的にStringsファイルにてエラー内容に応じて文章を変更予定

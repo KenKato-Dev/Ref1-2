@@ -1,5 +1,5 @@
 //
-//  RecepieCategory.swift
+//  RecipeCategory.swift
 //  RefManager1-2
 //
 //  Created by 加藤研太郎 on 2022/09/30.
@@ -14,14 +14,14 @@ struct Small: Codable {
     let categoryId: Int
     var categoryUrl: String
 }
-// RecepieCategoryのModel、楽天APIへのリクエスト処理
-class RecepieModel {
+// RecipeCategoryのModel、楽天APIへのリクエスト処理
+class RecipeModel {
     // envファイルより生成
     let rakutenAPIKey = env["rakutenAPIKey"]!
     // 楽天APIへのリクエスト処理
     func fetch(_ keyword: String, _ completion: @escaping (Result<[Small], Error>) -> Void) {
         guard let url = URL(string: rakutenAPIKey) else { return }
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
+        DispatchQueue.main.async {
             let task = URLSession.shared.dataTask(with: url) { data, _, error in
                 if let error = error {
                     completion(.failure(error))
@@ -35,9 +35,9 @@ class RecepieModel {
                     guard let data = data else {
                         return
                     }
-                    let recepieData = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+                    let recipeData = try JSONSerialization.jsonObject(with: data) as? [String: Any]
                     // 全体からKeyで内部をDictionaryにて取り出し
-                    let result = recepieData?["result"] as? [String: Any]
+                    let result = recipeData?["result"] as? [String: Any]
                     // dataからsmallに変換
                     let small = result?["small"] as? [[String: Any]]
                     guard let small = small else {return}

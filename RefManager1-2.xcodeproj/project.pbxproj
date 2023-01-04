@@ -39,13 +39,13 @@
 		ECBD105529339C9400AF2702 /* RefManager1_2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD105429339C9400AF2702 /* RefManager1_2Tests.swift */; };
 		ECBD105C293A3D9F00AF2702 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD105B293A3D9F00AF2702 /* UIImage+Extension.swift */; };
 		ECBD105F293B94DD00AF2702 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ECBD1061293B94DD00AF2702 /* Localizable.strings */; };
-		ECC2590E28E7369600F790F5 /* RecepieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2590D28E7369600F790F5 /* RecepieModel.swift */; };
+		ECC2590E28E7369600F790F5 /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2590D28E7369600F790F5 /* RecipeModel.swift */; };
 		ECC4532429582A5E0064CF13 /* AccountInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4532329582A5E0064CF13 /* AccountInformationViewController.swift */; };
 		ECC4532629582A760064CF13 /* AccountInformationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4532529582A760064CF13 /* AccountInformationPresenter.swift */; };
 		ECC45328295847910064CF13 /* AccountInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC45327295847910064CF13 /* AccountInformation.swift */; };
-		ECCAA677290045D800CE141B /* RecepieCategoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCAA676290045D800CE141B /* RecepieCategoryListPresenter.swift */; };
-		ECDF47A928B4F7B7004BC6A9 /* RecepieCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47A828B4F7B7004BC6A9 /* RecepieCategoryCell.swift */; };
-		ECDF47AB28B4F7DC004BC6A9 /* RecepieCategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47AA28B4F7DB004BC6A9 /* RecepieCategoryListViewController.swift */; };
+		ECCAA677290045D800CE141B /* RecipeCategoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCAA676290045D800CE141B /* RecipeCategoryListPresenter.swift */; };
+		ECDF47A928B4F7B7004BC6A9 /* RecipeCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47A828B4F7B7004BC6A9 /* RecipeCategoryCell.swift */; };
+		ECDF47AB28B4F7DC004BC6A9 /* RecipeCategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47AA28B4F7DB004BC6A9 /* RecipeCategoryListViewController.swift */; };
 		ECE2F0E028349FBC00975A38 /* FoodUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */; };
 		ECEA02B82963C4D300869A0D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEA02B72963C4D300869A0D /* Environment.swift */; };
 		ECEB7103280314BD00B157FB /* FoodListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEB7102280314BD00B157FB /* FoodListCell.swift */; };
@@ -90,13 +90,13 @@
 		ECBD105B293A3D9F00AF2702 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		ECBD1060293B94DD00AF2702 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ECBD1062293B951A00AF2702 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		ECC2590D28E7369600F790F5 /* RecepieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieModel.swift; sourceTree = "<group>"; };
+		ECC2590D28E7369600F790F5 /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
 		ECC4532329582A5E0064CF13 /* AccountInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInformationViewController.swift; sourceTree = "<group>"; };
 		ECC4532529582A760064CF13 /* AccountInformationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInformationPresenter.swift; sourceTree = "<group>"; };
 		ECC45327295847910064CF13 /* AccountInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInformation.swift; sourceTree = "<group>"; };
-		ECCAA676290045D800CE141B /* RecepieCategoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieCategoryListPresenter.swift; sourceTree = "<group>"; };
-		ECDF47A828B4F7B7004BC6A9 /* RecepieCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieCategoryCell.swift; sourceTree = "<group>"; };
-		ECDF47AA28B4F7DB004BC6A9 /* RecepieCategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepieCategoryListViewController.swift; sourceTree = "<group>"; };
+		ECCAA676290045D800CE141B /* RecipeCategoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCategoryListPresenter.swift; sourceTree = "<group>"; };
+		ECDF47A828B4F7B7004BC6A9 /* RecipeCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCategoryCell.swift; sourceTree = "<group>"; };
+		ECDF47AA28B4F7DB004BC6A9 /* RecipeCategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCategoryListViewController.swift; sourceTree = "<group>"; };
 		ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodUseCase.swift; sourceTree = "<group>"; };
 		ECEA02B72963C4D300869A0D /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		ECEB7102280314BD00B157FB /* FoodListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListCell.swift; sourceTree = "<group>"; };
@@ -143,8 +143,8 @@
 		EC9C1C0928F3E8260024570D /* RecepieCategory */ = {
 			isa = PBXGroup;
 			children = (
-				ECDF47AA28B4F7DB004BC6A9 /* RecepieCategoryListViewController.swift */,
-				ECCAA676290045D800CE141B /* RecepieCategoryListPresenter.swift */,
+				ECDF47AA28B4F7DB004BC6A9 /* RecipeCategoryListViewController.swift */,
+				ECCAA676290045D800CE141B /* RecipeCategoryListPresenter.swift */,
 			);
 			path = RecepieCategory;
 			sourceTree = "<group>";
@@ -173,7 +173,7 @@
 				ECA6F44528026B0C00CA7C2D /* AppDelegate.swift */,
 				ECA6F44728026B0C00CA7C2D /* SceneDelegate.swift */,
 				ECA6F45C28026BAE00CA7C2D /* FoodData.swift */,
-				ECC2590D28E7369600F790F5 /* RecepieModel.swift */,
+				ECC2590D28E7369600F790F5 /* RecipeModel.swift */,
 				ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */,
 				EC9C1C0A28F3E8650024570D /* FoodList */,
 				EC9C1C0B28F3E8A60024570D /* FoodAddition */,
@@ -199,7 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				ECEB7102280314BD00B157FB /* FoodListCell.swift */,
-				ECDF47A828B4F7B7004BC6A9 /* RecepieCategoryCell.swift */,
+				ECDF47A828B4F7B7004BC6A9 /* RecipeCategoryCell.swift */,
 				EC77EA1F28F2A813009B3EBA /* CheckBoxButton.swift */,
 				EC77EA2028F2A813009B3EBA /* DeleteButton.swift */,
 				EC77EA2128F2A813009B3EBA /* UnitSelectButton.swift */,
@@ -398,8 +398,8 @@
 				ECC4532429582A5E0064CF13 /* AccountInformationViewController.swift in Sources */,
 				ECA60EB128FEE28B00B7C7F6 /* FoodAppendPresenter.swift in Sources */,
 				ECBD105C293A3D9F00AF2702 /* UIImage+Extension.swift in Sources */,
-				ECC2590E28E7369600F790F5 /* RecepieModel.swift in Sources */,
-				ECDF47A928B4F7B7004BC6A9 /* RecepieCategoryCell.swift in Sources */,
+				ECC2590E28E7369600F790F5 /* RecipeModel.swift in Sources */,
+				ECDF47A928B4F7B7004BC6A9 /* RecipeCategoryCell.swift in Sources */,
 				ECE2F0E028349FBC00975A38 /* FoodUseCase.swift in Sources */,
 				EC77EA2628F2A813009B3EBA /* AddButton.swift in Sources */,
 				ECA6F45B28026B8E00CA7C2D /* FoodAppendViewController.swift in Sources */,
@@ -411,9 +411,9 @@
 				ECC4532629582A760064CF13 /* AccountInformationPresenter.swift in Sources */,
 				ECC45328295847910064CF13 /* AccountInformation.swift in Sources */,
 				ECEA02B82963C4D300869A0D /* Environment.swift in Sources */,
-				ECDF47AB28B4F7DC004BC6A9 /* RecepieCategoryListViewController.swift in Sources */,
+				ECDF47AB28B4F7DC004BC6A9 /* RecipeCategoryListViewController.swift in Sources */,
 				EC77EA2428F2A813009B3EBA /* DeleteButton.swift in Sources */,
-				ECCAA677290045D800CE141B /* RecepieCategoryListPresenter.swift in Sources */,
+				ECCAA677290045D800CE141B /* RecipeCategoryListPresenter.swift in Sources */,
 				ECA6F45D28026BAE00CA7C2D /* FoodData.swift in Sources */,
 				EC5AAD8E2924B239004EAF94 /* SignUpViewController.swift in Sources */,
 				EC77EA2328F2A813009B3EBA /* CheckBoxButton.swift in Sources */,

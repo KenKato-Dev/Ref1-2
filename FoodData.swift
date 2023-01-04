@@ -246,7 +246,7 @@ final class FoodData: FoodDataProtocol {
     }
     // ユーザー情報の取得
     func fetchUserInfo(_ completion: @escaping (Result<UserData, Error>) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
+        DispatchQueue.main.async {
             guard let uid = Auth.auth().currentUser?.uid else {return}
             self.db.collection("Users").document(uid).getDocument { documentSnapshot, error in
                 if let error = error {
