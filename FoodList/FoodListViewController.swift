@@ -97,7 +97,7 @@ final class FoodListViewController: UIViewController {
     }
 // performsegueと連動
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toRecepieTableView" {
+        if segue.identifier == "toRecipeTableView" {
             let recipeView = segue.destination as? RecipeCategoryListViewController
             recipeView?.navigationItem.title = String("\(sender!)")
 
@@ -310,8 +310,8 @@ extension FoodListViewController: FoodListPresenterOutput {
         }))
         // アラートアクションシート二項目目
         alert.addAction(.init(title: "レシピを調べる", style: .default, handler: { _ in
-            // prepareと連動、RecepieCategoryViewへ移動
-            self.performSegue(withIdentifier: "toRecepieTableView", sender: array[row].name)
+            // prepareと連動、RecipeCategoryViewへ移動
+            self.performSegue(withIdentifier: "toRecipeTableView", sender: array[row].name)
         }))
         // アラートアクションシート三項目目
         alert.addAction(.init(title: "キャンセル", style: .destructive, handler: { _ in
@@ -321,7 +321,6 @@ extension FoodListViewController: FoodListPresenterOutput {
     }
     // AppendViewControllerへの遷移処理
     func perfomSeguetofoodAppendVC() { // (_ array:[Food],at:Int)
-//        self.performSegue(withIdentifier: "toRecepieTableView", sender: array[at].name)
         self.performSegue(withIdentifier: "toFoodAppendVC", sender: nil)
     }
     // 項目選択時に削除ボタンを押すと表示するアラートを表示

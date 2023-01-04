@@ -1,5 +1,5 @@
 //
-//  RecepieTableViewCell.swift
+//  RecipeTableViewCell.swift
 //  RefManager1-2
 //
 //  Created by 加藤研太郎 on 2022/08/23.

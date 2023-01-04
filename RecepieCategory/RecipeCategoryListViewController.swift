@@ -1,5 +1,5 @@
 //
-//  RecepieViewController.swift
+//  RecipeViewController.swift
 //  RefManager1-2
 //
 //  Created by 加藤研太郎 on 2022/08/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-// RecepieCategoryViewのVC
+// RecipeCategoryViewのVC
 class RecipeCategoryListViewController: UIViewController {
 
     @IBOutlet var recipeTable: UITableView!
@@ -30,7 +30,7 @@ extension RecipeCategoryListViewController: UITableViewDelegate, UITableViewData
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "recepieCell", for: indexPath) as? RecipeCategoryCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell", for: indexPath) as? RecipeCategoryCell
         cell?.categoryName.text = recipeCategoryListPresenter.cellForRowAt(indexPath: indexPath)
         return cell!
     }
