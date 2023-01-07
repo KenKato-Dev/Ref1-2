@@ -1,5 +1,5 @@
 # 冷蔵庫くん  
-  <img src="https://user-images.githubusercontent.com/84781651/210377761-d29f1662-e458-4f77-bc17-411c88b78933.png" width="100%">  
+  <img src="https://user-images.githubusercontent.com/84781651/210377761-d29f1662-e458-4f77-bc17-411c88b78933.png" width="70%">    
 冷蔵庫くんはSwiftとFirebaseにより構築されたiOSアプリです。冷蔵庫内の食品(食材、惣菜、飲料、調味料など)を登録し、クラウド上で数量確認、登録日確認、追加、削除、レシピの検索が行えます。 
   
 
