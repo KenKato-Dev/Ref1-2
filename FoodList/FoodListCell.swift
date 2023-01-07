@@ -41,7 +41,7 @@ class FoodListCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        controllCheckBox( state: .normal)
+        controllCheckBox(state: .normal)
     }
 
     func composeFood(food: Food) {
@@ -61,7 +61,7 @@ class FoodListCell: UITableViewCell {
         case let .shownCheckBox(isChecked):
             checkBoxButton.isHidden = false
             checkBoxButton.updateAppearance(isChecked: isChecked)
-            self.selectionStyle = .none
+            selectionStyle = .none
         }
     }
 

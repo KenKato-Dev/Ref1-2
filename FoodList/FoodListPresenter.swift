@@ -25,6 +25,7 @@ protocol FoodListPresenterOutput: AnyObject {
     func shouldShowUserName(_ userName: String)
     func showDeleteAlert()
 }
+
 // FoodListのPresenter
 final class FoodListPresenter {
     private let foodData: FoodData
@@ -37,25 +38,28 @@ final class FoodListPresenter {
     private(set) static var isTapRow = false
     private let db = Firestore.firestore()
     private var uid = Auth.auth().currentUser?.uid
-    private (set) var titleText = ""
+    private(set) var titleText = ""
     init(foodData: FoodData, foodUseCase: FoodUseCase) {
         self.foodData = foodData
         self.foodUseCase = foodUseCase
     }
+
     // インスタンス変数の中身をViewController側から注入させる
     func setOutput(foodListPresenterOutput: FoodListPresenterOutput) {
         self.foodListPresenterOutput = foodListPresenterOutput
     }
+
     // Queryの生成、fetch、reloadDataを実行し配列表示を構築
     func fetchArray() {
-        guard let uid = self.uid else {return}
-        self.foodData.isConfiguringQuery(
+        guard let uid = uid else { return }
+        foodData.isConfiguringQuery(
             uid,
             foodUseCase.isFilteringRefrigerator,
             foodUseCase.isFilteringFreezer,
             foodUseCase.foodFilter,
-            foodUseCase.selectedKinds)
-        self.foodData.fetch { result in
+            foodUseCase.selectedKinds
+        )
+        foodData.fetch { result in
             DispatchQueue.main.async {
                 switch result {
                 case let .success(foods):
@@ -75,19 +79,20 @@ final class FoodListPresenter {
 
     // ページネート処理、cell番号と配列数、querydoumentsnapshotの数で条件
     func didScrollToLast(row: Int) {
-        if row == self.array.count - 1 && foodData.countOfDocuments != 0 {
+        if row == array.count - 1, foodData.countOfDocuments != 0 {
             foodData.paginate()
             foodData.fetch { result in
-                    switch result {
-                    case let .success(foods):
-                        self.array.append(contentsOf: foods)
-                        self.foodListPresenterOutput?.reloadData()
-                    case let .failure(error):
-                        self.foodListPresenterOutput?.presentErrorIfNeeded(error)
-                    }
+                switch result {
+                case let .success(foods):
+                    self.array.append(contentsOf: foods)
+                    self.foodListPresenterOutput?.reloadData()
+                case let .failure(error):
+                    self.foodListPresenterOutput?.presentErrorIfNeeded(error)
+                }
             }
         }
     }
+
     // 冷蔵ボタンの処理
     func didTapRefrigiratorButton(_: UIButton) {
         foodUseCase.didTapRefrigeratorButton()
@@ -97,6 +102,7 @@ final class FoodListPresenter {
         )
         switchLocation(location: .refrigerator)
     }
+
     // 冷凍ボタンの処理
     func didTapFreezerButton(_: UIButton) {
         foodUseCase.didTapFreezerButton()
@@ -105,6 +111,7 @@ final class FoodListPresenter {
         )
         switchLocation(location: .freezer)
     }
+
     // 冷蔵/冷凍ボタンの共通処理
     private func switchLocation(location: Food.Location) {
         foodUseCase.foodFilter.location = location
@@ -116,10 +123,11 @@ final class FoodListPresenter {
             foodUseCase.selectedKinds,
             foodUseCase.foodFilter.location
         )
-        self.fetchArray()
+        fetchArray()
         print(foodData.query)
         foodListPresenterOutput?.reloadData()
     }
+
     // 食材ボタンの共通処理
     func didTapFoodKindButtons(_ kind: Food.FoodKind, _ button: UIButton) {
         foodUseCase.toggleDictionary(kind: kind)
@@ -128,7 +136,7 @@ final class FoodListPresenter {
         foodUseCase.foodFilter.kindArray = selectedFoodKinds
         // ここでselectedKindsに入る
         foodUseCase.isAddingKinds(selectedKinds: &selectedFoodKinds)
-        self.fetchArray()
+        fetchArray()
         print(foodData.query)
         // 押したボタン画像を変更
         var image = UIImage(named: kind.rawValue + "Button")
@@ -137,7 +145,8 @@ final class FoodListPresenter {
                 UIImage(named: kind.rawValue + "Button")!,
                 button.imageView!.image!,
                 UIImage(named: "selectedButton")!,
-                0.5)
+                0.5
+            )
         }
         // 押されたボタンのBool値Valueを基準にボタン外観を変更
         if foodUseCase.foodKindDictionary[kind]! {
@@ -151,27 +160,30 @@ final class FoodListPresenter {
         }
         foodListPresenterOutput?.reloadData()
     }
+
     // Bool値を条件に配列フィルターと配列を初期化
     func refreshArrayIfNeeded(row: Int) -> Food? {
-        if !foodUseCase.isFilteringFreezer &&
-            !foodUseCase.isFilteringRefrigerator &&
-            foodUseCase.selectedKinds.isEmpty {
+        if !foodUseCase.isFilteringFreezer,
+           !foodUseCase.isFilteringRefrigerator,
+           foodUseCase.selectedKinds.isEmpty {
             foodUseCase.resetDictionary()
             foodUseCase.foodFilter.kindArray = Food.FoodKind.allCases
-            self.foodListPresenterOutput?.resetButtonColor()
+            foodListPresenterOutput?.resetButtonColor()
         }
         return array[row]
     }
+
     // 削除ボタンの処理
     func didTapDeleteButton() {
         isDelete.toggle()
         // ボタンの無効化
         foodListPresenterOutput?.arrangeDisplayingView(isDelete)
         if isDelete, checkedID.values.contains(true) {
-            self.foodListPresenterOutput?.showDeleteAlert()
+            foodListPresenterOutput?.showDeleteAlert()
         }
         foodListPresenterOutput?.reloadData()
     }
+
     // クロージャ変数didTapに引数atを加えて返す、返り値をcell定義のクロージャに代入するための処理
     func setArgInDidTapCheckBox(at: Int) -> ((Bool) -> Void)? {
         didTapCheckBox = { isChecked in
@@ -179,29 +191,33 @@ final class FoodListPresenter {
         }
         return didTapCheckBox
     }
+
     // addButtonを押した時の処理
     func didTapAddButton() {
-        self.foodListPresenterOutput?.perfomSeguetofoodAppendVC()
+        foodListPresenterOutput?.perfomSeguetofoodAppendVC()
     }
+
     // tableViewのcellの列数の処理
     func numberOfRows() -> Int {
-        return self.array.count
-
+        return array.count
     }
+
     // cell選択時の処理
     func didSelectRow(storyboard: FoodAppendViewController?, row: Int) {
         FoodListPresenter.isTapRow = true
-        if self.isDelete {
-            self.foodListPresenterOutput?.showAlertInCell(storyboard, self.array, row, FoodListPresenter.isTapRow)
+        if isDelete {
+            foodListPresenterOutput?.showAlertInCell(storyboard, array, row, FoodListPresenter.isTapRow)
         }
     }
+
     //
-     func didTapPreserveOnUpdationView(foodName: String?, foodQuantity: String?, foodinArray: Food) {
-         guard let uid = self.uid else {return}
-         self.foodData.postFromUpdationView(
+    func didTapPreserveOnUpdationView(foodName: String?, foodQuantity: String?, foodinArray: Food) {
+        guard let uid = uid else { return }
+        foodData.postFromUpdationView(
             uid, foodName: foodName,
             foodQuantity: foodQuantity,
-            foodinArray: foodinArray) { result in
+            foodinArray: foodinArray
+        ) { result in
             switch result {
             case .success:
                 FoodListPresenter.isTapRow = false
@@ -210,35 +226,38 @@ final class FoodListPresenter {
                 FoodListPresenter.isTapRow = false
             }
         }
-        self.foodData.isConfiguringQuery(
+        foodData.isConfiguringQuery(
             uid,
             foodUseCase.isFilteringRefrigerator,
             foodUseCase.isFilteringFreezer,
             foodUseCase.foodFilter,
-            foodUseCase.selectedKinds)
-         self.foodData.fetch { result in
+            foodUseCase.selectedKinds
+        )
+        foodData.fetch { result in
 
-             DispatchQueue.main.async {
-                 switch result {
-                 case let .success(foods):
-                     self.array = foods
-                     self.foodListPresenterOutput?.reloadData()
-                 case let .failure(error):
-                     self.foodListPresenterOutput?.presentErrorIfNeeded(error)
-                 }
-             }
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(foods):
+                    self.array = foods
+                    self.foodListPresenterOutput?.reloadData()
+                case let .failure(error):
+                    self.foodListPresenterOutput?.presentErrorIfNeeded(error)
+                }
+            }
         }
-            self.foodListPresenterOutput?.dismiss()
+        foodListPresenterOutput?.dismiss()
     }
+
     func setLocationOnUpdationView(_ row: Int, locationString: String) {
-        guard let uid = self.uid else {return}
-        self.foodData.setLocation(uid, self.array[row].IDkey, locationString)
+        guard let uid = uid else { return }
+        foodData.setLocation(uid, array[row].IDkey, locationString)
     }
+
     func deleteAction() {
         //                 filterで値のみを取り出し、defoはTrueを取り出す
-        let filteredIDictionary = self.checkedID.filter(\.value).map(\.key)
-        guard let uid = self.uid else {return}
-        self.foodData.delete(uid, filteredIDictionary) { result in
+        let filteredIDictionary = checkedID.filter(\.value).map(\.key)
+        guard let uid = uid else { return }
+        foodData.delete(uid, filteredIDictionary) { result in
             switch result {
             case .success:
                 // ここから
@@ -248,13 +267,14 @@ final class FoodListPresenter {
                     self.foodUseCase.isFilteringRefrigerator,
                     self.foodUseCase.isFilteringFreezer,
                     self.foodUseCase.foodFilter,
-                    self.foodUseCase.selectedKinds)
+                    self.foodUseCase.selectedKinds
+                )
                 self.foodData.fetch { result in
                     switch result {
                     case let .success(foods):
                         self.array = foods
                         self.array = self.array.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
-                        // このReloadにより削除がtableに反映
+                    // このReloadにより削除がtableに反映
 //                                self.foodListPresenterOutput?.reloadData()
                     case let .failure(error):
                         self.foodListPresenterOutput?.presentErrorIfNeeded(error)
@@ -269,22 +289,24 @@ final class FoodListPresenter {
             }
         }
     }
+
     func resetCheckedID() {
-        self.checkedID = [:]
+        checkedID = [:]
     }
+
     func resetIsTapRow() {
         FoodListPresenter.isTapRow = false
     }
 
     func greentingToUser() {
-        self.foodData.fetchUserInfo { result in
-                switch result {
-                case let .success(user):
-                    self.foodListPresenterOutput?.shouldShowUserName(user.userName)
-                    self.foodListPresenterOutput?.fadeout()
-                case .failure:
-                    self.foodListPresenterOutput?.shouldShowUserName("情報取得を失敗しました")
-                }
+        foodData.fetchUserInfo { result in
+            switch result {
+            case let .success(user):
+                self.foodListPresenterOutput?.shouldShowUserName(user.userName)
+                self.foodListPresenterOutput?.fadeout()
+            case .failure:
+                self.foodListPresenterOutput?.shouldShowUserName("情報取得を失敗しました")
+            }
         }
     }
 }

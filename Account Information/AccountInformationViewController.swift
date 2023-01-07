@@ -8,27 +8,29 @@
 import UIKit
 
 class AccountInformationViewController: UIViewController {
-    @IBOutlet weak var accountNameLabel: UILabel!
-    @IBOutlet weak var accountEmailLabel: UILabel!
-    @IBOutlet weak var accountCreatedDayLabel: UILabel!
-    @IBOutlet weak var signOutButton: UIButton!
+    @IBOutlet var accountNameLabel: UILabel!
+    @IBOutlet var accountEmailLabel: UILabel!
+    @IBOutlet var accountCreatedDayLabel: UILabel!
+    @IBOutlet var signOutButton: UIButton!
     private let accountInformationPresenter = AccountInformatonPresenter(accountInformation: AccountInformation())
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.accountInformationPresenter.setOutput(accountInformationPresenterOutput: self)
-        self.accountInformationPresenter.displayAccountInformation()
-        self.signOutButton.addAction(.init(handler: { _ in
+        accountInformationPresenter.setOutput(accountInformationPresenterOutput: self)
+        accountInformationPresenter.displayAccountInformation()
+        signOutButton.addAction(.init(handler: { _ in
             self.accountInformationPresenter.didTapSignOutButton()
         }), for: .touchUpInside)
     }
 }
+
 extension AccountInformationViewController: AccountInformationPresenterOutput {
     func setAccountInformation(_ name: String, _ email: String, _ criatedDay: String) {
-        self.accountNameLabel.text = name
-        self.accountEmailLabel.text = email
-        self.accountCreatedDayLabel.text = criatedDay
+        accountNameLabel.text = name
+        accountEmailLabel.text = email
+        accountCreatedDayLabel.text = criatedDay
     }
+
     func moveToRootVC() {
-        self.navigationController?.popToRootViewController(animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
 }

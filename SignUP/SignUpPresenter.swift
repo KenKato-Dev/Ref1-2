@@ -5,8 +5,8 @@
 //  Created by 加藤研太郎 on 2022/11/15.
 //
 
-import Foundation
 import Firebase
+import Foundation
 
 protocol SignUpPresenterOutput: AnyObject {
     func isSequrePassEntry()
@@ -17,27 +17,31 @@ protocol SignUpPresenterOutput: AnyObject {
     func showLoadingSpin()
     func hideIndicator(_ isHidden: Bool)
 }
+
 final class SignUpPresenter {
     private let userService: UserService
     private weak var signUpPresenterOutput: SignUpPresenterOutput?
     init(userService: UserService) {
         self.userService = userService
     }
+
     func setOutput(signUpPresenterOutput: SignUpPresenterOutput?) {
         self.signUpPresenterOutput = signUpPresenterOutput
     }
+
     func hidePassword() {
-        self.signUpPresenterOutput?.isSequrePassEntry()
+        signUpPresenterOutput?.isSequrePassEntry()
     }
+
     func didTapSignUpButton(_ email: String?, _ userName: String?, _ pass: String?) {
-        guard let email = email, let userName = userName, let pass = pass else {return}
+        guard let email = email, let userName = userName, let pass = pass else { return }
         if email.isEmpty || pass.count < 6 || userName.isEmpty {
-            self.signUpPresenterOutput?.showEssential()
+            signUpPresenterOutput?.showEssential()
         } else {
-            self.signUpPresenterOutput?.showLoadingSpin()
-            self.userService.checkEmailUsed(email) { result in
+            signUpPresenterOutput?.showLoadingSpin()
+            userService.checkEmailUsed(email) { result in
                 switch result {
-                case var .success(isUnusing):
+                case let .success(isUnusing):
                     if isUnusing {
                         self.userService.postUser(email, userName, pass) { result in
                             self.signUpPresenterOutput?.hideIndicator(true)
@@ -59,6 +63,5 @@ final class SignUpPresenter {
                 }
             }
         }
-
     }
 }

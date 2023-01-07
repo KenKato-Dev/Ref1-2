@@ -443,7 +443,7 @@
                                 <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCell" rowHeight="70" translatesAutoresizingMaskIntoConstraints="NO" id="wAV-os-jWS" customClass="RecipeCategoryCell" customModule="RefManager1_2" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCell" rowHeight="70" translatesAutoresizingMaskIntoConstraints="NO" id="wAV-os-jWS" customClass="RecipeCategoryCell" customModule="RefManager1_2" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wAV-os-jWS" id="fKr-I5-h1N">
@@ -783,7 +783,7 @@
         <!--Sign In View Controller-->
         <scene sceneID="Po2-Md-lPl">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="UTi-Qe-vt0" customClass="SignInViewController" customModule="RefManager1_2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="signInVC" modalPresentationStyle="fullScreen" id="UTi-Qe-vt0" customClass="SignInViewController" customModule="RefManager1_2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3xg-2y-cRY">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

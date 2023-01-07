@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EC1242ED286F158B00C60089 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC1242EC286F158B00C60089 /* GoogleService-Info.plist */; };
 		EC1242F0286F1CD300C60089 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = EC1242EF286F1CD300C60089 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		EC1242F2286F1CD300C60089 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EC1242F1286F1CD300C60089 /* FirebaseAuth */; };
 		EC1242F4286F1CD300C60089 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = EC1242F3286F1CD300C60089 /* FirebaseCrashlytics */; };
@@ -48,6 +47,8 @@
 		ECDF47AB28B4F7DC004BC6A9 /* RecipeCategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47AA28B4F7DB004BC6A9 /* RecipeCategoryListViewController.swift */; };
 		ECE2F0E028349FBC00975A38 /* FoodUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */; };
 		ECEA02B82963C4D300869A0D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEA02B72963C4D300869A0D /* Environment.swift */; };
+		ECEA02BC2965822C00869A0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECEA02BB2965822C00869A0D /* GoogleService-Info.plist */; };
+		ECEA02DE2969505C00869A0D /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEA02DD2969505C00869A0D /* Router.swift */; };
 		ECEB7103280314BD00B157FB /* FoodListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEB7102280314BD00B157FB /* FoodListCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,7 +63,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EC1242EC286F158B00C60089 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EC5AAD8B292383B1004EAF94 /* SignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPresenter.swift; sourceTree = "<group>"; };
 		EC5AAD8D2924B239004EAF94 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		EC77EA1F28F2A813009B3EBA /* CheckBoxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
@@ -98,7 +98,9 @@
 		ECDF47A828B4F7B7004BC6A9 /* RecipeCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCategoryCell.swift; sourceTree = "<group>"; };
 		ECDF47AA28B4F7DB004BC6A9 /* RecipeCategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCategoryListViewController.swift; sourceTree = "<group>"; };
 		ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodUseCase.swift; sourceTree = "<group>"; };
-		ECEA02B72963C4D300869A0D /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		ECEA02B72963C4D300869A0D /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Environment.swift; path = ../Environment.swift; sourceTree = "<group>"; };
+		ECEA02BB2965822C00869A0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ECEA02DD2969505C00869A0D /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		ECEB7102280314BD00B157FB /* FoodListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,6 +147,8 @@
 			children = (
 				ECDF47AA28B4F7DB004BC6A9 /* RecipeCategoryListViewController.swift */,
 				ECCAA676290045D800CE141B /* RecipeCategoryListPresenter.swift */,
+				ECDF47A828B4F7B7004BC6A9 /* RecipeCategoryCell.swift */,
+				ECC2590D28E7369600F790F5 /* RecipeModel.swift */,
 			);
 			path = RecipeCategory;
 			sourceTree = "<group>";
@@ -154,6 +158,10 @@
 			children = (
 				ECA6F44928026B0C00CA7C2D /* FoodListViewController.swift */,
 				EC9C1C0C28F45E2D0024570D /* FoodListPresenter.swift */,
+				ECEB7102280314BD00B157FB /* FoodListCell.swift */,
+				EC77EA1F28F2A813009B3EBA /* CheckBoxButton.swift */,
+				EC77EA2028F2A813009B3EBA /* DeleteButton.swift */,
+				EC77EA2228F2A813009B3EBA /* AddButton.swift */,
 			);
 			path = FoodList;
 			sourceTree = "<group>";
@@ -173,8 +181,9 @@
 				ECA6F44528026B0C00CA7C2D /* AppDelegate.swift */,
 				ECA6F44728026B0C00CA7C2D /* SceneDelegate.swift */,
 				ECA6F45C28026BAE00CA7C2D /* FoodData.swift */,
-				ECC2590D28E7369600F790F5 /* RecipeModel.swift */,
 				ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */,
+				EC77EA2128F2A813009B3EBA /* UnitSelectButton.swift */,
+				ECEA02DD2969505C00869A0D /* Router.swift */,
 				EC9C1C0A28F3E8650024570D /* FoodList */,
 				EC9C1C0B28F3E8A60024570D /* FoodAddition */,
 				EC9C1C0928F3E8260024570D /* RecipeCategory */,
@@ -198,21 +207,15 @@
 		ECA6F44428026B0C00CA7C2D /* RefManager1-2 */ = {
 			isa = PBXGroup;
 			children = (
-				ECEB7102280314BD00B157FB /* FoodListCell.swift */,
-				ECDF47A828B4F7B7004BC6A9 /* RecipeCategoryCell.swift */,
-				EC77EA1F28F2A813009B3EBA /* CheckBoxButton.swift */,
-				EC77EA2028F2A813009B3EBA /* DeleteButton.swift */,
-				EC77EA2128F2A813009B3EBA /* UnitSelectButton.swift */,
-				EC77EA2228F2A813009B3EBA /* AddButton.swift */,
 				ECA41AE0290E5A5D0030BF16 /* TapFeedback.swift */,
 				ECEA02B72963C4D300869A0D /* Environment.swift */,
 				ECBD105B293A3D9F00AF2702 /* UIImage+Extension.swift */,
+				ECBD1061293B94DD00AF2702 /* Localizable.strings */,
 				ECA6F44B28026B0C00CA7C2D /* Main.storyboard */,
 				ECA6F44E28026B0E00CA7C2D /* Assets.xcassets */,
 				ECA6F45028026B0E00CA7C2D /* LaunchScreen.storyboard */,
-				EC1242EC286F158B00C60089 /* GoogleService-Info.plist */,
 				ECA6F45328026B0E00CA7C2D /* Info.plist */,
-				ECBD1061293B94DD00AF2702 /* Localizable.strings */,
+				ECEA02BB2965822C00869A0D /* GoogleService-Info.plist */,
 			);
 			path = "RefManager1-2";
 			sourceTree = "<group>";
@@ -334,7 +337,7 @@
 			files = (
 				ECBD105F293B94DD00AF2702 /* Localizable.strings in Resources */,
 				ECA6F45228026B0E00CA7C2D /* LaunchScreen.storyboard in Resources */,
-				EC1242ED286F158B00C60089 /* GoogleService-Info.plist in Resources */,
+				ECEA02BC2965822C00869A0D /* GoogleService-Info.plist in Resources */,
 				ECA6F44F28026B0E00CA7C2D /* Assets.xcassets in Resources */,
 				ECA6F44D28026B0C00CA7C2D /* Main.storyboard in Resources */,
 			);
@@ -414,6 +417,7 @@
 				ECDF47AB28B4F7DC004BC6A9 /* RecipeCategoryListViewController.swift in Sources */,
 				EC77EA2428F2A813009B3EBA /* DeleteButton.swift in Sources */,
 				ECCAA677290045D800CE141B /* RecipeCategoryListPresenter.swift in Sources */,
+				ECEA02DE2969505C00869A0D /* Router.swift in Sources */,
 				ECA6F45D28026BAE00CA7C2D /* FoodData.swift in Sources */,
 				EC5AAD8E2924B239004EAF94 /* SignUpViewController.swift in Sources */,
 				EC77EA2328F2A813009B3EBA /* CheckBoxButton.swift in Sources */,

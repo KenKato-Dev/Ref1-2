@@ -7,7 +7,7 @@
 
 import UIKit
 
-    // FoodAppendViewのVC
+// FoodAppendViewのVC
 class FoodAppendViewController: UIViewController {
     private let foodAppendPresenter = FoodAppendPresenter(foodData: FoodData())
     @IBOutlet var foodNameTextField: UITextField!
@@ -15,7 +15,7 @@ class FoodAppendViewController: UIViewController {
     @IBOutlet var methodSelectText: UILabel!
     @IBOutlet var refrigeratorButton: UIButton!
     @IBOutlet var freezerButton: UIButton!
-    @IBOutlet weak var locationButtonsStack: UIStackView!
+    @IBOutlet var locationButtonsStack: UIStackView!
     @IBOutlet var kindSelectText: UILabel!
     @IBOutlet var foodKindsStacks: UIStackView!
     @IBOutlet var meatButton: UIButton!
@@ -80,14 +80,17 @@ class FoodAppendViewController: UIViewController {
         unitSelectButton.selectingUnit()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
     }
+
     // キーボードを下げる処理
     @objc func hideKeyboard() {
         view.endEditing(true)
     }
+
     // キャンセルボタンの処理
     @IBAction func cancel(_: Any) {
         foodAppendPresenter.didTapCancelButton()
     }
+
     // 保存ボタンの処理
     @IBAction func preserve(_: Any) {
         foodAppendPresenter.didTapPreserveButton(foodName: foodNameTextField.text,
@@ -95,6 +98,7 @@ class FoodAppendViewController: UIViewController {
                                                  unit: unitSelectButton.selectedUnit)
     }
 }
+
 // enterでキーボードを下げる処理
 extension FoodAppendViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -102,75 +106,86 @@ extension FoodAppendViewController: UITextFieldDelegate {
         return true
     }
 }
+
 // Outputの中身を注入
 extension FoodAppendViewController: FoodAppendPresenterOutput {
     // placeholderとキーボードの種類を指定
     func setPlaceholderAndKeyboard() {
-
         foodNameTextField.attributedPlaceholder
-        = NSAttributedString(string: "名称を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+            = NSAttributedString(
+                string: "名称を入れてください",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+            )
         quantityTextField.attributedPlaceholder
-        = NSAttributedString(string: "数量を入れてください", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+            = NSAttributedString(
+                string: "数量を入れてください",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+            )
         quantityTextField.keyboardType = .numberPad
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
     }
+
     // dismiss処理
     func dismiss() {
         dismiss(animated: true, completion: nil)
     }
+
     // テキストフィールドの入力内容、選択ボタンの種類で条件付けしプレースホルダーの表示とボタンテキスト色を変更
     func didTapPreserveButtonWithoutEssential() {
-        if self.foodNameTextField.text!.isEmpty {
-            self.foodNameTextField.attributedPlaceholder = NSAttributedString(
+        if foodNameTextField.text!.isEmpty {
+            foodNameTextField.attributedPlaceholder = NSAttributedString(
                 string: "名称を入れてください",
-                attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
-
-    }
-        if self.quantityTextField.text!.isEmpty {
-        self.quantityTextField.attributedPlaceholder = NSAttributedString(
-            string: "数量を入れてください",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
-        } else if Int(self.quantityTextField.text!) == nil {
-            self.quantityTextField.text = ""
-            self.quantityTextField.attributedPlaceholder = NSAttributedString(
-                string: "数字を入れてください",
-                attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.red]
+            )
         }
-        if self.unitSelectButton.selectedUnit == .initial {
+        if quantityTextField.text!.isEmpty {
+            quantityTextField.attributedPlaceholder = NSAttributedString(
+                string: "数量を入れてください",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.red]
+            )
+        } else if Int(quantityTextField.text!) == nil {
+            quantityTextField.text = ""
+            quantityTextField.attributedPlaceholder = NSAttributedString(
+                string: "数字を入れてください",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.red]
+            )
+        }
+        if unitSelectButton.selectedUnit == .initial {
             unitSelectButton.tintColor = .red
         }
     }
+
     // エラーハンドル、内容を表示
     func presentErrorIfNeeded(_ errorOrNil: Error?) {
-        guard let error = errorOrNil else {return}
+        guard let error = errorOrNil else { return }
         let message = "エラー発生:\(error)"
         let alart = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alart, animated: true) {
-        }
+        present(alart, animated: true) {}
     }
 
     // ボタンの状態を初期状態へリセット
     func resetButtonsImage() {
-        self.meatButton.setImage(UIImage(named: "meatButton"), for: .normal)
-        self.meatButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        self.fishButton.setImage(UIImage(named: "fishButton"), for: .normal)
-        self.fishButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        self.vegetableAndFruitButton.setImage(UIImage(named: "vegetableAndFruitButton"), for: .normal)
-        self.vegetableAndFruitButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        self.milkAndEggButton.setImage(UIImage(named: "milkAndEggButton"), for: .normal)
-        self.milkAndEggButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        self.dishButton.setImage(UIImage(named: "dishButton"), for: .normal)
-        self.dishButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        self.drinkButton.setImage(UIImage(named: "drinkButton"), for: .normal)
-        self.drinkButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        self.seasoningButton.setImage(UIImage(named: "seasoningButton"), for: .normal)
-        self.seasoningButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        self.sweetButton.setImage(UIImage(named: "sweetButton"), for: .normal)
-        self.sweetButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        self.othersButton.setImage(UIImage(named: "otherButton"), for: .normal)
-        self.othersButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        meatButton.setImage(UIImage(named: "meatButton"), for: .normal)
+        meatButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        fishButton.setImage(UIImage(named: "fishButton"), for: .normal)
+        fishButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        vegetableAndFruitButton.setImage(UIImage(named: "vegetableAndFruitButton"), for: .normal)
+        vegetableAndFruitButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        milkAndEggButton.setImage(UIImage(named: "milkAndEggButton"), for: .normal)
+        milkAndEggButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        dishButton.setImage(UIImage(named: "dishButton"), for: .normal)
+        dishButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        drinkButton.setImage(UIImage(named: "drinkButton"), for: .normal)
+        drinkButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        seasoningButton.setImage(UIImage(named: "seasoningButton"), for: .normal)
+        seasoningButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        sweetButton.setImage(UIImage(named: "sweetButton"), for: .normal)
+        sweetButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        othersButton.setImage(UIImage(named: "otherButton"), for: .normal)
+        othersButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
     }
+
     // 押された際のボタンの外観を変化
     func animateButton(_ location: Food.Location) {
         if location == .refrigerator {

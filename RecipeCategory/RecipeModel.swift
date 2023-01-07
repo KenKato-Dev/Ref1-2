@@ -14,6 +14,7 @@ struct Small: Codable {
     let categoryId: Int
     var categoryUrl: String
 }
+
 // RecipeCategoryのModel、楽天APIへのリクエスト処理
 class RecipeModel {
     // envファイルより生成
@@ -40,7 +41,7 @@ class RecipeModel {
                     let result = recipeData?["result"] as? [String: Any]
                     // dataからsmallに変換
                     let small = result?["small"] as? [[String: Any]]
-                    guard let small = small else {return}
+                    guard let small = small else { return }
                     let smallData = try JSONSerialization.data(withJSONObject: small, options: .prettyPrinted)
                     let decodedSmall = try decoder.decode([Small].self, from: smallData)
                     array.append(contentsOf: decodedSmall)

@@ -28,9 +28,10 @@ final class RecipeCategoryListPresenter {
     func setOutput(recipeCategoryListPresenterOutput: RecipeCategoryListPresenterOutput?) {
         self.recipeCategoryListPresenterOutput = recipeCategoryListPresenterOutput
     }
-// indicatorの表示と楽天APIへのリクエストを実施
+
+    // indicatorの表示と楽天APIへのリクエストを実施
     func reloadArray(searchKeyword: String?) {
-        self.recipeCategoryListPresenterOutput?.showLoadingSpin()
+        recipeCategoryListPresenterOutput?.showLoadingSpin()
         if let searchKeyword = searchKeyword {
             recipeModel.fetch(searchKeyword) { result in
                 switch result {
