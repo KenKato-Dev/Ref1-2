@@ -1,33 +1,36 @@
-# 冷蔵庫くん 
- <img src="https://user-images.githubusercontent.com/84781651/210377761-d29f1662-e458-4f77-bc17-411c88b78933.png" width="100%">  
-   
-冷蔵庫くんは冷蔵庫内の食材や総菜、飲料、スイーツなどの食品を登録、追加や削除等修正、食品のレシピ検索が行えるiOSアプリです。SwiftとFirebaseにより構築されております。  
+# 冷蔵庫くん  
+  <img src="https://user-images.githubusercontent.com/84781651/210377761-d29f1662-e458-4f77-bc17-411c88b78933.png" width="100%">  
+冷蔵庫くんはSwiftとFirebaseにより構築されたiOSアプリです。冷蔵庫内の食品(食材、惣菜、飲料、調味料など)を登録し、クラウド上で数量確認、登録日確認、追加、削除、レシピの検索が行えます。 
   
+
 ## 導入
 1. 下記のコマンドを任意のディレクトリから実行してださい。  
 ```  
 $ git clone https://github.com/KenKato-Dev/Ref1-2  
-
+  
 $ cd Refmanager1-2  
 ```  
-2. 移動したディレクトリにあるRefManager1-2.xcodeprojを開いてください。
-3. Xcodeからアプリを実行してください。(※GoogleService-Info.plist及びEnvironment.Swiftはプロジェクト内に含まれておりません。送付しますのでGit又はメール等でご連絡ください)
-4. 画面下部の「アカウントをお持ちでない方はコチラ」をタップし、メールアドレス、ユーザー名、パスワードを入力し登録をしてください。(メールアドレスは＠と.comが入っていたら認識しますので動かすだけならテキトーで構いません)
-5. 入力が完了すると登録された食材が表示されるtableViewを持つメイン画面に遷移されます、食材の追加、選択表示、修正、削除、レシピ検索、ユーザー登録情報の確認とログアウト等お試しください。
- 
+2. 移動したディレクトリにあるhoge.xcodeprojを開いてください。
+3. Xcodeからアプリを実行してください。
+4. セキュリティの観点からGoogleService-Info.plist及びEnvironment.Swiftはプロジェクト内に含まれておりません。
+　　ご連絡に応じてこれら2ファイルを共有しますがEnviromnet.Swiftをご自身で導入される際は以下ご参照ください。  
+    - .envファイルにAPIキーをディクショナリ方式にて追加するとビルド時にEnvironment.Swiftというファイルがディレクトリに自動生成されますのでプロジェクトに導入してください。  
+5. 画面下部の「アカウントをお持ちでない方はコチラ」をタップし、メールアドレス、ユーザー名、パスワードを入力し登録をしてください。  
+   (メールアドレスは＠と.comが入っていたら認識しますので動かすだけならテキトーで構いません)  
+6. 入力が完了すると登録された食材が表示されるtableViewを持つメイン画面に遷移されます、食材の追加、選択表示、修正、削除、レシピ検索、ユーザー登録情報の確認とログアウト等お試しください。  
 
-## 構成  
+## 構成/Composition  
 
 - MVP  
 - Firesbase  
     - Auth  
     - FireStore  
-        — scheme  
+        - scheme  
 - API
     - Rakuten Recipe API  
 
 MVP:  
-設計パターンはMVPを採用しています．構成としては各画面にViewControllerとPresenter、複数画面向けにModelを用意し，それぞれ以下の役割としています。  
+設計パターンはMVPを採用しています。構成としては各画面にViewControllerとPresenter、複数画面向けにModelを用意し、それぞれ以下の役割としています。  
 - ViewContoller：ユーザーの操作等イベントをPresenterに渡し処理しPresenterから返ってきた内容を元にUIを描写  
 - Presenter：ModelとViewControllerの仲介役としてViewから受け取ったイベントや必要に応じてModelへ処理を委譲し返ってきた内容を元に処理を実行、処理結果をViewへ変換  
 - Model：Presenterからの異常など必要に応じてAPIへのリクエストやfetch、postを実行、UIや画面表示に依存せずロジックを一元管理  
@@ -42,33 +45,39 @@ Auth:
 ユーザの認証に使用しています。ユーザは登録情報の保護や複数アカウントで管理したいニーズへの対応に加え将来的に実装したいグループ間での登録情報の共有に必要なため使用しています。  
 
 Firestore:  
-FirestoreはアプリのDB構成に使用しています。DBには下記のようなSchemeで登録された食品情報Foodと利用者情報Userを登録しています。
+FirestoreはアプリのDB構成に使用しています。下記のようなSchemeで登録された食品情報Foodと利用者情報Userを登録しています。  
+
+
 Users(コレクション)  
-    — UserID(ドキュメント)  
-    — User(フィールド)  
-    — Foods(サブコレクション) — FoodID(ドキュメント) — Food各プロパティ(フィールド)  
+    — UserID(ドキュメント:ユーザーID)  
+    — User(フィールド: 利用者情報)  
+    — Foods(サブコレクション) — FoodID(ドキュメント) — Food(フィールド: 食品情報)  
 
-Userは下記のようなSchemeです。    
-userName: String  
-email:String  
-createdAt:Timestamp  
+- User(フィールド: 利用者情報)      
+    - userName: String  
+    - email:String  
+    - createdAt:Timestamp  
 
-Foodは以下のようなSchemeです。  
-location: Location(Enum)  
-kind: FoodKind(Enum)  
-name: String  
-quantity: String  
-unit: UnitSelectButton.UnitMenu(Enum)  
-IDkey: String  
-date: Date  
+- Food(フィールド: 食品情報)    
+    - location: Location(Enum)  
+    - kind: FoodKind(Enum)  
+    - name: String  
+    - quantity: String  
+    - unit: UnitSelectButton.UnitMenu(Enum)  
+    - IDkey: String  
+    - date: Date  
   
-FoodsはUsersのサブコレクションとしており、ユーザー情報Userと登録された食材情報Foodを紐づけています。  
+FoodsはUsersのサブコレクションとしており、ユーザー情報Userと登録された食材情報Foodを紐づけています。
+
+サブコレクションが何かを
+一元管理のメリット、ユーザーごとに表示を切り変えるためにサブこれを利用している
+混ぜると醜い、分けるとどれがID
   
 API:  
 楽天レシピに登録されている料理のレシピ取得に楽天APIのRakuten Recipe APIを利用しています。リクエストしてレシピ集をData型にて受け取ります。  
-APIのリクエストに必要なキーはEnvironment。swiftファイルにて管理しておりプロジェクトに同梱していません。  
+APIのリクエストに必要なキーはEnvironment.Swiftファイルにて管理しておりプロジェクトに同梱していません。  
   
-## 概要  
+## 概要
 以下5つの機能で食材を管理できます。  
 - 食品を冷蔵/冷凍の2種の保管場所、肉や海鮮、調味料など計9種の種類分け、5種の数量単位にて保管可能  
 - どこに何があるか保管場所と種類のボタンそれぞれもしくは両方組み合わせ把握可能  
@@ -76,15 +85,63 @@ APIのリクエストに必要なキーはEnvironment。swiftファイルにて�
 - 選択した食材のおすすめレシピ集(楽天レシピ)を表示、タップしブラウザ上でレシピ集を閲覧可能  
 - 複数の食品をまとめて削除可能  
   
-## 特徴  
+## 特徴 
 - 買い物中や帰宅途中など知りたい場面でも片手で操作しやすくボタンを下部に集中配置  
 - 何がいつからどれくらいあるのかを一目で把握できるセル内容  
 - 多量に登録されている状態でもページネーションにより迅速に表示  
-## 作成の中で工夫した点  
-　Firestoreからの配列の取り出しとソート、ページネーション  
-チェックボックスとデリートボタンの関連付け、enum State での管理  
-.env APIキーの隠匿管理  
-Firestoreのスキーマ構築  
+  
+## 工夫した点
+フィルタリング制御と情報のリアルタイム表示：
+保管場所(冷蔵/冷凍/の3つ)と複数選択可能な食品の種類(計9つ)が組み合わったフィルターとなります。
+UI操作に合わせてこのフィルター制御を行い知りたい情報を食品の種類と登録日時に並べ替えた状態でFirestoreへリクエストしてTableViewに配列を表示します。
+情報の探しやすさや見やすさ向上に加え、将来的にグループシェア機能をつけた際にグループ間での表示情報の誤差を最小限にすることに繋がると考えております。
+
+```swift
+if filterRef || filterFreezer, !kinds.isEmpty {
+            query = db.collection("Users").document(uid).collection("foods")
+                .whereField(fieldElementLocation, isEqualTo: location)
+                .whereField(fieldElementKind, in: kindArray)
+                .order(by: "kindNumber").order(by: "date").limit(to: 10)
+        } else if filterRef || filterFreezer, kinds.isEmpty {
+            query = db.collection("Users").document(uid).collection("foods")
+                .whereField(fieldElementLocation, isEqualTo: location)
+                .order(by: "kindNumber").order(by: "date").limit(to: 10)
+        } else if !filterRef, !filterFreezer, !kinds.isEmpty {
+
+            query = db.collection("Users").document(uid).collection("foods")
+                .whereField(fieldElementKind, in: kindArray)
+                .order(by: "kindNumber").order(by: "date").limit(to: 10)
+        } else {
+            query = Firestore.firestore().collection("Users").document(uid).collection("foods")
+                .order(by: "kindNumber").order(by: "date").limit(to: 10)
+        }
+
+```
+ページネーション機能：
+元々はアプリ起動時にFirestoreから情報を全て取り出していましたが登録情報を増やすにつれて少しずつ画面が表示される時間が長くなりました。
+このページネーションを実装したことでアプリ起動時や画面遷移時の待機時間減少を期待して期待しております。
+
+```swift
+    func paginate() {
+        guard let nextDocument = queryDocumentSnaphots.last else { return }
+        query = query.start(afterDocument: nextDocument).limit(to: 10)
+    }
+```
+
+FoodListCell内のcheckBoxButtonの記述改善：
+FoodListCellはFoodListTableViewに表示するCellを担当し、Cellは普段は隠蔽され情報削除時に現れタップされると見た目が変わるCheckBoxButtonを持っています。
+元々はCellの状態をViewControllerで判断しそれを元にFuncを呼び出して処理しCheckBoxButtonの見た目を変えていました。
+しかしViewController全体と当該関係箇所が見にくく、期待する表示通りの制御ができない場合が発生していました。
+これらを下記Enum Stateにより一元化することによりViewControllerの見やすさ改善と期待通りの制御が行えるようになりました。
+DeleteButtonをタップし、どれを削除するか選択するためのFoodListCell内のcheckBoxButtonの状態を下記Enumにて状態を管理しています。
+
+```swift
+enum State {
+        case normal //CheckBoxButton隠蔽状態
+        case shownCheckBox(isChecked: Bool) //CheckBoxButton出現、Bool値により外観が変化
+    }
+```
+
   
 ## 今後の方針  
 - グループ間での共有機能
