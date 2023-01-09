@@ -12,7 +12,7 @@ $ cd Refmanager1-2
 ```  
 2. 移動したディレクトリにあるhoge.xcodeprojを開いてください。
 3. Xcodeからアプリを実行してください。
-4. セキュリティの観点からGoogleService-Info.plist及びEnvironment.Swiftはプロジェクト内に含まれておりません。
+4. セキュリティの観点からGoogleService-Info.plist及びEnvironment.Swiftはプロジェクト内に含まれておりません。　　
 　　ご連絡に応じてこれら2ファイルを共有します、Enviromnet.Swiftをご自身で導入される際は以下ご参照ください。  
     - 楽天レシピAPIの楽天レシピカテゴリ一覧APIからリクエストURLを生成してください。  
     - 下記コマンドにてディレクトリ下に.envファイルを作成してください。  
