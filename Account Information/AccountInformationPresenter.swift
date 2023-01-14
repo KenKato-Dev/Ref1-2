@@ -43,7 +43,9 @@ class AccountInformatonPresenter {
     func didTapSignOutButton() {
         do {
             try auth.signOut()
-        } catch {}
+        } catch {
+            print("エラー：\(error)")
+        }
         accountInformationPresenterOutput?.moveToRootVC()
     }
 }

@@ -273,14 +273,10 @@ final class FoodListPresenter {
                     switch result {
                     case let .success(foods):
                         self.array = foods
-                        self.array = self.array.sorted(by: { $0.kind.rawValue > $1.kind.rawValue })
-                    // このReloadにより削除がtableに反映
-//                                self.foodListPresenterOutput?.reloadData()
                     case let .failure(error):
                         self.foodListPresenterOutput?.presentErrorIfNeeded(error)
                         print("fetchfoodsに失敗:\(error)")
                     }
-                    // 下記reloadがないと表示が反映されず1
                     self.foodListPresenterOutput?.reloadData()
                 }
             case let .failure(error):

@@ -15,7 +15,7 @@ protocol SignInPresenterOutput: AnyObject {
     func resetContetntsOfTextField()
     func showWorngInputIfNeeded(_ isHidden: Bool)
     func showAlertPassReset()
-    func presentErrorIfNeeded(_ errorOrNil: Error?)
+    func presentErrorIfNeeded(_ errorMessage: String)
     func showLoadingSpin()
     func hideIndicator(_ isHidden: Bool)
 }
@@ -54,8 +54,11 @@ final class SignInPresenter {
                 self.signInPresenterOutput?.resetContetntsOfTextField()
             case let .failure(error):
                 self.isFillOutNecessary = false
-                self.signInPresenterOutput?.showWorngInputIfNeeded(self.isFillOutNecessary)
-                print(error)
+                if let error = error as NSError? {
+                    self.signInPresenterOutput?.presentErrorIfNeeded(self.manageSiginInErrorMessage(error))
+                    print(error)
+                }
+//                self.signInPresenterOutput?.showWorngInputIfNeeded(self.isFillOutNecessary)
             }
         }
     }
@@ -77,19 +80,31 @@ final class SignInPresenter {
             }
         }
     }
-//    static func performsegueIfAlreadySignIn() {
-//        UserService.shared.checkSignInStatus { isSignIn in
-//            if isSignIn {
-//                SignInViewController().performSegue(uid: Auth.auth().currentUser!.uid)
-//            } else {
-//                print("サインイン履歴なし")
-//            }
-//        }
-//    }
     func resetIsFillOutNecessary() {
         isFillOutNecessary = false
     }
     func resetisDisableSgue() {
         self.isDisableSegue = false
     }
-}
+    func manageSiginInErrorMessage(_ error: NSError) -> String {
+                switch AuthErrorCode.Code(rawValue: error.code) {
+                case .invalidEmail:
+                    print("メールアドレスの形式が違います")
+                    return "メールアドレスの形式が違います"
+                case .emailAlreadyInUse:
+                    print("このメールアドレスはすでに使われています")
+                    return "このメールアドレスはすでに使われています"
+                case .weakPassword:
+                    print("パスワードが簡単すぎます")
+                    return "パスワードが簡単すぎます"
+                case .userNotFound, .wrongPassword:
+                    print("メールアドレス、またはパスワードが間違えてます")
+                    return "メールアドレス、またはパスワードが間違えてます"
+                case .userDisabled:
+                    print("このユーザーアカウントは無効化されています")
+                    return "このユーザーアカウントは無効化されています"
+                default:
+                    print("良きせぬエラーが発生しました\nしばらくお待ちください")
+                    return "良きせぬエラーが発生しました\nしばらくお待ちください"
+                }
+    }}

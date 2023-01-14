@@ -37,10 +37,6 @@ final class SignInViewController: UIViewController {
             self.signInPresenter.didTapResetPassButton()
         }), for: .touchUpInside)
     }
-//    override func viewWillAppear(_ animated: Bool) {
-//                signInPresenter.performsegueIfAlreadySignIn()
-//    }
-
     // performsegueの動作を制御
     override func shouldPerformSegue(withIdentifier identifier: String, sender _: Any?) -> Bool {
         if identifier == "toFoodListView", signInPresenter.isFillOutNecessary {
@@ -51,7 +47,6 @@ final class SignInViewController: UIViewController {
             return false
         }
     }
-
     @objc func hideKeyboard() {
         view.endEditing(true)
     }
@@ -132,10 +127,9 @@ extension SignInViewController: SignInPresenterOutput {
         present(alert, animated: true)
     }
 
-    func presentErrorIfNeeded(_ errorOrNil: Error?) {
-        guard let error = errorOrNil else { return }
-        let message = "エラー発生:\(error)"
-        let alart = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+    func presentErrorIfNeeded(_ errorMessage: String) {
+//        let message = errorMessage
+        let alart = UIAlertController(title: nil, message: errorMessage, preferredStyle: .alert)
         alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alart, animated: true) {}
     }

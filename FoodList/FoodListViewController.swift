@@ -218,13 +218,21 @@ extension FoodListViewController: FoodListPresenterOutput {
     func animateLocationButton(_ isFilteringRef: Bool, _ isFilteringFreezer: Bool) {
         if isFilteringRef {
             refrigeratorButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            refrigeratorButton.layer.borderColor = UIColor.gray.cgColor
+            refrigeratorButton.layer.cornerRadius = 20
+            refrigeratorButton.layer.borderWidth = 3.0
         } else {
             refrigeratorButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+            refrigeratorButton.layer.borderColor = UIColor.clear.cgColor
         }
         if isFilteringFreezer {
             freezerButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            freezerButton.layer.borderColor = UIColor.gray.cgColor
+            freezerButton.layer.cornerRadius = 20
+            freezerButton.layer.borderWidth = 3.0
         } else {
             freezerButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+            freezerButton.layer.borderColor = UIColor.clear.cgColor
         }
     }
 

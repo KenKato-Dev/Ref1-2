@@ -48,7 +48,6 @@
 		ECE2F0E028349FBC00975A38 /* FoodUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */; };
 		ECEA02B82963C4D300869A0D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEA02B72963C4D300869A0D /* Environment.swift */; };
 		ECEA02BC2965822C00869A0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECEA02BB2965822C00869A0D /* GoogleService-Info.plist */; };
-		ECEA02DE2969505C00869A0D /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEA02DD2969505C00869A0D /* Router.swift */; };
 		ECEB7103280314BD00B157FB /* FoodListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEB7102280314BD00B157FB /* FoodListCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -100,7 +99,6 @@
 		ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodUseCase.swift; sourceTree = "<group>"; };
 		ECEA02B72963C4D300869A0D /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Environment.swift; path = ../Environment.swift; sourceTree = "<group>"; };
 		ECEA02BB2965822C00869A0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
-		ECEA02DD2969505C00869A0D /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		ECEB7102280314BD00B157FB /* FoodListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,7 +181,6 @@
 				ECA6F45C28026BAE00CA7C2D /* FoodData.swift */,
 				ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */,
 				EC77EA2128F2A813009B3EBA /* UnitSelectButton.swift */,
-				ECEA02DD2969505C00869A0D /* Router.swift */,
 				EC9C1C0A28F3E8650024570D /* FoodList */,
 				EC9C1C0B28F3E8A60024570D /* FoodAddition */,
 				EC9C1C0928F3E8260024570D /* RecipeCategory */,
@@ -417,7 +414,6 @@
 				ECDF47AB28B4F7DC004BC6A9 /* RecipeCategoryListViewController.swift in Sources */,
 				EC77EA2428F2A813009B3EBA /* DeleteButton.swift in Sources */,
 				ECCAA677290045D800CE141B /* RecipeCategoryListPresenter.swift in Sources */,
-				ECEA02DE2969505C00869A0D /* Router.swift in Sources */,
 				ECA6F45D28026BAE00CA7C2D /* FoodData.swift in Sources */,
 				EC5AAD8E2924B239004EAF94 /* SignUpViewController.swift in Sources */,
 				EC77EA2328F2A813009B3EBA /* CheckBoxButton.swift in Sources */,

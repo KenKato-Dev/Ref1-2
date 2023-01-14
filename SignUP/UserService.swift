@@ -20,11 +20,10 @@ struct UserData {
 }
 
 class UserService {
-    static let shared = UserService() // 試作
 
     private let auth = Auth.auth()
     private let db = Firestore.firestore()
-    private var alart = UIAlertController(title: nil, message: "エラー発生:\(Error?.self)", preferredStyle: .alert)
+    private (set) var errorMessage = ""
 
     func signIn(_ email: String, _ password: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         auth.signIn(withEmail: email, password: password) { [weak self] authDataResult, error in
@@ -56,10 +55,29 @@ class UserService {
                   _ completion: @escaping (Result<Void, Error>) -> Void) {
         DispatchQueue.main.async {
             self.auth.createUser(withEmail: email, password: pass) { result, err in
-                if let err = err {
-                    completion(.failure(err))
-                    print("manager認証にエラー発生:\(err)")
-                    return
+                if let err = err as NSError? {
+                    if let errorCode = AuthErrorCode.Code(rawValue: err.code) {
+                        switch errorCode {
+                        case .invalidEmail:
+                            print("メールアドレスの形式が違います")
+                            self.errorMessage = "メールアドレスの形式が違います"
+                        case .emailAlreadyInUse:
+                            print("このメールアドレスはすでに使われています")
+                            self.errorMessage = "このメールアドレスはすでに使われています"
+                        case .weakPassword:
+                            print("パスワードが簡単すぎます")
+                            self.errorMessage = "パスワードが簡単すぎます"
+                        case .userNotFound, .wrongPassword:
+                            print("メールアドレス、またはパスワードが間違えてます")
+                            self.errorMessage = "メールアドレス、またはパスワードが間違えてます"
+                        case .userDisabled:
+                            print("このユーザーアカウントは無効化されています")
+                            self.errorMessage = "このユーザーアカウントは無効化されています"
+                        default:
+                            print("良きせぬエラーが発生しました\nしばらくお待ちください")
+                            self.errorMessage = "良きせぬエラーが発生しました\nしばらくお待ちください"
+                        }
+                    }
                 }
                 print("manager認証に成功")
                 //
@@ -84,23 +102,27 @@ class UserService {
 
     func checkEmailUsed(_ email: String, _ completion: @escaping (Result<Bool, Error>) -> Void) {
         auth.fetchSignInMethods(forEmail: email) { method, error in
-            if let error = error {
+            if let error = error as NSError? {
                 completion(.failure(error))
-                print("checkEmailUsedに失敗")
-                return
+            } else {
+                guard method != nil else {
+                    completion(.success(true))
+                    print("未使用のEmail")
+                    return
+                }
+                completion(.success(false))
+                print("既に使われているEmail")
             }
+//            if let error = error {
+//                completion(.failure(error))
+//                print("checkEmailUsedに失敗")
+//                return
+//            }
 
-            guard method != nil else {
-                completion(.success(true))
-                print("未使用のEmail")
-                return
-            }
-            completion(.success(false))
-            print("既に使われているEmail")
         }
     }
 
     func resetPasswordWithMail(_ mail: String) {
-        auth.sendPasswordReset(withEmail: mail)
+        self.auth.sendPasswordReset(withEmail: mail)
     }
 }
