@@ -12,7 +12,8 @@ protocol SignUpPresenterOutput: AnyObject {
     func isSequrePassEntry()
     func showEssential()
     func showUsedEmail()
-    func performSegue(uid: String)
+//    func performSegue(uid: String)
+    func dismiss()
     func presentErrorIfNeeded(_ errorMessage: String)
     func showLoadingSpin()
     func hideIndicator(_ isHidden: Bool)
@@ -20,7 +21,7 @@ protocol SignUpPresenterOutput: AnyObject {
 
 final class SignUpPresenter {
     private let userService: UserService
-    private(set) var isDisableSegue = false
+//    private(set) var isDisableSegue = false
     private weak var signUpPresenterOutput: SignUpPresenterOutput?
     init(userService: UserService) {
         self.userService = userService
@@ -50,9 +51,20 @@ final class SignUpPresenter {
                                 switch result {
                                 case .success:
                                     print("ユーザー登録に成功")
-                                    self.signUpPresenterOutput?.performSegue(uid: Auth.auth().currentUser!.uid)
-                                    self.isDisableSegue = true
-
+                                    self.userService.sendAuthEmail { result in
+                                        switch result {
+                                        case let .success(isSendingEmail):
+                                            self.signUpPresenterOutput?.presentErrorIfNeeded("認証メールを送りました")
+                                            self.signUpPresenterOutput?.hideIndicator(true)
+//                                            self.signUpPresenterOutput?.dismiss()
+                                        case let .failure(error):
+                                            print(error)
+                                            if let error = error as NSError? {
+                                                self.signUpPresenterOutput?.presentErrorIfNeeded("メール送信に失敗しました")
+                                                self.signUpPresenterOutput?.hideIndicator(true)
+                                            }
+                                        }
+                                    }
                                 case let .failure(error):
                                     if let error = error as NSError? {
                                         self.signUpPresenterOutput?.presentErrorIfNeeded(self.manageAuthErrorMessage(error))

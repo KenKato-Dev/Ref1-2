@@ -73,7 +73,7 @@ class AddButton: UIButton {
         // マスク適用
         layer.masksToBounds = true
         // 角丸み
-        layer.cornerRadius = 20.0
+        layer.cornerRadius = 10.0
         // 枠線の色
 //        layer.borderColor = UIColor(displayP3Red: 79/255, green: 172/255, blue: 254/255,alpha: 1.0).cgColor
         // 枠線の太さ

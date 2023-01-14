@@ -45,24 +45,36 @@ final class SignInPresenter {
         self.isDisableSegue = true
         signInPresenterOutput?.didTapWithoutNecessaryFields()
         signInPresenterOutput?.showLoadingSpin()
-        userService.signIn(email, password) { result in
+        if Auth.auth().currentUser == nil {
+            self.signInPresenterOutput?.presentErrorIfNeeded("ユーザー登録を確認できません")
             self.signInPresenterOutput?.hideIndicator(true)
-            switch result {
-            case let .success(uid):
-                self.isFillOutNecessary = true
-                self.signInPresenterOutput?.performSegue(uid: uid)
-                self.signInPresenterOutput?.resetContetntsOfTextField()
-            case let .failure(error):
-                self.isFillOutNecessary = false
-                if let error = error as NSError? {
-                    self.signInPresenterOutput?.presentErrorIfNeeded(self.manageSiginInErrorMessage(error))
-                    print(error)
-                }
-//                self.signInPresenterOutput?.showWorngInputIfNeeded(self.isFillOutNecessary)
-            }
         }
+        if Auth.auth().currentUser!.isEmailVerified {
+            userService.signIn(email, password) { result in
+                self.signInPresenterOutput?.hideIndicator(true)
+                switch result {
+                case let .success(uid):
+                    self.isFillOutNecessary = true
+                    self.signInPresenterOutput?.performSegue(uid: uid)
+                    self.signInPresenterOutput?.resetContetntsOfTextField()
+                case let .failure(error):
+                    self.isFillOutNecessary = false
+                    if let error = error as NSError? {
+                        self.signInPresenterOutput?.presentErrorIfNeeded(self.manageSiginInErrorMessage(error))
+                        print(error)
+                        self.signInPresenterOutput?.hideIndicator(true)
+                    }
+                }
+            }
+        } else {
+            self.signInPresenterOutput?.presentErrorIfNeeded("メール認証を確認できません")
+            self.signInPresenterOutput?.hideIndicator(true)
+        }
+        //
     }
-
+    func reloadUser() {
+        Auth.auth().currentUser?.reload()
+    }
     func didTapResetPassButton() {
         signInPresenterOutput?.showAlertPassReset()
     }

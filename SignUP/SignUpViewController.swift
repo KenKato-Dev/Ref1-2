@@ -33,13 +33,13 @@ final class SignUpViewController: UIViewController {
                 )
         }), for: .touchUpInside)
     }
-    override func shouldPerformSegue(withIdentifier identifier: String, sender _: Any?) -> Bool {
-        if identifier == "toFoodListViewDirectly" && signUpPresenter.isDisableSegue {
-            return true
-        } else {
-            return false
-        }
-    }
+//    override func shouldPerformSegue(withIdentifier identifier: String, sender _: Any?) -> Bool {
+//        if identifier == "toFoodListViewDirectly" && signUpPresenter.isDisableSegue {
+//            return true
+//        } else {
+//            return false
+//        }
+//    }
     @objc func hideKeyboard() {
         view.endEditing(true)
     }
@@ -69,9 +69,9 @@ extension SignUpViewController: SignUpPresenterOutput {
         wrongInputLabel.textColor = .red
     }
 
-    func performSegue(uid: String) {
-        performSegue(withIdentifier: "toFoodListViewDirectly", sender: uid)
-    }
+//    func performSegue(uid: String) {
+//        performSegue(withIdentifier: "toFoodListViewDirectly", sender: uid)
+//    }
     func presentErrorIfNeeded(_ errorMessage: String) {
 //        let message = errorMessage
         let alart = UIAlertController(title: nil, message: errorMessage, preferredStyle: .alert)
@@ -92,7 +92,9 @@ extension SignUpViewController: SignUpPresenterOutput {
         view.addSubview(indicatorBackView)
         activityIndicator.startAnimating()
     }
-
+    func dismiss() {
+        self.dismiss()
+    }
     func hideIndicator(_ isHidden: Bool) {
         activityIndicator.isHidden = isHidden
         indicatorBackView.isHidden = isHidden

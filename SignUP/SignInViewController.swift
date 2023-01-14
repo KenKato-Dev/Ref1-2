@@ -27,6 +27,7 @@ final class SignInViewController: UIViewController {
         signInPresenter.performsegueIfAlreadySignIn()
         signInPresenter.hideWrongInputInInitial()
         signInPresenter.hidePassword()
+        signInPresenter.reloadUser()
         signInButton.addAction(.init(handler: { _ in
             guard let email = self.emailTextField.text, let password
                     = self.passwordTextField.text else { return }
