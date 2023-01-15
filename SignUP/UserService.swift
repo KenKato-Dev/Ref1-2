@@ -25,14 +25,15 @@ class UserService {
     private let db = Firestore.firestore()
 //    private (set) var errorMessage = ""
 
-    func signIn(_ email: String, _ password: String, _ completion: @escaping (Result<String, Error>) -> Void) {
+    func signIn(_ email: String, _ password: String, _ completion: @escaping (Result<User, Error>) -> Void) {
         auth.signIn(withEmail: email, password: password) { [weak self] authDataResult, error in
             if let error = error {
                 print(error)
                 completion(.failure(error))
             } else {
-                guard let uid = authDataResult?.user.uid else { return }
-                completion(.success(uid))
+                guard let user = authDataResult?.user else { return }
+//                guard let uid = authDataResult?.user.uid else { return }
+                completion(.success(user))
             }
         }
     }

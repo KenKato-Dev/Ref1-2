@@ -139,24 +139,25 @@ final class FoodListPresenter {
         fetchArray()
         print(foodData.query)
         // 押したボタン画像を変更
-        var image = UIImage(named: kind.rawValue + "Button")
-        if button.imageView!.image == UIImage(named: kind.rawValue + "Button") {
-            image = button.imageView!.image!.compositeImage(
-                UIImage(named: kind.rawValue + "Button")!,
-                button.imageView!.image!,
-                UIImage(named: "selectedButton")!,
-                0.5
-            )
-        }
+        var image = UIImage(named: kind.rawValue + "ButtonSelected")
+//        if button.imageView!.image! == UIImage(named: kind.rawValue + "Button") {
+//            image = button.imageView!.image!.compositeImage(
+//                UIImage(named: kind.rawValue + "Button")!,
+//                button.imageView!.image!,
+//                UIImage(named: "selectedButton")!,
+//                0.5
+//            )
+//        }
         // 押されたボタンのBool値Valueを基準にボタン外観を変更
         if foodUseCase.foodKindDictionary[kind]! {
+//            var image = UIImage(named: kind.rawValue + "ButtonSelected")
+            button.setImage(UIImage(named: kind.rawValue + "ButtonSelected"), for: .normal)
             button.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
 //            button.isHighlighted = true
-            button.setImage(image, for: .normal)
         } else {
+            button.setImage(UIImage(named: kind.rawValue + "Button"), for: .normal)
             button.transform = CGAffineTransform(scaleX: 1, y: 1)
 //            button.isHighlighted = false
-            button.setImage(UIImage(named: kind.rawValue + "Button"), for: .normal)
         }
         foodListPresenterOutput?.reloadData()
     }

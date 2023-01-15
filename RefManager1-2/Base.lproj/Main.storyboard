@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4fB-Nk-tQM">
-                                <rect key="frame" x="0.0" y="103" width="393" height="621.33333333333337"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="611.33333333333337"/>
                                 <color key="backgroundColor" red="0.79506490519999995" green="0.95638051899999998" blue="0.86083414719999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" name="Color"/>
                                 <prototypes>
@@ -142,12 +142,14 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hcp-aU-k7B">
                                                 <rect key="frame" x="0.0" y="0.0" width="552" height="51"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ci-GQ-MLm">
+                                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ci-GQ-MLm">
                                                         <rect key="frame" x="0.0" y="0.0" width="61.333333333333336" height="51"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="tintColor" systemColor="systemRedColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" image="meatButton"/>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGF-Cl-bIX">
+                                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGF-Cl-bIX">
                                                         <rect key="frame" x="61.333333333333329" y="0.0" width="61.333333333333329" height="51"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="魚" image="fishButton"/>
@@ -188,10 +190,10 @@
                                                         <state key="normal" title="その他" image="otherButton"/>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" name="themeColor"/>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.79506490519999995" green="0.95638051899999998" blue="0.86083414719999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="hcp-aU-k7B" firstAttribute="top" secondItem="tyq-DV-7WE" secondAttribute="top" id="2iM-rt-STL"/>
                                             <constraint firstAttribute="width" secondItem="tyq-DV-7WE" secondAttribute="height" multiplier="10.8:1" id="4LF-sq-kGi"/>
@@ -213,13 +215,13 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="wrE-E4-GY6"/>
                             </scrollView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="CN4-Pj-DGz">
-                                <rect key="frame" x="5" y="724.33333333333337" width="383" height="42.666666666666629"/>
+                                <rect key="frame" x="5" y="719.33333333333337" width="383" height="42.666666666666629"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCq-u3-tN4">
                                         <rect key="frame" x="0.0" y="0.0" width="189" height="42.666666666666664"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="冷蔵">
-                                            <backgroundConfiguration key="background" cornerRadius="30">
+                                            <backgroundConfiguration key="background" cornerRadius="15">
                                                 <color key="backgroundColor" name="refColor"/>
                                             </backgroundConfiguration>
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -229,7 +231,7 @@
                                         <rect key="frame" x="194" y="0.0" width="189" height="42.666666666666664"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="冷凍">
-                                            <backgroundConfiguration key="background" cornerRadius="30">
+                                            <backgroundConfiguration key="background" cornerRadius="15">
                                                 <color key="backgroundColor" name="freezerColor"/>
                                             </backgroundConfiguration>
                                             <color key="baseForegroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -239,13 +241,13 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.79506490519999995" green="0.95638051899999998" blue="0.86083414719999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="7kW-7V-hcx" firstAttribute="top" secondItem="CN4-Pj-DGz" secondAttribute="bottom" id="5Iu-CO-aMY"/>
+                            <constraint firstItem="7kW-7V-hcx" firstAttribute="top" secondItem="CN4-Pj-DGz" secondAttribute="bottom" constant="5" id="5Iu-CO-aMY"/>
                             <constraint firstItem="4fB-Nk-tQM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="BIh-YR-THX"/>
                             <constraint firstItem="7kW-7V-hcx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DHy-cl-lSp"/>
+                            <constraint firstItem="CN4-Pj-DGz" firstAttribute="top" secondItem="4fB-Nk-tQM" secondAttribute="bottom" constant="5" id="Qoc-7t-wlB"/>
                             <constraint firstItem="CN4-Pj-DGz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="T7P-VV-FXO"/>
-                            <constraint firstItem="4fB-Nk-tQM" firstAttribute="bottom" secondItem="CN4-Pj-DGz" secondAttribute="top" id="VMe-I7-9j5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7kW-7V-hcx" secondAttribute="trailing" id="Vnm-0u-pBh"/>
                             <constraint firstItem="4fB-Nk-tQM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="WmH-ls-4fM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4fB-Nk-tQM" secondAttribute="trailing" id="bbM-8z-fsy"/>
@@ -260,7 +262,7 @@
                     <navigationItem key="navigationItem" title="冷蔵品と冷凍品" id="ebQ-Yw-zQR">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="ZNo-GJ-wc7">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="CDt-br-9dE" customClass="AddButton" customModule="RefManager1_2" customModuleProvider="target">
-                                <rect key="frame" x="16" y="2" width="47" height="40"/>
+                                <rect key="frame" x="16" y="4.6666666666666679" width="47" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
@@ -279,7 +281,7 @@
                         <rightBarButtonItems>
                             <barButtonItem title="Item" style="plain" id="mTu-Y5-xLb">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="2re-t4-uPJ">
-                                    <rect key="frame" x="329.66666666666669" y="2" width="47.333333333333314" height="40"/>
+                                    <rect key="frame" x="329.66666666666669" y="4.6666666666666679" width="47.333333333333314" height="35"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" image="person.fill" catalog="system">
@@ -295,7 +297,7 @@
                             </barButtonItem>
                             <barButtonItem id="WPw-lO-9Qe">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="8e0-Ob-ULs" customClass="DeleteButton" customModule="RefManager1_2" customModuleProvider="target">
-                                    <rect key="frame" x="273.66666666666669" y="2" width="48" height="40"/>
+                                    <rect key="frame" x="273.66666666666669" y="4.6666666666666679" width="48" height="35"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" image="trash" catalog="system">
@@ -328,7 +330,6 @@
                         <outlet property="scrollView" destination="7kW-7V-hcx" id="05F-YW-Vx9"/>
                         <outlet property="seasoningButton" destination="zz3-RA-gu0" id="l7H-Mt-pC1"/>
                         <outlet property="sweetButton" destination="bKq-yt-7xj" id="HnO-4U-U9Z"/>
-                        <outlet property="tableViewBottomConstraint" destination="VMe-I7-9j5" id="hnP-oI-X2K"/>
                         <outlet property="vegitableFruitsButton" destination="niJ-RN-24C" id="vR3-gl-cJA"/>
                         <outlet property="viewTitle" destination="ebQ-Yw-zQR" id="aOL-4D-cPZ"/>
                         <segue destination="rRR-Uk-hkv" kind="show" identifier="toRecipeTableView" id="jAc-dp-xnC"/>
@@ -336,7 +337,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="584" y="-327"/>
+            <point key="canvasLocation" x="583.96946564885491" y="-327.46478873239437"/>
         </scene>
         <!--Account Information View Controller-->
         <scene sceneID="lIG-lf-eHV">
@@ -408,7 +409,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="w1p-NH-9nN"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="themeColor"/>
                         <constraints>
                             <constraint firstItem="qj7-M3-rDZ" firstAttribute="top" secondItem="ORi-LV-aya" secondAttribute="bottom" constant="100" id="4tw-AB-sms"/>
                             <constraint firstItem="ORi-LV-aya" firstAttribute="leading" secondItem="w1p-NH-9nN" secondAttribute="leading" constant="30" id="8f6-ma-xOx"/>
@@ -443,7 +444,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qOY-vt-1qq">
                                 <rect key="frame" x="0.0" y="103" width="393" height="715"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="themeColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCell" rowHeight="70" translatesAutoresizingMaskIntoConstraints="NO" id="wAV-os-jWS" customClass="RecipeCategoryCell" customModule="RefManager1_2" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="70"/>
@@ -502,7 +503,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vET-EE-tGq"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="themeColor"/>
                         <constraints>
                             <constraint firstItem="qOY-vt-1qq" firstAttribute="leading" secondItem="vET-EE-tGq" secondAttribute="leading" id="4xU-cD-hc1"/>
                             <constraint firstItem="qOY-vt-1qq" firstAttribute="centerX" secondItem="Bjv-MJ-eYz" secondAttribute="centerX" id="Fc0-kf-BDh"/>
@@ -574,10 +575,10 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dnC-0g-6bP">
                                                 <rect key="frame" x="0.0" y="0.0" width="189" height="45"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="冷蔵">
-                                                    <backgroundConfiguration key="background" cornerRadius="30">
+                                                    <backgroundConfiguration key="background" cornerRadius="15">
                                                         <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </backgroundConfiguration>
                                                     <color key="baseForegroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -585,17 +586,18 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qCC-LR-hc8">
                                                 <rect key="frame" x="194" y="0.0" width="189" height="45"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="冷凍">
-                                                    <backgroundConfiguration key="background" cornerRadius="30">
+                                                    <backgroundConfiguration key="background" cornerRadius="15">
                                                         <color key="backgroundColor" name="freezerColor"/>
                                                     </backgroundConfiguration>
                                                     <color key="baseForegroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </buttonConfiguration>
                                             </button>
                                         </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="6Qv-0a-SxU"/>
                                         </constraints>
@@ -731,7 +733,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="EBo-ON-V98"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="themeColor"/>
                         <constraints>
                             <constraint firstItem="5O4-gL-wtm" firstAttribute="top" secondItem="EBo-ON-V98" secondAttribute="top" constant="20" id="A27-IC-EVN"/>
                             <constraint firstItem="HAv-4m-4lB" firstAttribute="width" secondItem="qh5-El-XsC" secondAttribute="width" multiplier="0.9" id="AfF-eH-HK9"/>
@@ -1025,20 +1027,20 @@
         </scene>
     </scenes>
     <resources>
-        <image name="dishButton" width="710" height="591"/>
-        <image name="drinkButton" width="710" height="591"/>
-        <image name="fishButton" width="710" height="591"/>
-        <image name="meatButton" width="710" height="591"/>
-        <image name="milkAndEggButton" width="710" height="591"/>
-        <image name="otherButton" width="710" height="591"/>
+        <image name="dishButton" width="237" height="200"/>
+        <image name="drinkButton" width="239" height="200"/>
+        <image name="fishButton" width="237" height="197"/>
+        <image name="meatButton" width="237" height="197"/>
+        <image name="milkAndEggButton" width="239" height="197"/>
+        <image name="otherButton" width="283" height="200"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="seasoningButton" width="710" height="591"/>
-        <image name="sweetButton" width="710" height="591"/>
+        <image name="seasoningButton" width="239" height="200"/>
+        <image name="sweetButton" width="239" height="200"/>
         <image name="titleImage" width="695" height="245"/>
         <image name="trash" catalog="system" width="117" height="128"/>
-        <image name="vegetableAndFruitButton" width="710" height="591"/>
+        <image name="vegetableAndFruitButton" width="239" height="197"/>
         <namedColor name="Color">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -1047,6 +1049,9 @@
         </namedColor>
         <namedColor name="refColor">
             <color red="1" green="0.57800000905990601" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="themeColor">
+            <color red="0.79506490519999995" green="0.95638051899999998" blue="0.86083414719999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -15,7 +15,7 @@ protocol SignInPresenterOutput: AnyObject {
     func resetContetntsOfTextField()
     func showWorngInputIfNeeded(_ isHidden: Bool)
     func showAlertPassReset()
-    func presentErrorIfNeeded(_ errorMessage: String)
+    func showErrorMessageIfNeeded(_ errorMessage: String)
     func showLoadingSpin()
     func hideIndicator(_ isHidden: Bool)
 }
@@ -45,32 +45,32 @@ final class SignInPresenter {
         self.isDisableSegue = true
         signInPresenterOutput?.didTapWithoutNecessaryFields()
         signInPresenterOutput?.showLoadingSpin()
-        if Auth.auth().currentUser == nil {
-            self.signInPresenterOutput?.presentErrorIfNeeded("ユーザー登録を確認できません")
-            self.signInPresenterOutput?.hideIndicator(true)
-        }
-        if Auth.auth().currentUser!.isEmailVerified {
+//        if Auth.auth().currentUser == nil {
+//            self.signInPresenterOutput?.presentErrorIfNeeded("ユーザー登録を確認できません")
+//            self.signInPresenterOutput?.hideIndicator(true)
+//        }
+//        if Auth.auth().currentUser!.isEmailVerified {
             userService.signIn(email, password) { result in
                 self.signInPresenterOutput?.hideIndicator(true)
                 switch result {
-                case let .success(uid):
-                    self.isFillOutNecessary = true
-                    self.signInPresenterOutput?.performSegue(uid: uid)
-                    self.signInPresenterOutput?.resetContetntsOfTextField()
+                case let .success(user):
+                    if user.isEmailVerified {
+                        self.isFillOutNecessary = true
+                        self.signInPresenterOutput?.performSegue(uid: user.uid)
+                        self.signInPresenterOutput?.resetContetntsOfTextField()
+                    } else {
+                        self.signInPresenterOutput?.showErrorMessageIfNeeded("メール認証を確認できません")
+                        self.signInPresenterOutput?.hideIndicator(true)
+                    }
                 case let .failure(error):
                     self.isFillOutNecessary = false
                     if let error = error as NSError? {
-                        self.signInPresenterOutput?.presentErrorIfNeeded(self.manageSiginInErrorMessage(error))
+                        self.signInPresenterOutput?.showErrorMessageIfNeeded(self.manageSiginInErrorMessage(error))
                         print(error)
                         self.signInPresenterOutput?.hideIndicator(true)
                     }
                 }
             }
-        } else {
-            self.signInPresenterOutput?.presentErrorIfNeeded("メール認証を確認できません")
-            self.signInPresenterOutput?.hideIndicator(true)
-        }
-        //
     }
     func reloadUser() {
         Auth.auth().currentUser?.reload()

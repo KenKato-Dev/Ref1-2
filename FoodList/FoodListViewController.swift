@@ -44,6 +44,7 @@ final class FoodListViewController: UIViewController {
         foodListPresenter.setOutput(foodListPresenterOutput: self)
         foodListPresenter.greentingToUser()
         foodListPresenter.fetchArray()
+        self.navigationController?.navigationBar.barTintColor = UIColor(named: "themeColor")
         // 各種ボタン操作
         deleteButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapDeleteButton()
@@ -189,6 +190,7 @@ extension FoodListViewController: FoodListPresenterOutput {
     func arrangeDisplayingView(_ isDelete: Bool) {
         deleteButton.imageChange(bool: isDelete)
         addButtton.isEnabled = isDelete
+        accountButton.isEnabled = isDelete
         locationButtonsStack.isHidden = !isDelete
         kindButtonsStack.isHidden = !isDelete
         kindButtonsBackView.isHidden = !isDelete

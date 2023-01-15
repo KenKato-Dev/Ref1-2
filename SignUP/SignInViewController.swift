@@ -128,7 +128,7 @@ extension SignInViewController: SignInPresenterOutput {
         present(alert, animated: true)
     }
 
-    func presentErrorIfNeeded(_ errorMessage: String) {
+    func showErrorMessageIfNeeded(_ errorMessage: String) {
 //        let message = errorMessage
         let alart = UIAlertController(title: nil, message: errorMessage, preferredStyle: .alert)
         alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
