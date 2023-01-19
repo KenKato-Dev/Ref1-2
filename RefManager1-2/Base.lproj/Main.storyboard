@@ -246,7 +246,7 @@
                             <constraint firstItem="7kW-7V-hcx" firstAttribute="top" secondItem="CN4-Pj-DGz" secondAttribute="bottom" constant="5" id="5Iu-CO-aMY"/>
                             <constraint firstItem="4fB-Nk-tQM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="BIh-YR-THX"/>
                             <constraint firstItem="7kW-7V-hcx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DHy-cl-lSp"/>
-                            <constraint firstItem="CN4-Pj-DGz" firstAttribute="top" secondItem="4fB-Nk-tQM" secondAttribute="bottom" constant="5" id="Qoc-7t-wlB"/>
+                            <constraint firstItem="CN4-Pj-DGz" firstAttribute="top" secondItem="4fB-Nk-tQM" secondAttribute="bottom" constant="5" id="Jzh-lc-Zpl"/>
                             <constraint firstItem="CN4-Pj-DGz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="T7P-VV-FXO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7kW-7V-hcx" secondAttribute="trailing" id="Vnm-0u-pBh"/>
                             <constraint firstItem="4fB-Nk-tQM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="WmH-ls-4fM"/>
@@ -330,6 +330,7 @@
                         <outlet property="scrollView" destination="7kW-7V-hcx" id="05F-YW-Vx9"/>
                         <outlet property="seasoningButton" destination="zz3-RA-gu0" id="l7H-Mt-pC1"/>
                         <outlet property="sweetButton" destination="bKq-yt-7xj" id="HnO-4U-U9Z"/>
+                        <outlet property="tableViewBottomConstraint" destination="Jzh-lc-Zpl" id="mAH-Pa-mh4"/>
                         <outlet property="vegitableFruitsButton" destination="niJ-RN-24C" id="vR3-gl-cJA"/>
                         <outlet property="viewTitle" destination="ebQ-Yw-zQR" id="aOL-4D-cPZ"/>
                         <segue destination="rRR-Uk-hkv" kind="show" identifier="toRecipeTableView" id="jAc-dp-xnC"/>
@@ -446,7 +447,7 @@
                                 <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <color key="backgroundColor" name="themeColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCell" rowHeight="70" translatesAutoresizingMaskIntoConstraints="NO" id="wAV-os-jWS" customClass="RecipeCategoryCell" customModule="RefManager1_2" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCell" rowHeight="70" translatesAutoresizingMaskIntoConstraints="NO" id="wAV-os-jWS" customClass="RecipeCategoryCell" customModule="RefManager1_2" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wAV-os-jWS" id="fKr-I5-h1N">
@@ -1051,7 +1052,7 @@
             <color red="1" green="0.57800000905990601" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="themeColor">
-            <color red="0.79506490519999995" green="0.95638051899999998" blue="0.86083414719999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.79500001668930054" green="0.95599997043609619" blue="0.86100000143051147" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

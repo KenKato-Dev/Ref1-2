@@ -207,7 +207,7 @@ extension FoodListViewController: FoodListPresenterOutput {
         if !isDelete {
             locationButtonsStack.backgroundColor = .clear
             kindButtonsStack.backgroundColor = .clear
-            tableViewBottomConstraint.constant = 165
+            tableViewBottomConstraint.constant = -165
 
         } else {
             locationButtonsStack.backgroundColor = .clear

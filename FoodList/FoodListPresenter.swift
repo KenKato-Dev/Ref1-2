@@ -137,17 +137,7 @@ final class FoodListPresenter {
         // ここでselectedKindsに入る
         foodUseCase.isAddingKinds(selectedKinds: &selectedFoodKinds)
         fetchArray()
-        print(foodData.query)
-        // 押したボタン画像を変更
-        var image = UIImage(named: kind.rawValue + "ButtonSelected")
-//        if button.imageView!.image! == UIImage(named: kind.rawValue + "Button") {
-//            image = button.imageView!.image!.compositeImage(
-//                UIImage(named: kind.rawValue + "Button")!,
-//                button.imageView!.image!,
-//                UIImage(named: "selectedButton")!,
-//                0.5
-//            )
-//        }
+
         // 押されたボタンのBool値Valueを基準にボタン外観を変更
         if foodUseCase.foodKindDictionary[kind]! {
 //            var image = UIImage(named: kind.rawValue + "ButtonSelected")

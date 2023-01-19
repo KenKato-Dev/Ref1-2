@@ -57,15 +57,7 @@ final class FoodAppendPresenter {
     func didTapKindButton(kind: Food.FoodKind, _ button: UIButton) {
         baseArray.kind = kind
         foodAppendPresenterOutput?.resetButtonsImage()
-//        var image = UIImage(named: kind.rawValue + "Button")
-//        if button.imageView!.image == UIImage(named: kind.rawValue + "Button") {
-//            image = button.imageView!.image!.compositeImage(
-//                UIImage(named: kind.rawValue + "Button")!,
-//                button.imageView!.image!,
-//                UIImage(named: "selectedButton")!,
-//                0.5
-//            )
-//        }
+
         // ここのボタンへの操作となるため上記resetButtonsImageが必要
         if baseArray.kind == kind {
             button.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
