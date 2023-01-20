@@ -212,7 +212,7 @@ extension FoodListViewController: FoodListPresenterOutput {
         } else {
             locationButtonsStack.backgroundColor = .clear
             kindButtonsStack.backgroundColor = .white
-            tableViewBottomConstraint.constant = 0
+            tableViewBottomConstraint.constant = 5
         }
     }
 
