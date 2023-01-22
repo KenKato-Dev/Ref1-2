@@ -46,16 +46,16 @@ class FoodListCell: UITableViewCell {
 
     func composeFood(food: Food) {
         preserveMethodTextLabel.text = locationTranslator(location: food.location)
-        //
         preserveMethodTextLabel.layer.cornerRadius = 15
         preserveMethodTextLabel.clipsToBounds = true
-        if preserveMethodTextLabel.text == "冷蔵"{
+        foodNameTextLabel.adjustsFontSizeToFitWidth = true
+        if preserveMethodTextLabel.text == "冷蔵" {
             preserveMethodTextLabel.textColor = .white
             preserveMethodTextLabel.backgroundColor = UIColor(named: "ref")
             preserveMethodTextLabel.layer.borderColor = UIColor(.clear).cgColor
             preserveMethodTextLabel.layer.borderWidth = 2
 
-        } else if preserveMethodTextLabel.text == "冷凍"{
+        } else if preserveMethodTextLabel.text == "冷凍" {
             preserveMethodTextLabel.textColor = UIColor(named: "freezer")
             preserveMethodTextLabel.backgroundColor = .white
             preserveMethodTextLabel.layer.borderColor = UIColor(named: "freezer")?.cgColor

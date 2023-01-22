@@ -82,9 +82,11 @@ extension SignUpViewController: SignUpPresenterOutput {
         view.addSubview(indicatorBackView)
         activityIndicator.startAnimating()
     }
+
     func dismiss() {
-        self.dismiss()
+        dismiss()
     }
+
     func hideIndicator(_ isHidden: Bool) {
         activityIndicator.isHidden = isHidden
         indicatorBackView.isHidden = isHidden

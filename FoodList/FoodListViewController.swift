@@ -35,7 +35,6 @@ final class FoodListViewController: UIViewController {
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
     private var userNameLabel = UILabel()
     private let recommendToAddLabel = UILabel()
-//    var receivedUIDFromSignInVC = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -142,20 +141,6 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_: UITableView, willDisplay _: UITableViewCell, forRowAt indexPath: IndexPath) {
         foodListPresenter.didScrollToLast(row: indexPath.row)
     }
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        foodListPresenter.numberOfRows()
-//    }
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        .leastNonzeroMagnitude
-//    }
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        5
-//    }
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let marginView = UIView()
-//            marginView.backgroundColor = .clear
-//            return marginView
-//    }
 
 }
 
@@ -362,7 +347,7 @@ extension FoodListViewController: FoodListPresenterOutput {
 
     // 項目選択時に削除ボタンを押すと表示するアラートを表示
     func shouldShowUserName(_ userName: String) {
-        self.navigationController?.navigationBar.barTintColor = UIColor(named: "themeColor")
+        navigationController?.navigationBar.barTintColor = UIColor(named: "themeColor")
         navigationController?.navigationBar.titleTextAttributes =
             [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]
         viewTitle.title = "\(userName)さんの冷蔵庫"

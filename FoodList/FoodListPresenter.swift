@@ -140,14 +140,11 @@ final class FoodListPresenter {
 
         // 押されたボタンのBool値Valueを基準にボタン外観を変更
         if foodUseCase.foodKindDictionary[kind]! {
-//            var image = UIImage(named: kind.rawValue + "ButtonSelected")
             button.setImage(UIImage(named: kind.rawValue + "ButtonSelected"), for: .normal)
             button.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-//            button.isHighlighted = true
         } else {
             button.setImage(UIImage(named: kind.rawValue + "Button"), for: .normal)
             button.transform = CGAffineTransform(scaleX: 1, y: 1)
-//            button.isHighlighted = false
         }
         foodListPresenterOutput?.reloadData()
     }

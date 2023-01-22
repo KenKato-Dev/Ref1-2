@@ -75,22 +75,14 @@ class DeleteButton: UIButton {
         layer.masksToBounds = true
         // 角丸み
         layer.cornerRadius = 10.0
-        // 枠線の色
-//        layer.borderColor = UIColor(ciColor: .gray).cgColor
-//        layer.borderColor = UIColor(displayP3Red: 79/255, green: 172/255, blue: 254/255,alpha: 1.0).cgColor
-        // 枠線の太さ
-//        layer.borderWidth = 2
-        // Padding
-//        contentEdgeInsets = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
         // 背景色
         backgroundColor = UIColor.white
         // テキスト色
         setTitleColor(UIColor.red, for: .normal)
-//        setTitleColor(UIColor(displayP3Red: 79/255, green: 172/255, blue: 254/255,alpha: 1.0), for: .normal)
         // テキストサイズ
         titleLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
         imageView?.image?.withTintColor(.red)
-        // シンボルカラー
+
     }
 
     // bool=trueの際に作動
@@ -102,15 +94,8 @@ class DeleteButton: UIButton {
         } else {
             setImage(.remove, for: .normal)
             setTitle("", for: .normal)
-//            setTitle("削除", for: .normal)
             setTitleColor(.red, for: .normal)
         }
     }
-    /*
-     // Only override draw() if you perform custom drawing.
-     // An empty implementation adversely affects performance during animation.
-     override func draw(_ rect: CGRect) {
-         // Drawing code
-     }
-     */
+
 }

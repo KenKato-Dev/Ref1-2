@@ -66,9 +66,10 @@ final class RecipeCategoryListPresenter {
     }
 
     func didSelectRow(indexPath: IndexPath) {
-        self.recipeCategoryListPresenterOutput?
+        recipeCategoryListPresenterOutput?
             .showJumpMessageIfNeeded(indexPath: indexPath)
     }
+
     func openUrl(indexPath: IndexPath) {
         if UIApplication.shared.canOpenURL(URL(string: array[indexPath.row].categoryUrl)!) {
             UIApplication.shared.open(URL(string: array[indexPath.row].categoryUrl)!)

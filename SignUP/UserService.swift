@@ -20,7 +20,6 @@ struct UserData {
 }
 
 class UserService {
-
     private let auth = Auth.auth()
     private let db = Firestore.firestore()
 
@@ -37,7 +36,7 @@ class UserService {
     }
 
     func checkSignInStatus(_ completion: @escaping (Bool) -> Void) {
-        if auth.currentUser != nil && auth.currentUser!.isEmailVerified {
+        if auth.currentUser != nil, auth.currentUser!.isEmailVerified {
             completion(true)
         } else {
             completion(false)
@@ -91,11 +90,12 @@ class UserService {
     }
 
     func resetPasswordWithMail(_ mail: String) {
-        self.auth.sendPasswordReset(withEmail: mail)
+        auth.sendPasswordReset(withEmail: mail)
     }
+
     //
-    func sendAuthEmail(_ completion:@escaping (Result<Bool, Error>) -> Void) {
-        self.auth.currentUser?.sendEmailVerification { errorOrNil in
+    func sendAuthEmail(_ completion: @escaping (Result<Bool, Error>) -> Void) {
+        auth.currentUser?.sendEmailVerification { errorOrNil in
             if let error = errorOrNil {
                 completion(.failure(error))
             } else {
@@ -103,10 +103,11 @@ class UserService {
             }
         }
     }
+
     //
-    func checkMailValification(_ completion:@escaping (Result<Bool, Error>) -> Void) {
-        self.auth.currentUser?.reload(completion: { errorOrNil in
-            guard let currentUser = self.auth.currentUser else {return}
+    func checkMailValification(_ completion: @escaping (Result<Bool, Error>) -> Void) {
+        auth.currentUser?.reload(completion: { errorOrNil in
+            guard let currentUser = self.auth.currentUser else { return }
             if let error = errorOrNil {
                 completion(.failure(error))
             } else {

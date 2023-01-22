@@ -30,7 +30,7 @@ final class SignInViewController: UIViewController {
         signInPresenter.reloadUser()
         signInButton.addAction(.init(handler: { _ in
             guard let email = self.emailTextField.text, let password
-                    = self.passwordTextField.text else { return }
+                = self.passwordTextField.text else { return }
             self.signInPresenter.didTapSignInButton(email, password)
         }), for: .touchUpInside)
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
@@ -38,6 +38,7 @@ final class SignInViewController: UIViewController {
             self.signInPresenter.didTapResetPassButton()
         }), for: .touchUpInside)
     }
+
     // performsegueの動作を制御
     override func shouldPerformSegue(withIdentifier identifier: String, sender _: Any?) -> Bool {
         if identifier == "toFoodListView", signInPresenter.isFillOutNecessary {
@@ -48,6 +49,7 @@ final class SignInViewController: UIViewController {
             return false
         }
     }
+
     @objc func hideKeyboard() {
         view.endEditing(true)
     }
@@ -134,6 +136,7 @@ extension SignInViewController: SignInPresenterOutput {
         alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alart, animated: true) {}
     }
+
     // 試作
     static func checkSignInStatus(_ isSignIn: Bool) -> UIViewController {
         if isSignIn {

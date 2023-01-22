@@ -86,26 +86,27 @@ final class SignUpPresenter {
             }
         }
     }
+
     func manageAuthErrorMessage(_ error: NSError) -> String {
-                switch AuthErrorCode.Code(rawValue: error.code) {
-                case .invalidEmail:
-                    print("メールアドレスの形式が違います")
-                    return "メールアドレスの形式が違います"
-                case .emailAlreadyInUse:
-                    print("このメールアドレスはすでに使われています")
-                    return "このメールアドレスはすでに使われています"
-                case .weakPassword:
-                    print("パスワードが簡単すぎます")
-                    return "パスワードが簡単すぎます"
-                case .userNotFound, .wrongPassword:
-                    print("メールアドレス、またはパスワードが間違えてます")
-                    return "メールアドレス、またはパスワードが間違えてます"
-                case .userDisabled:
-                    print("このユーザーアカウントは無効化されています")
-                    return "このユーザーアカウントは無効化されています"
-                default:
-                    print("良きせぬエラーが発生しました\nしばらくお待ちください")
-                    return "良きせぬエラーが発生しました\nしばらくお待ちください"
-                }
+        switch AuthErrorCode.Code(rawValue: error.code) {
+        case .invalidEmail:
+            print("メールアドレスの形式が違います")
+            return "メールアドレスの形式が違います"
+        case .emailAlreadyInUse:
+            print("このメールアドレスはすでに使われています")
+            return "このメールアドレスはすでに使われています"
+        case .weakPassword:
+            print("パスワードが簡単すぎます")
+            return "パスワードが簡単すぎます"
+        case .userNotFound, .wrongPassword:
+            print("メールアドレス、またはパスワードが間違えてます")
+            return "メールアドレス、またはパスワードが間違えてます"
+        case .userDisabled:
+            print("このユーザーアカウントは無効化されています")
+            return "このユーザーアカウントは無効化されています"
+        default:
+            print("良きせぬエラーが発生しました\nしばらくお待ちください")
+            return "良きせぬエラーが発生しました\nしばらくお待ちください"
+        }
     }
 }

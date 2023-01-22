@@ -107,6 +107,7 @@ extension RecipeCategoryListViewController: RecipeCategoryListPresenterOutput {
         alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alart, animated: true) {}
     }
+
     func showJumpMessageIfNeeded(indexPath: IndexPath) {
         let title = "外部リンクを開きますか？"
         let message = "楽天レシピにアクセスします"
