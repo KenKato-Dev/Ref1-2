@@ -14,7 +14,7 @@ class FoodListCell: UITableViewCell {
     }
 
     @IBOutlet var checkBoxButton: CheckBoxButton!
-    @IBOutlet var preserveMethodTextLable: UILabel!
+    @IBOutlet var preserveMethodTextLabel: UILabel!
     @IBOutlet var foodImage: UIImageView!
     @IBOutlet var foodNameTextLabel: UILabel!
     @IBOutlet var dateTextLabel: UILabel!
@@ -45,7 +45,23 @@ class FoodListCell: UITableViewCell {
     }
 
     func composeFood(food: Food) {
-        preserveMethodTextLable.text = locationTranslator(location: food.location)
+        preserveMethodTextLabel.text = locationTranslator(location: food.location)
+        preserveMethodTextLabel.layer.cornerRadius = 15
+        preserveMethodTextLabel.clipsToBounds = true
+        foodNameTextLabel.adjustsFontSizeToFitWidth = true
+        if preserveMethodTextLabel.text == "冷蔵" {
+            preserveMethodTextLabel.textColor = .white
+            preserveMethodTextLabel.backgroundColor = UIColor(named: "ref")
+            preserveMethodTextLabel.layer.borderColor = UIColor(.clear).cgColor
+            preserveMethodTextLabel.layer.borderWidth = 2
+
+        } else if preserveMethodTextLabel.text == "冷凍" {
+            preserveMethodTextLabel.textColor = UIColor(named: "freezer")
+            preserveMethodTextLabel.backgroundColor = .white
+            preserveMethodTextLabel.layer.borderColor = UIColor(named: "freezer")?.cgColor
+            preserveMethodTextLabel.layer.borderWidth = 2
+        }
+        //
         foodImage.image = UIImage(named: "\(food.kind.rawValue)")
         foodNameTextLabel.text = food.name
         quantityTextLabel.text = String(food.quantity)

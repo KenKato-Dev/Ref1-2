@@ -35,7 +35,6 @@ final class FoodListViewController: UIViewController {
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
     private var userNameLabel = UILabel()
     private let recommendToAddLabel = UILabel()
-//    var receivedUIDFromSignInVC = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,6 +106,7 @@ final class FoodListViewController: UIViewController {
 
 extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
     // cellの数
+
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         foodListPresenter.numberOfRows()
     }
@@ -141,6 +141,7 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_: UITableView, willDisplay _: UITableViewCell, forRowAt indexPath: IndexPath) {
         foodListPresenter.didScrollToLast(row: indexPath.row)
     }
+
 }
 
 // Presenter側で定義したOutputに準拠した拡張
@@ -189,6 +190,7 @@ extension FoodListViewController: FoodListPresenterOutput {
     func arrangeDisplayingView(_ isDelete: Bool) {
         deleteButton.imageChange(bool: isDelete)
         addButtton.isEnabled = isDelete
+        accountButton.isEnabled = isDelete
         locationButtonsStack.isHidden = !isDelete
         kindButtonsStack.isHidden = !isDelete
         kindButtonsBackView.isHidden = !isDelete
@@ -205,12 +207,12 @@ extension FoodListViewController: FoodListPresenterOutput {
         if !isDelete {
             locationButtonsStack.backgroundColor = .clear
             kindButtonsStack.backgroundColor = .clear
-            tableViewBottomConstraint.constant = 165
+            tableViewBottomConstraint.constant = -165
 
         } else {
             locationButtonsStack.backgroundColor = .clear
-            kindButtonsStack.backgroundColor = .white
-            tableViewBottomConstraint.constant = 0
+            kindButtonsStack.backgroundColor = .clear
+            tableViewBottomConstraint.constant = 5
         }
     }
 
@@ -218,21 +220,21 @@ extension FoodListViewController: FoodListPresenterOutput {
     func animateLocationButton(_ isFilteringRef: Bool, _ isFilteringFreezer: Bool) {
         if isFilteringRef {
             refrigeratorButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            refrigeratorButton.layer.borderColor = UIColor.gray.cgColor
-            refrigeratorButton.layer.cornerRadius = 20
-            refrigeratorButton.layer.borderWidth = 3.0
+            refrigeratorButton.tintColor = .gray
+            refrigeratorButton.configuration?.background.backgroundColor = UIColor(named: "refSelected") //
         } else {
             refrigeratorButton.transform = CGAffineTransform(scaleX: 1, y: 1)
-            refrigeratorButton.layer.borderColor = UIColor.clear.cgColor
+            refrigeratorButton.tintColor = .white
+            refrigeratorButton.configuration?.background.backgroundColor = UIColor(named: "ref")
         }
         if isFilteringFreezer {
             freezerButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            freezerButton.layer.borderColor = UIColor.gray.cgColor
-            freezerButton.layer.cornerRadius = 20
-            freezerButton.layer.borderWidth = 3.0
+            freezerButton.tintColor = UIColor(named: "freezerSelected")
+            freezerButton.configuration?.background.backgroundColor = .lightGray //
         } else {
             freezerButton.transform = CGAffineTransform(scaleX: 1, y: 1)
-            freezerButton.layer.borderColor = UIColor.clear.cgColor
+            freezerButton.tintColor = .white
+            freezerButton.configuration?.background.backgroundColor = .white //
         }
     }
 
@@ -345,6 +347,7 @@ extension FoodListViewController: FoodListPresenterOutput {
 
     // 項目選択時に削除ボタンを押すと表示するアラートを表示
     func shouldShowUserName(_ userName: String) {
+        navigationController?.navigationBar.barTintColor = UIColor(named: "themeColor")
         navigationController?.navigationBar.titleTextAttributes =
             [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]
         viewTitle.title = "\(userName)さんの冷蔵庫"
@@ -357,8 +360,8 @@ extension FoodListViewController: FoodListPresenterOutput {
             height: 50
         )
         userNameLabel.textAlignment = .center
-        userNameLabel.font = .systemFont(ofSize: 25)
-        userNameLabel.textColor = UIColor.gray
+        userNameLabel.font = .systemFont(ofSize: 15)
+        userNameLabel.textColor = UIColor.darkGray
         userNameLabel.backgroundColor = UIColor.white.withAlphaComponent(0.6)
         userNameLabel.adjustsFontSizeToFitWidth = true
         // navigationItemでは表示されず
@@ -400,15 +403,15 @@ extension FoodListViewController: FoodListPresenterOutput {
 
     // 削除するかどうかアラート
     func showDeleteAlert() {
-        let alert = UIAlertController(title: "削除しますか?", message: "", preferredStyle: .actionSheet)
-        alert.addAction(.init(title: "はい", style: .default, handler: { _ in
+        let alart = UIAlertController(title: "削除しますか?", message: "", preferredStyle: .actionSheet)
+        alart.addAction(.init(title: "はい", style: .default, handler: { _ in
             self.foodListPresenter.deleteAction()
             self.reloadData()
         }))
-        alert.addAction(.init(title: "いいえ", style: .destructive, handler: { _ in
+        alart.addAction(.init(title: "いいえ", style: .destructive, handler: { _ in
             self.foodListPresenter.resetCheckedID()
             print("削除をキャンセル")
         }))
-        present(alert, animated: true)
+        present(alart, animated: true)
     }
 }

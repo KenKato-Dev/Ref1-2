@@ -32,20 +32,10 @@ class CheckBoxButton: TapFeedbackView {
         layer.masksToBounds = true
         // 角丸み
         layer.cornerRadius = 15.0
-        // 枠線の色
-        //        layer.borderColor = UIColor(displayP3Red: 79/255, green: 172/255, blue: 254/255,alpha: 1.0).cgColor
-        // 枠線の太さ
-        //        layer.borderWidth = 2
-        // Padding
-        //        contentEdgeInsets = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
         // 背景色
         backgroundColor = UIColor.clear
-        // テキスト色
-        //        setTitleColor(UIColor.red, for: .normal)
-        //        setTitleColor(UIColor(displayP3Red: 79/255, green: 172/255, blue: 254/255,alpha: 1.0), for: .normal)
         // テキストサイズ
         titleLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
-        //        imageView?.image?.withTintColor(.red)
     }
 
     // Bool引数isCheckによってボタン外観をsetImageを切り替えさせる

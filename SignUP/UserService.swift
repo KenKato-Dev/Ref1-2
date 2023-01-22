@@ -20,32 +20,26 @@ struct UserData {
 }
 
 class UserService {
-
     private let auth = Auth.auth()
     private let db = Firestore.firestore()
-    private (set) var errorMessage = ""
 
-    func signIn(_ email: String, _ password: String, _ completion: @escaping (Result<String, Error>) -> Void) {
+    func signIn(_ email: String, _ password: String, _ completion: @escaping (Result<User, Error>) -> Void) {
         auth.signIn(withEmail: email, password: password) { [weak self] authDataResult, error in
             if let error = error {
                 print(error)
                 completion(.failure(error))
             } else {
-                guard let uid = authDataResult?.user.uid else { return }
-                completion(.success(uid))
+                guard let user = authDataResult?.user else { return }
+                completion(.success(user))
             }
         }
     }
 
     func checkSignInStatus(_ completion: @escaping (Bool) -> Void) {
-        Auth.auth().addStateDidChangeListener { _, user in
-            if user == nil {
-                // 新規
-                completion(false)
-            } else {
-                // ログイン済み
-                completion(true)
-            }
+        if auth.currentUser != nil, auth.currentUser!.isEmailVerified {
+            completion(true)
+        } else {
+            completion(false)
         }
     }
 
@@ -54,30 +48,9 @@ class UserService {
                   _ pass: String,
                   _ completion: @escaping (Result<Void, Error>) -> Void) {
         DispatchQueue.main.async {
-            self.auth.createUser(withEmail: email, password: pass) { result, err in
-                if let err = err as NSError? {
-                    if let errorCode = AuthErrorCode.Code(rawValue: err.code) {
-                        switch errorCode {
-                        case .invalidEmail:
-                            print("メールアドレスの形式が違います")
-                            self.errorMessage = "メールアドレスの形式が違います"
-                        case .emailAlreadyInUse:
-                            print("このメールアドレスはすでに使われています")
-                            self.errorMessage = "このメールアドレスはすでに使われています"
-                        case .weakPassword:
-                            print("パスワードが簡単すぎます")
-                            self.errorMessage = "パスワードが簡単すぎます"
-                        case .userNotFound, .wrongPassword:
-                            print("メールアドレス、またはパスワードが間違えてます")
-                            self.errorMessage = "メールアドレス、またはパスワードが間違えてます"
-                        case .userDisabled:
-                            print("このユーザーアカウントは無効化されています")
-                            self.errorMessage = "このユーザーアカウントは無効化されています"
-                        default:
-                            print("良きせぬエラーが発生しました\nしばらくお待ちください")
-                            self.errorMessage = "良きせぬエラーが発生しました\nしばらくお待ちください"
-                        }
-                    }
+            self.auth.createUser(withEmail: email, password: pass) { result, error in
+                if let error = error {
+                    completion(.failure(error))
                 }
                 print("manager認証に成功")
                 //
@@ -113,16 +86,33 @@ class UserService {
                 completion(.success(false))
                 print("既に使われているEmail")
             }
-//            if let error = error {
-//                completion(.failure(error))
-//                print("checkEmailUsedに失敗")
-//                return
-//            }
-
         }
     }
 
     func resetPasswordWithMail(_ mail: String) {
-        self.auth.sendPasswordReset(withEmail: mail)
+        auth.sendPasswordReset(withEmail: mail)
+    }
+
+    //
+    func sendAuthEmail(_ completion: @escaping (Result<Bool, Error>) -> Void) {
+        auth.currentUser?.sendEmailVerification { errorOrNil in
+            if let error = errorOrNil {
+                completion(.failure(error))
+            } else {
+                completion(.success(true))
+            }
+        }
+    }
+
+    //
+    func checkMailValification(_ completion: @escaping (Result<Bool, Error>) -> Void) {
+        auth.currentUser?.reload(completion: { errorOrNil in
+            guard let currentUser = self.auth.currentUser else { return }
+            if let error = errorOrNil {
+                completion(.failure(error))
+            } else {
+                completion(.success(currentUser.isEmailVerified))
+            }
+        })
     }
 }

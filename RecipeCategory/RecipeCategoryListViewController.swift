@@ -102,9 +102,23 @@ extension RecipeCategoryListViewController: RecipeCategoryListPresenterOutput {
     // エラー内容を表示、将来的にStringsファイルにてエラー内容に応じて文章を変更予定
     func presentErrorIfNeeded(_ errorOrNil: Error?) {
         guard let error = errorOrNil else { return }
-        let message = "エラー発生:\(error)"
+        let message = "エラー発生:\(error.localizedDescription)"
         let alart = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alart, animated: true) {}
+    }
+
+    func showJumpMessageIfNeeded(indexPath: IndexPath) {
+        let title = "外部リンクを開きますか？"
+        let message = "楽天レシピにアクセスします"
+
+        let alart = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alart.addAction(.init(title: "はい", style: .default, handler: { _ in
+            self.recipeCategoryListPresenter.openUrl(indexPath: indexPath)
+        }))
+        alart.addAction(.init(title: "いいえ", style: .destructive, handler: { _ in
+
+        }))
         present(alart, animated: true) {}
     }
 }

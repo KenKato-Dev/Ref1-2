@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 extension UIImage {
     // 画像同士を重ねて新たな画像を生成する処理
+
     func compositeImage(_ originalImage: UIImage,
                         _ currentImage: UIImage,
                         _ image: UIImage,

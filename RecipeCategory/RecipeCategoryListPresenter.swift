@@ -15,6 +15,7 @@ protocol RecipeCategoryListPresenterOutput: AnyObject {
     func hideIndicator(_ isHidden: Bool)
     func showNoResult()
     func presentErrorIfNeeded(_ errorOrNil: Error?)
+    func showJumpMessageIfNeeded(indexPath: IndexPath)
 }
 
 final class RecipeCategoryListPresenter {
@@ -65,6 +66,11 @@ final class RecipeCategoryListPresenter {
     }
 
     func didSelectRow(indexPath: IndexPath) {
+        recipeCategoryListPresenterOutput?
+            .showJumpMessageIfNeeded(indexPath: indexPath)
+    }
+
+    func openUrl(indexPath: IndexPath) {
         if UIApplication.shared.canOpenURL(URL(string: array[indexPath.row].categoryUrl)!) {
             UIApplication.shared.open(URL(string: array[indexPath.row].categoryUrl)!)
         } else {
