@@ -27,7 +27,7 @@ class TapFeedbackView: UIButton {
         touchEndAnimation()
     }
 
-    // ビューを凹んだように見せるアニメーション
+    // ビューを凹ませるアニメーション
     private func touchStartAnimation() {
         UIButton.animate(withDuration: 0.2,
                          delay: 0.0,

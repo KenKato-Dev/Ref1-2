@@ -16,6 +16,7 @@ protocol FoodAppendPresenterOutput: AnyObject {
     func presentErrorIfNeeded(_ errorOrNil: Error?)
     func resetButtonsImage()
     func animateButton(_ location: Food.Location)
+
 }
 
 // FoodAppendViewのPresenter

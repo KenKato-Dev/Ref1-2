@@ -45,11 +45,7 @@ final class SignInPresenter {
         self.isDisableSegue = true
         signInPresenterOutput?.didTapWithoutNecessaryFields()
         signInPresenterOutput?.showLoadingSpin()
-//        if Auth.auth().currentUser == nil {
-//            self.signInPresenterOutput?.presentErrorIfNeeded("ユーザー登録を確認できません")
-//            self.signInPresenterOutput?.hideIndicator(true)
-//        }
-//        if Auth.auth().currentUser!.isEmailVerified {
+
             userService.signIn(email, password) { result in
                 self.signInPresenterOutput?.hideIndicator(true)
                 switch result {

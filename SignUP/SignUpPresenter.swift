@@ -12,7 +12,6 @@ protocol SignUpPresenterOutput: AnyObject {
     func isSequrePassEntry()
     func showEssential()
     func showUsedEmail()
-//    func performSegue(uid: String)
     func dismiss()
     func presentErrorIfNeeded(_ errorMessage: String)
     func showLoadingSpin()
@@ -21,7 +20,6 @@ protocol SignUpPresenterOutput: AnyObject {
 
 final class SignUpPresenter {
     private let userService: UserService
-//    private(set) var isDisableSegue = false
     private weak var signUpPresenterOutput: SignUpPresenterOutput?
     init(userService: UserService) {
         self.userService = userService

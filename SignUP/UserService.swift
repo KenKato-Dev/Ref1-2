@@ -23,7 +23,6 @@ class UserService {
 
     private let auth = Auth.auth()
     private let db = Firestore.firestore()
-//    private (set) var errorMessage = ""
 
     func signIn(_ email: String, _ password: String, _ completion: @escaping (Result<User, Error>) -> Void) {
         auth.signIn(withEmail: email, password: password) { [weak self] authDataResult, error in
@@ -32,7 +31,6 @@ class UserService {
                 completion(.failure(error))
             } else {
                 guard let user = authDataResult?.user else { return }
-//                guard let uid = authDataResult?.user.uid else { return }
                 completion(.success(user))
             }
         }
@@ -44,15 +42,6 @@ class UserService {
         } else {
             completion(false)
         }
-//        Auth.auth().addStateDidChangeListener { _, user in
-//            if user == nil {
-//                // 新規
-//                completion(false)
-//            } else {
-//                // ログイン済み
-//                completion(true)
-//            }
-//        }
     }
 
     func postUser(_ email: String,
@@ -106,7 +95,7 @@ class UserService {
     }
     //
     func sendAuthEmail(_ completion:@escaping (Result<Bool, Error>) -> Void) {
-        self.auth.currentUser?.sendEmailVerification { errorOrNil in // with: ActionCodeSettings,
+        self.auth.currentUser?.sendEmailVerification { errorOrNil in
             if let error = errorOrNil {
                 completion(.failure(error))
             } else {
