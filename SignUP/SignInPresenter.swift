@@ -99,7 +99,7 @@ final class SignInPresenter {
     func resetisDisableSgue() {
         isDisableSegue = false
     }
-    //返りのエラー内容にて表示変更
+    // 返りのエラー内容にて表示変更
     func manageSiginInErrorMessage(_ error: NSError) -> String {
         switch AuthErrorCode.Code(rawValue: error.code) {
         case .invalidEmail:
@@ -122,12 +122,7 @@ final class SignInPresenter {
             return "良きせぬエラーが発生しました\nしばらくお待ちください"
         }
     }
-    func adUnitID(key: String) -> String? {
-        guard let adUnitIDs = Bundle.main.object(forInfoDictionaryKey: "AdUnitIDs") as? [String: String] else {
-            return nil
-        }
-        return adUnitIDs[key]
-    }
+
     func displayBanner() {
         self.signInPresenterOutput?.setUpAdBanner()
     }

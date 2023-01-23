@@ -34,6 +34,7 @@ final class FoodListViewController: UIViewController {
     @IBOutlet var foodListTableView: UITableView!
     @IBOutlet var viewTitle: UINavigationItem!
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bannerView: GADBannerView!
 
     private var userNameLabel = UILabel()
     private let recommendToAddLabel = UILabel()
@@ -43,6 +44,7 @@ final class FoodListViewController: UIViewController {
         foodListTableView.delegate = self
         foodListTableView.dataSource = self
         foodListPresenter.setOutput(foodListPresenterOutput: self)
+        foodListPresenter.displayBanner()
         foodListPresenter.greentingToUser()
         foodListPresenter.fetchArray()
         // 各種ボタン操作
@@ -415,5 +417,11 @@ extension FoodListViewController: FoodListPresenterOutput {
             print("削除をキャンセル")
         }))
         present(alart, animated: true)
+    }
+    func setUpAdBanner() {
+        // 実装テスト用ID
+            bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+            bannerView.rootViewController = self
+            bannerView.load(GADRequest())
     }
 }

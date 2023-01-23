@@ -6,6 +6,7 @@
 //
 
 import Firebase
+import GoogleMobileAds
 import Foundation
 
 // ViewController側の処理を定義
@@ -24,6 +25,7 @@ protocol FoodListPresenterOutput: AnyObject {
     func removeRecommendToAddLabel(_ isHidden: Bool)
     func shouldShowUserName(_ userName: String)
     func showDeleteAlert()
+    func setUpAdBanner()
 
 }
 
@@ -293,5 +295,8 @@ final class FoodListPresenter {
                 self.foodListPresenterOutput?.shouldShowUserName("情報取得を失敗しました")
             }
         }
+    }
+    func displayBanner() {
+        self.foodListPresenterOutput?.setUpAdBanner()
     }
 }

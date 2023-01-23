@@ -171,7 +171,7 @@ extension SignInViewController: SignInPresenterOutput {
     }
     // GoogleAd
     func setUpAdBanner() {
-        //実装テスト用ID
+        // 実装テスト用ID
             bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
             bannerView.rootViewController = self
             bannerView.load(GADRequest())
