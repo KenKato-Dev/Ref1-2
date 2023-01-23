@@ -10,6 +10,7 @@ import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import GoogleMobileAds
 import UIKit
 
 @main
@@ -17,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?)
         -> Bool {
         FirebaseApp.configure()
-
+            // 初期化
+            GADMobileAds.sharedInstance().start(completionHandler: nil)
         // Override point for customization after application launch.
         return true
     }

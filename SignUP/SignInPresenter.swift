@@ -18,6 +18,7 @@ protocol SignInPresenterOutput: AnyObject {
     func showErrorMessageIfNeeded(_ errorMessage: String)
     func showLoadingSpin()
     func hideIndicator(_ isHidden: Bool)
+    func setUpAdBanner()
 }
 
 final class SignInPresenter {
@@ -120,5 +121,14 @@ final class SignInPresenter {
             print("良きせぬエラーが発生しました\nしばらくお待ちください")
             return "良きせぬエラーが発生しました\nしばらくお待ちください"
         }
+    }
+    func adUnitID(key: String) -> String? {
+        guard let adUnitIDs = Bundle.main.object(forInfoDictionaryKey: "AdUnitIDs") as? [String: String] else {
+            return nil
+        }
+        return adUnitIDs[key]
+    }
+    func displayBanner() {
+        self.signInPresenterOutput?.setUpAdBanner()
     }
 }

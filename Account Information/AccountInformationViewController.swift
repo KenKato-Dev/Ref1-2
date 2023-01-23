@@ -26,7 +26,9 @@ class AccountInformationViewController: UIViewController {
 extension AccountInformationViewController: AccountInformationPresenterOutput {
     func setAccountInformation(_ name: String, _ email: String, _ criatedDay: String) {
         accountNameLabel.text = name
+        accountNameLabel.adjustsFontSizeToFitWidth = true
         accountEmailLabel.text = email
+        accountEmailLabel.adjustsFontSizeToFitWidth = true
         accountCreatedDayLabel.text = criatedDay
     }
 

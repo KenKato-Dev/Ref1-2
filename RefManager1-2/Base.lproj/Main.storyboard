@@ -188,13 +188,13 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="A5i-rA-CLE">
                                                                     <rect key="frame" x="85" y="40" width="287.5" height="40"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="材料名" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bsa-sa-OJq">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="材料名" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bsa-sa-OJq">
                                                                             <rect key="frame" x="0.0" y="0.0" width="143.5" height="40"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数量" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BV5-FO-lKD">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数量" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BV5-FO-lKD">
                                                                             <rect key="frame" x="148.5" y="0.0" width="72" height="40"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -208,9 +208,9 @@
                                                                         </label>
                                                                         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" reuseIdentifier="cell" rowHeight="80" id="NOF-ag-0eQ" customClass="FoodListCell" customModule="RefManager1_2" customModuleProvider="target">
                                                                             <rect key="frame" x="127" y="40" width="160.5" height="0.0"/>
-                                                                            <autoresizingMask key="autoresizingMask"/>
+                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NOF-ag-0eQ" id="ipQ-l9-gND">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="160.5" height="0.0"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="160.5" height="1.1920928955078125e-07"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <subviews>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3KJ-Y8-qrE">
@@ -496,7 +496,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="ORi-LV-aya">
                                 <rect key="frame" x="30" y="212" width="141.5" height="121.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アカウント名：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4VU-fq-gw8">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アカウント名：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4VU-fq-gw8">
                                         <rect key="frame" x="20" y="0.0" width="121.5" height="20.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <nil key="textColor"/>
@@ -508,7 +508,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="利用開始日：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P19-xs-E07">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="利用開始日：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P19-xs-E07">
                                         <rect key="frame" x="37.5" y="101" width="104" height="20.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <nil key="textColor"/>
@@ -527,13 +527,13 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="4p8-P8-FmX">
                                 <rect key="frame" x="181.5" y="212" width="222.5" height="121.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アカウント登録名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehh-M2-Qfk">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アカウント登録名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ehh-M2-Qfk">
                                         <rect key="frame" x="0.0" y="0.0" width="139" height="20.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXXX@XX.XX" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8a-PM-pQg">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXXX@XX.XX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8a-PM-pQg">
                                         <rect key="frame" x="0.0" y="50.5" width="108.5" height="20.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <nil key="textColor"/>
@@ -962,21 +962,21 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSR-DF-fBd">
-                                <rect key="frame" x="100" y="549" width="214" height="44"/>
+                            <button opaque="NO" contentMode="scaleToFill" highlighted="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSR-DF-fBd">
+                                <rect key="frame" x="100" y="529" width="214" height="44"/>
                                 <buttonConfiguration key="configuration" style="plain" title="ログイン">
                                     <backgroundConfiguration key="background" cornerRadius="20">
-                                        <color key="backgroundColor" red="0.66452283249158239" green="0.79742739898989901" blue="0.73524470387757912" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </backgroundConfiguration>
                                     <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="baseForegroundColor" red="0.42899763784799694" green="0.51603960990909092" blue="0.46448511728433767" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <segue destination="BYZ-38-t0r" kind="show" identifier="toFoodListView" id="D7Q-WU-N5h"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v81-ff-chZ">
-                                <rect key="frame" x="10" y="683" width="394" height="34"/>
+                                <rect key="frame" x="10" y="623" width="394" height="34"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="アカウントをお持ちでない方はコチラ">
                                     <color key="titleColor" systemColor="systemIndigoColor"/>
@@ -985,7 +985,7 @@
                                     <segue destination="50g-ej-6ev" kind="show" identifier="toSignUpVC" id="O33-d3-Giw"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="メールアドレス" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="95F-IH-kFC">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="メールアドレス" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="95F-IH-kFC">
                                 <rect key="frame" x="55.5" y="339" width="121.5" height="20"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1016,15 +1016,24 @@
                                     <constraint firstAttribute="width" secondItem="WcX-pg-deb" secondAttribute="height" multiplier="2:1" id="ptt-0i-WcT"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FNt-i1-gds" customClass="GADBannerView">
+                                <rect key="frame" x="47" y="687" width="320" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Fbt-Q2-dfe"/>
+                                    <constraint firstAttribute="width" constant="320" id="ruJ-Fv-ZoY"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="G8w-Nw-roS"/>
                         <color key="backgroundColor" red="0.79506490520583428" green="0.95638051899996668" blue="0.86083414723612572" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="v81-ff-chZ" firstAttribute="top" secondItem="xSR-DF-fBd" secondAttribute="bottom" constant="90" id="6CT-9z-Q6v"/>
+                            <constraint firstItem="v81-ff-chZ" firstAttribute="top" secondItem="xSR-DF-fBd" secondAttribute="bottom" constant="50" id="6CT-9z-Q6v"/>
                             <constraint firstItem="1fB-M2-Suz" firstAttribute="width" secondItem="3xg-2y-cRY" secondAttribute="width" multiplier="0.5" id="7E3-gf-Et1"/>
                             <constraint firstItem="G8w-Nw-roS" firstAttribute="trailing" secondItem="v81-ff-chZ" secondAttribute="trailing" constant="10" id="BtT-ET-BOp"/>
                             <constraint firstItem="G8w-Nw-roS" firstAttribute="trailing" secondItem="xSR-DF-fBd" secondAttribute="trailing" constant="100" id="CiM-Tg-BBu"/>
                             <constraint firstItem="sfO-vH-cOz" firstAttribute="top" secondItem="uV7-dP-10f" secondAttribute="bottom" constant="10" id="Ilc-e5-HSP"/>
+                            <constraint firstItem="FNt-i1-gds" firstAttribute="top" secondItem="v81-ff-chZ" secondAttribute="bottom" constant="30" id="J6B-Si-fGk"/>
                             <constraint firstItem="sfO-vH-cOz" firstAttribute="centerX" secondItem="3xg-2y-cRY" secondAttribute="centerX" id="MQY-5I-1aB"/>
                             <constraint firstItem="v81-ff-chZ" firstAttribute="centerX" secondItem="3xg-2y-cRY" secondAttribute="centerX" id="MRM-k6-wzZ"/>
                             <constraint firstItem="uV7-dP-10f" firstAttribute="top" secondItem="1fB-M2-Suz" secondAttribute="bottom" constant="30" id="Q67-Y5-Ywe"/>
@@ -1033,7 +1042,8 @@
                             <constraint firstItem="1fB-M2-Suz" firstAttribute="top" secondItem="WcX-pg-deb" secondAttribute="bottom" constant="50" id="aho-Ce-nKg"/>
                             <constraint firstItem="1fB-M2-Suz" firstAttribute="centerY" secondItem="95F-IH-kFC" secondAttribute="centerY" id="bbJ-nY-9Ru"/>
                             <constraint firstItem="v81-ff-chZ" firstAttribute="leading" secondItem="G8w-Nw-roS" secondAttribute="leading" constant="10" id="dzf-Ld-hQf"/>
-                            <constraint firstItem="xSR-DF-fBd" firstAttribute="top" secondItem="sfO-vH-cOz" secondAttribute="bottom" constant="80" id="fIX-5G-pJM"/>
+                            <constraint firstItem="xSR-DF-fBd" firstAttribute="top" secondItem="sfO-vH-cOz" secondAttribute="bottom" constant="60" id="fIX-5G-pJM"/>
+                            <constraint firstItem="FNt-i1-gds" firstAttribute="centerX" secondItem="3xg-2y-cRY" secondAttribute="centerX" id="fxG-m4-7Lb"/>
                             <constraint firstItem="WcX-pg-deb" firstAttribute="leading" secondItem="G8w-Nw-roS" secondAttribute="leading" constant="20" id="gtf-P8-fom"/>
                             <constraint firstItem="uV7-dP-10f" firstAttribute="centerY" secondItem="Jo0-wF-LPz" secondAttribute="centerY" id="hfd-SZ-UFx"/>
                             <constraint firstItem="oBT-lB-kK2" firstAttribute="centerX" secondItem="3xg-2y-cRY" secondAttribute="centerX" id="jUI-Z9-wCe"/>
@@ -1049,6 +1059,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Vgl-8B-2JU"/>
                     <connections>
+                        <outlet property="bannerView" destination="FNt-i1-gds" id="dMq-3Y-Wyp"/>
                         <outlet property="emailTextField" destination="1fB-M2-Suz" id="Mvo-NE-stQ"/>
                         <outlet property="passwordTextField" destination="uV7-dP-10f" id="zVq-SP-3km"/>
                         <outlet property="resetPassButton" destination="sfO-vH-cOz" id="peq-KN-Ddg"/>
@@ -1075,15 +1086,15 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZE4-Rc-IWx">
+                            <button opaque="NO" contentMode="scaleToFill" highlighted="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZE4-Rc-IWx">
                                 <rect key="frame" x="93.5" y="470" width="227" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <buttonConfiguration key="configuration" style="plain" title="アカウントを作成">
                                     <backgroundConfiguration key="background" cornerRadius="20">
-                                        <color key="backgroundColor" red="0.66452283249999999" green="0.79742739900000004" blue="0.73524470389999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </backgroundConfiguration>
                                     <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="baseForegroundColor" red="0.4289976378" green="0.51603960989999997" blue="0.46448511730000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </buttonConfiguration>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="TgS-1L-jNh">
@@ -1109,7 +1120,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="kcQ-ne-sYj">
                                 <rect key="frame" x="30" y="248" width="137" height="142"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="メールアドレス" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zB-po-PrA">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="メールアドレス" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5zB-po-PrA">
                                         <rect key="frame" x="15.5" y="0.0" width="121.5" height="27.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1201,7 +1212,7 @@
         <image name="trash" catalog="system" width="117" height="128"/>
         <image name="vegetableAndFruitButton" width="208" height="208"/>
         <namedColor name="freezer">
-            <color red="0.30980393290000002" green="0.6784313917" blue="0.91764706370000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.31000000238418579" green="0.67799997329711914" blue="0.9179999828338623" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="ref">
             <color red="0.31000000238418579" green="0.44299998879432678" blue="0.74500000476837158" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

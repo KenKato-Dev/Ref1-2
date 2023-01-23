@@ -43,6 +43,7 @@
 		ECC4532629582A760064CF13 /* AccountInformationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4532529582A760064CF13 /* AccountInformationPresenter.swift */; };
 		ECC45328295847910064CF13 /* AccountInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC45327295847910064CF13 /* AccountInformation.swift */; };
 		ECCAA677290045D800CE141B /* RecipeCategoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCAA676290045D800CE141B /* RecipeCategoryListPresenter.swift */; };
+		ECCC801F297D7907005BA910 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = ECCC801E297D7907005BA910 /* GoogleMobileAds */; };
 		ECDF47A928B4F7B7004BC6A9 /* RecipeCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47A828B4F7B7004BC6A9 /* RecipeCategoryCell.swift */; };
 		ECDF47AB28B4F7DC004BC6A9 /* RecipeCategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47AA28B4F7DB004BC6A9 /* RecipeCategoryListViewController.swift */; };
 		ECE2F0E028349FBC00975A38 /* FoodUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */; };
@@ -110,6 +111,7 @@
 				EC1242FE286F1CD300C60089 /* FirebaseMessaging in Frameworks */,
 				EC1242F6286F1CD300C60089 /* FirebaseDatabaseSwift in Frameworks */,
 				EC1242F4286F1CD300C60089 /* FirebaseCrashlytics in Frameworks */,
+				ECCC801F297D7907005BA910 /* GoogleMobileAds in Frameworks */,
 				EC1242F0286F1CD300C60089 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				EC1242FC286F1CD300C60089 /* FirebaseFirestoreSwift in Frameworks */,
 				EC1242FA286F1CD300C60089 /* FirebaseFirestoreCombine-Community in Frameworks */,
@@ -262,6 +264,7 @@
 				EC1242F9286F1CD300C60089 /* FirebaseFirestoreCombine-Community */,
 				EC1242FB286F1CD300C60089 /* FirebaseFirestoreSwift */,
 				EC1242FD286F1CD300C60089 /* FirebaseMessaging */,
+				ECCC801E297D7907005BA910 /* GoogleMobileAds */,
 			);
 			productName = "RefManager1-2";
 			productReference = ECA6F44228026B0C00CA7C2D /* RefManager1-2.app */;
@@ -316,6 +319,7 @@
 			mainGroup = ECA6F43928026B0C00CA7C2D;
 			packageReferences = (
 				EC1242EE286F1CD300C60089 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				ECCC801D297D7907005BA910 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = ECA6F44328026B0C00CA7C2D /* Products */;
 			projectDirPath = "";
@@ -603,13 +607,13 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.KatoKen.RefManager1-2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -632,13 +636,13 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.KatoKen.RefManager1-2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -724,6 +728,14 @@
 				kind = branch;
 			};
 		};
+		ECCC801D297D7907005BA910 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -766,6 +778,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC1242EE286F1CD300C60089 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		ECCC801E297D7907005BA910 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ECCC801D297D7907005BA910 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

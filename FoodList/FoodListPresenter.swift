@@ -24,6 +24,7 @@ protocol FoodListPresenterOutput: AnyObject {
     func removeRecommendToAddLabel(_ isHidden: Bool)
     func shouldShowUserName(_ userName: String)
     func showDeleteAlert()
+
 }
 
 // FoodListのPresenter

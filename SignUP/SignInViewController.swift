@@ -6,6 +6,7 @@
 //
 
 import Firebase
+import GoogleMobileAds
 import UIKit
 
 final class SignInViewController: UIViewController {
@@ -16,6 +17,7 @@ final class SignInViewController: UIViewController {
     @IBOutlet var wrongInputLabel: UILabel!
     @IBOutlet var showSignUpViewButton: UIButton!
     @IBOutlet var resetPassButton: UIButton!
+    @IBOutlet private weak var bannerView: GADBannerView!
     private var indicatorBackView = UIView()
     private let activityIndicator = UIActivityIndicatorView()
     private let signInPresenter = SignInPresenter(userService: UserService())
@@ -24,6 +26,7 @@ final class SignInViewController: UIViewController {
         emailTextField.delegate = self
         passwordTextField.delegate = self
         signInPresenter.setOutput(signInPresenterOutput: self)
+        signInPresenter.displayBanner()
         signInPresenter.performsegueIfAlreadySignIn()
         signInPresenter.hideWrongInputInInitial()
         signInPresenter.hidePassword()
@@ -165,5 +168,13 @@ extension SignInViewController: SignInPresenterOutput {
     func hideIndicator(_ isHidden: Bool) {
         activityIndicator.isHidden = isHidden
         indicatorBackView.isHidden = isHidden
+    }
+    // GoogleAd
+    func setUpAdBanner() {
+//        if let id = self.signInPresenter.adUnitID(key: "banner") {
+            bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+            bannerView.rootViewController = self
+            bannerView.load(GADRequest())
+//        }
     }
 }

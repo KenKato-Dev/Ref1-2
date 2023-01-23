@@ -8,6 +8,7 @@
 import FirebaseCore
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import GoogleMobileAds
 import UIKit
 // FoodListVIewVC
 final class FoodListViewController: UIViewController {
@@ -33,6 +34,7 @@ final class FoodListViewController: UIViewController {
     @IBOutlet var foodListTableView: UITableView!
     @IBOutlet var viewTitle: UINavigationItem!
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
+
     private var userNameLabel = UILabel()
     private let recommendToAddLabel = UILabel()
 
