@@ -21,7 +21,6 @@ class RecipeCategoryCell: UITableViewCell {
     }
 
     func isSettingIconImage() {
-//        let image = UIImage(systemName: "fork.knife.circle")?.withTintColor(.systemOrange)
         let image = UIImage(named: "recipe")
 
         let imageSize = CGSize(width: 90, height: 90)

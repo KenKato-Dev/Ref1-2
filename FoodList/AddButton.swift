@@ -77,7 +77,6 @@ class AddButton: UIButton {
 
         // テキスト色
         setTitleColor(UIColor.red, for: .normal)
-//        setTitleColor(UIColor(displayP3Red: 79/255, green: 172/255, blue: 254/255,alpha: 1.0), for: .normal)
         // テキストサイズ
         titleLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
         imageView?.image?.withTintColor(.red)

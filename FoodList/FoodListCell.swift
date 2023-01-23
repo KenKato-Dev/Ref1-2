@@ -49,6 +49,7 @@ class FoodListCell: UITableViewCell {
         preserveMethodTextLabel.layer.cornerRadius = 15
         preserveMethodTextLabel.clipsToBounds = true
         foodNameTextLabel.adjustsFontSizeToFitWidth = true
+        //冷蔵冷凍タグマークを構成
         if preserveMethodTextLabel.text == "冷蔵" {
             preserveMethodTextLabel.textColor = .white
             preserveMethodTextLabel.backgroundColor = UIColor(named: "ref")
