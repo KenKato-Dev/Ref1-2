@@ -209,12 +209,13 @@ extension FoodListViewController: FoodListPresenterOutput {
         if !isDelete {
             locationButtonsStack.backgroundColor = .clear
             kindButtonsStack.backgroundColor = .clear
-            tableViewBottomConstraint.constant = -165
+            tableViewBottomConstraint.constant = -100
 
         } else {
             locationButtonsStack.backgroundColor = .clear
             kindButtonsStack.backgroundColor = .clear
             tableViewBottomConstraint.constant = 5
+
         }
     }
 
@@ -416,4 +417,15 @@ extension FoodListViewController: FoodListPresenterOutput {
         }))
         present(alart, animated: true)
     }
+    // firebaseの一回のID指定可能数が10個までのため制限
+    func manageDeleteQuery() {
+
+// 削除可能数が10個までであることをアラート表示
+            let limitTitile = "一度に10個まで削除可能です"
+            let limitMessage = "現在\(foodListPresenter.checkedID.filter {$0.value == true}.count)個選択しています"
+            let alart = UIAlertController(title: limitTitile, message: limitMessage, preferredStyle: .alert)
+            alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alart, animated: true) {}
+    }
+
 }

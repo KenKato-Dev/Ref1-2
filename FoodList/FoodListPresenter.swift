@@ -24,6 +24,7 @@ protocol FoodListPresenterOutput: AnyObject {
     func removeRecommendToAddLabel(_ isHidden: Bool)
     func shouldShowUserName(_ userName: String)
     func showDeleteAlert()
+    func manageDeleteQuery()
 
 }
 
@@ -168,7 +169,13 @@ final class FoodListPresenter {
         // ボタンの無効化
         foodListPresenterOutput?.arrangeDisplayingView(isDelete)
         if isDelete, checkedID.values.contains(true) {
-            foodListPresenterOutput?.showDeleteAlert()
+            if self.checkedID.filter {$0.value == true}.count > 10 {
+                self.foodListPresenterOutput?.manageDeleteQuery()
+                isDelete = false
+                foodListPresenterOutput?.arrangeDisplayingView(isDelete)
+            } else {
+                foodListPresenterOutput?.showDeleteAlert()
+            }
         }
         foodListPresenterOutput?.reloadData()
     }
@@ -178,7 +185,9 @@ final class FoodListPresenter {
         didTapCheckBox = { isChecked in
             self.checkedID[self.array[at].IDkey] = isChecked
         }
+//        print(self.checkedID)
         return didTapCheckBox
+
     }
 
     // addButtonを押した時の処理
