@@ -175,6 +175,6 @@ extension SignInViewController: SignInPresenterOutput {
             bannerView.adUnitID = env["adUnitIDForSignIn"]!
             bannerView.rootViewController = self
             bannerView.load(GADRequest())
-        bannerView.isHidden = true
+        bannerView.isHidden = false
     }
 }
