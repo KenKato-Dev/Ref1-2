@@ -285,10 +285,8 @@ extension FoodListViewController: FoodListPresenterOutput {
             updationView.foodKindsStacks.isHidden = true
             updationView.parentStacKView.spacing = 50
             updationView.nameTextHeightconstraint.constant = 20
-
             updationView.quantityTextHeightConstraint.constant = 20
-            print("staticRow：\(row)")
-            print("IsTapRow：\(FoodListPresenter.isTapRow),\(isTapRow)")
+
             // 以下直接FoodListPresenter.isTapRowだと不可
             if isTapRow {
                 updationView.unitSelectButton
@@ -407,7 +405,7 @@ extension FoodListViewController: FoodListPresenterOutput {
     }
     func setUpAdBanner() {
         // 実装テスト用ID
-            bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+            bannerView.adUnitID = env["adUnitIDForList"]!
             bannerView.rootViewController = self
             bannerView.load(GADRequest())
         bannerView.isHidden = false
@@ -428,4 +426,5 @@ extension FoodListViewController: FoodListPresenterOutput {
         activityIndicator.isHidden = isHidden
         indicatorBackView.isHidden = isHidden
     }
+
 }
