@@ -99,7 +99,7 @@ final class SignInPresenter {
     func resetisDisableSgue() {
         isDisableSegue = false
     }
-    //返りのエラー内容にて表示変更
+    // 返りのエラー内容にて表示変更
     func manageSiginInErrorMessage(_ error: NSError) -> String {
         switch AuthErrorCode.Code(rawValue: error.code) {
         case .invalidEmail:

@@ -34,6 +34,9 @@ final class FoodListViewController: UIViewController {
     @IBOutlet var foodListTableView: UITableView!
     @IBOutlet var viewTitle: UINavigationItem!
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bannerView: GADBannerView!
+    private var indicatorBackView = UIView()
+    private let activityIndicator = UIActivityIndicatorView()
 
     private var userNameLabel = UILabel()
     private let recommendToAddLabel = UILabel()
@@ -43,7 +46,9 @@ final class FoodListViewController: UIViewController {
         foodListTableView.delegate = self
         foodListTableView.dataSource = self
         foodListPresenter.setOutput(foodListPresenterOutput: self)
-        foodListPresenter.greentingToUser()
+        foodListPresenter.displayBanner()
+        foodListPresenter.displayTitle()
+        foodListPresenter.displayIndicator()
         foodListPresenter.fetchArray()
         // 各種ボタン操作
         deleteButton.addAction(.init(handler: { _ in
@@ -170,20 +175,18 @@ extension FoodListViewController: FoodListPresenterOutput {
     // navigationItemのタイトルをBool値に応じて変更、色が変わらず要改善
     func setTitle(_ refigerator: Bool, _ freezer: Bool, _ selectedKinds: [Food.FoodKind], _ location: Food.Location) {
         // この処理でなく条件式も含めタイトルを入れるようにする
-        navigationController?.navigationBar.titleTextAttributes =
-            [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20)]
         if !refigerator,
            !freezer, selectedKinds.isEmpty {
             viewTitle.title = "冷蔵品と冷凍品"
-            viewTitle.titleView?.tintColor = .black
+            self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.darkGray, .font: UIFont.systemFont(ofSize: 20)]
 
         } else {
             if location == .refrigerator {
                 viewTitle.title = "冷蔵品"
-                viewTitle.titleView?.tintColor = .darkGray
+                self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "ref"), .font: UIFont.systemFont(ofSize: 20)]
             } else if location == .freezer {
                 viewTitle.title = "冷凍品"
-                viewTitle.titleView?.tintColor = .blue
+                self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "freezer"), .font: UIFont.systemFont(ofSize: 20)]
             }
         }
     }
@@ -209,12 +212,13 @@ extension FoodListViewController: FoodListPresenterOutput {
         if !isDelete {
             locationButtonsStack.backgroundColor = .clear
             kindButtonsStack.backgroundColor = .clear
-            tableViewBottomConstraint.constant = -165
+            tableViewBottomConstraint.constant = -100
 
         } else {
             locationButtonsStack.backgroundColor = .clear
             kindButtonsStack.backgroundColor = .clear
             tableViewBottomConstraint.constant = 5
+
         }
     }
 
@@ -346,31 +350,6 @@ extension FoodListViewController: FoodListPresenterOutput {
     func perfomSeguetofoodAppendVC() { // (_ array:[Food],at:Int)
         performSegue(withIdentifier: "toFoodAppendVC", sender: nil)
     }
-
-    // 項目選択時に削除ボタンを押すと表示するアラートを表示
-    func shouldShowUserName(_ userName: String) {
-        navigationController?.navigationBar.barTintColor = UIColor(named: "themeColor")
-        navigationController?.navigationBar.titleTextAttributes =
-            [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]
-        viewTitle.title = "\(userName)さんの冷蔵庫"
-        // 名前を試験表示
-        userNameLabel.text = "\(userName)さんこんにちは！"
-        userNameLabel.frame = CGRect(
-            x: 0, // self.foodListTableView.frame.width/2
-            y: foodListTableView.frame.height / 3,
-            width: foodListTableView.frame.width,
-            height: 50
-        )
-        userNameLabel.textAlignment = .center
-        userNameLabel.font = .systemFont(ofSize: 15)
-        userNameLabel.textColor = UIColor.darkGray
-        userNameLabel.backgroundColor = UIColor.white.withAlphaComponent(0.6)
-        userNameLabel.adjustsFontSizeToFitWidth = true
-        // navigationItemでは表示されず
-        foodListTableView.addSubview(userNameLabel)
-        userNameLabel.alpha = 1
-    }
-
     func fadeout() {
         Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { time in
             if self.userNameLabel.alpha > 0 {
@@ -415,5 +394,38 @@ extension FoodListViewController: FoodListPresenterOutput {
             print("削除をキャンセル")
         }))
         present(alart, animated: true)
+    }
+    // firebaseの一回のID指定可能数が10個までのため制限
+    func manageDeleteQuery() {
+
+// 削除可能数が10個までであることをアラート表示
+            let limitTitile = "一度に10個まで削除可能です"
+            let limitMessage = "現在\(foodListPresenter.checkedID.filter {$0.value == true}.count)個選択しています"
+            let alart = UIAlertController(title: limitTitile, message: limitMessage, preferredStyle: .alert)
+            alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alart, animated: true) {}
+    }
+    func setUpAdBanner() {
+        // 実装テスト用ID
+            bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+            bannerView.rootViewController = self
+            bannerView.load(GADRequest())
+        bannerView.isHidden = false
+    }
+    func showIndicator() {
+        indicatorBackView = UIView(frame: view.bounds)
+        indicatorBackView.backgroundColor = .white
+        indicatorBackView.alpha = 0.5
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
+        activityIndicator.color = .gray
+        activityIndicator.center = view.center
+        self.view.addSubview(indicatorBackView)
+        indicatorBackView.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+    }
+    func hideIndicator(_ isHidden: Bool) {
+        activityIndicator.isHidden = isHidden
+        indicatorBackView.isHidden = isHidden
     }
 }

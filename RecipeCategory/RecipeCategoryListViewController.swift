@@ -57,7 +57,7 @@ extension RecipeCategoryListViewController: RecipeCategoryListPresenterOutput {
     }
 
     // indicatorと背景をセットで表示
-    func showLoadingSpin() {
+    func showIndicator() {
         indicatorBackView = UIView(frame: view.bounds)
         indicatorBackView.backgroundColor = .white
         indicatorBackView.alpha = 0.5

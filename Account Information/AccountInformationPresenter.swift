@@ -6,11 +6,13 @@
 //
 
 import Firebase
+import MessageUI
 import Foundation
 
 protocol AccountInformationPresenterOutput: AnyObject {
     func setAccountInformation(_ name: String, _ email: String, _ criatedDay: String)
     func moveToRootVC()
+    func presentEmailView()
 }
 
 class AccountInformatonPresenter {
@@ -47,5 +49,13 @@ class AccountInformatonPresenter {
             print("エラー：\(error)")
         }
         accountInformationPresenterOutput?.moveToRootVC()
+    }
+    func didTapEmailButton() {
+        self.accountInformationPresenterOutput?.presentEmailView()
+    }
+
+    func didTapPrivacyPolicyButton() {
+        guard let url = URL(string: "https://kenkato-dev.github.io/RefManager.github.io/")else {return}
+        UIApplication.shared.open(url)
     }
 }

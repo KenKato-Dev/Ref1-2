@@ -67,19 +67,13 @@ class AddButton: UIButton {
     }
 
     private func customDesign() {
-        setImage(UIImage(systemName: "plus"), for: .normal)
-        // テキスト挿入
-        setTitle("", for: .normal)
+        let imageConfig = UIImage.SymbolConfiguration(font: .boldSystemFont(ofSize: 18))
+        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
+        setImage(image, for: .normal)
         // マスク適用
         layer.masksToBounds = true
         // 角丸み
         layer.cornerRadius = 10.0
-
-        // テキスト色
-        setTitleColor(UIColor.red, for: .normal)
-        // テキストサイズ
-        titleLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
-        imageView?.image?.withTintColor(.red)
     }
 
 }

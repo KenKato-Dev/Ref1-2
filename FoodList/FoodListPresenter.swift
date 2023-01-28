@@ -22,8 +22,11 @@ protocol FoodListPresenterOutput: AnyObject {
     func fadeout()
     func showRecoomendation()
     func removeRecommendToAddLabel(_ isHidden: Bool)
-    func shouldShowUserName(_ userName: String)
     func showDeleteAlert()
+    func manageDeleteQuery()
+    func setUpAdBanner()
+    func showIndicator()
+    func hideIndicator(_ isHidden: Bool)
 
 }
 
@@ -66,12 +69,14 @@ final class FoodListPresenter {
                 case let .success(foods):
                     self.array = foods
                     self.foodListPresenterOutput?.reloadData()
+                    self.foodListPresenterOutput?.hideIndicator(true)
                     if self.array.isEmpty {
                         self.foodListPresenterOutput?.showRecoomendation()
                     } else {
                         self.foodListPresenterOutput?.removeRecommendToAddLabel(true)
                     }
                 case let .failure(error):
+                    self.foodListPresenterOutput?.hideIndicator(true)
                     self.foodListPresenterOutput?.presentErrorIfNeeded(error)
                 }
             }
@@ -168,7 +173,13 @@ final class FoodListPresenter {
         // ボタンの無効化
         foodListPresenterOutput?.arrangeDisplayingView(isDelete)
         if isDelete, checkedID.values.contains(true) {
-            foodListPresenterOutput?.showDeleteAlert()
+            if self.checkedID.filter {$0.value == true}.count > 10 {
+                self.foodListPresenterOutput?.manageDeleteQuery()
+                isDelete = false
+                foodListPresenterOutput?.arrangeDisplayingView(isDelete)
+            } else {
+                foodListPresenterOutput?.showDeleteAlert()
+            }
         }
         foodListPresenterOutput?.reloadData()
     }
@@ -178,7 +189,9 @@ final class FoodListPresenter {
         didTapCheckBox = { isChecked in
             self.checkedID[self.array[at].IDkey] = isChecked
         }
+//        print(self.checkedID)
         return didTapCheckBox
+
     }
 
     // addButtonを押した時の処理
@@ -282,16 +295,19 @@ final class FoodListPresenter {
     func resetIsTapRow() {
         FoodListPresenter.isTapRow = false
     }
-
-    func greentingToUser() {
-        foodData.fetchUserInfo { result in
-            switch result {
-            case let .success(user):
-                self.foodListPresenterOutput?.shouldShowUserName(user.userName)
-                self.foodListPresenterOutput?.fadeout()
-            case .failure:
-                self.foodListPresenterOutput?.shouldShowUserName("情報取得を失敗しました")
-            }
-        }
+    func displayTitle() {
+        foodListPresenterOutput?.setTitle(
+            foodUseCase.isFilteringRefrigerator,
+            foodUseCase.isFilteringFreezer,
+            foodUseCase.selectedKinds,
+            foodUseCase.foodFilter.location
+        )
+    }
+    func displayBanner() {
+        self.foodListPresenterOutput?.setUpAdBanner()
+    }
+    // viewWill/DidAppearに入れると余分なViewが生成されるため単独でここから呼ぶ
+    func displayIndicator() {
+        self.foodListPresenterOutput?.showIndicator()
     }
 }
