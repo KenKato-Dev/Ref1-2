@@ -308,7 +308,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="冷蔵品と冷凍品" id="ebQ-Yw-zQR">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="ZNo-GJ-wc7">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="CDt-br-9dE" customClass="AddButton" customModule="RefManager1_2" customModuleProvider="target">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="CDt-br-9dE" customClass="AddButton" customModule="RefManager1_2" customModuleProvider="target">
                                 <rect key="frame" x="20" y="5" width="46.5" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
@@ -653,7 +653,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="2JB-Xc-ihz" userLabel="Parent Stack View">
-                                <rect key="frame" x="5" y="177.5" width="404" height="603.5"/>
+                                <rect key="frame" x="5" y="177.5" width="404" height="586"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="保存方法を選んでください" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1PN-Tn-dOu">
                                         <rect key="frame" x="0.0" y="0.0" width="404" height="36"/>
@@ -800,10 +800,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jax-iL-4T8">
-                                        <rect key="frame" x="0.0" y="541" width="404" height="62.5"/>
+                                        <rect key="frame" x="0.0" y="541" width="404" height="45"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53s-yj-18u">
-                                                <rect key="frame" x="0.0" y="0.0" width="197" height="62.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="197" height="45"/>
                                                 <color key="tintColor" systemColor="systemRedColor"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="キャンセル" cornerStyle="dynamic">
@@ -818,7 +818,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3K5-hI-9uA">
-                                                <rect key="frame" x="207" y="0.0" width="197" height="62.5"/>
+                                                <rect key="frame" x="207" y="0.0" width="197" height="45"/>
                                                 <color key="tintColor" systemColor="tintColor"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="保存する" cornerStyle="dynamic" titleAlignment="center">
@@ -832,6 +832,9 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="dUl-k9-G2D"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -855,7 +858,6 @@
                             <constraint firstItem="gd3-UM-ewx" firstAttribute="height" secondItem="qh5-El-XsC" secondAttribute="height" multiplier="0.04" id="eoh-0H-4Sd"/>
                             <constraint firstItem="HAv-4m-4lB" firstAttribute="height" secondItem="qh5-El-XsC" secondAttribute="height" multiplier="0.05" id="g9F-97-XCD"/>
                             <constraint firstItem="5O4-gL-wtm" firstAttribute="height" secondItem="qh5-El-XsC" secondAttribute="height" multiplier="0.05" id="gMu-uX-2Jf"/>
-                            <constraint firstItem="jax-iL-4T8" firstAttribute="height" secondItem="qh5-El-XsC" secondAttribute="height" multiplier="0.07" id="taW-kQ-Snd"/>
                             <constraint firstItem="5O4-gL-wtm" firstAttribute="width" secondItem="qh5-El-XsC" secondAttribute="width" multiplier="0.9" id="wuY-yc-F6u"/>
                             <constraint firstItem="2JB-Xc-ihz" firstAttribute="leading" secondItem="EBo-ON-V98" secondAttribute="leading" constant="5" id="yPJ-hF-wco"/>
                         </constraints>
