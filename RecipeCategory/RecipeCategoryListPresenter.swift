@@ -11,7 +11,7 @@ protocol RecipeCategoryListPresenterOutput: AnyObject {
     func reloadData()
     func dismiss()
     func setTitle()
-    func showLoadingSpin()
+    func showIndicator()
     func hideIndicator(_ isHidden: Bool)
     func showNoResult()
     func presentErrorIfNeeded(_ errorOrNil: Error?)
@@ -32,7 +32,7 @@ final class RecipeCategoryListPresenter {
 
     // indicatorの表示と楽天APIへのリクエストを実施
     func reloadArray(searchKeyword: String?) {
-        recipeCategoryListPresenterOutput?.showLoadingSpin()
+        recipeCategoryListPresenterOutput?.showIndicator()
         if let searchKeyword = searchKeyword {
             recipeModel.fetch(searchKeyword) { result in
                 switch result {

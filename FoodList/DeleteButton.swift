@@ -76,7 +76,7 @@ class DeleteButton: UIButton {
         // 角丸み
         layer.cornerRadius = 10.0
         // 背景色
-        backgroundColor = UIColor.white
+        backgroundColor = UIColor.clear
         // テキスト色
         setTitleColor(UIColor.red, for: .normal)
         // テキストサイズ
