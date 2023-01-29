@@ -72,6 +72,8 @@ final class FoodListPresenter {
                     self.foodListPresenterOutput?.hideIndicator(true)
                     if self.array.isEmpty {
                         self.foodListPresenterOutput?.showRecoomendation()
+                        // 追加
+                        self.foodListPresenterOutput?.removeRecommendToAddLabel(false)
                     } else {
                         self.foodListPresenterOutput?.removeRecommendToAddLabel(true)
                     }
