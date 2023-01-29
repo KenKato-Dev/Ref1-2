@@ -536,7 +536,7 @@
                                 <rect key="frame" x="0.0" y="92" width="414" height="770"/>
                                 <color key="backgroundColor" name="themeColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCell" rowHeight="70" translatesAutoresizingMaskIntoConstraints="NO" id="wAV-os-jWS" customClass="RecipeCategoryCell" customModule="RefManager1_2" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCell" rowHeight="70" translatesAutoresizingMaskIntoConstraints="NO" id="wAV-os-jWS" customClass="RecipeCategoryCell" customModule="RefManager1_2" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wAV-os-jWS" id="fKr-I5-h1N">
@@ -635,7 +635,7 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1pA-MU-hJi" customClass="UnitSelectButton" customModule="RefManager1_2" customModuleProvider="target">
                                         <rect key="frame" x="189" y="0.0" width="184" height="44.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <menu key="menu" id="zLt-hD-NOw">
                                             <children>
                                                 <command title="Item 1" id="8BT-Mu-0iP"/>
