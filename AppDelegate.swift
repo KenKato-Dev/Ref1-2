@@ -19,9 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         -> Bool {
         FirebaseApp.configure()
             // 初期化
-            DispatchQueue.global().async {
                 GADMobileAds.sharedInstance().start(completionHandler: nil)
-            }
         // Override point for customization after application launch.
         return true
     }
