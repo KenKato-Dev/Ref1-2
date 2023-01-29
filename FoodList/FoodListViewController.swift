@@ -408,7 +408,7 @@ extension FoodListViewController: FoodListPresenterOutput {
             self.bannerView.adUnitID = env["adUnitIDForList"]!
             self.bannerView.rootViewController = self
             self.bannerView.load(GADRequest())
-            self.bannerView.isHidden = true
+            self.bannerView.isHidden = false
     }
     func showIndicator() {
         indicatorBackView = UIView(frame: view.bounds)

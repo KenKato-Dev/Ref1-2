@@ -15,7 +15,7 @@
 		EC1242FA286F1CD300C60089 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = EC1242F9286F1CD300C60089 /* FirebaseFirestoreCombine-Community */; };
 		EC1242FC286F1CD300C60089 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EC1242FB286F1CD300C60089 /* FirebaseFirestoreSwift */; };
 		EC1242FE286F1CD300C60089 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = EC1242FD286F1CD300C60089 /* FirebaseMessaging */; };
-		EC50A5EA297F554F000C1756 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC50A5E9297F554F000C1756 /* Environment.swift */; };
+		EC309980298636F900FA2AE2 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC30997F298636F900FA2AE2 /* Environment.swift */; };
 		EC50A5ED2982A293000C1756 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC50A5EC2982A293000C1756 /* MessageUI.framework */; };
 		EC5AAD8C292383B1004EAF94 /* SignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5AAD8B292383B1004EAF94 /* SignUpPresenter.swift */; };
 		EC5AAD8E2924B239004EAF94 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5AAD8D2924B239004EAF94 /* SignUpViewController.swift */; };
@@ -64,7 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EC50A5E9297F554F000C1756 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		EC30997F298636F900FA2AE2 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Environment.swift; path = ../../../../.Trash/Environment.swift; sourceTree = "<group>"; };
 		EC50A5EC2982A293000C1756 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		EC5AAD8B292383B1004EAF94 /* SignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPresenter.swift; sourceTree = "<group>"; };
 		EC5AAD8D2924B239004EAF94 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -219,7 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				ECA41AE0290E5A5D0030BF16 /* TapFeedback.swift */,
-				EC50A5E9297F554F000C1756 /* Environment.swift */,
+				EC30997F298636F900FA2AE2 /* Environment.swift */,
 				ECBD105B293A3D9F00AF2702 /* UIImage+Extension.swift */,
 				ECBD1061293B94DD00AF2702 /* Localizable.strings */,
 				ECA6F44B28026B0C00CA7C2D /* Main.storyboard */,
@@ -411,7 +411,6 @@
 			files = (
 				ECBD104B2933573300AF2702 /* SignInViewController.swift in Sources */,
 				ECA41AE1290E5A5D0030BF16 /* TapFeedback.swift in Sources */,
-				EC50A5EA297F554F000C1756 /* Environment.swift in Sources */,
 				ECC4532429582A5E0064CF13 /* AccountInformationViewController.swift in Sources */,
 				ECA60EB128FEE28B00B7C7F6 /* FoodAppendPresenter.swift in Sources */,
 				ECBD105C293A3D9F00AF2702 /* UIImage+Extension.swift in Sources */,
@@ -427,6 +426,7 @@
 				ECEB7103280314BD00B157FB /* FoodListCell.swift in Sources */,
 				ECC4532629582A760064CF13 /* AccountInformationPresenter.swift in Sources */,
 				ECC45328295847910064CF13 /* AccountInformation.swift in Sources */,
+				EC309980298636F900FA2AE2 /* Environment.swift in Sources */,
 				ECDF47AB28B4F7DC004BC6A9 /* RecipeCategoryListViewController.swift in Sources */,
 				EC77EA2428F2A813009B3EBA /* DeleteButton.swift in Sources */,
 				ECCAA677290045D800CE141B /* RecipeCategoryListPresenter.swift in Sources */,
