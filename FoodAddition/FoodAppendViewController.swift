@@ -111,15 +111,19 @@ extension FoodAppendViewController: UITextFieldDelegate {
 extension FoodAppendViewController: FoodAppendPresenterOutput {
     // placeholderとキーボードの種類を指定
     func setPlaceholderAndKeyboard() {
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 13),
+            .foregroundColor: UIColor.gray
+        ]
         foodNameTextField.attributedPlaceholder
             = NSAttributedString(
                 string: "名称を入れてください",
-                attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+                attributes: attributes // [NSAttributedString.Key.foregroundColor: UIColor.gray]
             )
         quantityTextField.attributedPlaceholder
             = NSAttributedString(
                 string: "数量を入れてください",
-                attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+                attributes: attributes
             )
         quantityTextField.keyboardType = .numberPad
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
