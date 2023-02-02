@@ -1,8 +1,7 @@
 # 冷蔵庫くん  
-  <img src="https://user-images.githubusercontent.com/84781651/211175517-52638bb5-8fd6-4ac7-b09d-25db6128fad8.gif" width="20%"><img src="https://user-images.githubusercontent.com/84781651/210377761-d29f1662-e458-4f77-bc17-411c88b78933.png" width="80%">
-冷蔵庫くんはSwiftとFirebaseにより構築されたiOSアプリです。冷蔵庫内の食品(食材、惣菜、飲料、調味料など)を登録し、クラウド上で数量確認、登録日確認、追加、削除、レシピの検索が行えます。 
+  <img src="https://user-images.githubusercontent.com/84781651/215305572-8003106c-fef5-4a22-b5de-273af037ed92.mov" width="18%"><img src="https://user-images.githubusercontent.com/84781651/215305015-438fca01-6f5c-4296-b33e-bcaef853afb2.png" width="80%">
   
-
+冷蔵庫くんはSwiftとFirebaseにより構築されたiOSアプリです。冷蔵庫内の食品(食材、惣菜、飲料、調味料など)を登録し、クラウド上で数量確認、登録日確認、追加、削除、レシピの検索が行えます。 
 ## 導入
 1. 下記のコマンドを任意のディレクトリから実行してださい。  
 ```  
@@ -10,7 +9,7 @@ $ git clone https://github.com/KenKato-Dev/Ref1-2
   
 $ cd Refmanager1-2  
 ```  
-2. 移動したディレクトリにあるhoge.xcodeprojを開いてください。
+2. 移動したディレクトリにあるRefmanager1-2.xcodeprojを開いてください。
 3. Xcodeからアプリを実行してください。
 4. セキュリティの観点からGoogleService-Info.plist及びEnvironment.Swiftはプロジェクト内に含まれておりません。  
    ご連絡に応じてこれら2ファイルを共有します、Enviromnet.Swiftをご自身で導入される際は以下ご参照ください。  
@@ -80,9 +79,6 @@ Users(コレクション)
   
 FoodsはUsersのサブコレクションとしており、ユーザー情報Userと登録された食材情報Foodを紐づけています。
 
-サブコレクションが何かを
-一元管理のメリット、ユーザーごとに表示を切り変えるためにサブこれを利用している
-混ぜると醜い、分けるとどれがID
   
 API:  
 楽天レシピに登録されている料理のレシピ取得に楽天APIのRakuten Recipe APIを利用しています。リクエストしてレシピ集をData型にて受け取ります。  
