@@ -83,12 +83,22 @@ extension SignUpViewController: SignUpPresenterOutput {
         activityIndicator.startAnimating()
     }
 
-    func dismiss() {
-        dismiss()
-    }
-
     func hideIndicator(_ isHidden: Bool) {
         activityIndicator.isHidden = isHidden
         indicatorBackView.isHidden = isHidden
+    }
+    internal func popToRoot() {
+//        performSegue(withIdentifier: "ToSignIn", sender: nil)
+//        let signInViewController = self.storyboard?.instantiateViewController(withIdentifier: "signInVC") as? SignInViewController
+//        self.present(signInViewController!, animated: true)
+        navigationController?.popToRootViewController(animated: true)
+
+    }
+    func showSendEmail() {
+        let alart = UIAlertController(title: nil, message: "認証メールを送りました", preferredStyle: .alert)
+        alart.addAction(UIAlertAction(title: "はい", style: .default, handler: { _ in
+            self.popToRoot()
+        }))
+        present(alart, animated: true) {}
     }
 }

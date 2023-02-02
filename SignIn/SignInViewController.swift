@@ -16,6 +16,7 @@ final class SignInViewController: UIViewController {
     @IBOutlet var signInButton: UIButton!
     @IBOutlet var wrongInputLabel: UILabel!
     @IBOutlet var showSignUpViewButton: UIButton!
+    @IBOutlet weak var trialButton: UIButton!
     @IBOutlet var resetPassButton: UIButton!
     @IBOutlet private weak var bannerView: GADBannerView!
     private var indicatorBackView = UIView()
@@ -39,6 +40,9 @@ final class SignInViewController: UIViewController {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
         resetPassButton.addAction(.init(handler: { _ in
             self.signInPresenter.didTapResetPassButton()
+        }), for: .touchUpInside)
+        trialButton.addAction(.init(handler: { _ in
+            self.signInPresenter.didTapTrialButton()
         }), for: .touchUpInside)
     }
 

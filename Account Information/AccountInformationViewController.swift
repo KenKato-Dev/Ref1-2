@@ -12,7 +12,9 @@ class AccountInformationViewController: UIViewController {
     @IBOutlet var accountNameLabel: UILabel!
     @IBOutlet var accountEmailLabel: UILabel!
     @IBOutlet var accountCreatedDayLabel: UILabel!
+    @IBOutlet weak var signUpfromAccountVCButton: UIButton!
     @IBOutlet var signOutButton: UIButton!
+    @IBOutlet weak var accontDeleteButton: UIButton!
     @IBOutlet weak var sendEmailButton: UIButton!
     @IBOutlet weak var showPrivacyPolicyButton: UIButton!
     private var mailViewController = MFMailComposeViewController()
@@ -22,6 +24,7 @@ class AccountInformationViewController: UIViewController {
         super.viewDidLoad()
         accountInformationPresenter.setOutput(accountInformationPresenterOutput: self)
         accountInformationPresenter.displayAccountInformation()
+        accountInformationPresenter.displayForAnonymous()
         signOutButton.addAction(.init(handler: { _ in
             self.accountInformationPresenter.didTapSignOutButton()
         }), for: .touchUpInside)
@@ -30,6 +33,9 @@ class AccountInformationViewController: UIViewController {
         }), for: .touchUpInside)
         showPrivacyPolicyButton.addAction(.init(handler: { _ in
             self.accountInformationPresenter.didTapPrivacyPolicyButton()
+        }), for: .touchUpInside)
+        accontDeleteButton.addAction(.init(handler: { _ in
+            self.accountInformationPresenter.didTapDeleteAccountButton()
         }), for: .touchUpInside)
     }
 }
@@ -81,11 +87,19 @@ extension AccountInformationViewController: MFMailComposeViewControllerDelegate 
 }
 extension AccountInformationViewController: AccountInformationPresenterOutput {
     func setAccountInformation(_ name: String, _ email: String, _ criatedDay: String) {
-        accountNameLabel.text = name
-        accountNameLabel.adjustsFontSizeToFitWidth = true
-        accountEmailLabel.text = email
-        accountEmailLabel.adjustsFontSizeToFitWidth = true
-        accountCreatedDayLabel.text = criatedDay
+        signUpfromAccountVCButton.isHidden = true
+            accountNameLabel.text = name
+            accountNameLabel.adjustsFontSizeToFitWidth = true
+            accountEmailLabel.text = email
+            accountEmailLabel.adjustsFontSizeToFitWidth = true
+            accountCreatedDayLabel.text = criatedDay
+    }
+    func setUpForAnonymous() {
+            accountNameLabel.text = "お試し利用中"
+            accountEmailLabel.text = "お試し利用中"
+            accountCreatedDayLabel.text = "お試し利用中"
+            signOutButton.isHidden = true
+            sendEmailButton.isHidden = true
     }
 
     func moveToRootVC() {
@@ -93,5 +107,34 @@ extension AccountInformationViewController: AccountInformationPresenterOutput {
     }
     func presentEmailView() {
         self.composeEmailContent()
+    }
+    func showAlartIfNeeded(_ message: String) {
+            let alart = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+            alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alart, animated: true) {}
+    }
+    func showAlartBeforeSignOut(_ message: String) {
+            let alart = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alart.addAction(.init(title: "はい", style: .default, handler: { [self] _ in
+            self.accountInformationPresenter.signOutAction()
+        }))
+        alart.addAction(UIAlertAction(title: "いいえ", style: .destructive, handler: nil))
+            present(alart, animated: true) {}
+    }
+    func showAlartBeforePlivacyPolicy(_ title: String, _ message: String) {
+            let alart = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alart.addAction(.init(title: "はい", style: .default, handler: { [self] _ in
+            self.accountInformationPresenter.privacyPolicyAction()
+        }))
+        alart.addAction(UIAlertAction(title: "いいえ", style: .destructive, handler: nil))
+            present(alart, animated: true) {}
+    }
+    func showAlartBeforeAccountDelete(_ message: String) {
+        let alart = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alart.addAction(.init(title: "はい", style: .default, handler: { [self] _ in
+            self.accountInformationPresenter.deleteAccountAction()
+        }))
+        alart.addAction(UIAlertAction(title: "いいえ", style: .destructive, handler: nil))
+        present(alart, animated: true) {}
     }
 }

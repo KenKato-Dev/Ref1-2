@@ -34,7 +34,17 @@ class UserService {
             }
         }
     }
-
+    func sigInAsTrial(_ completion: @escaping (Result<User, Error>) -> Void) {
+        auth.signInAnonymously {  [weak self] authDataResult, error in
+            if let error = error {
+                print(error)
+                completion(.failure(error))
+            } else {
+                guard let user = authDataResult?.user else { return }
+                completion(.success(user))
+            }
+        }
+    }
     func checkSignInStatus(_ completion: @escaping (Bool) -> Void) {
         if auth.currentUser != nil, auth.currentUser!.isEmailVerified {
             completion(true)
@@ -42,33 +52,62 @@ class UserService {
             completion(false)
         }
     }
-
+    // お試しユーザーの場合はマージで情報上書き対応
     func postUser(_ email: String,
                   _ userName: String?,
                   _ pass: String,
                   _ completion: @escaping (Result<Void, Error>) -> Void) {
         DispatchQueue.main.async {
-            self.auth.createUser(withEmail: email, password: pass) { result, error in
-                if let error = error {
-                    completion(.failure(error))
-                }
-                print("manager認証に成功")
-                //
-                guard let userID = result?.user.uid else { return }
-                guard let userName = userName else { return }
-                let documentData: [String: Any] = [
-                    "email": email,
-                    "userName": userName,
-                    "createdAt": Timestamp()
-                ]
-                self.db.collection("Users").document(userID).setData(documentData) { err in
-                    if let err = err {
-                        print("manager情報保存に失敗：\(err)")
-                        completion(.failure(err))
+
+            if let user = self.auth.currentUser, user.isAnonymous {
+                let credential = EmailAuthProvider.credential(withEmail: email, password: pass)
+                user.link(with: credential) { result, errorOrNil in
+                    if let error = errorOrNil {
+                        completion(.failure(error))
                     }
-                    completion(.success(()))
-                    print("manager情報の保存に成功")
+                    print("認証成功\(result?.user.uid)")
+                    print(self.auth.currentUser?.isEmailVerified)
+
+                    guard let userID = result?.user.uid else { return }
+                    guard let userName = userName else { return }
+                    let documentData: [String: Any] = [
+                        "email": email,
+                        "userName": userName,
+                        "createdAt": Timestamp()
+                    ]
+                    self.db.collection("Users").document(userID).setData(documentData) { err in
+                        if let err = err {
+                            print("manager情報保存に失敗：\(err)")
+                            completion(.failure(err))
+                        }
+                        completion(.success(()))
+                        print("manager情報の保存に成功")
+                    }
                 }
+
+            } else {
+                self.auth.createUser(withEmail: email, password: pass) { result, error in
+                    if let error = error {
+                        completion(.failure(error))
+                    }
+                    print("manager認証に成功")
+
+                    guard let userID = result?.user.uid else { return }
+                    guard let userName = userName else { return }
+                    let documentData: [String: Any] = [
+                        "email": email,
+                        "userName": userName,
+                        "createdAt": Timestamp()
+                    ]
+                    self.db.collection("Users").document(userID).setData(documentData) { err in
+                        if let err = err {
+                            print("manager情報保存に失敗：\(err)")
+                            completion(.failure(err))
+                        }
+                        completion(.success(()))
+                        print("manager情報の保存に成功")
+                    }
+                } // createUser
             }
         }
     }

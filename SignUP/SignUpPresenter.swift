@@ -12,10 +12,11 @@ protocol SignUpPresenterOutput: AnyObject {
     func isSequrePassEntry()
     func showEssential()
     func showUsedEmail()
-    func dismiss()
     func presentErrorIfNeeded(_ errorMessage: String)
     func showLoadingSpin()
     func hideIndicator(_ isHidden: Bool)
+    func popToRoot()
+    func showSendEmail()
 }
 
 final class SignUpPresenter {
@@ -52,9 +53,9 @@ final class SignUpPresenter {
                                     self.userService.sendAuthEmail { result in
                                         switch result {
                                         case let .success(isSendingEmail):
-                                            self.signUpPresenterOutput?.presentErrorIfNeeded("認証メールを送りました")
                                             self.signUpPresenterOutput?.hideIndicator(true)
-//                                            self.signUpPresenterOutput?.dismiss()
+//                                            self.signUpPresenterOutput?.presentErrorIfNeeded("認証メールを送りました")
+                                            self.signUpPresenterOutput?.showSendEmail()
                                         case let .failure(error):
                                             print(error)
                                             if let error = error as NSError? {
@@ -74,6 +75,7 @@ final class SignUpPresenter {
                             // すでに使われているEmailである旨を伝える
                             self.signUpPresenterOutput?.showUsedEmail()
                             print("このメルアドは利用済み")
+                            self.signUpPresenterOutput?.hideIndicator(true)
                         }
                     case let .failure(error):
                         if let error = error as NSError? {

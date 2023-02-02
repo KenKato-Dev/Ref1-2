@@ -69,6 +69,25 @@ final class SignInPresenter {
             }
         }
     }
+    func didTapTrialButton() {
+        isDisableSegue = true
+        signInPresenterOutput?.showLoadingSpin()
+        userService.sigInAsTrial { result in
+            self.signInPresenterOutput?.hideIndicator(true)
+            switch result {
+            case let .success(user):
+                self.isFillOutNecessary = true
+                self.signInPresenterOutput?.performSegue(uid: user.uid)
+                self.signInPresenterOutput?.resetContetntsOfTextField()
+            case let .failure(error):
+                if let error = error as NSError? {
+                    self.signInPresenterOutput?.showErrorMessageIfNeeded(self.manageSiginInErrorMessage(error))
+                    print(error)
+                    self.signInPresenterOutput?.hideIndicator(true)
+                }
+            }
+        }
+    }
 
     func reloadUser() {
         Auth.auth().currentUser?.reload()
