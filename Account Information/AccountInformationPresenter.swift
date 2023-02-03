@@ -81,6 +81,7 @@ class AccountInformatonPresenter {
             switch result {
 
             case .success:
+                self.accountInformationPresenterOutput?.moveToRootVC()
                 self.accountInformationPresenterOutput?.showAlartIfNeeded("アカウントを削除しました")
             case let .failure(error):
                 self.accountInformationPresenterOutput?.showAlartIfNeeded("アカウント削除に失敗しました")
