@@ -88,11 +88,7 @@ extension SignUpViewController: SignUpPresenterOutput {
         indicatorBackView.isHidden = isHidden
     }
     internal func popToRoot() {
-//        performSegue(withIdentifier: "ToSignIn", sender: nil)
-//        let signInViewController = self.storyboard?.instantiateViewController(withIdentifier: "signInVC") as? SignInViewController
-//        self.present(signInViewController!, animated: true)
         navigationController?.popToRootViewController(animated: true)
-
     }
     func showSendEmail() {
         let alart = UIAlertController(title: nil, message: "認証メールを送りました", preferredStyle: .alert)
