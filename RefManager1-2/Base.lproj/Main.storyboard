@@ -562,7 +562,7 @@
                                 <rect key="frame" x="0.0" y="92" width="414" height="770"/>
                                 <color key="backgroundColor" name="themeColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCell" rowHeight="70" translatesAutoresizingMaskIntoConstraints="NO" id="wAV-os-jWS" customClass="RecipeCategoryCell" customModule="RefManager1_2" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCell" rowHeight="70" translatesAutoresizingMaskIntoConstraints="NO" id="wAV-os-jWS" customClass="RecipeCategoryCell" customModule="RefManager1_2" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wAV-os-jWS" id="fKr-I5-h1N">
@@ -997,7 +997,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="お試しで使ってみる"/>
-                                <buttonConfiguration key="configuration" style="plain" title="お試しで使ってみる">
+                                <buttonConfiguration key="configuration" style="plain" title="お試し利用開始">
                                     <backgroundConfiguration key="background" cornerRadius="20">
                                         <color key="backgroundColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="strokeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1193,7 +1193,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="4JZ-JQ-duh"/>
+        <segue reference="O33-d3-Giw"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="dishButton" width="208" height="208"/>
