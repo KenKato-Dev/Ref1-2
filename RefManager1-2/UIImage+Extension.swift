@@ -13,7 +13,8 @@ extension UIImage {
     func compositeImage(_ originalImage: UIImage,
                         _ currentImage: UIImage,
                         _ image: UIImage,
-                        _ value: CGFloat) -> UIImage {
+                        _ value: CGFloat) -> UIImage
+    {
         print("オリジン:\(originalImage),今:\(currentImage)")
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
@@ -36,7 +37,7 @@ extension UIImage {
         let textFontAttributes = [
             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 200),
             NSAttributedString.Key.foregroundColor: UIColor.darkGray,
-            NSAttributedString.Key.paragraphStyle: textStyle
+            NSAttributedString.Key.paragraphStyle: textStyle,
         ]
         text.draw(in: textRect, withAttributes: textFontAttributes as [NSAttributedString.Key: Any])
         guard let newImage = UIGraphicsGetImageFromCurrentImageContext() else { return self }

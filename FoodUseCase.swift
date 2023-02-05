@@ -17,7 +17,7 @@ final class FoodUseCase {
     private(set) var foodKindDictionary: [Food.FoodKind: Bool] = [
         .meat: false, .fish: false, .vegetableAndFruit: false,
         .milkAndEgg: false, .dish: false, .drink: false,
-        .seasoning: false, .sweet: false, .other: false
+        .seasoning: false, .sweet: false, .other: false,
     ]
     // 冷蔵ボタン操作の際のBool値操作
     func didTapRefrigeratorButton() {
@@ -53,7 +53,7 @@ final class FoodUseCase {
         foodKindDictionary = [
             .meat: false, .fish: false, .vegetableAndFruit: false,
             .milkAndEgg: false, .dish: false, .drink: false,
-            .seasoning: false, .sweet: false, .other: false
+            .seasoning: false, .sweet: false, .other: false,
         ]
     }
 }
