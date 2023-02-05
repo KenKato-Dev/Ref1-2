@@ -81,7 +81,7 @@ class FoodDataMock {
                 "quantity": "\(food.quantity)",
                 "unit": "\(food.unit)",
                 "IDkey": "\(food.IDkey)",
-                "date": "\(food.date)",
+                "date": "\(food.date)"
             ], merge: false) { error in
                 if let error = error {
                     completion(.failure(error))

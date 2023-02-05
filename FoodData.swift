@@ -115,7 +115,7 @@ final class FoodData: FoodDataProtocol {
                 "quantity": "\(food.quantity)",
                 "unit": "\(food.unit)",
                 "IDkey": "\(food.IDkey)",
-                "date": "\(food.date)",
+                "date": "\(food.date)"
             ], merge: false) { error in
                 if let error = error {
                     completion(.failure(error))
@@ -129,8 +129,7 @@ final class FoodData: FoodDataProtocol {
 
     // FirebaseへUpdationView経由で書込みする際の処理
     func postFromUpdationView(_ uid: String, foodName: String?, foodQuantity: String?,
-                              foodinArray: Food, _ completion: @escaping (Result<Void, Error>) -> Void)
-    {
+                              foodinArray: Food, _ completion: @escaping (Result<Void, Error>) -> Void) {
         db.collection("Users").document(uid).collection("foods")
             .document("\(fieldElementIDKey): \(foodinArray.IDkey)").setData([
                 "name": "\(foodName!)",
@@ -139,7 +138,7 @@ final class FoodData: FoodDataProtocol {
                 "IDkey": "\(foodinArray.IDkey)",
                 "kind": "\(foodinArray.kind)",
                 "kindNumber": "\(foodinArray.kind.kindNumber)",
-                "unit": "\(foodinArray.unit)",
+                "unit": "\(foodinArray.unit)"
             ], merge: true) { err in
                 if let err = err {
                     completion(.failure(err))
@@ -153,7 +152,7 @@ final class FoodData: FoodDataProtocol {
     func setLocation(_ uid: String, _ IDKey: String, _ location: String) {
         db.collection("Users").document(uid).collection("foods")
             .document("\(fieldElementIDKey): \(IDKey)").setData([
-                fieldElementLocation: "\(location)",
+                fieldElementLocation: "\(location)"
             ])
     }
 
@@ -196,8 +195,7 @@ final class FoodData: FoodDataProtocol {
                             _ filterRef: Bool,
                             _ filterFreezer: Bool,
                             _ filter: Filter,
-                            _ kinds: [Food.FoodKind])
-    {
+                            _ kinds: [Food.FoodKind]) {
         let kindArray = filter.kindArray.map { $0.rawValue }
         let location = filter.location.rawValue
         let kinds = kinds.map { $0.rawValue }
