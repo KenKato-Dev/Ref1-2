@@ -16,9 +16,9 @@ final class SignInViewController: UIViewController {
     @IBOutlet var signInButton: UIButton!
     @IBOutlet var wrongInputLabel: UILabel!
     @IBOutlet var showSignUpViewButton: UIButton!
-    @IBOutlet weak var trialButton: UIButton!
+    @IBOutlet var trialButton: UIButton!
     @IBOutlet var resetPassButton: UIButton!
-    @IBOutlet private weak var bannerView: GADBannerView!
+    @IBOutlet private var bannerView: GADBannerView!
     private var indicatorBackView = UIView()
     private let activityIndicator = UIActivityIndicatorView()
     private let signInPresenter = SignInPresenter(userService: UserService())
@@ -173,12 +173,13 @@ extension SignInViewController: SignInPresenterOutput {
         activityIndicator.isHidden = isHidden
         indicatorBackView.isHidden = isHidden
     }
+
     // GoogleAd
     func setUpAdBanner() {
         // 実装テスト用ID
-            bannerView.adUnitID = env["adUnitIDForSignIn"]!
-            bannerView.rootViewController = self
-            bannerView.load(GADRequest())
+        bannerView.adUnitID = env["adUnitIDForSignIn"]!
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
         bannerView.isHidden = false
     }
 }

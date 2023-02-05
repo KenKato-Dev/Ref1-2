@@ -6,8 +6,8 @@
 //
 
 import Firebase
-import MessageUI
 import Foundation
+import MessageUI
 
 protocol AccountInformationPresenterOutput: AnyObject {
     func setAccountInformation(_ name: String, _ email: String, _ criatedDay: String)
@@ -46,12 +46,14 @@ class AccountInformatonPresenter {
             }
         }
     }
+
     func displayForAnonymous() {
-        guard let user =  auth.currentUser else {return}
+        guard let user = auth.currentUser else { return }
         if user.isAnonymous {
-            self.accountInformationPresenterOutput?.setUpForAnonymous()
+            accountInformationPresenterOutput?.setUpForAnonymous()
         }
     }
+
     func signOutAction() {
         accountInformation.signOut { result in
             switch result {
@@ -62,24 +64,27 @@ class AccountInformatonPresenter {
             }
         }
     }
-    func didTapSignOutButton() {
-        self.accountInformationPresenterOutput?.showAlartBeforeSignOut("ログアウトしますか？")
 
+    func didTapSignOutButton() {
+        accountInformationPresenterOutput?.showAlartBeforeSignOut("ログアウトしますか？")
     }
+
     func didTapEmailButton() {
-        self.accountInformationPresenterOutput?.presentEmailView()
+        accountInformationPresenterOutput?.presentEmailView()
     }
+
     func privacyPolicyAction() {
-        guard let url = URL(string: "https://kenkato-dev.github.io/RefManager.github.io/")else {return}
+        guard let url = URL(string: "https://kenkato-dev.github.io/RefManager.github.io/") else { return }
         UIApplication.shared.open(url)
     }
+
     func didTapPrivacyPolicyButton() {
-        self.accountInformationPresenterOutput?.showAlartBeforePlivacyPolicy("プライバシーポリシーを開きますか？", "外部リンクにアクセスします")
+        accountInformationPresenterOutput?.showAlartBeforePlivacyPolicy("プライバシーポリシーを開きますか？", "外部リンクにアクセスします")
     }
+
     func deleteAccountAction() {
         accountInformation.deleteAccount { result in
             switch result {
-
             case .success:
                 self.accountInformationPresenterOutput?.moveToRootVC()
                 self.accountInformationPresenterOutput?.showAlartIfNeeded("アカウントを削除しました")
@@ -88,7 +93,8 @@ class AccountInformatonPresenter {
             }
         }
     }
+
     func didTapDeleteAccountButton() {
-        self.accountInformationPresenterOutput?.showAlartBeforeAccountDelete("アカウントを削除しますか？")
+        accountInformationPresenterOutput?.showAlartBeforeAccountDelete("アカウントを削除しますか？")
     }
 }

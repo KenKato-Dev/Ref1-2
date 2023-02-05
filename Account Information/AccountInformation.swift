@@ -12,7 +12,7 @@ class AccountInformation {
     private let auth = Auth.auth()
     private let db = Firestore.firestore()
     func fetchUserInfo(_ completion: @escaping (Result<UserData, Error>) -> Void) {
-        guard let user = self.auth.currentUser else { return }
+        guard let user = auth.currentUser else { return }
         if !user.isAnonymous {
             DispatchQueue.main.async {
                 self.db.collection("Users").document(user.uid).getDocument { documentSnapshot, error in
@@ -28,6 +28,7 @@ class AccountInformation {
             }
         }
     }
+
     func signOut(_ completion: @escaping (Result<Void, Error>) -> Void) {
         do {
             completion(.success(()))
@@ -36,13 +37,12 @@ class AccountInformation {
             completion(.failure(error))
         }
     }
-    func deleteAccount(_ completion: @escaping (Result<Void, Error>) -> Void) {
 
+    func deleteAccount(_ completion: @escaping (Result<Void, Error>) -> Void) {
         auth.currentUser?.delete(completion: { error in
-            guard let error = error else {return}
+            guard let error = error else { return }
             completion(.failure(error))
         })
         completion(.success(()))
-
     }
 }

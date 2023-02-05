@@ -78,5 +78,4 @@ class UnitSelectButton: UIButton {
             preserveButton.isEnabled = false
         }
     }
-
 }

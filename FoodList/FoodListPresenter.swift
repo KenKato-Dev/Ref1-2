@@ -27,7 +27,6 @@ protocol FoodListPresenterOutput: AnyObject {
     func setUpAdBanner()
     func showIndicator()
     func hideIndicator(_ isHidden: Bool)
-
 }
 
 // FoodListのPresenter
@@ -161,7 +160,8 @@ final class FoodListPresenter {
     func refreshArrayIfNeeded(row: Int) -> Food? {
         if !foodUseCase.isFilteringFreezer,
            !foodUseCase.isFilteringRefrigerator,
-           foodUseCase.selectedKinds.isEmpty {
+           foodUseCase.selectedKinds.isEmpty
+        {
             foodUseCase.resetDictionary()
             foodUseCase.foodFilter.kindArray = Food.FoodKind.allCases
             foodListPresenterOutput?.resetButtonColor()
@@ -175,7 +175,7 @@ final class FoodListPresenter {
         // ボタンの無効化
         foodListPresenterOutput?.arrangeDisplayingView(isDelete)
         if isDelete, checkedID.values.contains(true) {
-            if self.checkedID.filter {$0.value == true}.count > 10 {
+            if checkedID.filter { $0.value == true }.count > 10 {
                 self.foodListPresenterOutput?.manageDeleteQuery()
                 isDelete = false
                 foodListPresenterOutput?.arrangeDisplayingView(isDelete)
@@ -193,7 +193,6 @@ final class FoodListPresenter {
         }
 //        print(self.checkedID)
         return didTapCheckBox
-
     }
 
     // addButtonを押した時の処理
@@ -297,6 +296,7 @@ final class FoodListPresenter {
     func resetIsTapRow() {
         FoodListPresenter.isTapRow = false
     }
+
     func displayTitle() {
         foodListPresenterOutput?.setTitle(
             foodUseCase.isFilteringRefrigerator,
@@ -305,11 +305,13 @@ final class FoodListPresenter {
             foodUseCase.foodFilter.location
         )
     }
+
     func displayBanner() {
-        self.foodListPresenterOutput?.setUpAdBanner()
+        foodListPresenterOutput?.setUpAdBanner()
     }
+
     // viewWill/DidAppearに入れると余分なViewが生成されるため単独でここから呼ぶ
     func displayIndicator() {
-        self.foodListPresenterOutput?.showIndicator()
+        foodListPresenterOutput?.showIndicator()
     }
 }

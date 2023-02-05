@@ -34,8 +34,9 @@ class UserService {
             }
         }
     }
+
     func sigInAsTrial(_ completion: @escaping (Result<User, Error>) -> Void) {
-        auth.signInAnonymously {  [weak self] authDataResult, error in
+        auth.signInAnonymously { [weak self] authDataResult, error in
             if let error = error {
                 print(error)
                 completion(.failure(error))
@@ -45,6 +46,7 @@ class UserService {
             }
         }
     }
+
     func checkSignInStatus(_ completion: @escaping (Bool) -> Void) {
         if auth.currentUser != nil, auth.currentUser!.isEmailVerified {
             completion(true)
@@ -52,13 +54,14 @@ class UserService {
             completion(false)
         }
     }
+
     // お試しユーザーの場合はマージで情報上書き対応
     func postUser(_ email: String,
                   _ userName: String?,
                   _ pass: String,
-                  _ completion: @escaping (Result<Void, Error>) -> Void) {
+                  _ completion: @escaping (Result<Void, Error>) -> Void)
+    {
         DispatchQueue.main.async {
-
             if let user = self.auth.currentUser, user.isAnonymous {
                 let credential = EmailAuthProvider.credential(withEmail: email, password: pass)
                 user.link(with: credential) { result, errorOrNil in
@@ -73,7 +76,7 @@ class UserService {
                     let documentData: [String: Any] = [
                         "email": email,
                         "userName": userName,
-                        "createdAt": Timestamp()
+                        "createdAt": Timestamp(),
                     ]
                     self.db.collection("Users").document(userID).setData(documentData) { err in
                         if let err = err {
@@ -97,7 +100,7 @@ class UserService {
                     let documentData: [String: Any] = [
                         "email": email,
                         "userName": userName,
-                        "createdAt": Timestamp()
+                        "createdAt": Timestamp(),
                     ]
                     self.db.collection("Users").document(userID).setData(documentData) { err in
                         if let err = err {

@@ -75,5 +75,4 @@ class AddButton: UIButton {
         // 角丸み
         layer.cornerRadius = 10.0
     }
-
 }

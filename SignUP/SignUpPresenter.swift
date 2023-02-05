@@ -54,7 +54,6 @@ final class SignUpPresenter {
                                         switch result {
                                         case let .success(isSendingEmail):
                                             self.signUpPresenterOutput?.hideIndicator(true)
-//                                            self.signUpPresenterOutput?.presentErrorIfNeeded("認証メールを送りました")
                                             self.signUpPresenterOutput?.showSendEmail()
                                         case let .failure(error):
                                             print(error)

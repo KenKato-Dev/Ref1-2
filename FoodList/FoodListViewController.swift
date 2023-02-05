@@ -34,7 +34,7 @@ final class FoodListViewController: UIViewController {
     @IBOutlet var foodListTableView: UITableView!
     @IBOutlet var viewTitle: UINavigationItem!
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet var bannerView: GADBannerView!
     private var indicatorBackView = UIView()
     private let activityIndicator = UIActivityIndicatorView()
 
@@ -148,7 +148,6 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_: UITableView, willDisplay _: UITableViewCell, forRowAt indexPath: IndexPath) {
         foodListPresenter.didScrollToLast(row: indexPath.row)
     }
-
 }
 
 // Presenter側で定義したOutputに準拠した拡張
@@ -176,17 +175,18 @@ extension FoodListViewController: FoodListPresenterOutput {
     func setTitle(_ refigerator: Bool, _ freezer: Bool, _ selectedKinds: [Food.FoodKind], _ location: Food.Location) {
         // この処理でなく条件式も含めタイトルを入れるようにする
         if !refigerator,
-           !freezer, selectedKinds.isEmpty {
+           !freezer, selectedKinds.isEmpty
+        {
             viewTitle.title = "冷蔵品と冷凍品"
-            self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.darkGray, .font: UIFont.systemFont(ofSize: 20)]
+            navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.darkGray, .font: UIFont.systemFont(ofSize: 20)]
 
         } else {
             if location == .refrigerator {
                 viewTitle.title = "冷蔵品"
-                self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "ref"), .font: UIFont.systemFont(ofSize: 20)]
+                navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "ref"), .font: UIFont.systemFont(ofSize: 20)]
             } else if location == .freezer {
                 viewTitle.title = "冷凍品"
-                self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "freezer"), .font: UIFont.systemFont(ofSize: 20)]
+                navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "freezer"), .font: UIFont.systemFont(ofSize: 20)]
             }
         }
     }
@@ -218,7 +218,6 @@ extension FoodListViewController: FoodListPresenterOutput {
             locationButtonsStack.backgroundColor = .clear
             kindButtonsStack.backgroundColor = .clear
             tableViewBottomConstraint.constant = 5
-
         }
     }
 
@@ -329,7 +328,6 @@ extension FoodListViewController: FoodListPresenterOutput {
                         foodinArray: array[row]
                     )
                 }
-//                    self.foodListPresenter.resetIsTapRow()
             }), for: .touchUpInside)
         }))
         // アラートアクションシート二項目目
@@ -348,6 +346,7 @@ extension FoodListViewController: FoodListPresenterOutput {
     func perfomSeguetofoodAppendVC() { // (_ array:[Food],at:Int)
         performSegue(withIdentifier: "toFoodAppendVC", sender: nil)
     }
+
     func fadeout() {
         Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { time in
             if self.userNameLabel.alpha > 0 {
@@ -393,23 +392,25 @@ extension FoodListViewController: FoodListPresenterOutput {
         }))
         present(alart, animated: true)
     }
+
     // firebaseの一回のID指定可能数が10個までのため制限
     func manageDeleteQuery() {
-
-// 削除可能数が10個までであることをアラート表示
-            let limitTitile = "一度に10個まで削除可能です"
-            let limitMessage = "現在\(foodListPresenter.checkedID.filter {$0.value == true}.count)個選択しています"
-            let alart = UIAlertController(title: limitTitile, message: limitMessage, preferredStyle: .alert)
-            alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alart, animated: true) {}
+        // 削除可能数が10個までであることをアラート表示
+        let limitTitile = "一度に10個まで削除可能です"
+        let limitMessage = "現在\(foodListPresenter.checkedID.filter { $0.value == true }.count)個選択しています"
+        let alart = UIAlertController(title: limitTitile, message: limitMessage, preferredStyle: .alert)
+        alart.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alart, animated: true) {}
     }
+
     func setUpAdBanner() {
         // 実装テスト用ID
-            self.bannerView.adUnitID = env["adUnitIDForList"]!
-            self.bannerView.rootViewController = self
-            self.bannerView.load(GADRequest())
-            self.bannerView.isHidden = false
+        bannerView.adUnitID = env["adUnitIDForList"]!
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        bannerView.isHidden = false
     }
+
     func showIndicator() {
         indicatorBackView = UIView(frame: view.bounds)
         indicatorBackView.backgroundColor = .white
@@ -418,13 +419,13 @@ extension FoodListViewController: FoodListPresenterOutput {
         activityIndicator.style = .large
         activityIndicator.color = .gray
         activityIndicator.center = view.center
-        self.view.addSubview(indicatorBackView)
+        view.addSubview(indicatorBackView)
         indicatorBackView.addSubview(activityIndicator)
         activityIndicator.startAnimating()
     }
+
     func hideIndicator(_ isHidden: Bool) {
         activityIndicator.isHidden = isHidden
         indicatorBackView.isHidden = isHidden
     }
-
 }

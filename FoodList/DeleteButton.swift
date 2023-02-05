@@ -82,7 +82,6 @@ class DeleteButton: UIButton {
         // テキストサイズ
         titleLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
         imageView?.image?.withTintColor(.red)
-
     }
 
     // bool=trueの際に作動
@@ -97,5 +96,4 @@ class DeleteButton: UIButton {
             setTitleColor(.red, for: .normal)
         }
     }
-
 }
