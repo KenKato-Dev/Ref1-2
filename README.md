@@ -135,8 +135,8 @@ if filterRef || filterFreezer, !kinds.isEmpty {
     }
 ```
 
-FoodListCell内のcheckBoxButtonの記述改善：
-FoodListCellはFoodListTableViewに表示するCellを担当し、Cellは普段は隠蔽され情報削除時に現れタップされると見た目が変わるCheckBoxButtonを持っています。
+DeleteButtonおよびFoodListCell内のcheckBoxButtonの記述改善：
+FoodListCellはFoodListTableViewに表示するUITableViewCellクラスで、Cellは普段は隠蔽され情報削除時に現れタップされると見た目が変わるCheckBoxButtonを持っています。
 元々はCellの状態をViewControllerで判断しそれを元にFuncを呼び出して処理しCheckBoxButtonの見た目を変えていました。
 しかしViewController全体と当該関係箇所が見にくく、期待する表示通りの制御ができない場合が発生していました。
 これらを下記Enum Stateにより一元化することによりViewControllerの見やすさ改善と期待通りの制御が行えるようになりました。
