@@ -47,7 +47,7 @@ MVP:
 設計パターンはMVPを採用しています。構成としては各画面にViewControllerとPresenter、複数画面向けにModelを用意し、それぞれ以下の役割としています。  
 - ViewContoller：ユーザーの操作等イベントをPresenterに渡し処理しPresenterから返ってきた内容を元にUIを描写  
 - Presenter：ModelとViewControllerの仲介役としてViewから受け取ったイベントや必要に応じてModelへ処理を委譲し返ってきた内容を元に処理を実行、処理結果をViewへ変換  
-- Model：Presenterからの異常など必要に応じてAPIへのリクエストやfetch、postを実行、UIや画面表示に依存せずロジックを一元管理  
+- Model：Presenterからの処理移譲など必要に応じてAPIへのリクエストやfetch、postを実行、UIや画面表示に依存せずロジックを一元管理  
   
 MVPパターンの採用は、役割の明確化による保守のしやすさとテスト実装のしやすさ向上を期待して実装しています。  
   
