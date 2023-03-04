@@ -146,7 +146,6 @@
 			children = (
 				EC5AAD8D2924B239004EAF94 /* SignUpViewController.swift */,
 				EC5AAD8B292383B1004EAF94 /* SignUpPresenter.swift */,
-				ECBD104829334D5400AF2702 /* UserService.swift */,
 			);
 			path = SignUP;
 			sourceTree = "<group>";
@@ -204,8 +203,7 @@
 				EC9C1C0A28F3E8650024570D /* FoodList */,
 				EC9C1C0B28F3E8A60024570D /* FoodAddition */,
 				EC9C1C0928F3E8260024570D /* RecipeCategory */,
-				EC638CE9298A8A3B00997863 /* SignIn */,
-				EC5AAD8F2924B241004EAF94 /* SignUP */,
+				ECFA75BC29A1B93300753617 /* Sign */,
 				ECC4532229582A140064CF13 /* Account Information */,
 				ECA6F44428026B0C00CA7C2D /* RefManager1-2 */,
 				ECBD105329339C9400AF2702 /* RefManager1-2Tests */,
@@ -255,6 +253,16 @@
 				ECC45327295847910064CF13 /* AccountInformation.swift */,
 			);
 			path = "Account Information";
+			sourceTree = "<group>";
+		};
+		ECFA75BC29A1B93300753617 /* Sign */ = {
+			isa = PBXGroup;
+			children = (
+				ECBD104829334D5400AF2702 /* UserService.swift */,
+				EC638CE9298A8A3B00997863 /* SignIn */,
+				EC5AAD8F2924B241004EAF94 /* SignUP */,
+			);
+			path = Sign;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

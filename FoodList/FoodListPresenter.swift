@@ -19,7 +19,6 @@ protocol FoodListPresenterOutput: AnyObject {
     func resetButtonColor()
     func showAlertInCell(_ storyboard: FoodAppendViewController?, _ array: [Food], _ row: Int, _ isTapRow: Bool)
     func perfomSeguetofoodAppendVC()
-    func fadeout()
     func showRecoomendation()
     func removeRecommendToAddLabel(_ isHidden: Bool)
     func showDeleteAlert()
@@ -160,8 +159,7 @@ final class FoodListPresenter {
     func refreshArrayIfNeeded(row: Int) -> Food? {
         if !foodUseCase.isFilteringFreezer,
            !foodUseCase.isFilteringRefrigerator,
-           foodUseCase.selectedKinds.isEmpty
-        {
+           foodUseCase.selectedKinds.isEmpty {
             foodUseCase.resetDictionary()
             foodUseCase.foodFilter.kindArray = Food.FoodKind.allCases
             foodListPresenterOutput?.resetButtonColor()

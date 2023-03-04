@@ -57,7 +57,11 @@ extension AccountInformationViewController: MFMailComposeViewControllerDelegate 
         present(mailViewController, animated: true)
     }
 
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    func mailComposeController(
+        _ controller: MFMailComposeViewController,
+        didFinishWith result: MFMailComposeResult,
+        error: Error?
+    ) {
         var message = ""
         if let error = error {
             message = "\(error.localizedDescription)"

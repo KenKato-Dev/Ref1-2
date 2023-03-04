@@ -59,8 +59,7 @@ class UserService {
     func postUser(_ email: String,
                   _ userName: String?,
                   _ pass: String,
-                  _ completion: @escaping (Result<Void, Error>) -> Void)
-    {
+                  _ completion: @escaping (Result<Void, Error>) -> Void) {
         DispatchQueue.main.async {
             if let user = self.auth.currentUser, user.isAnonymous {
                 let credential = EmailAuthProvider.credential(withEmail: email, password: pass)
@@ -76,7 +75,7 @@ class UserService {
                     let documentData: [String: Any] = [
                         "email": email,
                         "userName": userName,
-                        "createdAt": Timestamp(),
+                        "createdAt": Timestamp()
                     ]
                     self.db.collection("Users").document(userID).setData(documentData) { err in
                         if let err = err {
@@ -100,7 +99,7 @@ class UserService {
                     let documentData: [String: Any] = [
                         "email": email,
                         "userName": userName,
-                        "createdAt": Timestamp(),
+                        "createdAt": Timestamp()
                     ]
                     self.db.collection("Users").document(userID).setData(documentData) { err in
                         if let err = err {

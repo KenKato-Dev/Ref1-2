@@ -175,8 +175,7 @@ extension FoodListViewController: FoodListPresenterOutput {
     func setTitle(_ refigerator: Bool, _ freezer: Bool, _ selectedKinds: [Food.FoodKind], _ location: Food.Location) {
         // この処理でなく条件式も含めタイトルを入れるようにする
         if !refigerator,
-           !freezer, selectedKinds.isEmpty
-        {
+           !freezer, selectedKinds.isEmpty {
             viewTitle.title = "冷蔵品と冷凍品"
             navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.darkGray, .font: UIFont.systemFont(ofSize: 20)]
 
@@ -345,17 +344,6 @@ extension FoodListViewController: FoodListPresenterOutput {
     // AppendViewControllerへの遷移処理
     func perfomSeguetofoodAppendVC() { // (_ array:[Food],at:Int)
         performSegue(withIdentifier: "toFoodAppendVC", sender: nil)
-    }
-
-    func fadeout() {
-        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { time in
-            if self.userNameLabel.alpha > 0 {
-                self.userNameLabel.alpha -= 0.05
-            } else {
-                time.invalidate()
-                self.userNameLabel.isHidden = true
-            }
-        }
     }
 
     // tableviewに説明文を表示

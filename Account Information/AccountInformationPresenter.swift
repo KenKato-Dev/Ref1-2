@@ -59,7 +59,7 @@ class AccountInformatonPresenter {
             switch result {
             case .success:
                 self.accountInformationPresenterOutput?.moveToRootVC()
-            case let .failure(error):
+            case .failure:
                 self.accountInformationPresenterOutput?.showAlartIfNeeded("ログアウトに失敗しました")
             }
         }
@@ -88,7 +88,7 @@ class AccountInformatonPresenter {
             case .success:
                 self.accountInformationPresenterOutput?.moveToRootVC()
                 self.accountInformationPresenterOutput?.showAlartIfNeeded("アカウントを削除しました")
-            case let .failure(error):
+            case .failure:
                 self.accountInformationPresenterOutput?.showAlartIfNeeded("アカウント削除に失敗しました")
             }
         }
