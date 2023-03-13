@@ -18,6 +18,7 @@ protocol AccountInformationPresenterOutput: AnyObject {
     func setUpForAnonymous()
     func showAlartBeforePlivacyPolicy(_ title: String, _ message: String)
     func showAlartBeforeAccountDelete(_ message: String)
+    func presentsignUpfromAccountView()
 }
 
 class AccountInformatonPresenter {
@@ -96,5 +97,8 @@ class AccountInformatonPresenter {
 
     func didTapDeleteAccountButton() {
         accountInformationPresenterOutput?.showAlartBeforeAccountDelete("アカウントを削除しますか？")
+    }
+    func didTapSignUpfromAccountView() {
+        self.accountInformationPresenterOutput?.presentsignUpfromAccountView()
     }
 }

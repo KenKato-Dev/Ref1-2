@@ -48,13 +48,14 @@ final class SignInViewController: UIViewController {
 
     // performsegueの動作を制御
     override func shouldPerformSegue(withIdentifier identifier: String, sender _: Any?) -> Bool {
-        if identifier == "toFoodListView", signInPresenter.isFillOutNecessary {
-            return true
-        } else if identifier == "toSignUpVC" {
-            return true
-        } else {
-            return false
-        }
+//        if identifier == "toFoodListView", signInPresenter.isFillOutNecessary {
+//            return true
+//        } else
+//        if identifier == "toSignUpVC" {
+//            return true
+//        } else {
+//            return false
+//        }
     }
 
     @objc func hideKeyboard() {
@@ -100,7 +101,7 @@ extension SignInViewController: SignInPresenterOutput {
     }
 
     func performSegue(uid: String) {
-        performSegue(withIdentifier: "toFoodListView", sender: uid)
+//        performSegue(withIdentifier: "toFoodListView", sender: uid)
     }
 
     func showAlertPassReset() {
@@ -145,15 +146,15 @@ extension SignInViewController: SignInPresenterOutput {
     }
 
     // 試作
-    static func checkSignInStatus(_ isSignIn: Bool) -> UIViewController {
-        if isSignIn {
-            let signInVC = SignInViewController()
-            return signInVC
-        } else {
-            let foodListVC = FoodListViewController()
-            return foodListVC
-        }
-    }
+//    static func checkSignInStatus(_ isSignIn: Bool) -> UIViewController {
+//        if isSignIn {
+//            let signInVC = SignInViewController()
+//            return signInVC
+//        } else {
+//            let foodListVC = FoodListViewController()
+//            return foodListVC
+//        }
+//    }
 
     func showLoadingSpin() {
         indicatorBackView = UIView(frame: view.bounds)
@@ -181,5 +182,21 @@ extension SignInViewController: SignInPresenterOutput {
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
         bannerView.isHidden = false
+    }
+    func pushFoodView() {
+        let foodListView = UIStoryboard(
+            name: "FoodList",
+            bundle: nil
+        )
+            .instantiateViewController(withIdentifier: "FoodListViewController") as! FoodListViewController
+        self.navigationController?.pushViewController(foodListView, animated: true)
+    }
+    func pushSignUpView(){
+        let signUpView = UIStoryboard(
+            name: "SignUp",
+            bundle: nil
+        )
+            .instantiateViewController(withIdentifier: "SignUpView") as! SignUpViewController
+        self.navigationController?.pushViewController(signUpView, animated: true)
     }
 }

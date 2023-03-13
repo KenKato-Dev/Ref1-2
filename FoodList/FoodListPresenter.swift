@@ -18,7 +18,8 @@ protocol FoodListPresenterOutput: AnyObject {
     func animateLocationButton(_ isFilteringRef: Bool, _ isFilteringFreezer: Bool)
     func resetButtonColor()
     func showAlertInCell(_ storyboard: FoodAppendViewController?, _ array: [Food], _ row: Int, _ isTapRow: Bool)
-    func perfomSeguetofoodAppendVC()
+    func presentFoodAppendView()
+    func presentAccountInforamtionView()
     func showRecoomendation()
     func removeRecommendToAddLabel(_ isHidden: Bool)
     func showDeleteAlert()
@@ -195,9 +196,12 @@ final class FoodListPresenter {
 
     // addButtonを押した時の処理
     func didTapAddButton() {
-        foodListPresenterOutput?.perfomSeguetofoodAppendVC()
+        foodListPresenterOutput?.presentFoodAppendView()
     }
-
+    // AccountButtonの処理
+    func didTapAccountButtton() {
+        foodListPresenterOutput?.presentAccountInforamtionView()
+    }
     // tableViewのcellの列数の処理
     func numberOfRows() -> Int {
         return array.count

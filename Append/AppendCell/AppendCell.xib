@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="110" id="ig4-mp-ryx" customClass="AppendCell" customModule="TabBarSample" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="319" height="110"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ig4-mp-ryx" id="qXf-29-u3M">
+                <rect key="frame" x="0.0" y="0.0" width="319" height="110"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jYV-Ud-vP7">
+                        <rect key="frame" x="0.0" y="0.0" width="110" height="110"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="jYV-Ud-vP7" secondAttribute="height" multiplier="1:1" id="omK-ub-XJr"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="種類(ボタン)">
+                            <backgroundConfiguration key="background">
+                                <color key="backgroundColor" systemColor="tintColor"/>
+                            </backgroundConfiguration>
+                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleCaption1"/>
+                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </buttonConfiguration>
+                    </button>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fYR-df-2L0">
+                        <rect key="frame" x="115" y="5" width="199" height="100"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="名称" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ig-Eb-Apv">
+                                <rect key="frame" x="0.0" y="0.0" width="199" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="15c-ur-Ce0">
+                                <rect key="frame" x="0.0" y="35" width="199" height="30"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="数量Int" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xkZ-13-OJo">
+                                        <rect key="frame" x="0.0" y="0.0" width="97" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LoT-90-dhb">
+                                        <rect key="frame" x="102" y="0.0" width="97" height="30"/>
+                                        <menu key="menu" id="2Ng-P7-jYB">
+                                            <children>
+                                                <command title="Item 1" id="n8m-xu-en3"/>
+                                                <command title="Item 2" id="E7e-8Q-Ld4"/>
+                                            </children>
+                                        </menu>
+                                        <state key="normal" title="単位"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ZIY-bf-jTW">
+                                <rect key="frame" x="0.0" y="70" width="199" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X5P-8n-wVK">
+                                        <rect key="frame" x="0.0" y="0.0" width="99.666666666666671" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="冷蔵">
+                                            <color key="titleColor" name="ref"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e7m-gw-suS">
+                                        <rect key="frame" x="99.666666666666657" y="0.0" width="99.333333333333343" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="冷凍"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="knq-Mx-uor">
+                        <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="knq-Mx-uor" secondAttribute="height" multiplier="1:1" id="9HU-YS-7xs"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="gray" image="minus" catalog="system">
+                            <backgroundConfiguration key="background" cornerRadius="10" strokeWidth="1">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="strokeColor" systemColor="systemRedColor"/>
+                            </backgroundConfiguration>
+                            <color key="baseForegroundColor" systemColor="systemRedColor"/>
+                            <color key="baseBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </buttonConfiguration>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="fYR-df-2L0" secondAttribute="bottom" constant="5" id="0Pd-jv-fvA"/>
+                    <constraint firstItem="jYV-Ud-vP7" firstAttribute="top" secondItem="qXf-29-u3M" secondAttribute="top" id="0Tf-eq-z40"/>
+                    <constraint firstAttribute="bottom" secondItem="jYV-Ud-vP7" secondAttribute="bottom" id="8dR-PB-eah"/>
+                    <constraint firstItem="fYR-df-2L0" firstAttribute="leading" secondItem="jYV-Ud-vP7" secondAttribute="trailing" constant="5" id="MYd-Ak-jkJ"/>
+                    <constraint firstItem="fYR-df-2L0" firstAttribute="centerY" secondItem="jYV-Ud-vP7" secondAttribute="centerY" id="Zcu-Wf-Cbk"/>
+                    <constraint firstItem="knq-Mx-uor" firstAttribute="top" secondItem="qXf-29-u3M" secondAttribute="top" id="ccg-OK-D2G"/>
+                    <constraint firstAttribute="trailing" secondItem="fYR-df-2L0" secondAttribute="trailing" constant="5" id="faT-rx-bYz"/>
+                    <constraint firstItem="jYV-Ud-vP7" firstAttribute="leading" secondItem="qXf-29-u3M" secondAttribute="leading" id="kQr-Ix-gDj"/>
+                    <constraint firstItem="knq-Mx-uor" firstAttribute="width" secondItem="jYV-Ud-vP7" secondAttribute="width" multiplier="0.2" id="pCq-Pi-eAH"/>
+                    <constraint firstItem="fYR-df-2L0" firstAttribute="top" secondItem="qXf-29-u3M" secondAttribute="top" constant="5" id="uOK-Hm-7Oe"/>
+                    <constraint firstItem="knq-Mx-uor" firstAttribute="leading" secondItem="qXf-29-u3M" secondAttribute="leading" id="x8L-ZV-Bh6"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="QcI-G2-GtJ"/>
+            <point key="canvasLocation" x="113.74045801526717" y="46.478873239436624"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="minus" catalog="system" width="128" height="26"/>
+        <namedColor name="ref">
+            <color red="0.31000000238418579" green="0.44299998879432678" blue="0.74500000476837158" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

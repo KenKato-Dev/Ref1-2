@@ -19,6 +19,8 @@ protocol SignInPresenterOutput: AnyObject {
     func showLoadingSpin()
     func hideIndicator(_ isHidden: Bool)
     func setUpAdBanner()
+    func pushFoodView()
+    func pushSignUpView()
 }
 
 final class SignInPresenter {
@@ -53,7 +55,9 @@ final class SignInPresenter {
             case let .success(user):
                 if user.isEmailVerified {
                     self.isFillOutNecessary = true
-                    self.signInPresenterOutput?.performSegue(uid: user.uid)
+//                    self.signInPresenterOutput?.performSegue(uid: user.uid)
+                    // push
+                    self.signInPresenterOutput?.pushFoodView()
                     self.signInPresenterOutput?.resetContetntsOfTextField()
                 } else {
                     self.signInPresenterOutput?.showErrorMessageIfNeeded("メール認証を確認できません")
@@ -76,9 +80,11 @@ final class SignInPresenter {
         userService.sigInAsTrial { result in
             self.signInPresenterOutput?.hideIndicator(true)
             switch result {
-            case let .success(user):
+            case .success:
                 self.isFillOutNecessary = true
-                self.signInPresenterOutput?.performSegue(uid: user.uid)
+//                self.signInPresenterOutput?.performSegue(uid: user.uid)
+                // push
+                self.signInPresenterOutput?.pushFoodView()
                 self.signInPresenterOutput?.resetContetntsOfTextField()
             case let .failure(error):
                 if let error = error as NSError? {
@@ -105,7 +111,9 @@ final class SignInPresenter {
     func performsegueIfAlreadySignIn() {
         userService.checkSignInStatus { isSignIn in
             if isSignIn, !self.isDisableSegue {
-                self.signInPresenterOutput?.performSegue(uid: Auth.auth().currentUser!.uid)
+//                self.signInPresenterOutput?.performSegue(uid: Auth.auth().currentUser!.uid)
+                // push
+                self.signInPresenterOutput?.pushFoodView()
             } else {
                 print("サインイン履歴なし")
             }

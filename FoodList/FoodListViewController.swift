@@ -57,6 +57,9 @@ final class FoodListViewController: UIViewController {
         addButtton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapAddButton()
         }), for: .touchUpInside)
+        accountButton.addAction(.init(handler: { _ in
+            self.foodListPresenter.didTapAccountButtton()
+        }), for: .touchUpInside)
         refrigeratorButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapRefrigiratorButton(self.refrigeratorButton)
         }), for: .touchUpInside)
@@ -332,7 +335,13 @@ extension FoodListViewController: FoodListPresenterOutput {
         // アラートアクションシート二項目目
         alert.addAction(.init(title: "レシピを調べる", style: .default, handler: { _ in
             // prepareと連動、RecipeCategoryViewへ移動
-            self.performSegue(withIdentifier: "toRecipeTableView", sender: array[row].name)
+//            self.performSegue(withIdentifier: "toRecipeTableView", sender: array[row].name)
+            let recipeCategoryView = UIStoryboard(name: "RecipeList", bundle: nil).instantiateViewController(withIdentifier: "RecipeCategoryListView") as! RecipeCategoryListViewController
+
+            recipeCategoryView.navigationItem.title = array[row].name
+//            detailedView.urlString = self.viewModel.qiita.articles[indexPath.row].url
+            self.navigationController?.pushViewController(recipeCategoryView, animated: true)
+
         }))
         // アラートアクションシート三項目目
         alert.addAction(.init(title: "キャンセル", style: .destructive, handler: { _ in
@@ -342,10 +351,18 @@ extension FoodListViewController: FoodListPresenterOutput {
     }
 
     // AppendViewControllerへの遷移処理
-    func perfomSeguetofoodAppendVC() { // (_ array:[Food],at:Int)
-        performSegue(withIdentifier: "toFoodAppendVC", sender: nil)
-    }
+    func presentFoodAppendView() { // (_ array:[Food],at:Int)
+        let foodAppendView = UIStoryboard(name: "Append", bundle: nil).instantiateViewController(withIdentifier: "FoodAppendView") as! FoodAppendViewController
+        foodAppendView.modalPresentationStyle = .fullScreen
+        self.present(foodAppendView, animated: true)
+//        self.navigationController?.pushViewController(foodAppendView, animated: true)
 
+//        performSegue(withIdentifier: "toFoodAppendVC", sender: nil)
+    }
+    func presentAccountInforamtionView() {
+        let accountInformationView = UIStoryboard(name: "AccountInformation", bundle: nil).instantiateViewController(withIdentifier: "AccountInformationView") as! AccountInformationViewController
+        self.navigationController?.pushViewController(accountInformationView, animated: true)
+    }
     // tableviewに説明文を表示
     func showRecoomendation() {
         recommendToAddLabel.text = "左上の＋から食品を登録できます"
