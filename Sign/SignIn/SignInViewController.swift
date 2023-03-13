@@ -47,7 +47,7 @@ final class SignInViewController: UIViewController {
     }
 
     // performsegueの動作を制御
-    override func shouldPerformSegue(withIdentifier identifier: String, sender _: Any?) -> Bool {
+    override func shouldPerformSegue(withIdentifier _: String, sender _: Any?) -> Bool {
 //        if identifier == "toFoodListView", signInPresenter.isFillOutNecessary {
 //            return true
 //        } else
@@ -100,7 +100,7 @@ extension SignInViewController: SignInPresenterOutput {
         wrongInputLabel.textColor = .clear
     }
 
-    func performSegue(uid: String) {
+    func performSegue(uid _: String) {
 //        performSegue(withIdentifier: "toFoodListView", sender: uid)
     }
 
@@ -183,20 +183,22 @@ extension SignInViewController: SignInPresenterOutput {
         bannerView.load(GADRequest())
         bannerView.isHidden = false
     }
+
     func pushFoodView() {
         let foodListView = UIStoryboard(
             name: "FoodList",
             bundle: nil
         )
-            .instantiateViewController(withIdentifier: "FoodListViewController") as! FoodListViewController
-        self.navigationController?.pushViewController(foodListView, animated: true)
+        .instantiateViewController(withIdentifier: "FoodListViewController") as! FoodListViewController
+        navigationController?.pushViewController(foodListView, animated: true)
     }
-    func pushSignUpView(){
+
+    func pushSignUpView() {
         let signUpView = UIStoryboard(
             name: "SignUp",
             bundle: nil
         )
-            .instantiateViewController(withIdentifier: "SignUpView") as! SignUpViewController
-        self.navigationController?.pushViewController(signUpView, animated: true)
+        .instantiateViewController(withIdentifier: "SignUpView") as! SignUpViewController
+        navigationController?.pushViewController(signUpView, animated: true)
     }
 }

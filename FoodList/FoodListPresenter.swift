@@ -160,7 +160,8 @@ final class FoodListPresenter {
     func refreshArrayIfNeeded(row: Int) -> Food? {
         if !foodUseCase.isFilteringFreezer,
            !foodUseCase.isFilteringRefrigerator,
-           foodUseCase.selectedKinds.isEmpty {
+           foodUseCase.selectedKinds.isEmpty
+        {
             foodUseCase.resetDictionary()
             foodUseCase.foodFilter.kindArray = Food.FoodKind.allCases
             foodListPresenterOutput?.resetButtonColor()
@@ -198,10 +199,12 @@ final class FoodListPresenter {
     func didTapAddButton() {
         foodListPresenterOutput?.presentFoodAppendView()
     }
+
     // AccountButtonの処理
     func didTapAccountButtton() {
         foodListPresenterOutput?.presentAccountInforamtionView()
     }
+
     // tableViewのcellの列数の処理
     func numberOfRows() -> Int {
         return array.count

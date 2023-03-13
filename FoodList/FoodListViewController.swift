@@ -178,7 +178,8 @@ extension FoodListViewController: FoodListPresenterOutput {
     func setTitle(_ refigerator: Bool, _ freezer: Bool, _ selectedKinds: [Food.FoodKind], _ location: Food.Location) {
         // この処理でなく条件式も含めタイトルを入れるようにする
         if !refigerator,
-           !freezer, selectedKinds.isEmpty {
+           !freezer, selectedKinds.isEmpty
+        {
             viewTitle.title = "冷蔵品と冷凍品"
             navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.darkGray, .font: UIFont.systemFont(ofSize: 20)]
 
@@ -354,15 +355,17 @@ extension FoodListViewController: FoodListPresenterOutput {
     func presentFoodAppendView() { // (_ array:[Food],at:Int)
         let foodAppendView = UIStoryboard(name: "Append", bundle: nil).instantiateViewController(withIdentifier: "FoodAppendView") as! FoodAppendViewController
         foodAppendView.modalPresentationStyle = .fullScreen
-        self.present(foodAppendView, animated: true)
+        present(foodAppendView, animated: true)
 //        self.navigationController?.pushViewController(foodAppendView, animated: true)
 
 //        performSegue(withIdentifier: "toFoodAppendVC", sender: nil)
     }
+
     func presentAccountInforamtionView() {
         let accountInformationView = UIStoryboard(name: "AccountInformation", bundle: nil).instantiateViewController(withIdentifier: "AccountInformationView") as! AccountInformationViewController
-        self.navigationController?.pushViewController(accountInformationView, animated: true)
+        navigationController?.pushViewController(accountInformationView, animated: true)
     }
+
     // tableviewに説明文を表示
     func showRecoomendation() {
         recommendToAddLabel.text = "左上の＋から食品を登録できます"

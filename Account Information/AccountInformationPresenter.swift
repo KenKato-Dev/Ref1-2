@@ -98,7 +98,8 @@ class AccountInformatonPresenter {
     func didTapDeleteAccountButton() {
         accountInformationPresenterOutput?.showAlartBeforeAccountDelete("アカウントを削除しますか？")
     }
+
     func didTapSignUpfromAccountView() {
-        self.accountInformationPresenterOutput?.presentsignUpfromAccountView()
+        accountInformationPresenterOutput?.presentsignUpfromAccountView()
     }
 }

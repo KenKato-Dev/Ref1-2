@@ -8,10 +8,8 @@
 import UIKit
 
 class MainTabViewController: UITabBarController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBar.delegate = self
+        tabBar.delegate = self
     }
-
 }

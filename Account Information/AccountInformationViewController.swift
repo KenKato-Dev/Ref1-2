@@ -153,12 +153,13 @@ extension AccountInformationViewController: AccountInformationPresenterOutput {
         alart.addAction(UIAlertAction(title: "いいえ", style: .destructive, handler: nil))
         present(alart, animated: true) {}
     }
+
     func presentsignUpfromAccountView() {
         let signUpView = UIStoryboard(
             name: "SignUp",
             bundle: nil
         )
-            .instantiateViewController(withIdentifier: "SignUpView") as! SignUpViewController
-        self.navigationController?.pushViewController(signUpView, animated: true)
+        .instantiateViewController(withIdentifier: "SignUpView") as! SignUpViewController
+        navigationController?.pushViewController(signUpView, animated: true)
     }
 }
