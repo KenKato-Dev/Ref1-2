@@ -15,7 +15,7 @@ final class SignInViewController: UIViewController {
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var signInButton: UIButton!
     @IBOutlet var wrongInputLabel: UILabel!
-    @IBOutlet var showSignUpViewButton: UIButton!
+    @IBOutlet var pushSignUpViewButton: UIButton!
     @IBOutlet var trialButton: UIButton!
     @IBOutlet var resetPassButton: UIButton!
     @IBOutlet private var bannerView: GADBannerView!
@@ -32,6 +32,9 @@ final class SignInViewController: UIViewController {
         signInPresenter.hideWrongInputInInitial()
         signInPresenter.hidePassword()
         signInPresenter.reloadUser()
+        pushSignUpViewButton.addAction(.init(handler: { _ in
+            self.signInPresenter.didTapPushSignInButton()
+        }), for: .touchUpInside)
         signInButton.addAction(.init(handler: { _ in
             guard let email = self.emailTextField.text, let password
                 = self.passwordTextField.text else { return }
@@ -56,6 +59,7 @@ final class SignInViewController: UIViewController {
 //        } else {
 //            return false
 //        }
+        return true
     }
 
     @objc func hideKeyboard() {
@@ -186,11 +190,15 @@ extension SignInViewController: SignInPresenterOutput {
 
     func pushFoodView() {
         let foodListView = UIStoryboard(
-            name: "FoodList",
+            name: "MainTab",
+//            name: "FoodList",
             bundle: nil
         )
-        .instantiateViewController(withIdentifier: "FoodListViewController") as! FoodListViewController
+            .instantiateViewController(withIdentifier: "MainTab") as! MainTabViewController
+//        .instantiateViewController(withIdentifier: "FoodListViewController") as! FoodListViewController
+//        present(foodListView, animated: true)
         navigationController?.pushViewController(foodListView, animated: true)
+
     }
 
     func pushSignUpView() {
@@ -198,7 +206,7 @@ extension SignInViewController: SignInPresenterOutput {
             name: "SignUp",
             bundle: nil
         )
-        .instantiateViewController(withIdentifier: "SignUpView") as! SignUpViewController
+            .instantiateViewController(withIdentifier: "SignUpView") as! SignUpViewController
         navigationController?.pushViewController(signUpView, animated: true)
     }
 }

@@ -43,6 +43,9 @@ final class SignInPresenter {
     func hideWrongInputInInitial() {
         signInPresenterOutput?.showWorngInputIfNeeded(true)
     }
+    func didTapPushSignInButton() {
+        self.signInPresenterOutput?.pushSignUpView()
+    }
 
     func didTapSignInButton(_ email: String, _ password: String) {
         isDisableSegue = true

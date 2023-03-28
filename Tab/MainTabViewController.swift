@@ -10,6 +10,7 @@ import UIKit
 class MainTabViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.delegate = self
+        self.navigationItem.hidesBackButton = true
+//        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 }

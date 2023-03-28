@@ -20,6 +20,7 @@ class RecipeCategoryListViewController: UIViewController {
         recipeTable.dataSource = self
         recipeCategoryListPresenter.setOutput(recipeCategoryListPresenterOutput: self)
         recipeCategoryListPresenter.reloadArray(searchKeyword: navigationItem.title)
+        recipeTable.register(UINib(nibName: "RecipeCell", bundle: nil), forCellReuseIdentifier: "recipeCell")
     }
 }
 

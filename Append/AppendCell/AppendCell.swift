@@ -8,6 +8,13 @@
 import UIKit
 
 class AppendCell: UITableViewCell {
+    @IBOutlet weak var kindViewButton: UIButton!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var quantityTextField: UITextField!
+    @IBOutlet weak var quantityUnitButton: UIButton!
+    @IBOutlet weak var refButton: UIButton!
+    @IBOutlet weak var freezerButton: UIButton!
+    @IBOutlet weak var removeButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -18,4 +25,7 @@ class AppendCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+}
+extension AppendCell: AppendCellProviderOutput {
+
 }

@@ -160,8 +160,7 @@ final class FoodListPresenter {
     func refreshArrayIfNeeded(row: Int) -> Food? {
         if !foodUseCase.isFilteringFreezer,
            !foodUseCase.isFilteringRefrigerator,
-           foodUseCase.selectedKinds.isEmpty
-        {
+           foodUseCase.selectedKinds.isEmpty {
             foodUseCase.resetDictionary()
             foodUseCase.foodFilter.kindArray = Food.FoodKind.allCases
             foodListPresenterOutput?.resetButtonColor()

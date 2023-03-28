@@ -93,6 +93,7 @@ final class FoodListViewController: UIViewController {
         othersButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(.other, self.othersButton)
         }), for: .touchUpInside)
+//        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -141,7 +142,8 @@ extension FoodListViewController: UITableViewDelegate, UITableViewDataSource {
 
     // cell選択時の動作
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let updationView = storyboard?.instantiateViewController(withIdentifier: "modal") as? FoodAppendViewController
+        let updationView = UIStoryboard(name: "Append", bundle: nil).instantiateViewController(withIdentifier: "FoodAppendView") as? FoodAppendViewController
+//        let updationView = storyboard?.instantiateViewController(withIdentifier: "FoodAppendView") as? FoodAppendViewController
         // ここで選択しているセルにアクセス
         tableView.deselectRow(at: indexPath, animated: false)
         foodListPresenter.didSelectRow(storyboard: updationView, row: indexPath.row)
@@ -178,8 +180,7 @@ extension FoodListViewController: FoodListPresenterOutput {
     func setTitle(_ refigerator: Bool, _ freezer: Bool, _ selectedKinds: [Food.FoodKind], _ location: Food.Location) {
         // この処理でなく条件式も含めタイトルを入れるようにする
         if !refigerator,
-           !freezer, selectedKinds.isEmpty
-        {
+           !freezer, selectedKinds.isEmpty {
             viewTitle.title = "冷蔵品と冷凍品"
             navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.darkGray, .font: UIFont.systemFont(ofSize: 20)]
 

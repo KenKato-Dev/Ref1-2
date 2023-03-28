@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Append List View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AppendFoods" id="Y6W-OH-hqX" customClass="AppendListViewController" customModule="RefManager1_2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -67,6 +67,11 @@
                             <constraint firstItem="C73-w1-bTT" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ye9-V2-3um"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="appendButton" destination="lGa-8n-K1t" id="V6o-Le-Qnj"/>
+                        <outlet property="appendTable" destination="C73-w1-bTT" id="mJ7-de-WIu"/>
+                        <outlet property="cancelButton" destination="w9Z-MS-0Ar" id="ufS-VB-Mqs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

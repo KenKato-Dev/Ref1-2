@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Account Information View Controller-->
+        <!--Item-->
         <scene sceneID="YEP-eV-9lg">
             <objects>
-                <viewController storyboardIdentifier="AccountInformationView" modalPresentationStyle="fullScreen" id="6s3-hq-ypE" customClass="AccountInformationViewController" customModule="RefManager1_2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountInformationView" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6s3-hq-ypE" customClass="AccountInformationViewController" customModule="RefManager1_2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xcb-0U-1sQ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -149,7 +149,9 @@
                             <constraint firstItem="Ucw-eE-KCu" firstAttribute="leading" secondItem="jbA-Pt-xly" secondAttribute="leading" constant="5" id="zNb-53-y57"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" image="person" catalog="system" id="9AZ-Cy-tlg"/>
                     <navigationItem key="navigationItem" id="hLV-vz-WlX"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="AccountCreatedDayLabel" destination="9wK-xv-eG7" id="fQs-ts-zSj"/>
                         <outlet property="SignOutButton" destination="q3c-as-HfF" id="Orh-ek-uyO"/>
@@ -169,6 +171,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="person" catalog="system" width="128" height="121"/>
         <namedColor name="themeColor">
             <color red="0.79500001668930054" green="0.95599997043609619" blue="0.86100000143051147" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
