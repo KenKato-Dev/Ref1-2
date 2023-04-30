@@ -20,13 +20,13 @@ protocol FoodAppendPresenterOutput: AnyObject {
 
 // FoodAppendViewのPresenter
 final class FoodAppendPresenter {
-    private let foodData: FoodData
+    private let foodData: FoodDataModel
     private weak var foodAppendPresenterOutput: FoodAppendPresenterOutput?
     private var baseArray = Food(location: .refrigerator, kind: .other, name: String(),
                                  quantity: String(), unit: UnitSelectButton.UnitMenu.initial,
                                  IDkey: UUID().uuidString, date: Date())
 //    private var uid: String = ""
-    init(foodData: FoodData) {
+    init(foodData: FoodDataModel) {
         self.foodData = foodData
     }
 

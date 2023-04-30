@@ -82,7 +82,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="お試しで使ってみる"/>
-                                <buttonConfiguration key="configuration" style="plain" title="お試し利用開始">
+                                <buttonConfiguration key="configuration" style="plain" title="ログインせず利用">
                                     <backgroundConfiguration key="background" cornerRadius="20">
                                         <color key="backgroundColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="strokeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

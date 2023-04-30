@@ -33,7 +33,6 @@ class FoodListCell: UITableViewCell {
                 let nextIsChecked = !isChecked
                 // didTapにはPresenterで用意した同じクロージャ型をVC上で代入
                 self.didTapCheckBox?(nextIsChecked)
-
                 self.controllCheckBox(state: .shownCheckBox(isChecked: nextIsChecked))
             }
         }), for: .touchUpInside)

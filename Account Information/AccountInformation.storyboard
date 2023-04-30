@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--アカウント情報-->
         <scene sceneID="YEP-eV-9lg">
             <objects>
                 <viewController storyboardIdentifier="AccountInformationView" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6s3-hq-ypE" customClass="AccountInformationViewController" customModule="RefManager1_2" customModuleProvider="target" sceneMemberID="viewController">
@@ -149,7 +149,7 @@
                             <constraint firstItem="Ucw-eE-KCu" firstAttribute="leading" secondItem="jbA-Pt-xly" secondAttribute="leading" constant="5" id="zNb-53-y57"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="person" catalog="system" id="9AZ-Cy-tlg"/>
+                    <tabBarItem key="tabBarItem" title="アカウント情報" image="person" catalog="system" id="9AZ-Cy-tlg"/>
                     <navigationItem key="navigationItem" id="hLV-vz-WlX"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

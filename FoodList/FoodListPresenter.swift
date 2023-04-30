@@ -19,7 +19,7 @@ protocol FoodListPresenterOutput: AnyObject {
     func resetButtonColor()
     func showAlertInCell(_ storyboard: FoodAppendViewController?, _ array: [Food], _ row: Int, _ isTapRow: Bool)
     func presentFoodAppendView()
-    func presentAccountInforamtionView()
+//    func presentAccountInforamtionView()
     func showRecoomendation()
     func removeRecommendToAddLabel(_ isHidden: Bool)
     func showDeleteAlert()
@@ -31,7 +31,7 @@ protocol FoodListPresenterOutput: AnyObject {
 
 // FoodListのPresenter
 final class FoodListPresenter {
-    private let foodData: FoodData
+    private let foodData: FoodDataModel
     private let foodUseCase: FoodUseCase
     private weak var foodListPresenterOutput: FoodListPresenterOutput?
     private(set) var array: [Food] = []
@@ -42,7 +42,7 @@ final class FoodListPresenter {
     private let db = Firestore.firestore()
     private var uid = Auth.auth().currentUser?.uid
     private(set) var titleText = ""
-    init(foodData: FoodData, foodUseCase: FoodUseCase) {
+    init(foodData: FoodDataModel, foodUseCase: FoodUseCase) {
         self.foodData = foodData
         self.foodUseCase = foodUseCase
     }
@@ -185,7 +185,7 @@ final class FoodListPresenter {
         foodListPresenterOutput?.reloadData()
     }
 
-    // クロージャ変数didTapに引数atを加えて返す、返り値をcell定義のクロージャに代入するための処理
+    // クロージャ変数didTapに引数(argument)atを加えて返す、返り値をcell定義のクロージャに代入するための処理
     func setArgInDidTapCheckBox(at: Int) -> ((Bool) -> Void)? {
         didTapCheckBox = { isChecked in
             self.checkedID[self.array[at].IDkey] = isChecked
@@ -200,9 +200,9 @@ final class FoodListPresenter {
     }
 
     // AccountButtonの処理
-    func didTapAccountButtton() {
-        foodListPresenterOutput?.presentAccountInforamtionView()
-    }
+//    func didTapAccountButtton() {
+//        foodListPresenterOutput?.presentAccountInforamtionView()
+//    }
 
     // tableViewのcellの列数の処理
     func numberOfRows() -> Int {

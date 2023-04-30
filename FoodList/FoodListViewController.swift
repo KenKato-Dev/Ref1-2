@@ -11,9 +11,9 @@ import FirebaseFirestoreSwift
 import GoogleMobileAds
 import UIKit
 // FoodListVIewVC
+
 final class FoodListViewController: UIViewController {
-    private let foodListPresenter = FoodListPresenter(foodData: FoodData(), foodUseCase: FoodUseCase())
-    @IBOutlet var accountButton: UIButton!
+    private let foodListPresenter = FoodListPresenter(foodData: FoodDataModel(), foodUseCase: FoodUseCase())
     @IBOutlet var addButtton: AddButton!
     @IBOutlet var deleteButton: DeleteButton!
     @IBOutlet var locationButtonsStack: UIStackView!
@@ -37,12 +37,16 @@ final class FoodListViewController: UIViewController {
     @IBOutlet var bannerView: GADBannerView!
     private var indicatorBackView = UIView()
     private let activityIndicator = UIActivityIndicatorView()
-
     private var userNameLabel = UILabel()
     private let recommendToAddLabel = UILabel()
-
+    var tabBarView: MainTabViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
+        //
+//        let button = AddButton()
+//        button.frame = .init(x: 0, y: 0, width: 20, height: 20)
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
+        //
         foodListTableView.delegate = self
         foodListTableView.dataSource = self
         foodListPresenter.setOutput(foodListPresenterOutput: self)
@@ -50,15 +54,13 @@ final class FoodListViewController: UIViewController {
         foodListPresenter.displayTitle()
         foodListPresenter.displayIndicator()
         foodListPresenter.fetchArray()
+        tabBarView?.tabBarDelegate = self // delegateMethod
         // 各種ボタン操作
         deleteButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapDeleteButton()
         }), for: .touchUpInside)
         addButtton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapAddButton()
-        }), for: .touchUpInside)
-        accountButton.addAction(.init(handler: { _ in
-            self.foodListPresenter.didTapAccountButtton()
         }), for: .touchUpInside)
         refrigeratorButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapRefrigiratorButton(self.refrigeratorButton)
@@ -93,7 +95,6 @@ final class FoodListViewController: UIViewController {
         othersButton.addAction(.init(handler: { _ in
             self.foodListPresenter.didTapFoodKindButtons(.other, self.othersButton)
         }), for: .touchUpInside)
-//        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -199,7 +200,6 @@ extension FoodListViewController: FoodListPresenterOutput {
     func arrangeDisplayingView(_ isDelete: Bool) {
         deleteButton.imageChange(bool: isDelete)
         addButtton.isEnabled = isDelete
-        accountButton.isEnabled = isDelete
         locationButtonsStack.isHidden = !isDelete
         kindButtonsStack.isHidden = !isDelete
         kindButtonsBackView.isHidden = !isDelete
@@ -362,10 +362,10 @@ extension FoodListViewController: FoodListPresenterOutput {
 //        performSegue(withIdentifier: "toFoodAppendVC", sender: nil)
     }
 
-    func presentAccountInforamtionView() {
-        let accountInformationView = UIStoryboard(name: "AccountInformation", bundle: nil).instantiateViewController(withIdentifier: "AccountInformationView") as! AccountInformationViewController
-        navigationController?.pushViewController(accountInformationView, animated: true)
-    }
+//    func presentAccountInforamtionView() {
+//        let accountInformationView = UIStoryboard(name: "AccountInformation", bundle: nil).instantiateViewController(withIdentifier: "AccountInformationView") as! AccountInformationViewController
+//        navigationController?.pushViewController(accountInformationView, animated: true)
+//    }
 
     // tableviewに説明文を表示
     func showRecoomendation() {
@@ -437,4 +437,16 @@ extension FoodListViewController: FoodListPresenterOutput {
         activityIndicator.isHidden = isHidden
         indicatorBackView.isHidden = isHidden
     }
+}
+extension FoodListViewController: TabViewDelegate {
+    func didTapAdd() {
+        print("DIDTAPADD")
+        self.foodListPresenter.didTapAddButton()
+    }
+
+    func didTapDelete() {
+        print("DIDTAPDELETE")
+        self.foodListPresenter.didTapDeleteButton()
+    }
+
 }

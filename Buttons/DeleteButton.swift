@@ -1,5 +1,5 @@
 //
-//  AddButton.swift
+//  deleteButton.swift
 //  RefManager1-2
 //
 //  Created by 加藤研太郎 on 2022/04/16.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddButton: UIButton {
+class DeleteButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         customDesign()
@@ -43,7 +43,7 @@ class AddButton: UIButton {
                          delay: 0.0,
                          options: UIView.AnimationOptions.curveEaseIn,
                          animations: {
-                             // 少しだけビューを小さく縮めて、奥への凹みを演出
+                             // 少しだけビューを小さく縮めて、奥に行ったような「凹み」を演出する
                              self.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                          },
                          completion: nil)
@@ -61,18 +61,47 @@ class AddButton: UIButton {
                          completion: nil)
     }
 
+    //
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         customDesign()
     }
 
     private func customDesign() {
-        let imageConfig = UIImage.SymbolConfiguration(font: .boldSystemFont(ofSize: 18))
-        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
-        setImage(image, for: .normal)
+        let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium, scale: .large)
+        let image = UIImage(systemName: "trash", withConfiguration: config)
+        self.setImage(image, for: .normal)
+        self.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        // テキスト挿入
+        setTitle("", for: .normal)
         // マスク適用
         layer.masksToBounds = true
         // 角丸み
         layer.cornerRadius = 10.0
+        // 背景色
+        backgroundColor = UIColor.clear
+        // テキスト色
+        setTitleColor(UIColor.red, for: .normal)
+        // テキストサイズ
+        titleLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
+        imageView?.image?.withTintColor(.red)
+    }
+
+    // bool=trueの際に作動
+    func imageChange(bool: Bool) {
+        if bool {
+            let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium, scale: .large)
+            let image = UIImage(systemName: "trash", withConfiguration: config)
+            self.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+            self.configuration?.baseForegroundColor = UIColor(named: "deepGreen")
+            setImage(image, for: .normal)
+
+        } else {
+            let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium, scale: .large)
+            setImage(.remove.withConfiguration(config).withTintColor(.red), for: .normal)
+            self.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+            self.configuration?.baseForegroundColor = .red
+
+        }
     }
 }

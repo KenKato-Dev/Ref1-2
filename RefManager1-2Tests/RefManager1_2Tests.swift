@@ -148,7 +148,7 @@ class FoodDataMock {
         }
     }
 
-    func test_isConfiguringQuery動作(_ filterRef: Bool, _ filterFreezer: Bool, _ filter: FoodData.Filter, _ kinds: [Food.FoodKind]) -> Query {
+    func test_isConfiguringQuery動作(_ filterRef: Bool, _ filterFreezer: Bool, _ filter: FoodDataModel.Filter, _ kinds: [Food.FoodKind]) -> Query {
         let kindArray = filter.kindArray.map { $0.rawValue }
         let location = filter.location.rawValue
         let kinds = kinds.map { $0.rawValue }

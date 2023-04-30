@@ -9,7 +9,7 @@ import UIKit
 
 // FoodAppendViewのVC
 class FoodAppendViewController: UIViewController {
-    private let foodAppendPresenter = FoodAppendPresenter(foodData: FoodData())
+    private let foodAppendPresenter = FoodAppendPresenter(foodData: FoodDataModel())
     @IBOutlet var foodNameTextField: UITextField!
     @IBOutlet var nameTextHeightconstraint: NSLayoutConstraint!
     @IBOutlet var methodSelectText: UILabel!

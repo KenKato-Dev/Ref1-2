@@ -1,5 +1,5 @@
 //
-//  deleteButton.swift
+//  AddButton.swift
 //  RefManager1-2
 //
 //  Created by 加藤研太郎 on 2022/04/16.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DeleteButton: UIButton {
+class AddButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         customDesign()
@@ -43,7 +43,7 @@ class DeleteButton: UIButton {
                          delay: 0.0,
                          options: UIView.AnimationOptions.curveEaseIn,
                          animations: {
-                             // 少しだけビューを小さく縮めて、奥に行ったような「凹み」を演出する
+                             // 少しだけビューを小さく縮めて、奥への凹みを演出
                              self.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                          },
                          completion: nil)
@@ -61,39 +61,19 @@ class DeleteButton: UIButton {
                          completion: nil)
     }
 
-    //
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         customDesign()
     }
 
     private func customDesign() {
-        setImage(UIImage(systemName: "trash")?.withTintColor(.red), for: .normal)
-        // テキスト挿入
-        setTitle("", for: .normal)
+        let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium, scale: .large)
+        let image = UIImage(systemName: "plus", withConfiguration: config)
+        self.setImage(image, for: .normal)
+        self.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         // マスク適用
         layer.masksToBounds = true
         // 角丸み
         layer.cornerRadius = 10.0
-        // 背景色
-        backgroundColor = UIColor.clear
-        // テキスト色
-        setTitleColor(UIColor.red, for: .normal)
-        // テキストサイズ
-        titleLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
-        imageView?.image?.withTintColor(.red)
-    }
-
-    // bool=trueの際に作動
-    func imageChange(bool: Bool) {
-        if bool {
-            setImage(UIImage(systemName: "trash"), for: .normal)
-            setTitle("", for: .normal)
-
-        } else {
-            setImage(.remove, for: .normal)
-            setTitle("", for: .normal)
-            setTitleColor(.red, for: .normal)
-        }
     }
 }
