@@ -19,6 +19,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="XgY-9P-pxI" kind="relationship" relationship="viewControllers" id="Fnc-d9-Byb"/>
+                        <segue destination="UHd-Ow-o5A" kind="relationship" relationship="viewControllers" id="tpm-aI-X9z"/>
                         <segue destination="dJS-rf-f5c" kind="relationship" relationship="viewControllers" id="SA7-fc-Ju6"/>
                     </connections>
                 </tabBarController>
@@ -36,15 +37,15 @@
             </objects>
             <point key="canvasLocation" x="-160" y="437"/>
         </scene>
-        <!--Storyboard Reference-->
+        <!--ShoppingList-->
         <scene sceneID="049-af-NCp">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="AppendFoods" id="UHd-Ow-o5A" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="AppendFoods" storyboardName="ShoppingList" referencedIdentifier="ShoppingList" id="UHd-Ow-o5A" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item2" id="PGY-Dd-Rib"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PIp-9m-BSi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="556.48854961832058" y="125.35211267605635"/>
+            <point key="canvasLocation" x="-370" y="323"/>
         </scene>
         <!--AccountInformationView-->
         <scene sceneID="eM6-aY-7mk">

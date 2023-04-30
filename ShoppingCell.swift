@@ -20,13 +20,13 @@ class ShoppingCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    func naming(_ nameText:String){
+    func naming(_ nameText: String) {
         self.itemNameLabel.text = nameText
     }
-    func checkCircle(_ isBuying:Bool){
-        if isBuying{
+    func checkCircle(_ isBuying: Bool) {
+        if isBuying {
             circleImage.image = UIImage(systemName: "checkmark.circle.fill")
-        }else{
+        } else {
             circleImage.image = UIImage(systemName: "circle")
         }
     }

@@ -6,3 +6,13 @@
 //
 
 import Foundation
+protocol ShoppingListPresenterOutput: AnyObject {
+
+}
+final class ShoppingListPresenter {
+    private weak var shoppingListPresenterOutput: ShoppingListPresenterOutput?
+
+    func setOutput(shoppingListPresenterOutput: ShoppingListPresenterOutput) {
+        self.shoppingListPresenterOutput = shoppingListPresenterOutput
+    }
+}

@@ -36,6 +36,7 @@
 		EC8AE8EC29BC82D000011C49 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8AE8EB29BC82D000011C49 /* SignUp.storyboard */; };
 		EC8AE8EE29BC975400011C49 /* AccountInformation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8AE8ED29BC975400011C49 /* AccountInformation.storyboard */; };
 		EC8AE8F029BEAA0C00011C49 /* FoodList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8AE8EF29BEAA0C00011C49 /* FoodList.storyboard */; };
+		EC93DBC029FE784E0074CFA6 /* ShoppingListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC93DBBF29FE784E0074CFA6 /* ShoppingListModel.swift */; };
 		EC9C1C0D28F45E2D0024570D /* FoodListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C1C0C28F45E2D0024570D /* FoodListPresenter.swift */; };
 		ECA41AE1290E5A5D0030BF16 /* TapFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA41AE0290E5A5D0030BF16 /* TapFeedback.swift */; };
 		ECA60EB128FEE28B00B7C7F6 /* FoodAppendPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA60EB028FEE28B00B7C7F6 /* FoodAppendPresenter.swift */; };
@@ -62,9 +63,9 @@
 		ECCF8C6329B3591400764E43 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCF8C6129B3591400764E43 /* MainTabViewController.swift */; };
 		ECDC85AF29FE4D7300266D3A /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDC85AE29FE4D7300266D3A /* ShoppingListViewController.swift */; };
 		ECDC85B129FE4D8300266D3A /* ShoppingListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDC85B029FE4D8300266D3A /* ShoppingListPresenter.swift */; };
-		ECDC85B329FE4DA500266D3A /* ShoppingList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECDC85B229FE4DA500266D3A /* ShoppingList.storyboard */; };
 		ECDC85B629FE535E00266D3A /* ShoppingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDC85B429FE535E00266D3A /* ShoppingCell.swift */; };
 		ECDC85B729FE535E00266D3A /* ShoppingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECDC85B529FE535E00266D3A /* ShoppingCell.xib */; };
+		ECDC85BE29FE6A0A00266D3A /* ShoppingList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECDC85BD29FE6A0A00266D3A /* ShoppingList.storyboard */; };
 		ECDF47A928B4F7B7004BC6A9 /* RecipeCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47A828B4F7B7004BC6A9 /* RecipeCategoryCell.swift */; };
 		ECDF47AB28B4F7DC004BC6A9 /* RecipeCategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDF47AA28B4F7DB004BC6A9 /* RecipeCategoryListViewController.swift */; };
 		ECE2F0E028349FBC00975A38 /* FoodUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */; };
@@ -104,6 +105,7 @@
 		EC8AE8EB29BC82D000011C49 /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
 		EC8AE8ED29BC975400011C49 /* AccountInformation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountInformation.storyboard; sourceTree = "<group>"; };
 		EC8AE8EF29BEAA0C00011C49 /* FoodList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FoodList.storyboard; sourceTree = "<group>"; };
+		EC93DBBF29FE784E0074CFA6 /* ShoppingListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListModel.swift; sourceTree = "<group>"; };
 		EC9C1C0C28F45E2D0024570D /* FoodListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListPresenter.swift; sourceTree = "<group>"; };
 		ECA41AE0290E5A5D0030BF16 /* TapFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapFeedback.swift; sourceTree = "<group>"; };
 		ECA60EB028FEE28B00B7C7F6 /* FoodAppendPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAppendPresenter.swift; sourceTree = "<group>"; };
@@ -133,9 +135,9 @@
 		ECCF8C6129B3591400764E43 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		ECDC85AE29FE4D7300266D3A /* ShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
 		ECDC85B029FE4D8300266D3A /* ShoppingListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListPresenter.swift; sourceTree = "<group>"; };
-		ECDC85B229FE4DA500266D3A /* ShoppingList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShoppingList.storyboard; sourceTree = "<group>"; };
 		ECDC85B429FE535E00266D3A /* ShoppingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCell.swift; sourceTree = "<group>"; };
 		ECDC85B529FE535E00266D3A /* ShoppingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingCell.xib; sourceTree = "<group>"; };
+		ECDC85BD29FE6A0A00266D3A /* ShoppingList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ShoppingList.storyboard; path = ../../../.Trash/ShoppingList.storyboard; sourceTree = "<group>"; };
 		ECDF47A828B4F7B7004BC6A9 /* RecipeCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCategoryCell.swift; sourceTree = "<group>"; };
 		ECDF47AA28B4F7DB004BC6A9 /* RecipeCategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCategoryListViewController.swift; sourceTree = "<group>"; };
 		ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodUseCase.swift; sourceTree = "<group>"; };
@@ -261,14 +263,15 @@
 			children = (
 				ECA6F44528026B0C00CA7C2D /* AppDelegate.swift */,
 				ECA6F44728026B0C00CA7C2D /* SceneDelegate.swift */,
-				ECA6F45C28026BAE00CA7C2D /* FoodDataModel.swift */,
 				EC00339929E298E800BB2023 /* Food.swift */,
 				ECE2F0DF28349FBC00975A38 /* FoodUseCase.swift */,
+				ECA6F45C28026BAE00CA7C2D /* FoodDataModel.swift */,
+				EC93DBBF29FE784E0074CFA6 /* ShoppingListModel.swift */,
 				ECDC85AE29FE4D7300266D3A /* ShoppingListViewController.swift */,
 				ECDC85B029FE4D8300266D3A /* ShoppingListPresenter.swift */,
 				ECDC85B429FE535E00266D3A /* ShoppingCell.swift */,
+				ECDC85BD29FE6A0A00266D3A /* ShoppingList.storyboard */,
 				ECDC85B529FE535E00266D3A /* ShoppingCell.xib */,
-				ECDC85B229FE4DA500266D3A /* ShoppingList.storyboard */,
 				EC00339829E1609800BB2023 /* Buttons */,
 				ECCF8C6529B3591900764E43 /* Tab */,
 				EC9C1C0A28F3E8650024570D /* FoodList */,
@@ -446,8 +449,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECDC85B329FE4DA500266D3A /* ShoppingList.storyboard in Resources */,
 				ECDC85B729FE535E00266D3A /* ShoppingCell.xib in Resources */,
+				ECDC85BE29FE6A0A00266D3A /* ShoppingList.storyboard in Resources */,
 				EC1D25CE29B47DFE006E4E73 /* Append.storyboard in Resources */,
 				ECBD105F293B94DD00AF2702 /* Localizable.strings in Resources */,
 				EC8AE8E829BC7B7500011C49 /* RecipeList.storyboard in Resources */,
@@ -530,6 +533,7 @@
 				ECE2F0E028349FBC00975A38 /* FoodUseCase.swift in Sources */,
 				EC77EA2628F2A813009B3EBA /* AddButton.swift in Sources */,
 				EC00339A29E298E800BB2023 /* Food.swift in Sources */,
+				EC93DBC029FE784E0074CFA6 /* ShoppingListModel.swift in Sources */,
 				EC08031029CACFB700D25410 /* AppendListViewController.swift in Sources */,
 				ECA6F45B28026B8E00CA7C2D /* FoodAppendViewController.swift in Sources */,
 				ECA6F44A28026B0C00CA7C2D /* FoodListViewController.swift in Sources */,
