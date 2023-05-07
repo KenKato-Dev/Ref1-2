@@ -20,6 +20,9 @@ class ShoppingCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    static func nib() -> UINib {
+        return UINib(nibName: "ShoppingCell", bundle: nil)
+        }
     func naming(_ nameText: String) {
         self.itemNameLabel.text = nameText
     }

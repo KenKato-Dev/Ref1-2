@@ -5,13 +5,12 @@
 //  Created by 加藤研太郎 on 2023/04/30.
 //
 
-import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Foundation
 import UIKit
-struct ShoppingListItem: Decodable {
+struct ShoppingListItem: Decodable, Hashable {
     var isBuying: Bool
     var itemName: String
     let itemID: String
@@ -21,7 +20,7 @@ final class ShoppingListModel {
     private(set) var countOfDocuments = 0
     private(set) var queryDocumentSnaphots: [QueryDocumentSnapshot] = []
     private var items: [ShoppingListItem] = []
-    private(set) var query = Firestore.firestore().collection("shoppingList").limit(to: 10)
+    private(set) var query = Firestore.firestore().collection("Users").document(Auth.auth().currentUser!.uid).collection("shoppingList")
 
     func postList(_ uid: String, _ item: ShoppingListItem) async throws {
         do {
@@ -48,6 +47,7 @@ final class ShoppingListModel {
             self.items = items
             return self.items
         } catch {
+            print(error.localizedDescription)
             throw error
         }
     }
