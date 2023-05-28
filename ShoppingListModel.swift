@@ -28,8 +28,10 @@ final class ShoppingListModel {
                 "isBuying": item.isBuying,
                 "itemName": item.itemName,
                 "itemID": item.itemID
-            ])
+            ], merge: false)
+            print("post")
         } catch {
+            print(error.localizedDescription)
             throw error
         }
     }

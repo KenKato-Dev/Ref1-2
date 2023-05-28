@@ -27,6 +27,7 @@ class ShoppingListViewController: UIViewController {
             Task {
                 try await self.presenter.didTapAddButton()
             }
+            self.apply()
         }), for: .touchUpInside)
         // ここでFetch
         Task {
@@ -55,8 +56,9 @@ extension ShoppingListViewController: UITextFieldDelegate {
 }
 extension ShoppingListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // tapによる処理
-        self.presenter.didSelectRow()
+        // didTapRowによる処理
+        self.presenter.switchIsBuying(at: indexPath)
+        self.apply()
     }
 //    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 //        //左へのスワイプによる操作

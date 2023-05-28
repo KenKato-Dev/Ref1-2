@@ -34,13 +34,22 @@ final class ShoppingListPresenter {
         try await self.shoppingListModel.postList(uid, item)
         try await self.fetchItems()
     }
-    func didSelectRow(at indexPath:IndexPath) {
-        //ItemのisBuyingをとぐる
-//        self.items[indexPath.row].isBuying.toggle()
-        //情報を上書き
+    func switchIsBuying(at indexPath: IndexPath) {
+        // ItemのisBuyingをとぐる
+        // 情報を上書き
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Task {
+            self.items[indexPath.row].isBuying.toggle()
+            print(self.items[indexPath.row].isBuying)
+            try await self.shoppingListModel.postList(uid, items[indexPath.row])
+//            let fetchedItems = try await self.shoppingListModel.fetchList()
+//            items = fetchedItems
+        }
     }
     func didTapAddtoFoodListButton() {
-
+        let boughtItem = self.items.filter {$0.isBuying}
+        // ここから一旦入力画面に飛ばす
+        //
     }
     func didTapShareButton() {
 
